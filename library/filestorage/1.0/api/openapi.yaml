@@ -1,0 +1,2453 @@
+openapi: 3.1.0
+info:
+  description: SCP File Storage Service
+  title: SCP File Storage Service
+  version: 1.1.1.dev1098
+servers:
+- url: https://filestorage-a.kr-west1.dev2.samsungsdscloud.com
+tags:
+- description: Volume API
+  name: filestorage.v1.VolumeAPIs
+- description: Type API
+  name: filestorage.v1.filestorage.v1.TypesAPIs
+- description: Snapshot API
+  name: filestorage.v1.SnapshotAPIs
+- description: Volume Access Rules API
+  name: filestorage.v1.VolumeAccessRulesAPIs
+- description: Snapshot Schedule API
+  name: filestorage.v1.SnapshotScheduleAPIs
+- description: Volume Access Rule Internal API
+  name: filestorage.v1.VolumeAccessRuleInternalAPIs
+- description: Volume Replication API
+  name: filestorage.v1.VolumeReplicationAPIs
+- description: Logical Interface API
+  name: filestorage.v1.LogicalInterfacesAPI
+paths:
+  /v1/replications:
+    get:
+      description: List Volume Replications
+      operationId: listVolumeReplications
+      parameters:
+      - description: Volume ID
+        example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        explode: true
+        in: query
+        name: volume_id
+        required: true
+        schema:
+          description: Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Volume Id
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplicationListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ListVolumeReplications
+      tags:
+      - filestorage.v1.VolumeReplicationAPIs
+      x-action-id: filestorage:ListVolumeReplications
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_replication_list
+      x-not-before: 2026-07-01
+      x-operation-id: listVolumeReplications
+      x-resource: Volume
+    post:
+      description: Create Volume Replication
+      operationId: createVolumeReplication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReplicationCreateRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplicationCreateResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: CreateVolumeReplication
+      tags:
+      - filestorage.v1.VolumeReplicationAPIs
+      x-action-id: filestorage:CreateVolumeReplication
+      x-api-access-level: CREATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_replication_create
+      x-not-before: 2026-07-01
+      x-operation-id: createVolumeReplication
+      x-resource: Volume
+  /v1/replications/regions:
+    get:
+      description: List Volume Replication Region
+      operationId: listVolumeReplicationRegion
+      parameters:
+      - description: Volume Type Name
+        example: HDD
+        explode: true
+        in: query
+        name: type_name
+        required: true
+        schema:
+          description: Volume Type Name
+          example: HDD
+          pattern: HDD|SSD
+          title: Type Name
+          type: string
+        style: form
+      - description: Region
+        example: kr-west1
+        explode: true
+        in: query
+        name: source_region_name
+        required: true
+        schema:
+          description: Region
+          example: kr-west1
+          title: Source Region Name
+          type: string
+        style: form
+      - description: Replication Type
+        example: replication
+        explode: true
+        in: query
+        name: replication_type
+        required: true
+        schema:
+          description: Replication Type
+          example: replication
+          pattern: replication|backup
+          title: Replication Type
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplicationRegionListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ListVolumeReplicationRegion
+      tags:
+      - filestorage.v1.VolumeReplicationAPIs
+      x-action-id: filestorage:ListVolumeReplicationRegions
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_replication_region_list
+      x-not-before: 2026-07-01
+      x-operation-id: listVolumeReplicationRegion
+      x-resource: Volume
+  /v1/replications/{replication_id}:
+    delete:
+      description: Delete Volume Replication
+      operationId: deleteVolumeReplication
+      parameters:
+      - description: Replication ID
+        example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        explode: false
+        in: path
+        name: replication_id
+        required: true
+        schema:
+          description: Replication ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Replication Id
+          type: string
+        style: simple
+      - description: Volume ID
+        example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        explode: true
+        in: query
+        name: volume_id
+        required: true
+        schema:
+          description: Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Volume Id
+          type: string
+        style: form
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: DeleteVolumeReplication
+      tags:
+      - filestorage.v1.VolumeReplicationAPIs
+      x-action-id: filestorage:DeleteVolumeReplication
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_replication_delete
+      x-not-before: 2026-07-01
+      x-operation-id: deleteVolumeReplication
+      x-resource: Volume
+    get:
+      description: Show Volume Replication
+      operationId: ShowVolumeReplication
+      parameters:
+      - description: Replication ID
+        example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        explode: false
+        in: path
+        name: replication_id
+        required: true
+        schema:
+          description: Replication ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Replication Id
+          type: string
+        style: simple
+      - description: Volume ID
+        example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        explode: true
+        in: query
+        name: volume_id
+        required: true
+        schema:
+          description: Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Volume Id
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplicationShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ShowVolumeReplication
+      tags:
+      - filestorage.v1.VolumeReplicationAPIs
+      x-action-id: filestorage:ShowVolumeReplication
+      x-api-access-level: READ
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_replication_show
+      x-not-before: 2026-07-01
+      x-operation-id: ShowVolumeReplication
+      x-resource: Volume
+    put:
+      description: Set Volume Replication
+      operationId: setVolumeReplication
+      parameters:
+      - description: Replication ID
+        example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        explode: false
+        in: path
+        name: replication_id
+        required: true
+        schema:
+          description: Replication ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Replication Id
+          type: string
+        style: simple
+      - description: Volume ID
+        example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        explode: true
+        in: query
+        name: volume_id
+        required: true
+        schema:
+          description: Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Volume Id
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReplicationUpdateRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: SetVolumeReplication
+      tags:
+      - filestorage.v1.VolumeReplicationAPIs
+      x-action-id: filestorage:SetVolumeReplication
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_replication_set
+      x-not-before: 2026-07-01
+      x-operation-id: setVolumeReplication
+      x-resource: Volume
+  /v1/snapshot-schedules:
+    get:
+      description: List snapshot schedule
+      operationId: listSnapshotSchedule
+      parameters:
+      - description: Volume ID
+        example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        explode: true
+        in: query
+        name: volume_id
+        required: true
+        schema:
+          description: Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Volume Id
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapshotScheduleListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ListSnapshotSchedule
+      tags:
+      - filestorage.v1.SnapshotScheduleAPIs
+      x-action-id: filestorage:ListVolumeSnapshotSchedules
+      x-api-access-level: READ
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_snapshot_schedule_list
+      x-not-before: 2026-07-01
+      x-operation-id: listSnapshotSchedule
+      x-resource: Volume
+    post:
+      description: Create snapshot schedule
+      operationId: createSnapshotSchedule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SnapshotScheduleCreateRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapshotScheduleCreateResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: CreateSnapshotSchedule
+      tags:
+      - filestorage.v1.SnapshotScheduleAPIs
+      x-action-id: filestorage:CreateVolumeSnapshotSchedule
+      x-api-access-level: CREATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_snapshot_schedule_create
+      x-not-before: 2026-07-01
+      x-operation-id: createSnapshotSchedule
+      x-resource: Volume
+  /v1/snapshot-schedules/{snapshot_schedule_id}:
+    delete:
+      description: Delete snapshot schedule
+      operationId: DeleteSnapshotSchedule
+      parameters:
+      - description: Snapshot Schedule ID
+        example: d02d1a74-1871-4a3d-bdfc-6e60e9ea0f31
+        explode: false
+        in: path
+        name: snapshot_schedule_id
+        required: true
+        schema:
+          description: Snapshot Schedule ID
+          example: d02d1a74-1871-4a3d-bdfc-6e60e9ea0f31
+          title: Snapshot Schedule Id
+          type: string
+        style: simple
+      - description: Volume ID
+        example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        explode: true
+        in: query
+        name: volume_id
+        required: true
+        schema:
+          description: Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Volume Id
+          type: string
+        style: form
+      responses:
+        "202":
+          description: Accepted
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: DeleteSnapshotSchedule
+      tags:
+      - filestorage.v1.SnapshotScheduleAPIs
+      x-action-id: filestorage:DeleteVolumeSnapshotSchedule
+      x-api-access-level: DELETE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_snapshot_schedule_delete
+      x-not-before: 2026-07-01
+      x-operation-id: DeleteSnapshotSchedule
+      x-resource: Volume
+    put:
+      description: Set snapshot schedule
+      operationId: setSnapshotSchedule
+      parameters:
+      - description: Snapshot Schedule ID
+        example: d02d1a74-1871-4a3d-bdfc-6e60e9ea0f31
+        explode: false
+        in: path
+        name: snapshot_schedule_id
+        required: true
+        schema:
+          description: Snapshot Schedule ID
+          example: d02d1a74-1871-4a3d-bdfc-6e60e9ea0f31
+          title: Snapshot Schedule Id
+          type: string
+        style: simple
+      - description: Volume ID
+        example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        explode: true
+        in: query
+        name: volume_id
+        required: true
+        schema:
+          description: Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Volume Id
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SnapshotScheduleSetRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapshotScheduleSetResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: SetSnapshotSchedule
+      tags:
+      - filestorage.v1.SnapshotScheduleAPIs
+      x-action-id: filestorage:SetVolumeSnapshotSchedule
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_snapshot_schedule_set
+      x-not-before: 2026-07-01
+      x-operation-id: setSnapshotSchedule
+      x-resource: Volume
+  /v1/snapshots:
+    get:
+      description: List snapshots
+      operationId: listSnapshots
+      parameters:
+      - description: Volume ID
+        example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        explode: true
+        in: query
+        name: volume_id
+        required: true
+        schema:
+          description: Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Volume Id
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapshotListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ListSnapshots
+      tags:
+      - filestorage.v1.SnapshotAPIs
+      x-action-id: filestorage:ListVolumeSnapshots
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_snapshot_list
+      x-not-before: 2026-07-01
+      x-operation-id: listSnapshots
+      x-resource: Volume
+    post:
+      description: Create snapshot
+      operationId: createSnapshot
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SnapshotCreateRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapshotShowResponse'
+          description: Accepted
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: CreateSnapshot
+      tags:
+      - filestorage.v1.SnapshotAPIs
+      x-action-id: filestorage:CreateVolumeSnapshot
+      x-api-access-level: CREATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_snapshot_create
+      x-not-before: 2026-07-01
+      x-operation-id: createSnapshot
+      x-resource: Volume
+  /v1/snapshots/{snapshot_id}:
+    delete:
+      description: Delete snapshots
+      operationId: deleteSnapshot
+      parameters:
+      - description: Snapshot ID
+        example: 40htrre5b-eww25-ff2b-a426-6afefas65a3b
+        explode: false
+        in: path
+        name: snapshot_id
+        required: true
+        schema:
+          description: Snapshot ID
+          example: 40htrre5b-eww25-ff2b-a426-6afefas65a3b
+          title: Snapshot Id
+          type: string
+        style: simple
+      - description: Volume ID
+        example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        explode: true
+        in: query
+        name: volume_id
+        required: true
+        schema:
+          description: Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Volume Id
+          type: string
+        style: form
+      responses:
+        "202":
+          description: Accepted
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: DeleteSnapshot
+      tags:
+      - filestorage.v1.SnapshotAPIs
+      x-action-id: filestorage:DeleteVolumeSnapshot
+      x-api-access-level: DELETE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_snapshot_delete
+      x-not-before: 2026-07-01
+      x-operation-id: deleteSnapshot
+      x-resource: Volume
+  /v1/snapshots/{snapshot_id}/restore:
+    put:
+      description: Restore snapshot
+      operationId: restoreSnapshot
+      parameters:
+      - description: Snapshot ID
+        example: 40htrre5b-eww25-ff2b-a426-6afefas65a3b
+        explode: false
+        in: path
+        name: snapshot_id
+        required: true
+        schema:
+          description: Snapshot ID
+          example: 40htrre5b-eww25-ff2b-a426-6afefas65a3b
+          title: Snapshot Id
+          type: string
+        style: simple
+      - description: Volume ID
+        example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        explode: true
+        in: query
+        name: volume_id
+        required: true
+        schema:
+          description: Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Volume Id
+          type: string
+        style: form
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapshotRestoreResponse'
+          description: Accepted
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: RestoreSnapshot
+      tags:
+      - filestorage.v1.SnapshotAPIs
+      x-action-id: filestorage:SetVolumeSnapshot
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_snapshot_set
+      x-not-before: 2026-07-01
+      x-operation-id: restoreSnapshot
+      x-resource: Volume
+  /v1/volumes:
+    get:
+      description: List volumes
+      operationId: listVolumes
+      parameters:
+      - description: offset
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          description: offset
+          title: Offset
+          type: integer
+        style: form
+      - description: limit
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 20
+          description: limit
+          title: Limit
+          type: integer
+        style: form
+      - description: Volume Name
+        example: my_volume
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Volume Type Name
+        example: HDD
+        explode: true
+        in: query
+        name: type_name
+        required: false
+        schema:
+          nullable: true
+          pattern: ^(HDD|SSD|HighPerformanceSSD)$
+          type: string
+        style: form
+      - description: sort
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          pattern: ^(name:asc|name:desc|created_at:asc|created_at:desc)$
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: ListVolumes
+      tags:
+      - filestorage.v1.VolumeAPIs
+      x-action-id: filestorage:ListVolumes
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_list
+      x-not-before: 2026-07-01
+      x-operation-id: listVolumes
+      x-resource: Volume
+    post:
+      description: Create volume
+      operationId: createVolume
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolumeCreateRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeCreateResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: CreateVolume
+      tags:
+      - filestorage.v1.VolumeAPIs
+      x-action-id: filestorage:CreateVolume
+      x-api-access-level: CREATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_create
+      x-not-before: 2026-07-01
+      x-operation-id: createVolume
+      x-resource: Volume
+  /v1/volumes/{volume_id}:
+    delete:
+      description: Delete volume
+      operationId: deleteVolume
+      parameters:
+      - description: Volume ID
+        example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        explode: false
+        in: path
+        name: volume_id
+        required: true
+        schema:
+          description: Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Volume Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          description: Accepted
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: DeleteVolume
+      tags:
+      - filestorage.v1.VolumeAPIs
+      x-action-id: filestorage:DeleteVolume
+      x-api-access-level: DELETE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_delete
+      x-not-before: 2026-07-01
+      x-operation-id: deleteVolume
+      x-resource: Volume
+    get:
+      description: Show volume
+      operationId: showVolume
+      parameters:
+      - description: Volume ID
+        example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        explode: false
+        in: path
+        name: volume_id
+        required: true
+        schema:
+          description: Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Volume Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeShowResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ShowVolume
+      tags:
+      - filestorage.v1.VolumeAPIs
+      x-action-id: filestorage:ShowVolume
+      x-api-access-level: READ
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_show
+      x-not-before: 2026-07-01
+      x-operation-id: showVolume
+      x-resource: Volume
+    put:
+      description: Set volume
+      operationId: setVolume
+      parameters:
+      - description: Volume ID
+        example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        explode: false
+        in: path
+        name: volume_id
+        required: true
+        schema:
+          description: Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Volume Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolumeSetRequest'
+        required: true
+      responses:
+        "202":
+          description: Accepted
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: SetVolume
+      tags:
+      - filestorage.v1.VolumeAPIs
+      x-action-id: filestorage:SetVolume
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_set
+      x-not-before: 2026-07-01
+      x-operation-id: setVolume
+      x-resource: Volume
+  /v1/volumes/{volume_id}/access-rules:
+    get:
+      description: List access rules
+      operationId: listAccessRules
+      parameters:
+      - description: Volume ID
+        example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        explode: false
+        in: path
+        name: volume_id
+        required: true
+        schema:
+          description: Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Volume Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeObjectAccessRuleListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ListAccessRules
+      tags:
+      - filestorage.v1.VolumeAccessRulesAPIs
+      x-action-id: filestorage:ListVolumeAccessRules
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_access_rule_list
+      x-not-before: 2026-07-01
+      x-operation-id: listAccessRules
+      x-resource: Volume
+    put:
+      description: Set access rule for volume
+      operationId: setAccessRule
+      parameters:
+      - description: Volume ID
+        example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        explode: false
+        in: path
+        name: volume_id
+        required: true
+        schema:
+          description: Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Volume Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessRuleRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessRuleResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: SetAccessRule
+      tags:
+      - filestorage.v1.VolumeAccessRulesAPIs
+      x-action-id: filestorage:SetVolumeAccessRule
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_access_rule_set
+      x-not-before: 2026-07-01
+      x-operation-id: setAccessRule
+      x-resource: Volume
+components:
+  schemas:
+    AccessRuleRequest:
+      example:
+        object_type: VM
+        action: add
+        object_id: 43fq3347-02q4-4aa8-ccf9-affe4917bb6f
+      properties:
+        action:
+          description: Access Rule Action
+          example: add
+          pattern: ^(add|remove)$
+          title: Action
+          type: string
+        object_id:
+          description: Object ID
+          example: 43fq3347-02q4-4aa8-ccf9-affe4917bb6f
+          title: Object Id
+          type: string
+        object_type:
+          description: Object Type
+          example: VM
+          pattern: ^(VM|BM|GPU|GPU_NODE|ENDPOINT)$
+          title: Object Type
+          type: string
+      required:
+      - action
+      - object_id
+      - object_type
+      title: AccessRuleRequest
+    AccessRuleResponse:
+      example:
+        volume_id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        object_type: VM
+        action: add
+        object_id: 43fq3347-02q4-4aa8-ccf9-affe4917bb6f
+      properties:
+        action:
+          description: Access Rule Action
+          example: add
+          title: Action
+          type: string
+        object_id:
+          description: Object ID
+          example: 43fq3347-02q4-4aa8-ccf9-affe4917bb6f
+          title: Object Id
+          type: string
+        object_type:
+          description: Object Type
+          example: VM
+          title: Object Type
+          type: string
+        volume_id:
+          description: Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Volume Id
+          type: string
+      required:
+      - action
+      - object_id
+      - object_type
+      - volume_id
+      title: AccessRuleResponse
+    Replication:
+      example:
+        replication_volume_region: kr-west1
+        replication_type: replication
+        replication_volume_access_level: ro
+        source_volume_region: kr-west1
+        source_volume_access_level: ro
+        replication_frequency: 5min
+        replication_id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        replication_volume_id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        source_volume_id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+      properties:
+        replication_frequency:
+          description: Frequency
+          example: 5min
+          title: Replication Frequency
+          type: string
+        replication_id:
+          description: Replication ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Replication Id
+          type: string
+        replication_type:
+          description: Replication Type
+          example: replication
+          title: Replication Type
+          type: string
+        replication_volume_access_level:
+          description: Target Access Level
+          example: ro
+          title: Replication Volume Access Level
+          type: string
+        replication_volume_id:
+          description: Target Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Replication Volume Id
+          type: string
+        replication_volume_region:
+          description: Target Region
+          example: kr-west1
+          title: Replication Volume Region
+          type: string
+        source_volume_access_level:
+          description: Source Access Level
+          example: ro
+          title: Source Volume Access Level
+          type: string
+        source_volume_id:
+          description: Source Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Source Volume Id
+          type: string
+        source_volume_region:
+          description: Source Region
+          example: kr-west1
+          title: Source Volume Region
+          type: string
+      required:
+      - replication_frequency
+      - replication_id
+      - replication_type
+      - replication_volume_access_level
+      - replication_volume_id
+      - replication_volume_region
+      - source_volume_access_level
+      - source_volume_id
+      - source_volume_region
+      title: Replication
+    ReplicationCreateRequest:
+      example:
+        cifs_password: cifs_password
+        replication_type: replication
+        volume_id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        name: my_volume
+        replication_frequency: 5min
+        region: kr-west1
+        backup_retention_count: 11
+      properties:
+        backup_retention_count:
+          maximum: 128
+          minimum: 1
+          nullable: true
+          type: integer
+        cifs_password:
+          nullable: true
+          type: string
+        name:
+          description: Target Volume Name
+          example: my_volume
+          pattern: "^[a-z]([a-z0-9_]){2,20}$"
+          title: Name
+          type: string
+        region:
+          description: Target Region
+          example: kr-west1
+          title: Region
+          type: string
+        replication_frequency:
+          description: Frequency
+          example: 5min
+          pattern: ^5min|hourly|daily|weekly|monthly
+          title: Replication Frequency
+          type: string
+        replication_type:
+          description: replication
+          example: replication
+          pattern: replication|backup
+          title: Replication Type
+          type: string
+        volume_id:
+          description: Source Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Volume Id
+          type: string
+      required:
+      - name
+      - region
+      - replication_frequency
+      - replication_type
+      - volume_id
+      title: ReplicationCreateRequest
+    ReplicationCreateResponse:
+      example:
+        protocol: NFS
+        replication_volume_region: kr-west1
+        source_volume_region: kr-west1
+        replication_id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        replication_status: creating
+        replication_volume_id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        source_volume_id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+      properties:
+        protocol:
+          description: Protocol
+          example: NFS
+          title: Protocol
+          type: string
+        replication_id:
+          description: Replication ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Replication Id
+          type: string
+        replication_status:
+          description: Replication Status
+          example: creating
+          title: Replication Status
+          type: string
+        replication_volume_id:
+          description: Target Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Replication Volume Id
+          type: string
+        replication_volume_region:
+          description: Target Region
+          example: kr-west1
+          title: Replication Volume Region
+          type: string
+        source_volume_id:
+          description: Source Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Source Volume Id
+          type: string
+        source_volume_region:
+          description: Source Region
+          example: kr-west1
+          title: Source Volume Region
+          type: string
+      required:
+      - protocol
+      - replication_id
+      - replication_status
+      - replication_volume_id
+      - replication_volume_region
+      - source_volume_id
+      - source_volume_region
+      title: ReplicationCreateResponse
+    ReplicationListResponse:
+      example:
+        replications:
+        - replication_volume_region: kr-west1
+          replication_type: replication
+          replication_volume_access_level: ro
+          source_volume_region: kr-west1
+          source_volume_access_level: ro
+          replication_frequency: 5min
+          replication_id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          replication_volume_id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          source_volume_id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        - replication_volume_region: kr-west1
+          replication_type: replication
+          replication_volume_access_level: ro
+          source_volume_region: kr-west1
+          source_volume_access_level: ro
+          replication_frequency: 5min
+          replication_id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          replication_volume_id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          source_volume_id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        count: 1
+      properties:
+        count:
+          description: count
+          example: 1
+          title: Count
+          type: integer
+        replications:
+          items:
+            $ref: '#/components/schemas/Replication'
+          type: array
+      required:
+      - count
+      - replications
+      title: ReplicationListResponse
+    ReplicationRegionListResponse:
+      example:
+        regions: "['kr-west1']"
+      properties:
+        regions:
+          description: Replication Region List
+          example: "['kr-west1']"
+          items:
+            type: string
+          type: array
+      required:
+      - regions
+      title: ReplicationRegionListResponse
+    ReplicationShowResponse:
+      example:
+        source_volume_name: my_volume
+        replication_volume_region: kr-west1
+        replication_type: replication
+        replication_volume_access_level: ro
+        source_volume_region: kr-west1
+        source_volume_access_level: ro
+        replication_frequency: 5min
+        replication_id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        source_volume_id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        replication_volume_name: my_volume
+        replication_policy: use
+        replication_status: creating
+        replication_volume_id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        backup_retention_count: 0
+      properties:
+        backup_retention_count:
+          nullable: true
+          type: integer
+        replication_frequency:
+          description: Frequency
+          example: 5min
+          title: Replication Frequency
+          type: string
+        replication_id:
+          description: Replication ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Replication Id
+          type: string
+        replication_policy:
+          description: Policy
+          example: use
+          title: Replication Policy
+          type: string
+        replication_status:
+          description: Replication Status
+          example: creating
+          title: Replication Status
+          type: string
+        replication_type:
+          description: Replication Type
+          example: replication
+          title: Replication Type
+          type: string
+        replication_volume_access_level:
+          description: Target Access Level
+          example: ro
+          title: Replication Volume Access Level
+          type: string
+        replication_volume_id:
+          description: Target Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Replication Volume Id
+          type: string
+        replication_volume_name:
+          description: Target Volume Name
+          example: my_volume
+          title: Replication Volume Name
+          type: string
+        replication_volume_region:
+          description: Target Region
+          example: kr-west1
+          title: Replication Volume Region
+          type: string
+        source_volume_access_level:
+          description: Source Access Level
+          example: ro
+          title: Source Volume Access Level
+          type: string
+        source_volume_id:
+          description: Source Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Source Volume Id
+          type: string
+        source_volume_name:
+          description: Source Volume Name
+          example: my_volume
+          title: Source Volume Name
+          type: string
+        source_volume_region:
+          description: Source Region
+          example: kr-west1
+          title: Source Volume Region
+          type: string
+      required:
+      - backup_retention_count
+      - replication_frequency
+      - replication_id
+      - replication_policy
+      - replication_status
+      - replication_type
+      - replication_volume_access_level
+      - replication_volume_id
+      - replication_volume_name
+      - replication_volume_region
+      - source_volume_access_level
+      - source_volume_id
+      - source_volume_name
+      - source_volume_region
+      title: ReplicationShowResponse
+    ReplicationUpdatePolicyEnum:
+      enum:
+      - 5min
+      - hourly
+      - daily
+      - weekly
+      - monthly
+      title: ReplicationUpdatePolicyEnum
+      type: string
+    ReplicationUpdateRequest:
+      example:
+        replication_frequency: 5min
+        replication_update_type: policy
+        replication_policy: use
+        backup_retention_count: 11
+      properties:
+        backup_retention_count:
+          maximum: 128
+          minimum: 1
+          nullable: true
+          type: integer
+        replication_frequency:
+          $ref: '#/components/schemas/ReplicationUpdatePolicyEnum'
+        replication_policy:
+          $ref: '#/components/schemas/ReplicationUpdateStatusEnum'
+        replication_update_type:
+          description: Replication Update Type
+          example: policy
+          pattern: policy|modify_schedule
+          title: Replication Update Type
+          type: string
+      required:
+      - replication_update_type
+      title: ReplicationUpdateRequest
+    ReplicationUpdateStatusEnum:
+      enum:
+      - use
+      - paused
+      title: ReplicationUpdateStatusEnum
+      type: string
+    Snapshot:
+      example:
+        size: "100"
+        name: my_volume.2024-10-01_14215
+        created_at: 2024-07-30T04:54:33.219373
+        id: 40htrre5b-eww25-ff2b-a426-6afefas65a3b
+        state: available
+      properties:
+        created_at:
+          description: Created At
+          example: 2024-07-30T04:54:33.219373
+          format: date-time
+          title: Created At
+          type: string
+        id:
+          description: Snapshot ID
+          example: 40htrre5b-eww25-ff2b-a426-6afefas65a3b
+          title: Id
+          type: string
+        name:
+          description: Snapshot Name
+          example: my_volume.2024-10-01_14215
+          title: Name
+          type: string
+        size:
+          description: Snapshot Size
+          example: "100"
+          title: Size
+          type: integer
+        state:
+          description: Snapshot State
+          example: available
+          title: State
+          type: string
+      required:
+      - created_at
+      - id
+      - name
+      - size
+      - state
+      title: Snapshot
+    SnapshotCreateRequest:
+      example:
+        volume_id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+      properties:
+        volume_id:
+          description: Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Volume Id
+          type: string
+      required:
+      - volume_id
+      title: SnapshotCreateRequest
+    SnapshotDetail:
+      example:
+        size: "100"
+        volume_id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        name: my_volume.2024-10-01_14215
+        created_at: 2024-07-30T04:54:33.219373
+        id: 40htrre5b-eww25-ff2b-a426-6afefas65a3b
+        state: available
+      properties:
+        created_at:
+          description: Created At
+          example: 2024-07-30T04:54:33.219373
+          format: date-time
+          title: Created At
+          type: string
+        id:
+          description: Snapshot ID
+          example: 40htrre5b-eww25-ff2b-a426-6afefas65a3b
+          title: Id
+          type: string
+        name:
+          description: Snapshot Name
+          example: my_volume.2024-10-01_14215
+          title: Name
+          type: string
+        size:
+          description: Snapshot Size
+          example: "100"
+          title: Size
+          type: integer
+        state:
+          description: Snapshot State
+          example: available
+          title: State
+          type: string
+        volume_id:
+          description: Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Volume Id
+          type: string
+      required:
+      - created_at
+      - id
+      - name
+      - size
+      - state
+      - volume_id
+      title: SnapshotDetail
+    SnapshotListResponse:
+      example:
+        snapshots:
+        - size: "100"
+          name: my_volume.2024-10-01_14215
+          created_at: 2024-07-30T04:54:33.219373
+          id: 40htrre5b-eww25-ff2b-a426-6afefas65a3b
+          state: available
+        - size: "100"
+          name: my_volume.2024-10-01_14215
+          created_at: 2024-07-30T04:54:33.219373
+          id: 40htrre5b-eww25-ff2b-a426-6afefas65a3b
+          state: available
+        count: 1
+        snapshot_size_total_byte: 0
+      properties:
+        count:
+          description: count
+          example: 1
+          title: Count
+          type: integer
+        snapshot_size_total_byte:
+          nullable: true
+          type: integer
+        snapshots:
+          items:
+            $ref: '#/components/schemas/Snapshot'
+          type: array
+      required:
+      - count
+      - snapshots
+      title: SnapshotListResponse
+    SnapshotRestoreResponse:
+      example:
+        snapshot:
+          size: "100"
+          name: my_volume.2024-10-01_14215
+          created_at: 2024-07-30T04:54:33.219373
+          id: 40htrre5b-eww25-ff2b-a426-6afefas65a3b
+          state: available
+      properties:
+        snapshot:
+          $ref: '#/components/schemas/Snapshot'
+      required:
+      - snapshot
+      title: SnapshotRestoreResponse
+    SnapshotSchedule:
+      example:
+        hour: "23"
+        day_of_week: day_of_week
+        frequency: WEEKLY
+      properties:
+        day_of_week:
+          nullable: true
+          pattern: ^(SUN|MON|TUE|WED|THU|FRI|SAT)$
+          type: string
+        frequency:
+          description: Frequency of the snapshot
+          example: WEEKLY
+          pattern: ^(WEEKLY|DAILY)$
+          title: Frequency
+          type: string
+        hour:
+          description: Hour of the snapshot schedule
+          example: "23"
+          pattern: "^([0-9]|1[0-9]|2[0-3])$"
+          title: Hour
+          type: string
+      required:
+      - frequency
+      - hour
+      title: SnapshotSchedule
+    SnapshotScheduleCreateRequest:
+      example:
+        volume_id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        snapshot_schedule:
+          hour: "23"
+          day_of_week: day_of_week
+          frequency: WEEKLY
+        snapshot_retention_count: 0
+      properties:
+        snapshot_retention_count:
+          nullable: true
+          type: integer
+        snapshot_schedule:
+          $ref: '#/components/schemas/SnapshotSchedule'
+        volume_id:
+          description: Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Volume Id
+          type: string
+      required:
+      - snapshot_schedule
+      - volume_id
+      title: SnapshotScheduleCreateRequest
+    SnapshotScheduleCreateResponse:
+      example:
+        volume_id: volume_id
+        snapshot_schedule:
+          hour: "23"
+          day_of_week: day_of_week
+          frequency: WEEKLY
+        snapshot_retention_count: "10"
+      properties:
+        snapshot_retention_count:
+          default: 0
+          description: Retention count
+          example: "10"
+          title: Snapshot Retention Count
+          type: integer
+        snapshot_schedule:
+          $ref: '#/components/schemas/SnapshotSchedule'
+        volume_id:
+          nullable: true
+          type: string
+      required:
+      - snapshot_schedule
+      - volume_id
+      title: SnapshotScheduleCreateResponse
+    SnapshotScheduleListResponse:
+      example:
+        volume_id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        snapshot_schedule:
+        - hour: "23"
+          id: id
+          day_of_week: day_of_week
+          frequency: WEEKLY
+        - hour: "23"
+          id: id
+          day_of_week: day_of_week
+          frequency: WEEKLY
+        snapshot_policy_enabled: true
+        snapshot_retention_count: "10"
+      properties:
+        snapshot_policy_enabled:
+          nullable: true
+          type: boolean
+        snapshot_retention_count:
+          default: 0
+          description: Retention count
+          example: "10"
+          title: Snapshot Retention Count
+          type: integer
+        snapshot_schedule:
+          items:
+            $ref: '#/components/schemas/SnapshotScheduleShow'
+          nullable: true
+          type: array
+        volume_id:
+          description: Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Volume Id
+          type: string
+      required:
+      - snapshot_schedule
+      - volume_id
+      title: SnapshotScheduleListResponse
+    SnapshotScheduleSetRequest:
+      example:
+        snapshot_schedule:
+          hour: "23"
+          day_of_week: day_of_week
+          frequency: WEEKLY
+        snapshot_retention_count: 0
+      properties:
+        snapshot_retention_count:
+          nullable: true
+          type: integer
+        snapshot_schedule:
+          $ref: '#/components/schemas/SnapshotSchedule'
+      required:
+      - snapshot_schedule
+      title: SnapshotScheduleSetRequest
+    SnapshotScheduleSetResponse:
+      example:
+        volume_id: volume_id
+        snapshot_schedule:
+          hour: "23"
+          day_of_week: day_of_week
+          frequency: WEEKLY
+        snapshot_retention_count: "10"
+      properties:
+        snapshot_retention_count:
+          default: 0
+          description: Retention count
+          example: "10"
+          title: Snapshot Retention Count
+          type: integer
+        snapshot_schedule:
+          $ref: '#/components/schemas/SnapshotSchedule'
+        volume_id:
+          nullable: true
+          type: string
+      required:
+      - snapshot_schedule
+      - volume_id
+      title: SnapshotScheduleSetResponse
+    SnapshotScheduleShow:
+      example:
+        hour: "23"
+        id: id
+        day_of_week: day_of_week
+        frequency: WEEKLY
+      properties:
+        day_of_week:
+          nullable: true
+          pattern: ^(SUN|MON|TUE|WED|THU|FRI|SAT)$
+          type: string
+        frequency:
+          description: Frequency of the snapshot
+          example: WEEKLY
+          pattern: ^(WEEKLY|DAILY)$
+          title: Frequency
+          type: string
+        hour:
+          description: Hour of the snapshot schedule
+          example: "23"
+          pattern: "^([0-9]|1[0-9]|2[0-3])$"
+          title: Hour
+          type: string
+        id:
+          nullable: true
+          type: string
+      required:
+      - frequency
+      - hour
+      title: SnapshotScheduleShow
+    SnapshotShowResponse:
+      example:
+        snapshot:
+          size: "100"
+          volume_id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          name: my_volume.2024-10-01_14215
+          created_at: 2024-07-30T04:54:33.219373
+          id: 40htrre5b-eww25-ff2b-a426-6afefas65a3b
+          state: available
+      properties:
+        snapshot:
+          $ref: '#/components/schemas/SnapshotDetail'
+      required:
+      - snapshot
+      title: SnapshotShowResponse
+    Tag:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          description: Key
+          example: key
+          maxLength: 128
+          title: Key
+          type: string
+        value:
+          maxLength: 256
+          nullable: true
+          type: string
+      required:
+      - key
+      title: Tag
+    ValidationErrorModel:
+      example:
+        msg: msg
+        loc:
+        - loc
+        - loc
+        ctx: "{}"
+        type_: type_
+      properties:
+        ctx:
+          nullable: true
+          type: object
+        loc:
+          items:
+            type: string
+          nullable: true
+          type: array
+        msg:
+          nullable: true
+          type: string
+        type_:
+          nullable: true
+          type: string
+      title: ValidationErrorModel
+    Volume:
+      example:
+        protocol: NFS
+        type_name: HDD
+        account_id: rwww523320dfvwbbefefsdvwdadsfa24c
+        purpose: REPLICATION
+        type_id: jef22f67-ee83-4gg2-2ab6-3lf774ekfjdu
+        name: my_volume
+        created_at: 2024-07-30T04:54:33.219373
+        id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        state: available
+      properties:
+        account_id:
+          description: Account ID
+          example: rwww523320dfvwbbefefsdvwdadsfa24c
+          title: Account Id
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-07-30T04:54:33.219373
+          format: date-time
+          title: Created At
+          type: string
+        id:
+          description: Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Id
+          type: string
+        name:
+          description: Volume Name
+          example: my_volume
+          title: Name
+          type: string
+        protocol:
+          description: Protocol
+          example: NFS
+          title: Protocol
+          type: string
+        purpose:
+          description: Purpose
+          example: REPLICATION
+          title: Purpose
+          type: string
+        state:
+          description: Volume State
+          example: available
+          title: State
+          type: string
+        type_id:
+          description: Volume Type ID
+          example: jef22f67-ee83-4gg2-2ab6-3lf774ekfjdu
+          title: Type Id
+          type: string
+        type_name:
+          description: Volume Type Name
+          example: HDD
+          title: Type Name
+          type: string
+      required:
+      - account_id
+      - created_at
+      - id
+      - name
+      - protocol
+      - purpose
+      - state
+      - type_id
+      - type_name
+      title: Volume
+    VolumeCreateRequest:
+      example:
+        protocol: NFS
+        type_name: HDD
+        cifs_password: cifs_password
+        snapshot_id: snapshot_id
+        name: my_volume
+        tags:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      properties:
+        cifs_password:
+          nullable: true
+          type: string
+        name:
+          description: Volume Name
+          example: my_volume
+          pattern: "^[a-z]([a-z0-9_]){2,20}$"
+          title: Name
+          type: string
+        protocol:
+          description: Protocol
+          example: NFS
+          pattern: ^(NFS|CIFS)$
+          title: Protocol
+          type: string
+        snapshot_id:
+          nullable: true
+          type: string
+        tags:
+          items:
+            $ref: '#/components/schemas/Tag'
+          nullable: true
+          type: array
+        type_name:
+          description: Volume Type Name
+          example: HDD
+          pattern: ^(HDD|SSD|HighPerformanceSSD)$
+          title: Type Name
+          type: string
+      required:
+      - name
+      - protocol
+      - type_name
+      title: VolumeCreateRequest
+    VolumeCreateResponse:
+      example:
+        protocol: NFS
+        type_name: HDD
+        volume_id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        snapshot_id: snapshot_id
+        volume_name: my_volume
+      properties:
+        protocol:
+          description: Protocol
+          example: NFS
+          title: Protocol
+          type: string
+        snapshot_id:
+          nullable: true
+          type: string
+        type_name:
+          description: Volume Type Name
+          example: HDD
+          title: Type Name
+          type: string
+        volume_id:
+          description: Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Volume Id
+          type: string
+        volume_name:
+          description: Volume Name
+          example: my_volume
+          title: Volume Name
+          type: string
+      required:
+      - protocol
+      - type_name
+      - volume_id
+      - volume_name
+      title: VolumeCreateResponse
+    VolumeListResponse:
+      example:
+        count: 1
+        filestorages:
+        - protocol: NFS
+          type_name: HDD
+          account_id: rwww523320dfvwbbefefsdvwdadsfa24c
+          purpose: REPLICATION
+          type_id: jef22f67-ee83-4gg2-2ab6-3lf774ekfjdu
+          name: my_volume
+          created_at: 2024-07-30T04:54:33.219373
+          id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          state: available
+        - protocol: NFS
+          type_name: HDD
+          account_id: rwww523320dfvwbbefefsdvwdadsfa24c
+          purpose: REPLICATION
+          type_id: jef22f67-ee83-4gg2-2ab6-3lf774ekfjdu
+          name: my_volume
+          created_at: 2024-07-30T04:54:33.219373
+          id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          state: available
+      properties:
+        count:
+          description: count
+          example: 1
+          title: Count
+          type: integer
+        filestorages:
+          items:
+            $ref: '#/components/schemas/Volume'
+          type: array
+      required:
+      - count
+      - filestorages
+      title: VolumeListResponse
+    VolumeObjectAccessRuleListBase:
+      example:
+        object_type: VM
+        access_rule_state: active
+        object_id: 43fq3347-02q4-4aa8-ccf9-affe4917bb6f
+      properties:
+        access_rule_state:
+          description: Access Rule State
+          example: active
+          title: Access Rule State
+          type: string
+        object_id:
+          description: Object ID
+          example: 43fq3347-02q4-4aa8-ccf9-affe4917bb6f
+          title: Object Id
+          type: string
+        object_type:
+          description: Object Type
+          example: VM
+          title: Object Type
+          type: string
+      required:
+      - access_rule_state
+      - object_id
+      - object_type
+      title: VolumeObjectAccessRuleListBase
+    VolumeObjectAccessRuleListResponse:
+      example:
+        volume_id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        access_rules:
+        - object_type: VM
+          access_rule_state: active
+          object_id: 43fq3347-02q4-4aa8-ccf9-affe4917bb6f
+        - object_type: VM
+          access_rule_state: active
+          object_id: 43fq3347-02q4-4aa8-ccf9-affe4917bb6f
+        count: 1
+      properties:
+        access_rules:
+          items:
+            $ref: '#/components/schemas/VolumeObjectAccessRuleListBase'
+          type: array
+        count:
+          description: count
+          example: 1
+          title: Count
+          type: integer
+        volume_id:
+          description: Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Volume Id
+          type: string
+      required:
+      - access_rules
+      - count
+      - volume_id
+      title: VolumeObjectAccessRuleListResponse
+    VolumeSetRequest:
+      example:
+        file_unit_recovery_enabled: "true"
+      properties:
+        file_unit_recovery_enabled:
+          description: Volume File Unit Recovery Enabled
+          example: "true"
+          title: File Unit Recovery Enabled
+          type: boolean
+      required:
+      - file_unit_recovery_enabled
+      title: VolumeSetRequest
+    VolumeShowResponse:
+      example:
+        type_name: HDD
+        purpose: REPLICATION
+        type_id: jef22f67-ee83-4gg2-2ab6-3lf774ekfjdu
+        usage: 0
+        created_at: 2024-07-30T04:54:33.219373
+        cifs_id: cifs_id
+        path: path
+        protocol: NFS
+        account_id: rwww523320dfvwbbefefsdvwdadsfa24c
+        file_unit_recovery_enabled: true
+        name: my_volume
+        encryption_enabled: "true"
+        endpoint_path: endpoint_path
+        id: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+        state: available
+      properties:
+        account_id:
+          description: Account ID
+          example: rwww523320dfvwbbefefsdvwdadsfa24c
+          title: Account Id
+          type: string
+        cifs_id:
+          nullable: true
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-07-30T04:54:33.219373
+          format: date-time
+          title: Created At
+          type: string
+        encryption_enabled:
+          description: Volume Encryption Enabled
+          example: "true"
+          title: Encryption Enabled
+          type: boolean
+        endpoint_path:
+          nullable: true
+          type: string
+        file_unit_recovery_enabled:
+          nullable: true
+          type: boolean
+        id:
+          description: Volume ID
+          example: bfdbabf2-04d9-4e8b-a205-020f8e6da438
+          title: Id
+          type: string
+        name:
+          description: Volume Name
+          example: my_volume
+          title: Name
+          type: string
+        path:
+          nullable: true
+          type: string
+        protocol:
+          description: Protocol
+          example: NFS
+          title: Protocol
+          type: string
+        purpose:
+          description: Purpose
+          example: REPLICATION
+          title: Purpose
+          type: string
+        state:
+          description: Volume State
+          example: available
+          title: State
+          type: string
+        type_id:
+          description: Volume Type ID
+          example: jef22f67-ee83-4gg2-2ab6-3lf774ekfjdu
+          title: Type Id
+          type: string
+        type_name:
+          description: Volume Type Name
+          example: HDD
+          title: Type Name
+          type: string
+        usage:
+          nullable: true
+          type: integer
+      required:
+      - account_id
+      - created_at
+      - encryption_enabled
+      - id
+      - name
+      - protocol
+      - purpose
+      - state
+      - type_id
+      - type_name
+      title: VolumeShowResponse
+  securitySchemes:
+    X-Auth-Token:
+      in: header
+      name: X-Auth-Token
+      type: apiKey
+x-app-name: scp-filestorage
+x-package-name: scp_filestorage
+x-service-type: scp-filestorage
+x-service-versions:
+  filestorage:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+x-url-prefix: ""

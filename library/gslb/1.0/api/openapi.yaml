@@ -1,0 +1,1498 @@
+openapi: 3.1.0
+info:
+  description: SCP Network Service
+  title: SCP Network Service
+  version: 0.0.1.dev7227
+servers:
+- url: ""
+tags:
+- description: Internal IP Pool API
+  name: vpc.v1.InternalIpPoolsApi
+- description: Internal Subnets API
+  name: vpc.v1.InternalSubnetsApi
+- description: Internal Vpc Endpoints API
+  name: vpc.v1.InternalVpcEndpointApi
+- description: Internal VPC Static Nat API
+  name: vpc.v1.InternalVpcStaticNatsApi
+- description: Internet Gateways API
+  name: vpc.v1.InternetGatewaysApi
+- description: Internal Private NAT API
+  name: vpc.v1.InternalPrivateNatsApi
+- description: Nat Gateways API
+  name: vpc.v1.NatGatewayApi
+- description: Ports API
+  name: vpc.v1.PortsApi
+- description: publicIps API
+  name: vpc.v1.PublicIpApi
+- description: Subnets API
+  name: vpc.v1.SubnetsApi
+- description: Vpc Endpoints API
+  name: vpc.v1.VpcEndpointApi
+- description: Vpcs API
+  name: vpc.v1.VpcsApi
+- description: Private NAT API
+  name: vpc.v1.PrivateNatApi
+- description: Private NAT IP API
+  name: vpc.v1.PrivateNatIpApi
+- description: VPC Peerings API
+  name: vpc.v1.VpcPeeringApi
+- description: VPC Peering Rules API
+  name: vpc.v1.VpcPeeringRuleApi
+- description: Transit Gateways API
+  name: vpc.v1.TransitGatewayApi
+- description: Transit Gateway VPC Connections API
+  name: vpc.v1.TransitGatewayVpcConnectionApi
+- description: Transit Gateway Rules API
+  name: vpc.v1.TransitGatewayRulesApi
+- description: Direct Connects API
+  name: direct-connect.v1.DirectConnectsApi
+- description: Direct Connects Rules API
+  name: direct-connect.v1.DirectConnectsRulesApi
+- description: Internal Security Groups API
+  name: security-group.v1.InternalSecurityGroupApi
+- description: Security Group Rules API
+  name: security-group.v1.SecurityGroupRuleApi
+- description: Security Groups API
+  name: security-group.v1.SecurityGroupApi
+- description: Firewall Rules API
+  name: firewall.v1.FirewallRulesApi
+- description: Firewalls API
+  name: firewall.v1.FirewallApi
+- description: VPN Gateways API
+  name: vpn.v1.VpnGatewaysApi
+- description: VPN Tunnels API
+  name: vpn.v1.VpnTunnelsApi
+- description: NetworkLoggingConfiguration API
+  name: network-logging.v1.NetworkLoggingConfigurationApi
+- description: NetworkLoggingStorage API
+  name: network-logging.v1.NetworkLoggingStorageApi
+- description: Internal Firewall Engine API
+  name: network-common.v1.InternalFirewallEngineApi
+- description: Network Natives API
+  name: network-common.v1.NetworkNativesApi
+- description: Cdn API
+  name: cdn.v1.CdnApi
+- description: Gslbs API
+  name: gslb.v1.GslbsApi
+- description: GslbResources API
+  name: gslb.v1.GslbResourcesApi
+- description: Public Domain Name API
+  name: dns.v1.PublicDomainNameApi
+- description: Hosted Zones API
+  name: dns.v1.HostedZonesApi
+- description: Private DNS API
+  name: dns.v1.PrivateDnsApi
+- description: Records API
+  name: dns.v1.RecordsApi
+paths:
+  /v1/gslbs:
+    get:
+      description: The GSLB List.
+      operationId: listGslbs
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: The GSLB State.
+        explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: The Name of the gslb.
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GslbListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ListGslbs
+      tags:
+      - gslb.v1.GslbsApi
+      x-action-id: gslb:ListGslbs
+      x-api-access-level: LIST
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: gslb_list
+      x-not-before: 2025-12-31
+      x-operation-id: listGslbs
+      x-resource: Gslb
+    post:
+      description: The GSLB Create.
+      operationId: createGslb
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GslbCreateRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GslbShowResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: CreateGslb
+      tags:
+      - gslb.v1.GslbsApi
+      x-action-id: gslb:CreateGslb
+      x-api-access-level: CREATE
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: gslb_create
+      x-not-before: 2025-12-31
+      x-operation-id: createGslb
+      x-resource: Gslb
+  /v1/gslbs/available-regions:
+    get:
+      description: The GSLB Availability Region.
+      operationId: ListGslbRegions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GslbConfigRegionResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ListGslbRegions
+      tags:
+      - gslb.v1.GslbsApi
+      x-action-id: gslb:ListGslbs
+      x-api-access-level: LIST
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope: CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-12-31
+      x-operation-id: ListGslbRegions
+  /v1/gslbs/check-duplication:
+    get:
+      description: The GSLB Name Availability.
+      operationId: checkGslbNameAvailability
+      parameters:
+      - description: The Name of the gslb.
+        explode: true
+        in: query
+        name: name
+        required: true
+        schema:
+          description: The Name of the gslb.
+          title: Name
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GslbCheckDuplicationResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: CheckGslbNameAvailability
+      tags:
+      - gslb.v1.GslbsApi
+      x-action-id: gslb:ShowGslb
+      x-api-access-level: READ
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope: CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-12-31
+      x-operation-id: checkGslbNameAvailability
+  /v1/gslbs/default-domain:
+    get:
+      description: The GSLB Default Domain.
+      operationId: showGslbDefaultDomain
+      parameters:
+      - description: The GSLB Environment Usage.
+        explode: true
+        in: query
+        name: gslb_env
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GslbDefaultDomainResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ShowGslbDefaultDomain
+      tags:
+      - gslb.v1.GslbsApi
+      x-action-id: gslb:ShowGslb
+      x-api-access-level: READ
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope: CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-12-31
+      x-operation-id: showGslbDefaultDomain
+  /v1/gslbs/ip-ranges:
+    get:
+      description: The GSLB IP Range.
+      operationId: ListGslbIpRanges
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GslbIpRangeResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ListGslbIpRanges
+      tags:
+      - gslb.v1.GslbsApi
+      x-action-id: gslb:ListGslbs
+      x-api-access-level: LIST
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope: CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-12-31
+      x-operation-id: ListGslbIpRanges
+  /v1/gslbs/{gslb_id}:
+    delete:
+      description: The GSLB Delete.
+      operationId: DeleteGslb
+      parameters:
+      - description: The GSLB ID.
+        explode: false
+        in: path
+        name: gslb_id
+        required: true
+        schema:
+          description: The GSLB ID.
+          title: Gslb Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GslbShowResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: DeleteGslb
+      tags:
+      - gslb.v1.GslbsApi
+      x-action-id: gslb:DeleteGslb
+      x-api-access-level: DELETE
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: gslb_delete
+      x-not-before: 2025-12-31
+      x-operation-id: DeleteGslb
+      x-resource: Gslb
+    get:
+      description: The GSLB Show.
+      operationId: ShowGslb
+      parameters:
+      - description: The GSLB ID.
+        explode: false
+        in: path
+        name: gslb_id
+        required: true
+        schema:
+          description: The GSLB ID.
+          title: Gslb Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GslbShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ShowGslb
+      tags:
+      - gslb.v1.GslbsApi
+      x-action-id: gslb:ShowGslb
+      x-api-access-level: READ
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: gslb_show
+      x-not-before: 2025-12-31
+      x-operation-id: ShowGslb
+      x-resource: Gslb
+    put:
+      description: The GSLB Set.
+      operationId: SetGslb
+      parameters:
+      - description: The GSLB ID.
+        explode: false
+        in: path
+        name: gslb_id
+        required: true
+        schema:
+          description: The GSLB ID.
+          title: Gslb Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GslbSetRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GslbShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: SetGslb
+      tags:
+      - gslb.v1.GslbsApi
+      x-action-id: gslb:SetGslb
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: gslb_update
+      x-not-before: 2025-12-31
+      x-operation-id: SetGslb
+      x-resource: Gslb
+  /v1/gslbs/{gslb_id}/health-check:
+    put:
+      description: Set GSLB Health Checks.
+      operationId: SetGslbHealthCheck
+      parameters:
+      - description: The GSLB ID.
+        explode: false
+        in: path
+        name: gslb_id
+        required: true
+        schema:
+          description: The GSLB ID.
+          title: Gslb Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GslbHealthCheck'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GslbShowResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: SetGslbHealthCheck
+      tags:
+      - gslb.v1.GslbsApi
+      x-action-id: gslb:SetGslb
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: gslb-health-check_update
+      x-not-before: 2025-12-31
+      x-operation-id: SetGslbHealthCheck
+      x-resource: GslbHealthCheck
+  /v1/gslbs/{gslb_id}/resources:
+    get:
+      description: The GSLB Resource List.
+      operationId: listGslbResources
+      parameters:
+      - description: The GSLB ID.
+        explode: false
+        in: path
+        name: gslb_id
+        required: true
+        schema:
+          description: The GSLB ID.
+          title: Gslb Id
+          type: string
+        style: simple
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GslbResourceListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ListGslbResources
+      tags:
+      - gslb.v1.GslbResourcesApi
+      x-action-id: gslb:ListGslbResources
+      x-api-access-level: LIST
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: gslb-resource_list
+      x-not-before: 2025-12-31
+      x-operation-id: listGslbResources
+      x-resource: GslbResource
+    put:
+      description: Set GSLB Resources.
+      operationId: setGslbResources
+      parameters:
+      - description: The GSLB ID.
+        explode: false
+        in: path
+        name: gslb_id
+        required: true
+        schema:
+          description: The GSLB ID.
+          title: Gslb Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GslbResourceSetRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GslbShowResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: SetGslbResources
+      tags:
+      - gslb.v1.GslbResourcesApi
+      x-action-id: gslb:SetGslbResources
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: gslb-resource_update
+      x-not-before: 2025-12-31
+      x-operation-id: setGslbResources
+      x-resource: GslbResource
+components:
+  schemas:
+    GslbCheckDuplicationResponse:
+      example:
+        result: true
+      properties:
+        result:
+          description: The GSLB Name Availability.
+          title: Result
+          type: boolean
+      required:
+      - result
+      title: GslbCheckDuplicationResponse
+    GslbConfigRegionResponse:
+      example:
+        gslb_available_regions:
+        - gslb_available_regions
+        - gslb_available_regions
+      properties:
+        gslb_available_regions:
+          description: The GSLB Availability Region.
+          items:
+            type: string
+          type: array
+      required:
+      - gslb_available_regions
+      title: GslbConfigRegionResponse
+    GslbCreateRequest:
+      example:
+        name: name
+        description: description
+        resources:
+        - destination: destination
+          description: description
+          weight: 56
+          disabled: true
+          region: region
+        - destination: destination
+          description: description
+          weight: 56
+          disabled: true
+          region: region
+        env_usage: env_usage
+        health_check:
+          send_string: send_string
+          health_check_interval: 28
+          protocol: protocol
+          receive_string: receive_string
+          health_check_user_password: health_check_user_password
+          health_check_probe_timeout: 182
+          health_check_user_id: health_check_user_id
+          timeout: 181
+          service_port: 9607
+        algorithm: algorithm
+        tags:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      properties:
+        algorithm:
+          description: The GSLB Algorithm.
+          title: Algorithm
+          type: string
+        description:
+          nullable: true
+          type: string
+        env_usage:
+          description: The GSLB Environment Usage.
+          title: Env Usage
+          type: string
+        health_check:
+          $ref: '#/components/schemas/GslbHealthCheck'
+        name:
+          description: The Name of the gslb.
+          title: Name
+          type: string
+        resources:
+          items:
+            $ref: '#/components/schemas/GslbResource'
+          type: array
+        tags:
+          default: []
+          description: Tag List
+          items:
+            $ref: '#/components/schemas/Tag'
+          type: array
+      required:
+      - algorithm
+      - env_usage
+      - name
+      - resources
+      title: GslbCreateRequest
+    GslbDefaultDomainResponse:
+      example:
+        gslb_default_domain: gslb_default_domain
+      properties:
+        gslb_default_domain:
+          description: The GSLB Default Domain.
+          title: Gslb Default Domain
+          type: string
+      required:
+      - gslb_default_domain
+      title: GslbDefaultDomainResponse
+    GslbDetail:
+      example:
+        linked_resource_count: 5
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: name
+        created_at: 2024-05-17T00:23:17Z
+        description: description
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        state: state
+        env_usage: env_usage
+        health_check:
+          health_check_interval: 28
+          receive_string: receive_string
+          created_at: 2024-05-17T00:23:17Z
+          health_check_probe_timeout: 182
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          timeout: 181
+          send_string: send_string
+          protocol: protocol
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          health_check_user_password: health_check_user_password
+          health_check_user_id: health_check_user_id
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          modified_at: 2024-05-17T00:23:17Z
+          service_port: 9607
+        modified_at: 2024-05-17T00:23:17Z
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        algorithm: algorithm
+      properties:
+        algorithm:
+          description: The GSLB Algorithm.
+          title: Algorithm
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        description:
+          nullable: true
+          type: string
+        env_usage:
+          description: The GSLB Environment Usage.
+          title: Env Usage
+          type: string
+        health_check:
+          $ref: '#/components/schemas/GslbHeathCheckShowResponse'
+        id:
+          description: ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        linked_resource_count:
+          description: The GSLB Linked Resource Count.
+          title: Linked Resource Count
+          type: integer
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: The Name of the gslb.
+          title: Name
+          type: string
+        state:
+          description: The GSLB State.
+          title: State
+          type: string
+      required:
+      - algorithm
+      - created_at
+      - created_by
+      - env_usage
+      - health_check
+      - id
+      - linked_resource_count
+      - modified_at
+      - modified_by
+      - name
+      - state
+      title: GslbDetail
+    GslbHealthCheck:
+      example:
+        send_string: send_string
+        health_check_interval: 28
+        protocol: protocol
+        receive_string: receive_string
+        health_check_user_password: health_check_user_password
+        health_check_probe_timeout: 182
+        health_check_user_id: health_check_user_id
+        timeout: 181
+        service_port: 9607
+      properties:
+        health_check_interval:
+          maximum: 299
+          minimum: 5
+          nullable: true
+          type: integer
+        health_check_probe_timeout:
+          maximum: 300
+          minimum: 5
+          nullable: true
+          type: integer
+        health_check_user_id:
+          maxLength: 60
+          nullable: true
+          type: string
+        health_check_user_password:
+          nullable: true
+          type: string
+        protocol:
+          description: The GSLB Health Check Protocol.
+          title: Protocol
+          type: string
+        receive_string:
+          maxLength: 300
+          nullable: true
+          type: string
+        send_string:
+          nullable: true
+          type: string
+        service_port:
+          maximum: 65535
+          minimum: 1
+          nullable: true
+          type: integer
+        timeout:
+          maximum: 300
+          minimum: 6
+          nullable: true
+          type: integer
+      required:
+      - protocol
+      title: GslbHealthCheck
+    GslbHeathCheckShowResponse:
+      example:
+        health_check_interval: 28
+        receive_string: receive_string
+        created_at: 2024-05-17T00:23:17Z
+        health_check_probe_timeout: 182
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        timeout: 181
+        send_string: send_string
+        protocol: protocol
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        health_check_user_password: health_check_user_password
+        health_check_user_id: health_check_user_id
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        modified_at: 2024-05-17T00:23:17Z
+        service_port: 9607
+      properties:
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        health_check_interval:
+          maximum: 299
+          minimum: 5
+          nullable: true
+          type: integer
+        health_check_probe_timeout:
+          maximum: 300
+          minimum: 5
+          nullable: true
+          type: integer
+        health_check_user_id:
+          maxLength: 60
+          nullable: true
+          type: string
+        health_check_user_password:
+          nullable: true
+          type: string
+        id:
+          description: ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        protocol:
+          description: The GSLB Health Check Protocol.
+          title: Protocol
+          type: string
+        receive_string:
+          maxLength: 300
+          nullable: true
+          type: string
+        send_string:
+          nullable: true
+          type: string
+        service_port:
+          maximum: 65535
+          minimum: 1
+          nullable: true
+          type: integer
+        timeout:
+          maximum: 300
+          minimum: 6
+          nullable: true
+          type: integer
+      required:
+      - created_at
+      - created_by
+      - id
+      - modified_at
+      - modified_by
+      - protocol
+      title: GslbHeathCheckShowResponse
+    GslbIpRangeResponse:
+      example:
+        gslb_ip_ranges:
+        - gslb_ip_ranges
+        - gslb_ip_ranges
+      properties:
+        gslb_ip_ranges:
+          description: The GSLB IP Range.
+          items:
+            type: string
+          type: array
+      required:
+      - gslb_ip_ranges
+      title: GslbIpRangeResponse
+    GslbListResponse:
+      example:
+        gslbs:
+        - linked_resource_count: 0
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          state: state
+          env_usage: env_usage
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          algorithm: algorithm
+        - linked_resource_count: 0
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          state: state
+          env_usage: env_usage
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          algorithm: algorithm
+        size: 20
+        count: 20
+        page: 0
+        sort:
+        - sort
+        - sort
+      properties:
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        gslbs:
+          items:
+            $ref: '#/components/schemas/GslbResponseCommon'
+          type: array
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - count
+      - gslbs
+      - page
+      - size
+      title: GslbListResponse
+    GslbResource:
+      example:
+        destination: destination
+        description: description
+        weight: 56
+        disabled: true
+        region: region
+      properties:
+        description:
+          maxLength: 50
+          nullable: true
+          type: string
+        destination:
+          description: The GSLB Resource Destination.
+          title: Destination
+          type: string
+        disabled:
+          nullable: true
+          type: boolean
+        region:
+          description: The GSLB Resource Region.
+          title: Region
+          type: string
+        weight:
+          maximum: 100
+          minimum: 0
+          nullable: true
+          type: integer
+      required:
+      - destination
+      - region
+      title: GslbResource
+    GslbResourceListResponse:
+      example:
+        size: 20
+        count: 20
+        gslb_resources:
+        - destination: destination
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          weight: 8
+          disabled: true
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          modified_at: 2024-05-17T00:23:17Z
+          region: region
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        - destination: destination
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          weight: 8
+          disabled: true
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          modified_at: 2024-05-17T00:23:17Z
+          region: region
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        page: 0
+        sort:
+        - sort
+        - sort
+      properties:
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        gslb_resources:
+          items:
+            $ref: '#/components/schemas/GslbResourceResponse'
+          type: array
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - count
+      - gslb_resources
+      - page
+      - size
+      title: GslbResourceListResponse
+    GslbResourceResponse:
+      example:
+        destination: destination
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        created_at: 2024-05-17T00:23:17Z
+        description: description
+        weight: 8
+        disabled: true
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        modified_at: 2024-05-17T00:23:17Z
+        region: region
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+      properties:
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        description:
+          maxLength: 50
+          nullable: true
+          type: string
+        destination:
+          description: The GSLB Resource Destination.
+          title: Destination
+          type: string
+        disabled:
+          nullable: true
+          type: boolean
+        id:
+          description: ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        region:
+          description: The GSLB Resource Region.
+          title: Region
+          type: string
+        weight:
+          maximum: 100
+          minimum: 0
+          nullable: true
+          type: integer
+      required:
+      - created_at
+      - created_by
+      - destination
+      - id
+      - modified_at
+      - modified_by
+      - region
+      title: GslbResourceResponse
+    GslbResourceSetRequest:
+      example:
+        resources:
+        - destination: destination
+          description: description
+          weight: 56
+          disabled: true
+          region: region
+        - destination: destination
+          description: description
+          weight: 56
+          disabled: true
+          region: region
+      properties:
+        resources:
+          items:
+            $ref: '#/components/schemas/GslbResource'
+          type: array
+      required:
+      - resources
+      title: GslbResourceSetRequest
+    GslbResponseCommon:
+      example:
+        linked_resource_count: 0
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: name
+        created_at: 2024-05-17T00:23:17Z
+        description: description
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        state: state
+        env_usage: env_usage
+        modified_at: 2024-05-17T00:23:17Z
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        algorithm: algorithm
+      properties:
+        algorithm:
+          description: The GSLB Algorithm.
+          title: Algorithm
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        description:
+          nullable: true
+          type: string
+        env_usage:
+          description: The GSLB Environment Usage.
+          title: Env Usage
+          type: string
+        id:
+          description: ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        linked_resource_count:
+          description: The GSLB Linked Resource Count.
+          title: Linked Resource Count
+          type: integer
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: The Name of the gslb.
+          title: Name
+          type: string
+        state:
+          description: The GSLB State.
+          title: State
+          type: string
+      required:
+      - algorithm
+      - created_at
+      - created_by
+      - env_usage
+      - id
+      - linked_resource_count
+      - modified_at
+      - modified_by
+      - name
+      - state
+      title: GslbResponseCommon
+    GslbSetRequest:
+      example:
+        description: description
+        algorithm: algorithm
+      properties:
+        algorithm:
+          nullable: true
+          type: string
+        description:
+          nullable: true
+          type: string
+      title: GslbSetRequest
+    GslbShowResponse:
+      example:
+        gslb:
+          linked_resource_count: 5
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          state: state
+          env_usage: env_usage
+          health_check:
+            health_check_interval: 28
+            receive_string: receive_string
+            created_at: 2024-05-17T00:23:17Z
+            health_check_probe_timeout: 182
+            created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            timeout: 181
+            send_string: send_string
+            protocol: protocol
+            modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            health_check_user_password: health_check_user_password
+            health_check_user_id: health_check_user_id
+            id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+            modified_at: 2024-05-17T00:23:17Z
+            service_port: 9607
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          algorithm: algorithm
+      properties:
+        gslb:
+          $ref: '#/components/schemas/GslbDetail'
+      required:
+      - gslb
+      title: GslbShowResponse
+    Tag:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          description: tag key
+          title: Key
+          type: string
+        value:
+          description: tag value
+          title: Value
+          type: string
+      required:
+      - key
+      - value
+      title: Tag
+  securitySchemes:
+    X-Auth-Token:
+      in: header
+      name: X-Auth-Token
+      type: apiKey
+x-app-name: scp-network
+x-package-name: scp_network
+x-service-type: scp-network
+x-service-versions:
+  cdn:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2025-12-31
+    status: CURRENT
+  direct-connect:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2025-12-31
+    status: CURRENT
+  dns:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2025-12-31
+    status: CURRENT
+  firewall:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2025-12-31
+    status: CURRENT
+  gslb:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2025-12-31
+    status: CURRENT
+  network-common:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2025-12-31
+    status: CURRENT
+  network-logging:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2025-12-31
+    status: CURRENT
+  security-group:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2025-12-31
+    status: CURRENT
+  vpc:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2025-12-31
+    status: CURRENT
+  vpn:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2025-12-31
+    status: CURRENT
+x-url-prefix: ""

@@ -1,0 +1,5 @@
+packageName: loadbalancer
+generatorName: go
+withGoMod: false
+structPrefix: true
+enumClassPrefix: true

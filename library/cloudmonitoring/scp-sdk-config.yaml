@@ -1,0 +1,5 @@
+packageName: cloudmonitoring
+generatorName: go
+withGoMod: false
+structPrefix: true
+enumClassPrefix: true

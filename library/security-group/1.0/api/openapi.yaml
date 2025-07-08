@@ -1,0 +1,1408 @@
+openapi: 3.1.0
+info:
+  description: SCP Network Service
+  title: SCP Network Service
+  version: 0.0.1.dev7080
+servers:
+- url: ""
+tags:
+- description: Internal IP Pool API
+  name: vpc.v1.InternalIpPoolsApi
+- description: Internal Subnets API
+  name: vpc.v1.InternalSubnetsApi
+- description: Internal Vpc Endpoints API
+  name: vpc.v1.InternalVpcEndpointApi
+- description: Internal VPC Static Nat API
+  name: vpc.v1.InternalVpcStaticNatsApi
+- description: Internet Gateways API
+  name: vpc.v1.InternetGatewaysApi
+- description: Internal Private NAT API
+  name: vpc.v1.InternalPrivateNatsApi
+- description: Nat Gateways API
+  name: vpc.v1.NatGatewayApi
+- description: Ports API
+  name: vpc.v1.PortsApi
+- description: publicIps API
+  name: vpc.v1.PublicIpApi
+- description: Subnets API
+  name: vpc.v1.SubnetsApi
+- description: Vpc Endpoints API
+  name: vpc.v1.VpcEndpointApi
+- description: Vpcs API
+  name: vpc.v1.VpcsApi
+- description: Private NAT API
+  name: vpc.v1.PrivateNatApi
+- description: Private NAT IP API
+  name: vpc.v1.PrivateNatIpApi
+- description: VPC Peerings API
+  name: vpc.v1.VpcPeeringApi
+- description: VPC Peering Rules API
+  name: vpc.v1.VpcPeeringRuleApi
+- description: Transit Gateways API
+  name: vpc.v1.TransitGatewayApi
+- description: Transit Gateway VPC Connections API
+  name: vpc.v1.TransitGatewayVpcConnectionApi
+- description: Transit Gateway Rules API
+  name: vpc.v1.TransitGatewayRulesApi
+- description: Direct Connects API
+  name: direct-connect.v1.DirectConnectsApi
+- description: Direct Connects Rules API
+  name: direct-connect.v1.DirectConnectsRulesApi
+- description: Internal Security Groups API
+  name: security-group.v1.InternalSecurityGroupApi
+- description: Security Group Rules API
+  name: security-group.v1.SecurityGroupRuleApi
+- description: Security Groups API
+  name: security-group.v1.SecurityGroupApi
+- description: Firewall Rules API
+  name: firewall.v1.FirewallRulesApi
+- description: Firewalls API
+  name: firewall.v1.FirewallApi
+- description: VPN Gateways API
+  name: vpn.v1.VpnGatewaysApi
+- description: VPN Tunnels API
+  name: vpn.v1.VpnTunnelsApi
+- description: NetworkLoggingConfiguration API
+  name: network-logging.v1.NetworkLoggingConfigurationApi
+- description: NetworkLoggingStorage API
+  name: network-logging.v1.NetworkLoggingStorageApi
+- description: Internal Firewall Engine API
+  name: network-common.v1.InternalFirewallEngineApi
+- description: Network Natives API
+  name: network-common.v1.NetworkNativesApi
+- description: Cdn API
+  name: cdn.v1.CdnApi
+- description: Gslbs API
+  name: gslb.v1.GslbsApi
+- description: GslbResources API
+  name: gslb.v1.GslbResourcesApi
+- description: Public Domain Name API
+  name: dns.v1.PublicDomainNameApi
+- description: Hosted Zones API
+  name: dns.v1.HostedZonesApi
+- description: Private DNS API
+  name: dns.v1.PrivateDnsApi
+- description: Records API
+  name: dns.v1.RecordsApi
+paths:
+  /v1/security-group-rules:
+    get:
+      description: Get Security Group rule list.
+      operationId: listSecurityGroupRules
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Security Group Rule ID
+        explode: true
+        in: query
+        name: id
+        required: false
+        schema:
+          description: Security Group Rule ID
+          title: Id
+          type: string
+        style: form
+      - description: Security Group ID
+        explode: true
+        in: query
+        name: security_group_id
+        required: true
+        schema:
+          description: Security Group ID
+          title: Security Group Id
+          type: string
+        style: form
+      - description: Security Group Rule Remote IP Address
+        explode: true
+        in: query
+        name: remote_ip_prefix
+        required: false
+        schema:
+          description: Security Group Rule Remote IP Address
+          title: Remote Ip Prefix
+          type: string
+        style: form
+      - description: Security Group Rule Remote Group ID
+        explode: true
+        in: query
+        name: remote_group_id
+        required: false
+        schema:
+          description: Security Group Rule Remote Group ID
+          title: Remote Group Id
+          type: string
+        style: form
+      - description: Security Group Rule Description
+        explode: true
+        in: query
+        name: description
+        required: false
+        schema:
+          description: Security Group Rule Description
+          title: Description
+          type: string
+        style: form
+      - description: "Security Group Rule Direction (Ingress, Egress)"
+        explode: true
+        in: query
+        name: direction
+        required: false
+        schema:
+          description: "Security Group Rule Direction (Ingress, Egress)"
+          title: Direction
+          type: string
+        style: form
+      - description: Security Group Rule Service
+        explode: true
+        in: query
+        name: service
+        required: false
+        schema:
+          description: Security Group Rule Service
+          title: Service
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityGroupRuleListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Security Group Rules
+      tags:
+      - security-group.v1.SecurityGroupRuleApi
+      x-action-id: security-group:ListSecurityGroupRules
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: security-group-rule_list
+      x-not-before: 2026-07-01
+      x-operation-id: listSecurityGroupRules
+      x-resource: security_group
+    post:
+      description: Create Security Group rule.
+      operationId: createSecurityGroupRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityGroupRuleCreateRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityGroupRuleShowResponse'
+          description: Created
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "409":
+          description: Conflict
+      security:
+      - X-Auth-Token: []
+      summary: Create Security Group Rule
+      tags:
+      - security-group.v1.SecurityGroupRuleApi
+      x-action-id: security-group:CreateSecurityGroupRule
+      x-api-access-level: CREATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "CLI, OPENAPI"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: security-group-rule_create
+      x-not-before: 2026-07-01
+      x-operation-id: createSecurityGroupRule
+      x-resource: security_group
+  /v1/security-group-rules/bulk:
+    post:
+      description: Create Security Group rules.
+      operationId: createSecurityGroupRules
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityGroupRulesCreateRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityGroupRulesCreateResponse'
+          description: Created
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "409":
+          description: Conflict
+      security:
+      - X-Auth-Token: []
+      summary: Create Security Group Rules
+      tags:
+      - security-group.v1.SecurityGroupRuleApi
+      x-action-id: security-group:CreateBulkSecurityGroupRules
+      x-api-access-level: CREATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: "CONSOLE,PRIVATE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2026-07-01
+      x-operation-id: createSecurityGroupRules
+      x-resource: security_group
+  /v1/security-group-rules/{security_group_id}/downloads:
+    get:
+      description: Download Security Group rule list.
+      operationId: downloadSecurityGroupRules
+      parameters:
+      - description: Security Group ID
+        explode: false
+        in: path
+        name: security_group_id
+        required: true
+        schema:
+          description: Security Group ID
+          title: Security Group Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Download Security Group Rules
+      tags:
+      - security-group.v1.SecurityGroupRuleApi
+      x-action-id: security-group:DownloadSecurityGroupRules
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2026-07-01
+      x-operation-id: downloadSecurityGroupRules
+      x-resource: security_group
+  /v1/security-group-rules/{security_group_rule_id}:
+    delete:
+      description: Delete Security Group rule.
+      operationId: deleteSecurityGroupRule
+      parameters:
+      - description: Security Group Rule ID
+        explode: false
+        in: path
+        name: security_group_rule_id
+        required: true
+        schema:
+          description: Security Group Rule ID
+          title: Security Group Rule Id
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Delete Security Group Rule
+      tags:
+      - security-group.v1.SecurityGroupRuleApi
+      x-action-id: security-group:DeleteSecurityGroupRule
+      x-api-access-level: DELETE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: security-group-rule_delete
+      x-not-before: 2026-07-01
+      x-operation-id: deleteSecurityGroupRule
+      x-resource: security_group
+    get:
+      description: Show Security Group rule.
+      operationId: showSecurityGroupRule
+      parameters:
+      - description: Security Group Rule ID
+        explode: false
+        in: path
+        name: security_group_rule_id
+        required: true
+        schema:
+          description: Security Group Rule ID
+          title: Security Group Rule Id
+          type: string
+        style: simple
+      - description: Field Name
+        explode: true
+        in: query
+        name: fields
+        required: false
+        schema:
+          $ref: '#/components/schemas/Fields'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityGroupRuleShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Show Security Group Rule
+      tags:
+      - security-group.v1.SecurityGroupRuleApi
+      x-action-id: security-group:ShowSecurityGroupRule
+      x-api-access-level: READ
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: security-group-rule_show
+      x-not-before: 2026-07-01
+      x-operation-id: showSecurityGroupRule
+      x-resource: security_group
+  /v1/security-groups:
+    get:
+      description: Get Security Group list.
+      operationId: listSecurityGroups
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Security Group ID
+        explode: true
+        in: query
+        name: id
+        required: false
+        schema:
+          description: Security Group ID
+          title: Id
+          type: string
+        style: form
+      - description: Security Group Name
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          description: Security Group Name
+          title: Name
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityGroupListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Security Groups
+      tags:
+      - security-group.v1.SecurityGroupApi
+      x-action-id: security-group:ListSecurityGroups
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: security-group_list
+      x-not-before: 2026-07-01
+      x-operation-id: listSecurityGroups
+      x-resource: security_group
+    post:
+      description: Create Security Group.
+      operationId: createSecurityGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityGroupCreateRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityGroupShowResponse'
+          description: Created
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Create Security Group
+      tags:
+      - security-group.v1.SecurityGroupApi
+      x-action-id: security-group:CreateSecurityGroup
+      x-api-access-level: CREATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: security-group_create
+      x-not-before: 2026-07-01
+      x-operation-id: createSecurityGroup
+      x-resource: security_group
+  /v1/security-groups/metrics/quotas:
+    get:
+      description: Get Security Group quotas.
+      operationId: getSecurityGroupQuotas
+      parameters:
+      - description: Security Group ID
+        explode: true
+        in: query
+        name: security_group_id
+        required: false
+        schema:
+          description: Security Group ID
+          title: Security Group Id
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityGroupQuotaResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Get Security Group Quotas
+      tags:
+      - security-group.v1.SecurityGroupApi
+      x-action-id: security-group:ShowSecurityGroupQuota
+      x-api-access-level: READ
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2026-07-01
+      x-operation-id: getSecurityGroupQuotas
+      x-resource: security_group
+  /v1/security-groups/{security_group_id}:
+    delete:
+      description: Delete Security Group.
+      operationId: deleteSecurityGroup
+      parameters:
+      - description: Security Group ID
+        explode: false
+        in: path
+        name: security_group_id
+        required: true
+        schema:
+          description: Security Group ID
+          title: Security Group Id
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "409":
+          description: Conflict
+      security:
+      - X-Auth-Token: []
+      summary: Delete Security Group
+      tags:
+      - security-group.v1.SecurityGroupApi
+      x-action-id: security-group:DeleteSecurityGroup
+      x-api-access-level: DELETE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: security-group_delete
+      x-not-before: 2026-07-01
+      x-operation-id: deleteSecurityGroup
+      x-resource: security_group
+    get:
+      description: Show Security Group.
+      operationId: showSecurityGroup
+      parameters:
+      - description: Security Group ID
+        explode: false
+        in: path
+        name: security_group_id
+        required: true
+        schema:
+          description: Security Group ID
+          title: Security Group Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityGroupShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Show Security Group
+      tags:
+      - security-group.v1.SecurityGroupApi
+      x-action-id: security-group:ShowSecurityGroup
+      x-api-access-level: READ
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: security-group_show
+      x-not-before: 2026-07-01
+      x-operation-id: showSecurityGroup
+      x-resource: security_group
+    put:
+      description: Set Security Group.
+      operationId: setSecurityGroup
+      parameters:
+      - description: Security Group ID
+        explode: false
+        in: path
+        name: security_group_id
+        required: true
+        schema:
+          description: Security Group ID
+          title: Security Group Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityGroupSetRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Set Security Group
+      tags:
+      - security-group.v1.SecurityGroupApi
+      x-action-id: security-group:SetSecurityGroup
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: security-group_set
+      x-not-before: 2026-07-01
+      x-operation-id: setSecurityGroup
+      x-resource: security_group
+components:
+  schemas:
+    Direction:
+      enum:
+      - ingress
+      - egress
+      title: Direction
+      type: string
+    Quota:
+      example:
+        limit: 0
+        used: 6
+      properties:
+        limit:
+          default: 0
+          description: Security Group Quota Limit
+          title: Limit
+          type: integer
+        used:
+          default: 0
+          description: Security Group Quota Used
+          title: Used
+          type: integer
+      title: Quota
+    SecurityGroup:
+      example:
+        account_id: account_id
+        loggable: true
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: name
+        created_at: 2024-05-17T00:23:17Z
+        description: description
+        id: id
+        state: state
+        modified_at: 2024-05-17T00:23:17Z
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        rule_count: 6
+      properties:
+        account_id:
+          description: Security Group Account ID
+          title: Account Id
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        description:
+          nullable: true
+          type: string
+        id:
+          description: Security Group ID
+          title: Id
+          type: string
+        loggable:
+          description: Security Group Loggable
+          title: Loggable
+          type: boolean
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: Security Group Name
+          title: Name
+          type: string
+        rule_count:
+          default: 0
+          description: Security Group Rule Count
+          title: Rule Count
+          type: integer
+        state:
+          description: Security Group State
+          title: State
+          type: string
+      required:
+      - account_id
+      - created_at
+      - created_by
+      - description
+      - id
+      - loggable
+      - modified_at
+      - modified_by
+      - name
+      - state
+      title: SecurityGroup
+    SecurityGroupCreateRequest:
+      example:
+        loggable: true
+        name: name
+        description: description
+        tags:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      properties:
+        description:
+          maxLength: 255
+          nullable: true
+          type: string
+        loggable:
+          nullable: true
+          type: boolean
+        name:
+          description: Security Group Name
+          maxLength: 255
+          title: Name
+          type: string
+        tags:
+          default: []
+          description: Tag List
+          items:
+            $ref: '#/components/schemas/Tag'
+          type: array
+      required:
+      - name
+      title: SecurityGroupCreateRequest
+    SecurityGroupListResponse:
+      example:
+        security_groups:
+        - account_id: account_id
+          loggable: true
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          id: id
+          state: state
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          rule_count: 6
+        - account_id: account_id
+          loggable: true
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          id: id
+          state: state
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          rule_count: 6
+        count: 0
+        links:
+        - ""
+        - ""
+      properties:
+        count:
+          nullable: true
+          type: integer
+        links:
+          items: {}
+          nullable: true
+          type: array
+        security_groups:
+          items:
+            $ref: '#/components/schemas/SecurityGroup'
+          type: array
+      required:
+      - security_groups
+      title: SecurityGroupListResponse
+    SecurityGroupQuotaResponse:
+      example:
+        security_groups:
+          limit: 0
+          used: 6
+        security_group_rules_per_sg:
+          limit: 0
+          used: 6
+        security_group_rules:
+          limit: 0
+          used: 6
+      properties:
+        security_group_rules:
+          $ref: '#/components/schemas/Quota'
+        security_group_rules_per_sg:
+          $ref: '#/components/schemas/Quota'
+        security_groups:
+          $ref: '#/components/schemas/Quota'
+      required:
+      - security_group_rules
+      - security_group_rules_per_sg
+      - security_groups
+      title: SecurityGroupQuotaResponse
+    SecurityGroupRule:
+      example:
+        remote_group_id: remote_group_id
+        ethertype: ethertype
+        created_at: 2024-05-17T00:23:17Z
+        description: description
+        port_range_max: 6
+        remote_ip_prefix: remote_ip_prefix
+        security_group_id: security_group_id
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        remote_group_name: remote_group_name
+        protocol: protocol
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        id: id
+        modified_at: 2024-05-17T00:23:17Z
+        direction: ""
+        port_range_min: 1
+      properties:
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        description:
+          nullable: true
+          type: string
+        direction:
+          allOf:
+          - $ref: '#/components/schemas/Direction'
+          description: "Security Group Rule Direction (Ingress, Egress)"
+        ethertype:
+          nullable: true
+          type: string
+        id:
+          description: Security Group Rule ID
+          title: Id
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        port_range_max:
+          nullable: true
+          type: integer
+        port_range_min:
+          nullable: true
+          type: integer
+        protocol:
+          nullable: true
+          type: string
+        remote_group_id:
+          nullable: true
+          type: string
+        remote_group_name:
+          nullable: true
+          type: string
+        remote_ip_prefix:
+          nullable: true
+          type: string
+        security_group_id:
+          description: Security Group ID
+          title: Security Group Id
+          type: string
+      required:
+      - created_at
+      - created_by
+      - description
+      - direction
+      - id
+      - modified_at
+      - modified_by
+      - port_range_max
+      - port_range_min
+      - protocol
+      - remote_group_id
+      - remote_ip_prefix
+      - security_group_id
+      title: SecurityGroupRule
+    SecurityGroupRuleCreateRequest:
+      example:
+        remote_group_id: remote_group_id
+        protocol: protocol
+        ethertype: ethertype
+        description: description
+        port_range_max: 0
+        remote_ip_prefix: remote_ip_prefix
+        security_group_id: security_group_id
+        direction: direction
+        port_range_min: 6
+      properties:
+        description:
+          nullable: true
+          type: string
+        direction:
+          description: "Security Group Rule Direction (Ingress, Egress)"
+          title: Direction
+          type: string
+        ethertype:
+          nullable: true
+          type: string
+        port_range_max:
+          nullable: true
+          type: integer
+        port_range_min:
+          nullable: true
+          type: integer
+        protocol:
+          nullable: true
+          type: string
+        remote_group_id:
+          nullable: true
+          type: string
+        remote_ip_prefix:
+          nullable: true
+          type: string
+        security_group_id:
+          description: Security Group ID
+          title: Security Group Id
+          type: string
+      required:
+      - direction
+      - protocol
+      - security_group_id
+      title: SecurityGroupRuleCreateRequest
+    SecurityGroupRuleCreateRequestParam:
+      example:
+        remote_group_id: remote_group_id
+        protocol: protocol
+        ethertype: ethertype
+        description: description
+        port_range_max: 0
+        remote_ip_prefix: remote_ip_prefix
+        security_group_id: security_group_id
+        direction: direction
+        port_range_min: 6
+      properties:
+        description:
+          nullable: true
+          type: string
+        direction:
+          description: "Security Group Rule Direction (Ingress, Egress)"
+          title: Direction
+          type: string
+        ethertype:
+          nullable: true
+          type: string
+        port_range_max:
+          nullable: true
+          type: integer
+        port_range_min:
+          nullable: true
+          type: integer
+        protocol:
+          nullable: true
+          type: string
+        remote_group_id:
+          nullable: true
+          type: string
+        remote_ip_prefix:
+          nullable: true
+          type: string
+        security_group_id:
+          nullable: true
+          type: string
+      required:
+      - direction
+      - protocol
+      title: SecurityGroupRuleCreateRequestParam
+    SecurityGroupRuleListResponse:
+      example:
+        count: 0
+        links:
+        - ""
+        - ""
+        security_group_rules:
+        - remote_group_id: remote_group_id
+          ethertype: ethertype
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          port_range_max: 6
+          remote_ip_prefix: remote_ip_prefix
+          security_group_id: security_group_id
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          remote_group_name: remote_group_name
+          protocol: protocol
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          id: id
+          modified_at: 2024-05-17T00:23:17Z
+          direction: ""
+          port_range_min: 1
+        - remote_group_id: remote_group_id
+          ethertype: ethertype
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          port_range_max: 6
+          remote_ip_prefix: remote_ip_prefix
+          security_group_id: security_group_id
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          remote_group_name: remote_group_name
+          protocol: protocol
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          id: id
+          modified_at: 2024-05-17T00:23:17Z
+          direction: ""
+          port_range_min: 1
+      properties:
+        count:
+          nullable: true
+          type: integer
+        links:
+          items: {}
+          nullable: true
+          type: array
+        security_group_rules:
+          items:
+            $ref: '#/components/schemas/SecurityGroupRule'
+          type: array
+      required:
+      - security_group_rules
+      title: SecurityGroupRuleListResponse
+    SecurityGroupRuleShowResponse:
+      example:
+        security_group_rule:
+          remote_group_id: remote_group_id
+          ethertype: ethertype
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          port_range_max: 6
+          remote_ip_prefix: remote_ip_prefix
+          security_group_id: security_group_id
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          remote_group_name: remote_group_name
+          protocol: protocol
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          id: id
+          modified_at: 2024-05-17T00:23:17Z
+          direction: ""
+          port_range_min: 1
+      properties:
+        security_group_rule:
+          $ref: '#/components/schemas/SecurityGroupRule'
+      required:
+      - security_group_rule
+      title: SecurityGroupRuleShowResponse
+    SecurityGroupRulesCreateRequest:
+      example:
+        security_group_id: security_group_id
+        security_group_rules:
+        - remote_group_id: remote_group_id
+          protocol: protocol
+          ethertype: ethertype
+          description: description
+          port_range_max: 0
+          remote_ip_prefix: remote_ip_prefix
+          security_group_id: security_group_id
+          direction: direction
+          port_range_min: 6
+        - remote_group_id: remote_group_id
+          protocol: protocol
+          ethertype: ethertype
+          description: description
+          port_range_max: 0
+          remote_ip_prefix: remote_ip_prefix
+          security_group_id: security_group_id
+          direction: direction
+          port_range_min: 6
+      properties:
+        security_group_id:
+          description: Security Group Rule ID
+          title: Security Group Id
+          type: string
+        security_group_rules:
+          items:
+            $ref: '#/components/schemas/SecurityGroupRuleCreateRequestParam'
+          type: array
+      required:
+      - security_group_id
+      - security_group_rules
+      title: SecurityGroupRulesCreateRequest
+    SecurityGroupRulesCreateResponse:
+      example:
+        security_group_rules:
+        - remote_group_id: remote_group_id
+          ethertype: ethertype
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          port_range_max: 6
+          remote_ip_prefix: remote_ip_prefix
+          security_group_id: security_group_id
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          remote_group_name: remote_group_name
+          protocol: protocol
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          id: id
+          modified_at: 2024-05-17T00:23:17Z
+          direction: ""
+          port_range_min: 1
+        - remote_group_id: remote_group_id
+          ethertype: ethertype
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          port_range_max: 6
+          remote_ip_prefix: remote_ip_prefix
+          security_group_id: security_group_id
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          remote_group_name: remote_group_name
+          protocol: protocol
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          id: id
+          modified_at: 2024-05-17T00:23:17Z
+          direction: ""
+          port_range_min: 1
+      properties:
+        security_group_rules:
+          items:
+            $ref: '#/components/schemas/SecurityGroupRule'
+          type: array
+      required:
+      - security_group_rules
+      title: SecurityGroupRulesCreateResponse
+    SecurityGroupSetRequest:
+      example:
+        loggable: true
+        description: description
+      properties:
+        description:
+          maxLength: 255
+          nullable: true
+          type: string
+        loggable:
+          nullable: true
+          type: boolean
+      title: SecurityGroupSetRequest
+    SecurityGroupShowResponse:
+      example:
+        security_group:
+          account_id: account_id
+          loggable: true
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          id: id
+          state: state
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          rule_count: 6
+      properties:
+        security_group:
+          $ref: '#/components/schemas/SecurityGroup'
+      required:
+      - security_group
+      title: SecurityGroupShowResponse
+    Tag:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          description: tag key
+          title: Key
+          type: string
+        value:
+          description: tag value
+          title: Value
+          type: string
+      required:
+      - key
+      - value
+      title: Tag
+    Fields:
+      anyOf:
+      - items: {}
+        type: array
+      - type: string
+      description: Field Name
+      nullable: true
+      title: Fields
+  securitySchemes:
+    X-Auth-Token:
+      in: header
+      name: X-Auth-Token
+      type: apiKey
+x-app-name: scp-network
+x-package-name: scp_network
+x-service-type: scp-network
+x-service-versions:
+  cdn:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  direct-connect:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  dns:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  firewall:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  gslb:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  network-common:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  network-logging:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  security-group:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  vpc:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  vpn:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+x-url-prefix: ""

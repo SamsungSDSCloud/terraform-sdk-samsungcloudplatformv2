@@ -1,0 +1,5186 @@
+openapi: 3.0.1
+info:
+  description: Nuri Monitoring service
+  title: Nuri Monitoring service
+  version: Nuri
+servers:
+- description: Generated server url
+  url: https://cloudmonitoring.kr-west1.dev2.samsungsdscloud.com/monitoring/event
+- description: Generated server url
+  url: https://cloudmonitoring.kr-west1.dev2.samsungsdscloud.com/monitoring/product
+- description: Generated server url
+  url: https://cloudmonitoring.kr-west1.dev2.samsungsdscloud.com/monitoring/log
+- description: Generated server url
+  url: https://cloudmonitoring.kr-west1.dev2.samsungsdscloud.com/monitoring/dashboard
+- description: Generated server url
+  url: https://cloudmonitoring.kr-west1.dev2.samsungsdscloud.com/monitoring/system
+- description: Generated server url
+  url: https://cloudmonitoring.kr-west1.dev2.samsungsdscloud.com/monitoring/agent
+- description: Generated server url
+  url: https://cloudmonitoring.kr-west1.dev2.samsungsdscloud.com/monitoring/admin
+paths:
+  /v1/cloudmonitorings/admin/login: {}
+  /v1/cloudmonitorings/admin/loginFail: {}
+  /v1/cloudmonitorings/admin/loginIdp: {}
+  /v1/cloudmonitorings/admin/v1/alarms/categorys: {}
+  /v1/cloudmonitorings/admin/v1/alarms/{productMttypeSq}/admin-users: {}
+  /v1/cloudmonitorings/admin/v1/alarms/{productMttypeSq}/members: {}
+  /v1/cloudmonitorings/admin/v1/alarms/{productMttypeSq}/members/{userResourceId}: {}
+  /v1/cloudmonitorings/admin/v1/alarms/{productMttypeSq}/users: {}
+  /v1/cloudmonitorings/admin/v1/all-projects/interface-kafka-logs: {}
+  /v1/cloudmonitorings/admin/v1/all-projects/interface-kafka-retries: {}
+  /v1/cloudmonitorings/admin/v1/all-projects/interface-logs: {}
+  /v1/cloudmonitorings/admin/v1/all-projects/interface-retries: {}
+  /v1/cloudmonitorings/admin/v1/console/mbs/block-types/{type}: {}
+  /v1/cloudmonitorings/admin/v1/console/mbs/collect-types/{type}: {}
+  /v1/cloudmonitorings/admin/v1/console/mbs/collectionChannels: {}
+  /v1/cloudmonitorings/admin/v1/console/mbs/module-types/{type}: {}
+  /v1/cloudmonitorings/admin/v1/console/mbs/zone: {}
+  /v1/cloudmonitorings/admin/v1/console/mbs/zone/collectionChannels/{channelSq}: {}
+  /v1/cloudmonitorings/admin/v1/console/mbs/zone/collectionChannels/{componentSq}/check: {}
+  /v1/cloudmonitorings/admin/v1/console/mbs/zone/endpoints/{moduleSq}: {}
+  /v1/cloudmonitorings/admin/v1/console/mbs/zone/getMbLnb: {}
+  /v1/cloudmonitorings/admin/v1/console/mbs/zone/modules/{moduleSq}: {}
+  /v1/cloudmonitorings/admin/v1/console/mbs/zone/pbs: {}
+  /v1/cloudmonitorings/admin/v1/console/mbs/zone/pbs/{componentSq}: {}
+  /v1/cloudmonitorings/admin/v1/console/mbs/zone/{componentSq}: {}
+  /v1/cloudmonitorings/admin/v1/console/mbs/zone/{componentSq}/collectionChannels: {}
+  /v1/cloudmonitorings/admin/v1/console/mbs/zone/{componentSq}/endpoints: {}
+  /v1/cloudmonitorings/admin/v1/console/mbs/zone/{componentSq}/endpoints/disable: {}
+  /v1/cloudmonitorings/admin/v1/console/mbs/zone/{componentSq}/endpoints/enable: {}
+  /v1/cloudmonitorings/admin/v1/console/mbs/zone/{componentSq}/modules: {}
+  /v1/cloudmonitorings/admin/v1/console/mbs/zone/{parentComponentSq}/pbs: {}
+  /v1/cloudmonitorings/admin/v1/console/mbs/{componentSq}: {}
+  /v1/cloudmonitorings/admin/v1/console/pbs/endpoints/{moduleSq}: {}
+  /v1/cloudmonitorings/admin/v1/console/pbs/{componentSq}: {}
+  /v1/cloudmonitorings/admin/v1/console/pbs/{componentSq}/endpoints: {}
+  /v1/cloudmonitorings/admin/v1/console/pbs/{componentSq}/endpoints/disable: {}
+  /v1/cloudmonitorings/admin/v1/console/pbs/{componentSq}/endpoints/enable: {}
+  /v1/cloudmonitorings/admin/v1/main/categorys: {}
+  /v1/cloudmonitorings/admin/v1/products: {}
+  /v1/cloudmonitorings/admin/v1/products/agentStates: {}
+  /v1/cloudmonitorings/admin/v1/products/agents/class-versions: {}
+  /v1/cloudmonitorings/admin/v1/products/agents/delete: {}
+  /v1/cloudmonitorings/admin/v1/products/agents/history: {}
+  /v1/cloudmonitorings/admin/v1/products/agents/install: {}
+  /v1/cloudmonitorings/admin/v1/products/agents/start: {}
+  /v1/cloudmonitorings/admin/v1/products/agents/stop: {}
+  /v1/cloudmonitorings/admin/v1/products/agents/update: {}
+  /v1/cloudmonitorings/admin/v1/products/alarms/action: {}
+  /v1/cloudmonitorings/admin/v1/products/alarms/history: {}
+  /v1/cloudmonitorings/admin/v1/products/kafka-sub-types: {}
+  /v1/cloudmonitorings/admin/v1/products/manual/agents/{resourceId}/prepare/{agentType}: {}
+  /v1/cloudmonitorings/admin/v1/products/olm-sub-types: {}
+  /v1/cloudmonitorings/admin/v1/products/projects/{agentClassType}: {}
+  /v1/cloudmonitorings/admin/v1/products/state-types/{agentType}: {}
+  /v1/cloudmonitorings/admin/v1/products/sub-types: {}
+  /v1/cloudmonitorings/admin/v1/products/types: {}
+  /v1/cloudmonitorings/admin/v1/products/{monSq}: {}
+  /v1/cloudmonitorings/agent/v1/agents/callback: {}
+  /v1/cloudmonitorings/agent/v1/agents/class-versions: {}
+  /v1/cloudmonitorings/agent/v1/agents/delete: {}
+  /v1/cloudmonitorings/agent/v1/agents/history: {}
+  /v1/cloudmonitorings/agent/v1/agents/install: {}
+  /v1/cloudmonitorings/agent/v1/agents/start: {}
+  /v1/cloudmonitorings/agent/v1/agents/stop: {}
+  /v1/cloudmonitorings/agent/v1/agents/update: {}
+  /v1/cloudmonitorings/agent/v1/agents/yaml/callback: {}
+  /v1/cloudmonitorings/agent/v1/console/agent-states: {}
+  /v1/cloudmonitorings/agent/v1/console/agent-types: {}
+  /v1/cloudmonitorings/agent/v1/console/agent-versions: {}
+  /v1/cloudmonitorings/agent/v1/console/agents: {}
+  /v1/cloudmonitorings/agent/v1/console/agents/callback: {}
+  /v1/cloudmonitorings/agent/v1/console/agents/histories: {}
+  /v1/cloudmonitorings/agent/v1/console/agents/install: {}
+  /v1/cloudmonitorings/agent/v1/console/agents/products-types: {}
+  /v1/cloudmonitorings/agent/v1/console/agents/start: {}
+  /v1/cloudmonitorings/agent/v1/console/agents/stop: {}
+  /v1/cloudmonitorings/agent/v1/console/agents/uninstall: {}
+  /v1/cloudmonitorings/agent/v1/console/agents/update: {}
+  /v1/cloudmonitorings/agent/v1/console/agents/yaml/callback: {}
+  /v1/cloudmonitorings/agent/v1/console/agents/{agentSq}/histories: {}
+  /v1/cloudmonitorings/agent/v1/console/agents/{agentSq}/install: {}
+  /v1/cloudmonitorings/agent/v1/console/agents/{agentSq}/logs: {}
+  /v1/cloudmonitorings/agent/v1/console/agents/{agentSq}/start: {}
+  /v1/cloudmonitorings/agent/v1/console/agents/{agentSq}/stop: {}
+  /v1/cloudmonitorings/agent/v1/console/agents/{agentSq}/uninstall: {}
+  /v1/cloudmonitorings/agent/v1/console/agents/{agentSq}/update: {}
+  /v1/cloudmonitorings/agent/v1/internal/products/callback: {}
+  /v1/cloudmonitorings/agent/v1/internal/products/callbackInstall: {}
+  /v1/cloudmonitorings/agent/v1/internal/products/callbackRecover: {}
+  /v1/cloudmonitorings/agent/v1/internal/products/yaml/callbackInstall: {}
+  /v1/cloudmonitorings/agent/v1/internal/products/yaml/callbackRecover: {}
+  /v1/cloudmonitorings/agent/v1/internal/products/{productResourceId}/agents: {}
+  /v1/cloudmonitorings/agent/v1/internal/products/{productResourceId}/agents/recover: {}
+  /v1/cloudmonitorings/agent/v1/manual/agents/{resourceId}/prepare/check: {}
+  /v1/cloudmonitorings/agent/v1/manual/agents/{resourceId}/prepare/{agentType}: {}
+  /v1/cloudmonitorings/dashboard/v1/console/dashboard-widgets: {}
+  /v1/cloudmonitorings/dashboard/v1/console/dashboard-widgets-without-accountId: {}
+  /v1/cloudmonitorings/dashboard/v1/console/dashboard-widgets-without-accountId/{widgetId}: {}
+  /v1/cloudmonitorings/dashboard/v1/console/dashboard-widgets-without-accountId/{widgetId}/copy: {}
+  /v1/cloudmonitorings/dashboard/v1/console/dashboard-widgets/{widgetId}: {}
+  /v1/cloudmonitorings/dashboard/v1/console/dashboard-widgets/{widgetId}/copy: {}
+  /v1/cloudmonitorings/dashboard/v1/console/dashboards: {}
+  /v1/cloudmonitorings/dashboard/v1/console/dashboards/account: {}
+  /v1/cloudmonitorings/dashboard/v1/console/dashboards/{dashboardId}: {}
+  /v1/cloudmonitorings/dashboard/v1/console/dashboards/{dashboardId}/copy: {}
+  /v1/cloudmonitorings/dashboard/v1/console/dashboards/{dashboardId}/favorites: {}
+  /v1/cloudmonitorings/dashboard/v1/console/dashboards/{dashboardId}/share: {}
+  /v1/cloudmonitorings/dashboard/v1/console/dashboards/{dashboardId}/users: {}
+  /v1/cloudmonitorings/dashboard/v1/console/dashboards/{dashboardId}/widgets: {}
+  /v1/cloudmonitorings/event/v1/console/event-filterings: {}
+  /v1/cloudmonitorings/event/v1/console/event-filterings/standard-date: {}
+  /v1/cloudmonitorings/event/v1/console/event-filterings/{eventFilteringSq}: {}
+  /v1/cloudmonitorings/event/v1/console/event-policies: {}
+  /v1/cloudmonitorings/event/v1/console/event-policies/create: {}
+  /v1/cloudmonitorings/event/v1/console/event-policies/disable: {}
+  /v1/cloudmonitorings/event/v1/console/event-policies/notifications: {}
+  /v1/cloudmonitorings/event/v1/console/event-policies/{eventPolicyId}: {}
+  /v1/cloudmonitorings/event/v1/console/event-policies/{eventPolicyId}/histories: {}
+  /v1/cloudmonitorings/event/v1/console/event-policies/{eventPolicyId}/notifications: {}
+  /v1/cloudmonitorings/event/v1/console/event-templates: {}
+  /v1/cloudmonitorings/event/v1/console/event-templates/list: {}
+  /v1/cloudmonitorings/event/v1/console/event-templates/{eventTemplateSq}: {}
+  /v1/cloudmonitorings/event/v1/console/event-templates/{eventTemplateSq}/notifications: {}
+  /v1/cloudmonitorings/event/v1/console/event-templates/{eventTemplateSq}/share: {}
+  /v1/cloudmonitorings/event/v1/console/event-templates/{eventTemplateSq}/share/users: {}
+  /v1/cloudmonitorings/event/v1/console/events: {}
+  /v1/cloudmonitorings/event/v1/console/events/all-resource-types: {}
+  /v1/cloudmonitorings/event/v1/console/events/event-history: {}
+  /v1/cloudmonitorings/event/v1/console/events/latest: {}
+  /v1/cloudmonitorings/event/v1/console/events/{eventId}/notification-states: {}
+  /v1/cloudmonitorings/event/v1/console/products/{productResourceId}/events: {}
+  /v1/cloudmonitorings/event/v1/interface/asg-policies: {}
+  /v1/cloudmonitorings/event/v1/interface/event-filterings/{productSq}: {}
+  /v1/cloudmonitorings/event/v1/interface/event-policies/db-reload: {}
+  /v1/cloudmonitorings/event/v1/interface/event-policies/log-metrics/{metricSq}: {}
+  /v1/cloudmonitorings/event/v1/interface/event-policies/product/{productSq}: {}
+  /v1/cloudmonitorings/event/v1/interface/event-policies/product/{productSq}/disable: {}
+  /v1/cloudmonitorings/event/v1/interface/event-policies/product/{productSq}/enable: {}
+  /v1/cloudmonitorings/event/v1/interface/event-policies/{ruleSq}/down-notifications: {}
+  /v1/cloudmonitorings/event/v1/interface/event-policies/{ruleSq}/notifications: {}
+  /v1/cloudmonitorings/event/v1/interface/events/dbconn: {}
+  /v1/cloudmonitorings/event/v1/interface/events/{eventId}/notification-states: {}
+  /v1/cloudmonitorings/event/v2/accounts/events:
+    get:
+      description: Search Account Event List
+      operationId: getAccountEventList
+      parameters:
+      - description: Event State
+        example: ALL
+        explode: true
+        in: query
+        name: eventState
+        required: true
+        schema:
+          description: swagger.event.eventSearchCriteria.eventState.value
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - ALL
+          example: ALL
+          type: string
+        style: form
+      - description: Query Start Date
+        example: 2021-10-23T18:00:00.000Z
+        explode: true
+        in: query
+        name: queryStartDt
+        required: true
+        schema:
+          description: swagger.event.eventSearchCriteria.queryStartDt.value
+          example: 2021-10-23T18:00:00.000Z
+          type: string
+        style: form
+      - description: Query End Date
+        example: 2021-10-23T23:59:59.000Z
+        explode: true
+        in: query
+        name: queryEndDt
+        required: true
+        schema:
+          description: swagger.event.eventSearchCriteria.queryEndDt.value
+          example: 2021-10-23T23:59:59.000Z
+          type: string
+        style: form
+      - description: "Page Number (default: 0)"
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          format: int32
+          minimum: 0
+          type: integer
+        style: form
+      - description: "Page Contents Size (default: 10)"
+        example: 10
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          format: int32
+          maximum: 1000
+          minimum: 0
+          type: integer
+        style: form
+      - description: Sorting Field List
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          example:
+          - email:asc
+          items:
+            example: "[\"email:asc\"]"
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageResponseOpenApiEventResponse'
+          description: OK
+        "400":
+          description: Invalid Request
+      summary: ListAccountEvents
+      tags:
+      - Open API - Event V2
+      x-action-id: cloudmonitoring:ShowMonitoring
+      x-api-access-level: MONITOR_VIEW
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      x-api-state: implemented
+      x-cli: event_accountevent_list
+      x-resource: Event
+  /v1/cloudmonitorings/event/v2/event-policies:
+    get:
+      description: Search Event Policies
+      operationId: getProductEventPolicyList
+      parameters:
+      - description: "Product Resource ID - Product Resource ID can be viewed using\
+          \ @[ListAccountResources]."
+        example: c94607c8-6a15-4e13-84f3-99cb77d478e3
+        explode: true
+        in: query
+        name: productResourceId
+        required: true
+        schema:
+          description: swagger.event.eventPolicySearchCriteria.productResourceId.value
+          example: c94607c8-6a15-4e13-84f3-99cb77d478e3
+          maxLength: 1000
+          minLength: 0
+          type: string
+        style: form
+      - description: "Metric Key - Metric Key can be viewed using @[ListMetrics]."
+        example: system.cpu.system.pct
+        explode: true
+        in: query
+        name: metricKey
+        required: false
+        schema:
+          description: swagger.event.eventPolicySearchCriteria.metricKey.value
+          example: system.cpu.system.pct
+          maxLength: 300
+          minLength: 0
+          type: string
+        style: form
+      - description: "Page Number (default: 0)"
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          format: int32
+          minimum: 0
+          type: integer
+        style: form
+      - description: "Page Contents Size (default: 10)"
+        example: 10
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          format: int32
+          maximum: 1000
+          minimum: 0
+          type: integer
+        style: form
+      - description: Sorting Field List
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          example:
+          - email:asc
+          items:
+            example: "[\"email:asc\"]"
+            type: string
+          type: array
+        style: form
+      - description: Resource Type
+        explode: false
+        in: header
+        name: X-ResourceType
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageResponseEventPolicyResponse'
+          description: OK
+        "400":
+          description: Invalid Request
+        "401":
+          description: Monitoring User Not Found
+        "403":
+          description: Unauthorized Request
+        "404":
+          description: Resource Not Found
+      summary: ListEventPolicies
+      tags:
+      - Open API - Event Policy V2
+      x-action-id: cloudmonitoring:ShowMonitoring
+      x-api-access-level: MONITOR_VIEW
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      x-api-state: implemented
+      x-cli: event_eventpolicy_list
+      x-resource: Event
+    post:
+      description: Create Event Policy
+      operationId: putEventPolicy
+      parameters:
+      - description: Resource Type
+        explode: false
+        in: header
+        name: X-ResourceType
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventPolicyCreateRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventPolicyDetailResponse'
+          description: OK
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventPolicyDetailResponse'
+          description: OK(Created)
+        "400":
+          description: Invalid Request
+        "401":
+          description: Monitoring User Not Found
+        "403":
+          description: Unauthorized Request
+        "404":
+          description: Resource Not Found
+      summary: CreateEventPolicy
+      tags:
+      - Open API - Event Policy V2
+      x-action-id: cloudmonitoring:SetMonitoring
+      x-api-access-level: MONITOR_SET
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      x-api-state: implemented
+      x-cli: event_eventpolicy_create
+      x-resource: Event
+  /v1/cloudmonitorings/event/v2/event-policies/{eventPolicyId}:
+    delete:
+      description: Delete Event policy
+      operationId: deleteEventPolicy
+      parameters:
+      - description: "Event policy ID to delete - Event Policy ID can be viewed using\
+          \ @[ListEventPolicies]."
+        example: 7226
+        explode: false
+        in: path
+        name: eventPolicyId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - description: Resource Type
+        explode: false
+        in: header
+        name: X-ResourceType
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: OK
+        "204":
+          description: OK(No Contents)
+        "400":
+          description: Invalid Request
+        "401":
+          description: Monitoring User Not Found
+        "403":
+          description: Unauthorized Request
+        "404":
+          description: Resource Not Found
+      summary: DeleteEventPolicy
+      tags:
+      - Open API - Event Policy V2
+      x-action-id: cloudmonitoring:SetMonitoring
+      x-api-access-level: MONITOR_SET
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      x-api-state: implemented
+      x-cli: event_eventpolicy_delete
+      x-resource: Event
+    get:
+      description: Show Event Policy
+      operationId: getEventPolicyDetail
+      parameters:
+      - description: "Event Policy ID to inquire - Event Policy ID can be viewed using\
+          \ @[ListEventPolicies]."
+        example: 7226
+        explode: false
+        in: path
+        name: eventPolicyId
+        required: true
+        schema:
+          format: int64
+          minimum: 1
+          type: integer
+        style: simple
+      - description: Resource Type
+        explode: false
+        in: header
+        name: X-ResourceType
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventPolicyDetailResponse'
+          description: OK
+        "400":
+          description: Invalid Request
+        "401":
+          description: Monitoring User Not Found
+        "403":
+          description: Unauthorized Request
+        "404":
+          description: Resource Not Found
+      summary: ShowEventPolicy
+      tags:
+      - Open API - Event Policy V2
+      x-action-id: cloudmonitoring:ShowMonitoring
+      x-api-access-level: MONITOR_VIEW
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      x-api-state: implemented
+      x-cli: event_eventpolicy_show
+      x-resource: Event
+    put:
+      description: Set Event Policy
+      operationId: modifyEventPolicy
+      parameters:
+      - description: "Event policy ID to modify - Event Policy ID can be viewed using\
+          \ @[ListEventPolicies]."
+        example: 7226
+        explode: false
+        in: path
+        name: eventPolicyId
+        required: true
+        schema:
+          format: int64
+          minimum: 1
+          type: integer
+        style: simple
+      - description: Resource Type
+        explode: false
+        in: header
+        name: X-ResourceType
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventPolicyUpdateRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventPolicyDetailResponse'
+          description: OK
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventPolicyDetailResponse'
+          description: OK(Created)
+        "400":
+          description: Invalid Request
+        "401":
+          description: Monitoring User Not Found
+        "403":
+          description: Unauthorized Request
+        "404":
+          description: Resource Not Found
+        "500":
+          description: Internal Server Error
+      summary: SetEventPolicy
+      tags:
+      - Open API - Event Policy V2
+      x-action-id: cloudmonitoring:SetMonitoring
+      x-api-access-level: MONITOR_SET
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      x-api-state: implemented
+      x-cli: event_eventpolicy_set
+      x-resource: Event
+  /v1/cloudmonitorings/event/v2/event-policies/{eventPolicyId}/histories:
+    get:
+      description: Search event policy histories
+      operationId: getEventPolicyHistories
+      parameters:
+      - description: "Event Policy ID to inquire - Event Policy ID can be viewed using\
+          \ @[ListEventPolicies]."
+        example: 7226
+        explode: false
+        in: path
+        name: eventPolicyId
+        required: true
+        schema:
+          format: int64
+          minimum: 1
+          type: integer
+        style: simple
+      - description: Query Start Date
+        example: 2021-10-23T18:00:00.000Z
+        explode: true
+        in: query
+        name: queryStartDt
+        required: true
+        schema:
+          description: swagger.event.eventPolicyHistorySearchCriteria.queryStartDt.value
+          example: 2021-10-23T18:00:00.000Z
+          type: string
+        style: form
+      - description: Query End Date
+        example: 2021-10-23T23:59:59.000Z
+        explode: true
+        in: query
+        name: queryEndDt
+        required: true
+        schema:
+          description: swagger.event.eventPolicyHistorySearchCriteria.queryEndDt.value
+          example: 2021-10-23T23:59:59.000Z
+          type: string
+        style: form
+      - description: "Page Number (default: 0)"
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          format: int32
+          minimum: 0
+          type: integer
+        style: form
+      - description: "Page Contents Size (default: 10)"
+        example: 10
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          format: int32
+          maximum: 1000
+          minimum: 0
+          type: integer
+        style: form
+      - description: Sorting Field List
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          example:
+          - email:asc
+          items:
+            example: "[\"email:asc\"]"
+            type: string
+          type: array
+        style: form
+      - description: Resource Type
+        explode: false
+        in: header
+        name: X-ResourceType
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageResponseEventPolicyHistoryResponse'
+          description: OK
+        "400":
+          description: Invalid Request
+        "401":
+          description: Monitoring User Not Found
+        "403":
+          description: Unauthorized Request
+        "404":
+          description: Resource Not Found
+      summary: ListEventPolicyHistories
+      tags:
+      - Open API - Event Policy V2
+      x-action-id: cloudmonitoring:ShowMonitoring
+      x-api-access-level: MONITOR_VIEW
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      x-api-state: implemented
+      x-cli: event_eventpolicyhistory_list
+      x-resource: Event
+  /v1/cloudmonitorings/event/v2/event-policies/{eventPolicyId}/notifications:
+    get:
+      description: Search Event Policy Notification
+      operationId: getEventPolicyNotification
+      parameters:
+      - description: "Page Number (default: 0)"
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          format: int32
+          minimum: 0
+          type: integer
+        style: form
+      - description: "Page Contents Size (default: 10)"
+        example: 10
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          format: int32
+          maximum: 1000
+          minimum: 0
+          type: integer
+        style: form
+      - description: Sorting Field List
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          example:
+          - email:asc
+          items:
+            example: "[\"email:asc\"]"
+            type: string
+          type: array
+        style: form
+      - description: "Event Policy ID to inquire - Event Policy ID can be viewed using\
+          \ @[ListEventPolicies]."
+        example: 7226
+        explode: false
+        in: path
+        name: eventPolicyId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - description: Resource Type
+        explode: false
+        in: header
+        name: X-ResourceType
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageResponseNotificationResponse'
+          description: OK
+        "400":
+          description: Invalid Request
+        "401":
+          description: Monitoring User Not Found
+        "403":
+          description: Unauthorized Request
+        "404":
+          description: Resource Not Found
+      summary: ListEventPolicyNotification
+      tags:
+      - Open API - Event Policy V2
+      x-action-id: cloudmonitoring:ShowMonitoring
+      x-api-access-level: MONITOR_VIEW
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      x-api-state: implemented
+      x-cli: event_eventpolicynotification_list
+      x-resource: Event
+  /v1/cloudmonitorings/event/v2/events:
+    get:
+      description: Search a list of events that occurred on a product resource.
+      operationId: getProductEventList
+      parameters:
+      - description: "Product Resource ID - Product Resource ID can be viewed using\
+          \ @[ListAccountResources]."
+        example: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+        explode: true
+        in: query
+        name: productResourceId
+        required: true
+        schema:
+          description: swagger.event.eventSearchCriteria.productResourceId.value
+          example: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+          maxLength: 1000
+          minLength: 0
+          type: string
+        style: form
+      - description: "Metric Key - Metric Key can be viewed using @[ListMetrics]."
+        example: system.cpu.system.pct
+        explode: true
+        in: query
+        name: metricKey
+        required: false
+        schema:
+          description: swagger.event.eventSearchCriteria.metricKey.value
+          example: system.cpu.system.pct
+          maxLength: 300
+          minLength: 0
+          type: string
+        style: form
+      - description: Event State
+        example: ALL
+        explode: true
+        in: query
+        name: eventState
+        required: true
+        schema:
+          description: swagger.event.eventSearchCriteria.eventState.value
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - ALL
+          example: ALL
+          type: string
+        style: form
+      - description: Query Start Date
+        example: 2021-10-23T18:00:00.000Z
+        explode: true
+        in: query
+        name: queryStartDt
+        required: true
+        schema:
+          description: swagger.event.eventSearchCriteria.queryStartDt.value
+          example: 2021-10-23T18:00:00.000Z
+          type: string
+        style: form
+      - description: Query End Date
+        example: 2021-10-23T23:59:59.000Z
+        explode: true
+        in: query
+        name: queryEndDt
+        required: true
+        schema:
+          description: swagger.event.eventSearchCriteria.queryEndDt.value
+          example: 2021-10-23T23:59:59.000Z
+          type: string
+        style: form
+      - description: "Page Number (default: 0)"
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          format: int32
+          minimum: 0
+          type: integer
+        style: form
+      - description: "Page Contents Size (default: 10)"
+        example: 10
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          format: int32
+          maximum: 1000
+          minimum: 0
+          type: integer
+        style: form
+      - description: Sorting Field List
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          example:
+          - email:asc
+          items:
+            example: "[\"email:asc\"]"
+            type: string
+          type: array
+        style: form
+      - description: Resource Type
+        explode: false
+        in: header
+        name: X-ResourceType
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageResponseOpenApiEventResponse'
+          description: OK
+        "400":
+          description: Invalid Request
+        "403":
+          description: Unauthorized Request
+        "404":
+          description: Resource Not Found
+      summary: ListResourceEvents
+      tags:
+      - Open API - Event V2
+      x-action-id: cloudmonitoring:ShowMonitoring
+      x-api-access-level: MONITOR_VIEW
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      x-api-state: implemented
+      x-cli: event_resourceevent_list
+      x-resource: Event
+  /v1/cloudmonitorings/event/v2/events/{eventId}:
+    get:
+      description: Show Resource Event
+      operationId: getEventDetail
+      parameters:
+      - description: "Event ID - Event ID can be viewed using @[ListResourceEvents]."
+        explode: false
+        in: path
+        name: eventId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Resource Type
+        explode: false
+        in: header
+        name: X-ResourceType
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventDetailResponse'
+          description: OK
+        "400":
+          description: Invalid Request
+        "401":
+          description: Monitoring User Not Found
+        "403":
+          description: Unauthorized Request
+        "404":
+          description: Resource Not Found
+      summary: ShowResourceEvent
+      tags:
+      - Open API - Event V2
+      x-action-id: cloudmonitoring:ShowMonitoring
+      x-api-access-level: MONITOR_VIEW
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      x-api-state: implemented
+      x-cli: event_resourceevent_show
+      x-resource: Event
+  /v1/cloudmonitorings/event/v2/events/{eventId}/notification-states:
+    get:
+      description: Search Event Notification States
+      operationId: getEventNotificationStates
+      parameters:
+      - description: "Event ID - Event ID can be viewed using @[ListResourceEvents]."
+        explode: false
+        in: path
+        name: eventId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: "Page Number (default: 0)"
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          format: int32
+          minimum: 0
+          type: integer
+        style: form
+      - description: "Page Contents Size (default: 10)"
+        example: 10
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          format: int32
+          maximum: 1000
+          minimum: 0
+          type: integer
+        style: form
+      - description: Sorting Field List
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          example:
+          - email:asc
+          items:
+            example: "[\"email:asc\"]"
+            type: string
+          type: array
+        style: form
+      - description: Resource Type
+        explode: false
+        in: header
+        name: X-ResourceType
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageResponseEventNotificationResponse'
+          description: OK
+        "400":
+          description: Invalid Request
+        "401":
+          description: Monitoring User Not Found
+        "403":
+          description: Unauthorized Request
+        "404":
+          description: Resource Not Found
+      summary: ShowEventNotificationStates
+      tags:
+      - Open API - Event V2
+      x-action-id: cloudmonitoring:ShowMonitoring
+      x-api-access-level: MONITOR_VIEW
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      x-api-state: implemented
+      x-cli: event_eventnotificationstate_show
+      x-resource: Event
+  /v1/cloudmonitorings/log/v1/console/log-data/accumulate-per-day: {}
+  /v1/cloudmonitorings/log/v1/console/log-data/accumulate-per-product: {}
+  /v1/cloudmonitorings/log/v1/console/log-data/accumulate-total: {}
+  /v1/cloudmonitorings/log/v1/console/log-data/log-usage: {}
+  /v1/cloudmonitorings/log/v1/console/log-data/product-log-usage: {}
+  /v1/cloudmonitorings/log/v1/console/log-metrics: {}
+  /v1/cloudmonitorings/log/v1/console/log-metrics/search: {}
+  /v1/cloudmonitorings/log/v1/console/log-metrics/{metricSq}: {}
+  /v1/cloudmonitorings/log/v1/console/logs: {}
+  /v1/cloudmonitorings/log/v1/console/logs/agent: {}
+  /v1/cloudmonitorings/log/v1/console/logs/fields: {}
+  /v1/cloudmonitorings/log/v1/console/logs/log-data: {}
+  /v1/cloudmonitorings/log/v1/console/logs/log-data/download: {}
+  /v1/cloudmonitorings/log/v1/console/logs/log-data/usage: {}
+  /v1/cloudmonitorings/log/v1/console/logs/product-types: {}
+  /v1/cloudmonitorings/log/v1/console/logs/query-histories: {}
+  /v1/cloudmonitorings/log/v1/console/logs/{logSq}/fields: {}
+  /v1/cloudmonitorings/log/v1/console/products/agentLogs: {}
+  /v1/cloudmonitorings/log/v1/console/products/log/editable: {}
+  /v1/cloudmonitorings/log/v1/console/products/logs: {}
+  /v1/cloudmonitorings/log/v1/interface/log-metrics/db-reload: {}
+  /v1/cloudmonitorings/log/v1/internal/logs: {}
+  /v1/cloudmonitorings/log/v1/internal/logs/exists: {}
+  /v1/cloudmonitorings/log/v1/internal/logs/{logSq}: {}
+  /v1/cloudmonitorings/log/v1/internal/products/exists-log: {}
+  /v1/cloudmonitorings/log/v1/internal/products/{productResourceId}/log-metrics: {}
+  /v1/cloudmonitorings/log/v1/internal/products/{productResourceId}/log-state: {}
+  /v1/cloudmonitorings/log/v1/internal/products/{productResourceId}/logs: {}
+  /v1/cloudmonitorings/log/v1/internal/products/{productResourceId}/logs/default: {}
+  /v1/cloudmonitorings/log/v1/log-usage/top10-product: {}
+  /v1/cloudmonitorings/log/v1/log-usage/total: {}
+  /v1/cloudmonitorings/log/v1/log-usage/weekly-product: {}
+  /v1/cloudmonitorings/log/v1/log-usage/weekly-product-ratio: {}
+  /v1/cloudmonitorings/log/v1/logs/log-data: {}
+  /v1/cloudmonitorings/log/v1/logs/status: {}
+  /v1/cloudmonitorings/product/v1/accounts/members:
+    get:
+      description: Search members included in an Account.
+      operationId: getAccountMembers
+      parameters:
+      - description: "Page Number (default: 0)"
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          format: int32
+          minimum: 0
+          type: integer
+        style: form
+      - description: "Page Contents Size (default: 10)"
+        example: 10
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          format: int32
+          maximum: 1000
+          minimum: 0
+          type: integer
+        style: form
+      - description: Sorting Field List
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          example:
+          - email:asc
+          items:
+            example: "[\"email:asc\"]"
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageResponseJsonArrayProjectMemberResponseForOpenAPI'
+          description: OK
+        "400":
+          description: Invalid Request
+        "401":
+          description: Monitoring User Not Found
+        "403":
+          description: Unauthorized Request
+        "404":
+          description: Resource Not Found
+      summary: ListAccountMember
+      tags:
+      - Open API - Account V1
+      x-action-id: cloudmonitoring:ShowMonitoring
+      x-api-access-level: MONITOR_VIEW
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      x-api-state: implemented
+      x-cli: product_accountmember_list
+      x-resource: Product
+  /v1/cloudmonitorings/product/v1/console/main-metrics: {}
+  /v1/cloudmonitorings/product/v1/console/metric-data: {}
+  /v1/cloudmonitorings/product/v1/console/metric-data-latest: {}
+  /v1/cloudmonitorings/product/v1/console/metric-data-method: {}
+  /v1/cloudmonitorings/product/v1/console/metric-data-tops: {}
+  /v1/cloudmonitorings/product/v1/console/metric-data-tops/VPC: {}
+  /v1/cloudmonitorings/product/v1/console/metrics: {}
+  /v1/cloudmonitorings/product/v1/console/object-types: {}
+  /v1/cloudmonitorings/product/v1/console/objects: {}
+  /v1/cloudmonitorings/product/v1/console/objects/dataops-dataflow: {}
+  /v1/cloudmonitorings/product/v1/console/objects/k8s: {}
+  /v1/cloudmonitorings/product/v1/console/objects/lb: {}
+  /v1/cloudmonitorings/product/v1/console/product-sub-types: {}
+  /v1/cloudmonitorings/product/v1/console/product-sub-types/check-authorization: {}
+  /v1/cloudmonitorings/product/v1/console/product-sub-types/top: {}
+  /v1/cloudmonitorings/product/v1/console/products: {}
+  /v1/cloudmonitorings/product/v1/console/products/check-authorization: {}
+  /v1/cloudmonitorings/product/v1/console/products/conditions: {}
+  /v1/cloudmonitorings/product/v1/console/products/count: {}
+  /v1/cloudmonitorings/product/v1/console/products/count/{state}: {}
+  /v1/cloudmonitorings/product/v1/console/products/summaries: {}
+  /v1/cloudmonitorings/product/v1/console/products/{productId}: {}
+  /v1/cloudmonitorings/product/v1/console/summary-metrics: {}
+  /v1/cloudmonitorings/product/v1/interface/objects: {}
+  /v1/cloudmonitorings/product/v1/interface/objects/dataops-dataflow: {}
+  /v1/cloudmonitorings/product/v1/interface/objects/k8s: {}
+  /v1/cloudmonitorings/product/v1/interface/objects/lb: {}
+  /v1/cloudmonitorings/product/v1/interface/pools: {}
+  /v1/cloudmonitorings/product/v1/interface/products/managed-product-types: {}
+  /v1/cloudmonitorings/product/v1/product-types:
+    get:
+      description: Search a list of product types supported by monitoring.
+      operationId: getProductTypeList
+      parameters:
+      - description: "Product type category - If not specified, the entire product\
+          \ type code will be retrieved."
+        example: Compute
+        explode: true
+        in: query
+        name: productCategoryCode
+        required: false
+        schema:
+          description: swagger.product.ProductSearchCriteria.productCategoryCode.value
+          example: Compute
+          type: string
+        style: form
+      - description: "Page Number (default: 0)"
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          format: int32
+          minimum: 0
+          type: integer
+        style: form
+      - description: "Page Contents Size (default: 10)"
+        example: 10
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          format: int32
+          maximum: 1000
+          minimum: 0
+          type: integer
+        style: form
+      - description: Sorting Field List
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          example:
+          - email:asc
+          items:
+            example: "[\"email:asc\"]"
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageResponseProductTypeInfoDto'
+          description: OK
+        "400":
+          description: Invalid Request
+        "401":
+          description: Monitoring User Not Found
+        "403":
+          description: Unauthorized Request
+        "404":
+          description: Resource Not Found
+      summary: ListService
+      tags:
+      - Open API - Product Type V1
+      x-action-id: cloudmonitoring:ShowMonitoring
+      x-api-access-level: MONITOR_VIEW
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      x-api-state: implemented
+      x-cli: product_service_list
+      x-resource: Product
+  /v1/cloudmonitorings/product/v2/accounts/products:
+    get:
+      description: Search Resource included in an Account.
+      operationId: getAccountProductList
+      parameters:
+      - description: "Page Number (default: 0)"
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          format: int32
+          minimum: 0
+          type: integer
+        style: form
+      - description: "Page Contents Size (default: 10)"
+        example: 10
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          format: int32
+          maximum: 1000
+          minimum: 0
+          type: integer
+        style: form
+      - description: Sorting Field List
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          example:
+          - email:asc
+          items:
+            example: "[\"email:asc\"]"
+            type: string
+          type: array
+        style: form
+      - description: Resource Type
+        explode: false
+        in: header
+        name: X-ResourceType
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageResponseAccountProductDto'
+          description: OK
+        "400":
+          description: Invalid Request
+        "401":
+          description: Monitoring User Not Found
+        "403":
+          description: Unauthorized Request
+        "404":
+          description: Resource Not Found
+      summary: ListAccountResources
+      tags:
+      - Open API - Account V2
+      x-action-id: cloudmonitoring:ShowMonitoring
+      x-api-access-level: MONITOR_VIEW
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      x-api-state: implemented
+      x-cli: product_accountresource_list
+      x-resource: Product
+  /v1/cloudmonitorings/product/v2/addrbooks/{addrbookId}/members:
+    get:
+      description: Search address book members
+      operationId: getAdressBookMemberList
+      parameters:
+      - description: "Address book ID - Address book IDs can be obtained from @[ListAddressBooks]."
+        explode: false
+        in: path
+        name: addrbookId
+        required: true
+        schema:
+          format: int32
+          minimum: 1
+          type: integer
+        style: simple
+      - description: "Page Number (default: 0)"
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          format: int32
+          minimum: 0
+          type: integer
+        style: form
+      - description: "Page Contents Size (default: 10)"
+        example: 10
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          format: int32
+          maximum: 1000
+          minimum: 0
+          type: integer
+        style: form
+      - description: Sorting Field List
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          example:
+          - email:asc
+          items:
+            example: "[\"email:asc\"]"
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageResponseAlarmAddrBookMemberDto'
+          description: OK
+        "400":
+          description: Invalid Request
+        "401":
+          description: Monitoring User Not Found
+        "403":
+          description: Unauthorized Request
+        "404":
+          description: Resource Not Found
+      summary: ListAddressBookMembers
+      tags:
+      - Open API - Address Book V2
+      x-action-id: cloudmonitoring:ShowMonitoring
+      x-api-access-level: MONITOR_VIEW
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      x-api-state: implemented
+      x-cli: product_addressbookmember_list
+      x-resource: Product
+  /v1/cloudmonitorings/product/v2/metric-data:
+    post:
+      description: "Search the performance values of the collected metrics. Up to\
+        \ 10 query conditions can be specified, and the maximum query period is 24\
+        \ hours."
+      operationId: getMetricPerfDataList
+      parameters:
+      - description: Resource Type
+        explode: false
+        in: header
+        name: X-ResourceType
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetricDataSearchCriteriaOpenAPIV2'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponseMetricStatisticsDataDtoOpenAPIV2'
+          description: OK
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponseMetricStatisticsDataDtoOpenAPIV2'
+          description: OK(Created)
+        "400":
+          description: Invalid Request
+        "401":
+          description: Monitoring User Not Found
+        "403":
+          description: Unauthorized Request
+        "404":
+          description: Resource Not Found
+      summary: ListMetricPefData
+      tags:
+      - Open API - Metric Data V2
+      x-action-id: cloudmonitoring:ShowMonitoring
+      x-api-access-level: MONITOR_VIEW
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      x-api-state: implemented
+      x-cli: product_metricperfdata_list
+      x-resource: Product
+  /v1/cloudmonitorings/product/v2/metrics:
+    get:
+      description: View the list of metrics provided by Monitoring. You can view the
+        full list of metrics or the list of metrics for each service type.
+      operationId: getMetricList
+      parameters:
+      - description: "Product type code - Product type codes can be obtained using\
+          \ @[ListServiceMonitoring]. If not specified, the entire metric list will\
+          \ be retrieved."
+        example: VM
+        explode: true
+        in: query
+        name: productTypeCode
+        required: false
+        schema:
+          description: swagger.product.MetricSearchCriteria.productTypeCode.value
+          example: VM
+          type: string
+        style: form
+      - description: "Object Type - Only available for services that have subtypes,\
+          \ such as when the 'productTypeCode' is 'Kubernetes' or 'Load Balancer'."
+        example: node
+        explode: true
+        in: query
+        name: objectType
+        required: false
+        schema:
+          description: swagger.product.MetricSearchCriteriaV2.objectType.value
+          example: node
+          type: string
+        style: form
+      - description: "Page Number (default: 0)"
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          format: int32
+          minimum: 0
+          type: integer
+        style: form
+      - description: "Page Contents Size (default: 10)"
+        example: 10
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          format: int32
+          maximum: 1000
+          minimum: 0
+          type: integer
+        style: form
+      - description: Sorting Field List
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          example:
+          - email:asc
+          items:
+            example: "[\"email:asc\"]"
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageResponseMetricInfoDto'
+          description: OK
+        "400":
+          description: Invalid Request
+        "401":
+          description: Monitoring User Not Found
+        "403":
+          description: Unauthorized Request
+        "404":
+          description: Resource Not Found
+      summary: ListMetrics
+      tags:
+      - Open API - Metric V2
+      x-action-id: cloudmonitoring:ShowMonitoring
+      x-api-access-level: MONITOR_VIEW
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      x-api-state: implemented
+      x-cli: product_metric_list
+      x-resource: Product
+  /v1/cloudmonitorings/product/v2/users/addrbooks:
+    get:
+      description: Search a list of address books created by user.
+      operationId: getAdressBookList
+      parameters:
+      - description: "Page Number (default: 0)"
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          format: int32
+          minimum: 0
+          type: integer
+        style: form
+      - description: "Page Contents Size (default: 10)"
+        example: 10
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          format: int32
+          maximum: 1000
+          minimum: 0
+          type: integer
+        style: form
+      - description: Sorting Field List
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          example:
+          - email:asc
+          items:
+            example: "[\"email:asc\"]"
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageResponseAlarmAddrBookDto'
+          description: OK
+        "400":
+          description: Invalid Request
+        "401":
+          description: Monitoring User Not Found
+        "403":
+          description: Unauthorized Request
+        "404":
+          description: Resource Not Found
+      summary: ListAddressBooks
+      tags:
+      - Open API - User V2
+      x-action-id: cloudmonitoring:ShowMonitoring
+      x-api-access-level: MONITOR_VIEW
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      x-api-state: implemented
+      x-cli: product_addressbook_list
+      x-resource: Product
+  /v1/cloudmonitorings/system/v1/console/accounts: {}
+  /v1/cloudmonitorings/system/v1/console/accounts/check-authorization: {}
+  /v1/cloudmonitorings/system/v1/console/address-books: {}
+  /v1/cloudmonitorings/system/v1/console/address-books/accounts-members: {}
+  /v1/cloudmonitorings/system/v1/console/address-books/address-book-users: {}
+  /v1/cloudmonitorings/system/v1/console/address-books/{addressBookSq}: {}
+  /v1/cloudmonitorings/system/v1/console/address-books/{addressBookSq}/address-book-user: {}
+  /v1/cloudmonitorings/system/v1/console/address-books/{addressBookSq}/address-book-users: {}
+  /v1/cloudmonitorings/system/v1/console/commoncodes: {}
+  /v1/cloudmonitorings/system/v1/console/groups: {}
+  /v1/cloudmonitorings/system/v1/console/menus: {}
+  /v1/cloudmonitorings/system/v1/console/notifications: {}
+  /v1/cloudmonitorings/system/v1/console/notifications/update: {}
+  /v1/cloudmonitorings/system/v1/console/products/{productResourceId}/tags: {}
+  /v1/cloudmonitorings/system/v1/console/region: {}
+  /v1/cloudmonitorings/system/v1/console/tags: {}
+  /v1/cloudmonitorings/system/v1/console/tags/resources: {}
+  /v1/cloudmonitorings/system/v1/console/user/current: {}
+  /v1/cloudmonitorings/system/v1/console/users/account-histories: {}
+  /v1/cloudmonitorings/system/v1/interface/admin-notifications: {}
+  /v1/cloudmonitorings/system/v1/interface/groups: {}
+  /v1/cloudmonitorings/system/v1/interface/users: {}
+components:
+  schemas:
+    AccountProductDto:
+      description: 프로젝트의 상품 정보 조회 시 응답을 전달하기 위한 객체
+      example:
+        lastEventLevel: WARNING
+        accountId: UqXgOSnoqOfKB0_LKO6xId
+        productIpAddress: 192.168.245.161
+        productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+        endDt: 9999-12-31T23:59:59.999Z
+        productTypeName: Virtual Server
+        startDt: 2021-10-23T08:30:00Z
+        productState: Running
+        productName: VM-Server-01
+        productTypeCode: VM
+        poolName: POOL-A8-C1DpGqRdQMlfNXdJxLb
+      properties:
+        accountId:
+          description: 프로젝트 아이디
+          example: UqXgOSnoqOfKB0_LKO6xId
+          type: string
+        endDt:
+          description: 상품 삭제 일시
+          example: 9999-12-31T23:59:59.999Z
+          format: date-time
+          type: string
+        lastEventLevel:
+          description: 최종 이벤트 레벨
+          example: WARNING
+          type: string
+        poolName:
+          description: 풀 이름
+          example: POOL-A8-C1DpGqRdQMlfNXdJxLb
+          type: string
+        productIpAddress:
+          description: 상품 IP주소
+          example: 192.168.245.161
+          type: string
+        productName:
+          description: 상품 이름
+          example: VM-Server-01
+          type: string
+        productResourceId:
+          description: 상품 리소스 아이디
+          example: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+          type: string
+        productState:
+          description: "상품 상태 - 유효한 값 : Running, Down"
+          example: Running
+          type: string
+        productTypeCode:
+          description: 상품 유형코드
+          example: VM
+          type: string
+        productTypeName:
+          description: 상품 유형이름
+          example: Virtual Server
+          type: string
+        startDt:
+          description: 상품 생성 일시
+          example: 2021-10-23T08:30:00Z
+          format: date-time
+          type: string
+      required:
+      - accountId
+      - productName
+      - productResourceId
+      - productState
+      - productTypeCode
+      - productTypeName
+      - startDt
+      title: AccountProductDto
+      type: object
+    AddrbookAdditionalInfo:
+      description: 알림 수신인 주소록 부가 정보 객체
+      example:
+        userAdditionalInfo:
+        - dst_offset: dst_offset
+          utc_offset: utc_offset
+          last_login_at: last_login_at
+          account_id: account_id
+          timezone: timezone
+          user_name: user_name
+          company_name: company_name
+          id: id
+          password_reuse_count: 0
+          member_created_at: member_created_at
+          email: email
+          tz_id: tz_id
+        - dst_offset: dst_offset
+          utc_offset: utc_offset
+          last_login_at: last_login_at
+          account_id: account_id
+          timezone: timezone
+          user_name: user_name
+          company_name: company_name
+          id: id
+          password_reuse_count: 0
+          member_created_at: member_created_at
+          email: email
+          tz_id: tz_id
+        memberCount: 4
+      properties:
+        memberCount:
+          description: 멤버수
+          example: 4
+          format: int64
+          type: integer
+        userAdditionalInfo:
+          items:
+            $ref: '#/components/schemas/Member'
+          type: array
+      required:
+      - memberCount
+      title: AddrbookAdditionalInfo
+      type: object
+    AlarmAddrBookDto:
+      description: 주소록 조회 시 응답을 전달하기 위한 객체
+      example:
+        createdByName: 김삼성
+        createdDt: 2021-10-23T22:00:00Z
+        addrbookId: "74"
+        createdBy: "1984"
+        addrBookName: contact name
+        memberCount: 10
+      properties:
+        addrBookName:
+          description: 주소록 이름
+          example: contact name
+          type: string
+        addrbookId:
+          description: 주소록 아이디
+          example: "74"
+          type: string
+        createdBy:
+          description: 생성자 아이디
+          example: "1984"
+          type: string
+        createdByName:
+          description: 생성자 이름
+          example: 김삼성
+          type: string
+        createdDt:
+          description: 생성 일시
+          example: 2021-10-23T22:00:00Z
+          format: date-time
+          type: string
+        memberCount:
+          description: 멤버 수
+          example: 10
+          format: int32
+          type: integer
+      required:
+      - addrBookName
+      - addrbookId
+      - createdBy
+      - createdByName
+      - createdDt
+      - memberCount
+      title: AlarmAddrBookDto
+      type: object
+    AlarmAddrBookMemberDto:
+      description: 주소록 멤버 조회 시 응답을 전달하기 위한 객체
+      example:
+        userMobileTelNo: 010-0000-0000
+        userEmail: kdhong@cloud.com
+        userName: 홍길동
+        userId: "1346"
+        userTimezone: Asia/Seoul
+        userLanguage: ko
+      properties:
+        userEmail:
+          description: 사용자 이메일
+          example: kdhong@cloud.com
+          type: string
+        userId:
+          description: 사용자 리소스 아이디
+          example: "1346"
+          type: string
+        userLanguage:
+          description: 사용자 언어
+          example: ko
+          type: string
+        userMobileTelNo:
+          description: 사용자 휴대전화번호
+          example: 010-0000-0000
+          type: string
+        userName:
+          description: 사용자 이름
+          example: 홍길동
+          type: string
+        userTimezone:
+          description: 사용자 타임존
+          example: Asia/Seoul
+          type: string
+      required:
+      - userEmail
+      - userId
+      - userLanguage
+      - userName
+      - userTimezone
+      title: AlarmAddrBookMemberDto
+      type: object
+    EventDetailResponse:
+      description: 이벤트 응답 전송 객체
+      example:
+        eventMessage: eventMessage
+        eventId: eventId
+        productIpAddress: 192.168.1.2
+        metricName: system.cpu.system.norm.pct
+        metricKey: system.cpu.system.norm.pct
+        productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+        objectTypeName: Cluster
+        endDt: 2021-10-23T23:59:59Z
+        metricSummary:
+          isLogMetric: "N"
+          metricType: NUM
+          metricDescription: "커널에서 사용한 CPU 시간의 백분율 (core 4개 모두를 100%사용하는 경우 : 400%)"
+          metricName: system.cpu.system.pct
+          metricKey: system.cpu.system.pct
+          metricSetKey: system.cpu
+          isObjectExist: "Y"
+          metricDescriptionEn: "Percentage of CPU time used in the kernel (if 100%\
+            \ of all 4 cores are used: 400%)"
+          metricSetName: CPU
+          productTargetType: system.core.id 별
+          metricUnit: bytes
+          productTargetTypeEn: By system.core.id
+        productName: VM-002
+        objectType: cluster
+        eventLevel: FATAL
+        eventPolicyId: 7240
+        eventState: ACTIVE
+        objectDisplayName: CPU0
+        durationSecond: 100
+        objectName: CPU0
+        startDt: 2021-10-23T18:00:00Z
+        productSummary:
+          lbSize: MEDIUM
+          productIpAddress: 192.168.1.2
+          vpcName: vpcName
+          productSq: 8703
+          productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+          productState: Running
+          productSubType: replicaset
+          productName: VM-002
+          lbName: lbName
+          agentState: Running
+          productTypeName: Virtual Server
+          productTypeCode: VM
+          productSubName: productSubName
+        eventPolicySummary:
+          isLogMetric: "N"
+          eventMessagePrefix: SCP
+          metricName: system.cpu.system.pct
+          productSq: 7321
+          metricKey: system.cpu.system.pct
+          productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+          eventThreshold:
+            rangeThreshold:
+              minValue: 80
+              maxValue: 90
+              minComparisonOperator: GT
+              maxComparisonOperator: LT
+            singleThreshold:
+              comparisonOperator: LT
+              value: 10
+            thresholdType: RANGE_VALUE
+            metricFunction: delta
+          productName: VM-002
+          productTargetType: system.core.id 별
+          updateById: updateById
+          createBy: "{}"
+          eventLevel: WARNING
+          ftCount: 3
+          metricDescription: "커널에서 사용한 CPU 시간의 백분율 (core 4개 모두를 100%사용하는 경우 : 400%)"
+          eventPolicyId: 7226
+          updateBy: "{}"
+          checkAsg: true
+          objectName: cpu0
+          createById: createById
+          metricDescriptionEn: "Percentage of CPU time used in the kernel (if 100%\
+            \ of all 4 cores are used: 400%)"
+          eventPolicyStatistics:
+            eventPolicyStatisticsType: MAX
+            eventPolicyStatisticsPeriod: 10
+          eventOccurTimeZone: GMT+9
+          productTargetTypeEn: By system.core.id
+        productTypeCode: VM
+      properties:
+        durationSecond:
+          description: "이벤트 지속 시간 - 단위: 초"
+          example: 100
+          format: int64
+          type: integer
+        endDt:
+          description: 종료일시
+          example: 2021-10-23T23:59:59Z
+          format: date-time
+          type: string
+        eventId:
+          description: 이벤트 아이디
+          type: string
+        eventLevel:
+          description: 이벤트 레벨
+          enum:
+          - INFORM
+          - WARNING
+          - FATAL
+          example: FATAL
+          type: string
+        eventMessage:
+          description: 이벤트 메시지
+          type: string
+        eventPolicyId:
+          description: 이벤트 정책 아이디
+          example: 7240
+          format: int64
+          type: integer
+        eventPolicySummary:
+          $ref: '#/components/schemas/EventPolicyResponse'
+        eventState:
+          description: Event State
+          enum:
+          - ACTIVE
+          - INACTIVE
+          example: ACTIVE
+          type: string
+        metricKey:
+          description: 메트릭 키
+          example: system.cpu.system.norm.pct
+          type: string
+        metricName:
+          description: 메트릭 이름
+          example: system.cpu.system.norm.pct
+          type: string
+        metricSummary:
+          $ref: '#/components/schemas/MetricSummary'
+        objectDisplayName:
+          description: 오브젝트 이름
+          example: CPU0
+          type: string
+        objectName:
+          description: 오브젝트 이름
+          example: CPU0
+          type: string
+        objectType:
+          description: 개별항목 유형
+          example: cluster
+          type: string
+        objectTypeName:
+          description: 개별항목 유형 이름
+          example: Cluster
+          type: string
+        productIpAddress:
+          description: 상품 IP주소
+          example: 192.168.1.2
+          type: string
+        productName:
+          description: 상품 이름
+          example: VM-002
+          type: string
+        productResourceId:
+          description: 상품 리소스 아이디
+          example: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+          type: string
+        productSummary:
+          $ref: '#/components/schemas/ProductSummary'
+        productTypeCode:
+          description: 상품 유형 코드
+          example: VM
+          type: string
+        startDt:
+          description: 시작일시
+          example: 2021-10-23T18:00:00Z
+          format: date-time
+          type: string
+      required:
+      - durationSecond
+      - eventId
+      - eventLevel
+      - eventMessage
+      - eventPolicySummary
+      - eventState
+      - metricKey
+      - metricSummary
+      - productResourceId
+      - productSummary
+      - startDt
+      title: EventDetailResponse
+      type: object
+    EventNotificationResponse:
+      description: 이벤트 알림 응답 전송 객체
+      example:
+        userMobileTelNo: 010-000-0000
+        notificationStates:
+        - sendMethod: MAIL
+          sendResult: SUCCESS
+          sendDt: 2021-10-23T18:00:00Z
+          errorMsg: SMS Send become Inactive.
+        - sendMethod: MAIL
+          sendResult: SUCCESS
+          sendDt: 2021-10-23T18:00:00Z
+          errorMsg: SMS Send become Inactive.
+        userEmail: kdhong@cloud.com
+        user: "{}"
+        userId: "1984"
+        userNameNotification: 홍길동
+      properties:
+        notificationStates:
+          description: 이벤트 알림 상태
+          items:
+            $ref: '#/components/schemas/NotificationStatus'
+          type: array
+        user:
+          type: object
+        userEmail:
+          description: 사용자 이메일
+          example: kdhong@cloud.com
+          type: string
+        userId:
+          description: 사용자 아이디
+          example: "1984"
+          type: string
+        userMobileTelNo:
+          description: 사용자 휴대 전화번호
+          example: 010-000-0000
+          type: string
+        userNameNotification:
+          description: 사용자 이름
+          example: 홍길동
+          type: string
+      required:
+      - notificationStates
+      - userId
+      - userNameNotification
+      title: EventNotificationResponse
+      type: object
+    EventPolicyCreateRequest:
+      description: 이벤트 정책 생성 시 요청 전송 객체
+      example:
+        productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+        notificationRecipients:
+        - recipientType: USER
+          notificationMethods:
+          - sendMethod:
+            - MAIL
+            eventLevel: FATAL
+          - sendMethod:
+            - MAIL
+            eventLevel: FATAL
+          recipientKey: "1347"
+        - recipientType: USER
+          notificationMethods:
+          - sendMethod:
+            - MAIL
+            eventLevel: FATAL
+          - sendMethod:
+            - MAIL
+            eventLevel: FATAL
+          recipientKey: "1347"
+        eventPolicyRequest:
+          isLogMetric: "N"
+          eventMessagePrefix: SCP
+          metricName: metricName
+          metricKey: system.diskio.read.bytes
+          eventThreshold:
+            rangeThreshold:
+              minValue: 80
+              maxValue: 90
+              minComparisonOperator: GT
+              maxComparisonOperator: LT
+            singleThreshold:
+              comparisonOperator: LT
+              value: 10
+            thresholdType: RANGE_VALUE
+            metricFunction: delta
+          podObjectDisplayName: dm0
+          objectType: SCP
+          eventLevel: WARNING
+          ftCount: 3
+          objectDisplayName: dm0
+          objectName: dm0
+          podObjectName: dm0
+          disableYn: "N"
+          eventPolicyStatistics:
+            eventPolicyStatisticsType: MAX
+            eventPolicyStatisticsPeriod: 10
+          eventOccurTimeZone: GMT+9
+      properties:
+        eventPolicyRequest:
+          $ref: '#/components/schemas/EventPolicyInfo'
+        notificationRecipients:
+          description: 이벤트 알림 수신인 정보 - 알림 대상자 정보는 10개까지 지정할 수 있습니다.
+          items:
+            $ref: '#/components/schemas/NotificationRecipient'
+          type: array
+        productResourceId:
+          description: "Product Resource ID - Product Resource ID can be viewed using\
+            \ @[ListAccountResources]."
+          example: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+          type: string
+      required:
+      - eventPolicyRequest
+      - productResourceId
+      title: EventPolicyCreateRequest
+      type: object
+    EventPolicyDetailResponse:
+      description: 이벤트 정책 조회 시 응답 전송 객체
+      example:
+        disableObject: "N"
+        createdByName: createdByName
+        isLogMetric: "N"
+        eventMessagePrefix: SCP
+        metricName: system.cpu.system.pct
+        metricKey: system.cpu.system.pct
+        productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+        objectTypeName: cluster
+        attrListStr: attrListStr
+        metricSummary:
+          isLogMetric: "N"
+          metricType: NUM
+          metricDescription: "커널에서 사용한 CPU 시간의 백분율 (core 4개 모두를 100%사용하는 경우 : 400%)"
+          metricName: system.cpu.system.pct
+          metricKey: system.cpu.system.pct
+          metricSetKey: system.cpu
+          isObjectExist: "Y"
+          metricDescriptionEn: "Percentage of CPU time used in the kernel (if 100%\
+            \ of all 4 cores are used: 400%)"
+          metricSetName: CPU
+          productTargetType: system.core.id 별
+          metricUnit: bytes
+          productTargetTypeEn: By system.core.id
+        productName: adad-002
+        metricUnit: '%'
+        objectType: cluster
+        metricType: NUM
+        eventLevel: WARNING
+        modifiedByName: modifiedByName
+        groupSummary:
+          groupSq: 0
+          groupName: groupName
+          productTypeName: productTypeName
+          productList:
+          - productSq: 6
+            productResourceId: productResourceId
+            productName: productName
+          - productSq: 6
+            productResourceId: productResourceId
+            productName: productName
+          productTypeCode: productTypeCode
+          groupResourceId: groupResourceId
+        updateBy: "{}"
+        checkAsg: true
+        productInfoAttrs:
+        - attrName: type
+          attrValue: test
+        displayEventRule: SCP
+        modifiedBy: modifiedBy
+        productTargetTypeEn: By system.core.id
+        userNameList:
+        - userName
+        - userName
+        modifiedDt: 2000-01-23T04:56:07.000+00:00
+        productSq: 7234
+        asgYn: asgYn
+        eventThreshold:
+          rangeThreshold:
+            minValue: 80
+            maxValue: 90
+            minComparisonOperator: GT
+            maxComparisonOperator: LT
+          singleThreshold:
+            comparisonOperator: LT
+            value: 10
+          thresholdType: RANGE_VALUE
+          metricFunction: delta
+        productTargetType: system.core.id 별
+        updateById: updateById
+        createBy: "{}"
+        createdDt: 2000-01-23T04:56:07.000+00:00
+        ftCount: 3
+        metricDescription: "커널에서 사용한 CPU 시간의 백분율 (core 4개 모두를 100%사용하는 경우 : 400%)"
+        createdBy: createdBy
+        eventPolicyId: 7226
+        objectDisplayName: /tmp
+        objectName: /tmp
+        startDt: 2021-10-23T18:00:00Z
+        userNames: "N"
+        createById: createById
+        metricDescriptionEn: "Percentage of CPU time used in the kernel (if 100% of\
+          \ all 4 cores are used: 400%)"
+        productSummary:
+          lbSize: MEDIUM
+          productIpAddress: 192.168.1.2
+          vpcName: vpcName
+          productSq: 8703
+          productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+          productState: Running
+          productSubType: replicaset
+          productName: VM-002
+          lbName: lbName
+          agentState: Running
+          productTypeName: Virtual Server
+          productTypeCode: VM
+          productSubName: productSubName
+        disableYn: disableYn
+        eventPolicyStatistics:
+          eventPolicyStatisticsType: MAX
+          eventPolicyStatisticsPeriod: 10
+        eventOccurTimeZone: GMT+9
+        userNameStr: userNameStr
+      properties:
+        asgYn:
+          type: string
+        attrListStr:
+          type: string
+        checkAsg:
+          type: boolean
+        createBy:
+          type: object
+        createById:
+          type: string
+        createdBy:
+          type: string
+        createdByName:
+          type: string
+        createdDt:
+          format: date-time
+          type: string
+        disableObject:
+          description: swagger.event.eventPolicyResponse.disableObject.value
+          example: "N"
+          type: string
+        disableYn:
+          type: string
+        displayEventRule:
+          description: swagger.event.eventResponse.displayEventRule.value
+          example: SCP
+          type: string
+        eventLevel:
+          description: 이벤트 레벨
+          enum:
+          - INFORM
+          - WARNING
+          - FATAL
+          example: WARNING
+          type: string
+        eventMessagePrefix:
+          description: 이벤트 메시지 접두사
+          example: SCP
+          type: string
+        eventOccurTimeZone:
+          description: swagger.event.eventPolicyResponse.eventOccurTimeZone.value
+          example: GMT+9
+          type: string
+        eventPolicyId:
+          description: 이벤트 정책 아이디
+          example: 7226
+          format: int64
+          type: integer
+        eventPolicyStatistics:
+          $ref: '#/components/schemas/EventPolicyStatistics'
+        eventThreshold:
+          $ref: '#/components/schemas/EventThreshold'
+        ftCount:
+          description: 결함허용 개수 - 설정한 조건에 맞는 값이 몇 번 반복해서 발생하면 이벤트를 발생시킬지 설정하는 값
+          example: 3
+          format: int64
+          type: integer
+        groupSummary:
+          $ref: '#/components/schemas/GroupSummary'
+        isLogMetric:
+          description: 로그 메트릭 여부
+          example: "N"
+          type: string
+        metricDescription:
+          description: 메트릭 설명
+          example: "커널에서 사용한 CPU 시간의 백분율 (core 4개 모두를 100%사용하는 경우 : 400%)"
+          type: string
+        metricDescriptionEn:
+          description: 메트릭 설명
+          example: "Percentage of CPU time used in the kernel (if 100% of all 4 cores\
+            \ are used: 400%)"
+          type: string
+        metricKey:
+          description: 메트릭 키
+          example: system.cpu.system.pct
+          type: string
+        metricName:
+          description: 메트릭 이름
+          example: system.cpu.system.pct
+          type: string
+        metricSummary:
+          $ref: '#/components/schemas/MetricSummary'
+        metricType:
+          description: 메트릭 유형
+          example: NUM
+          type: string
+        metricUnit:
+          description: 메트릭 단위
+          example: '%'
+          type: string
+        modifiedBy:
+          type: string
+        modifiedByName:
+          type: string
+        modifiedDt:
+          format: date-time
+          type: string
+        objectDisplayName:
+          description: 오브젝트 이름
+          example: /tmp
+          type: string
+        objectName:
+          description: 오브젝트 이름
+          example: /tmp
+          type: string
+        objectType:
+          description: 개별항목 유형
+          example: cluster
+          type: string
+        objectTypeName:
+          description: 개별항목 유형 이름
+          example: cluster
+          type: string
+        productInfoAttrs:
+          description: 상품 정보 속성
+          example:
+          - attrName: type
+            attrValue: test
+          items:
+            $ref: '#/components/schemas/ProductInfoAttr'
+          type: array
+        productName:
+          description: 상품 이름
+          example: adad-002
+          type: string
+        productResourceId:
+          description: 상품 리소스 아이디
+          example: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+          type: string
+        productSq:
+          description: 상품 시퀀스
+          example: 7234
+          format: int64
+          type: integer
+        productSummary:
+          $ref: '#/components/schemas/ProductSummary'
+        productTargetType:
+          description: 메트릭 대상 유형
+          example: system.core.id 별
+          type: string
+        productTargetTypeEn:
+          description: 메트릭 대상 유형
+          example: By system.core.id
+          type: string
+        startDt:
+          description: 시작일시
+          example: 2021-10-23T18:00:00Z
+          format: date-time
+          type: string
+        updateBy:
+          type: object
+        updateById:
+          type: string
+        userNameList:
+          description: 사용자 이름
+          example:
+          - userName
+          - userName
+          items:
+            description: 사용자 이름
+            example: "[\"userName\",\"userName\"]"
+            type: string
+          type: array
+        userNameStr:
+          type: string
+        userNames:
+          description: swagger.event.eventPolicyResponse.disableObject.value
+          example: "N"
+          type: string
+      required:
+      - eventLevel
+      - eventPolicyId
+      - eventThreshold
+      - ftCount
+      - isLogMetric
+      - metricKey
+      - metricSummary
+      - productSummary
+      title: EventPolicyDetailResponse
+      type: object
+    EventPolicyHistoryResponse:
+      description: 이벤트 정책 변경 이력 조회 시 응답 전송 객체
+      example:
+        disableObject: "N"
+        eventMessagePrefix: SCP
+        metricName: system.cpu.system.pct
+        metricKey: system.cpu.system.pct
+        productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+        notificationRecipientHistory:
+          userIds:
+          - userIds
+          - userIds
+          userNames:
+          - userNames
+          - userNames
+          addrbookIds:
+          - 0
+          - 0
+        productName: VM-Server-01
+        metricUnit: '%'
+        objectType: cluster
+        eventLevel: WARNING
+        modifiedByName: modifiedByName
+        updateBy: "{}"
+        modifiedBy: modifiedBy
+        eventPolicyHistoryId: 8759
+        productTargetTypeEn: By system.core.id
+        modifiedDt: 2000-01-23T04:56:07.000+00:00
+        eventThreshold:
+          rangeThreshold:
+            minValue: 80
+            maxValue: 90
+            minComparisonOperator: GT
+            maxComparisonOperator: LT
+          singleThreshold:
+            comparisonOperator: LT
+            value: 10
+          thresholdType: RANGE_VALUE
+          metricFunction: delta
+        productTargetType: system.core.id 별
+        updateById: updateById
+        eventPolicyHistoryType: U
+        createBy: "{}"
+        ftCount: 3
+        metricDescription: "커널에서 사용한 CPU 시간의 백분율 (core 4개 모두를 100%사용하는 경우 : 400%)"
+        eventPolicyId: 7240
+        objectDisplayName: cpu0
+        objectName: cpu0
+        createById: createById
+        metricDescriptionEn: "Percentage of CPU time used in the kernel (if 100% of\
+          \ all 4 cores are used: 400%)"
+        disableYn: "N"
+        eventPolicyStatistics:
+          eventPolicyStatisticsType: MAX
+          eventPolicyStatisticsPeriod: 10
+        eventOccurTimeZone: GMT+9
+      properties:
+        createBy:
+          type: object
+        createById:
+          type: string
+        disableObject:
+          description: swagger.event.eventPolicyResponse.disableObject.value
+          example: "N"
+          type: string
+        disableYn:
+          description: swagger.event.eventPolicyResponse.disableObject.value
+          example: "N"
+          type: string
+        eventLevel:
+          description: 이벤트 레벨
+          enum:
+          - INFORM
+          - WARNING
+          - FATAL
+          example: WARNING
+          type: string
+        eventMessagePrefix:
+          description: 이벤트 메시지 접두사
+          example: SCP
+          type: string
+        eventOccurTimeZone:
+          description: swagger.event.eventPolicyResponse.eventOccurTimeZone.value
+          example: GMT+9
+          type: string
+        eventPolicyHistoryId:
+          description: 이벤트 정책 이력 아이디
+          example: 8759
+          format: int64
+          type: integer
+        eventPolicyHistoryType:
+          description: "이벤트 정책 이력 유형 - C : 등록, U : 수정, D : 삭제"
+          example: U
+          type: string
+        eventPolicyId:
+          description: 이벤트 정책 아이디
+          example: 7240
+          format: int64
+          type: integer
+        eventPolicyStatistics:
+          $ref: '#/components/schemas/EventPolicyStatistics'
+        eventThreshold:
+          $ref: '#/components/schemas/EventThreshold'
+        ftCount:
+          description: 결함허용 개수
+          example: 3
+          format: int64
+          type: integer
+        metricDescription:
+          description: 메트릭 설명
+          example: "커널에서 사용한 CPU 시간의 백분율 (core 4개 모두를 100%사용하는 경우 : 400%)"
+          type: string
+        metricDescriptionEn:
+          description: 메트릭 설명
+          example: "Percentage of CPU time used in the kernel (if 100% of all 4 cores\
+            \ are used: 400%)"
+          type: string
+        metricKey:
+          description: 메트릭 키
+          example: system.cpu.system.pct
+          type: string
+        metricName:
+          description: 메트릭 이름
+          example: system.cpu.system.pct
+          type: string
+        metricUnit:
+          description: 메트릭 단위
+          example: '%'
+          type: string
+        modifiedBy:
+          type: string
+        modifiedByName:
+          type: string
+        modifiedDt:
+          format: date-time
+          type: string
+        notificationRecipientHistory:
+          $ref: '#/components/schemas/NotificationRecipientHistory'
+        objectDisplayName:
+          description: 오브젝트 이름
+          example: cpu0
+          type: string
+        objectName:
+          description: 오브젝트 이름
+          example: cpu0
+          type: string
+        objectType:
+          description: 개별항목 유형
+          example: cluster
+          type: string
+        productName:
+          description: 상품 이름
+          example: VM-Server-01
+          type: string
+        productResourceId:
+          description: 상품 리소스 아이디
+          example: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+          type: string
+        productTargetType:
+          description: 메트릭 대상 유형
+          example: system.core.id 별
+          type: string
+        productTargetTypeEn:
+          description: 메트릭 대상 유형
+          example: By system.core.id
+          type: string
+        updateBy:
+          type: object
+        updateById:
+          type: string
+      required:
+      - eventLevel
+      - eventPolicyHistoryId
+      - eventPolicyHistoryType
+      - eventThreshold
+      - ftCount
+      - metricKey
+      - metricName
+      - productName
+      - productResourceId
+      title: EventPolicyHistoryResponse
+      type: object
+    EventPolicyInfo:
+      description: 이벤트 정책을 담기 위한 정보 객체
+      example:
+        isLogMetric: "N"
+        eventMessagePrefix: SCP
+        metricName: metricName
+        metricKey: system.diskio.read.bytes
+        eventThreshold:
+          rangeThreshold:
+            minValue: 80
+            maxValue: 90
+            minComparisonOperator: GT
+            maxComparisonOperator: LT
+          singleThreshold:
+            comparisonOperator: LT
+            value: 10
+          thresholdType: RANGE_VALUE
+          metricFunction: delta
+        podObjectDisplayName: dm0
+        objectType: SCP
+        eventLevel: WARNING
+        ftCount: 3
+        objectDisplayName: dm0
+        objectName: dm0
+        podObjectName: dm0
+        disableYn: "N"
+        eventPolicyStatistics:
+          eventPolicyStatisticsType: MAX
+          eventPolicyStatisticsPeriod: 10
+        eventOccurTimeZone: GMT+9
+      properties:
+        disableYn:
+          description: swagger.event.eventPolicyResponse.disableYn.value
+          enum:
+          - "Y"
+          - "N"
+          example: "N"
+          type: string
+        eventLevel:
+          description: 이벤트 레벨
+          enum:
+          - INFORM
+          - WARNING
+          - FATAL
+          example: WARNING
+          type: string
+        eventMessagePrefix:
+          description: 이벤트 메시지 접두사
+          example: SCP
+          type: string
+        eventOccurTimeZone:
+          description: swagger.event.eventPolicyResponse.eventOccurTimeZone.value
+          example: GMT+9
+          type: string
+        eventPolicyStatistics:
+          $ref: '#/components/schemas/EventPolicyStatistics'
+        eventThreshold:
+          $ref: '#/components/schemas/EventThreshold'
+        ftCount:
+          description: 결함허용 개수 - 설정한 조건에 맞는 값이 몇 번 반복해서 발생하면 이벤트를 발생시킬지 설정하는 값
+          example: 3
+          format: int64
+          type: integer
+        isLogMetric:
+          description: 로그 메트릭 여부
+          enum:
+          - "Y"
+          - "N"
+          example: "N"
+          type: string
+        metricKey:
+          description: 메트릭 키
+          example: system.diskio.read.bytes
+          type: string
+        metricName:
+          type: string
+        objectDisplayName:
+          description: 오브젝트 이름
+          example: dm0
+          type: string
+        objectName:
+          description: 오브젝트 이름
+          example: dm0
+          type: string
+        objectType:
+          description: 개별항목 유형
+          example: SCP
+          type: string
+        podObjectDisplayName:
+          description: swagger.event.eventPolicyResponse.podObjectDisplayName.value
+          example: dm0
+          type: string
+        podObjectName:
+          description: swagger.event.eventPolicyResponse.podObjectName.value
+          example: dm0
+          type: string
+      required:
+      - disableYn
+      - eventLevel
+      - eventThreshold
+      - ftCount
+      - isLogMetric
+      - metricKey
+      title: EventPolicyInfo
+      type: object
+    EventPolicyInfoEditable:
+      description: 이벤트 정책 중 수정 가능한 정보
+      example:
+        eventMessagePrefix: SCP
+        eventLevel: WARNING
+        ftCount: 3
+        objectDisplayName: cpu0
+        objectName: cpu0
+        eventThreshold:
+          rangeThreshold:
+            minValue: 80
+            maxValue: 90
+            minComparisonOperator: GT
+            maxComparisonOperator: LT
+          singleThreshold:
+            comparisonOperator: LT
+            value: 10
+          thresholdType: RANGE_VALUE
+          metricFunction: delta
+        podObjectName: cpu0
+        disableYn: "N"
+        eventPolicyStatistics:
+          eventPolicyStatisticsType: MAX
+          eventPolicyStatisticsPeriod: 10
+        eventOccurTimeZone: GMT+9
+        podObjectDisplayName: cpu0
+        objectType: cluster
+      properties:
+        disableYn:
+          description: swagger.event.eventPolicyResponse.disableYn.value
+          enum:
+          - "Y"
+          - "N"
+          example: "N"
+          type: string
+        eventLevel:
+          description: 이벤트 레벨
+          enum:
+          - INFORM
+          - WARNING
+          - FATAL
+          example: WARNING
+          type: string
+        eventMessagePrefix:
+          description: 이벤트 메시지 접두사
+          example: SCP
+          type: string
+        eventOccurTimeZone:
+          description: swagger.event.eventPolicyResponse.eventOccurTimeZone.value
+          example: GMT+9
+          type: string
+        eventPolicyStatistics:
+          $ref: '#/components/schemas/EventPolicyStatistics'
+        eventThreshold:
+          $ref: '#/components/schemas/EventThreshold'
+        ftCount:
+          description: 결함허용 개수 - 설정한 조건에 맞는 값이 몇 번 반복해서 발생하면 이벤트를 발생시킬지 설정하는 값
+          example: 3
+          format: int64
+          type: integer
+        objectDisplayName:
+          description: 오브젝트 이름
+          example: cpu0
+          type: string
+        objectName:
+          description: 오브젝트 이름
+          example: cpu0
+          type: string
+        objectType:
+          description: 개별항목 유형
+          example: cluster
+          type: string
+        podObjectDisplayName:
+          description: swagger.event.eventPolicyResponse.podObjectName.value
+          example: cpu0
+          type: string
+        podObjectName:
+          description: swagger.event.eventPolicyResponse.podObjectName.value
+          example: cpu0
+          type: string
+      required:
+      - disableYn
+      - eventLevel
+      - eventThreshold
+      - ftCount
+      title: EventPolicyInfoEditable
+      type: object
+    EventPolicyResponse:
+      description: 이벤트 정책 조회 시 응답 전송 객체
+      example:
+        isLogMetric: "N"
+        eventMessagePrefix: SCP
+        metricName: system.cpu.system.pct
+        productSq: 7321
+        metricKey: system.cpu.system.pct
+        productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+        eventThreshold:
+          rangeThreshold:
+            minValue: 80
+            maxValue: 90
+            minComparisonOperator: GT
+            maxComparisonOperator: LT
+          singleThreshold:
+            comparisonOperator: LT
+            value: 10
+          thresholdType: RANGE_VALUE
+          metricFunction: delta
+        productName: VM-002
+        productTargetType: system.core.id 별
+        updateById: updateById
+        createBy: "{}"
+        eventLevel: WARNING
+        ftCount: 3
+        metricDescription: "커널에서 사용한 CPU 시간의 백분율 (core 4개 모두를 100%사용하는 경우 : 400%)"
+        eventPolicyId: 7226
+        updateBy: "{}"
+        checkAsg: true
+        objectName: cpu0
+        createById: createById
+        metricDescriptionEn: "Percentage of CPU time used in the kernel (if 100% of\
+          \ all 4 cores are used: 400%)"
+        eventPolicyStatistics:
+          eventPolicyStatisticsType: MAX
+          eventPolicyStatisticsPeriod: 10
+        eventOccurTimeZone: GMT+9
+        productTargetTypeEn: By system.core.id
+      properties:
+        checkAsg:
+          type: boolean
+        createBy:
+          type: object
+        createById:
+          type: string
+        eventLevel:
+          description: 이벤트 레벨
+          enum:
+          - INFORM
+          - WARNING
+          - FATAL
+          example: WARNING
+          type: string
+        eventMessagePrefix:
+          description: 이벤트 메시지 접두사
+          example: SCP
+          type: string
+        eventOccurTimeZone:
+          description: swagger.event.eventPolicyResponse.eventOccurTimeZone.value
+          example: GMT+9
+          type: string
+        eventPolicyId:
+          description: 이벤트 정책 아이디
+          example: 7226
+          format: int64
+          type: integer
+        eventPolicyStatistics:
+          $ref: '#/components/schemas/EventPolicyStatistics'
+        eventThreshold:
+          $ref: '#/components/schemas/EventThreshold'
+        ftCount:
+          description: 결함허용 개수 - 설정한 조건에 맞는 값이 몇 번 반복해서 발생하면 이벤트를 발생시킬지 설정하는 값
+          example: 3
+          format: int64
+          type: integer
+        isLogMetric:
+          description: 로그 메트릭 여부
+          example: "N"
+          type: string
+        metricDescription:
+          description: 메트릭 설명
+          example: "커널에서 사용한 CPU 시간의 백분율 (core 4개 모두를 100%사용하는 경우 : 400%)"
+          type: string
+        metricDescriptionEn:
+          description: 메트릭 설명
+          example: "Percentage of CPU time used in the kernel (if 100% of all 4 cores\
+            \ are used: 400%)"
+          type: string
+        metricKey:
+          description: 메트릭 키
+          example: system.cpu.system.pct
+          type: string
+        metricName:
+          description: 메트릭 이름
+          example: system.cpu.system.pct
+          type: string
+        objectName:
+          description: 오브젝트 이름
+          example: cpu0
+          type: string
+        productName:
+          description: 상품 이름
+          example: VM-002
+          type: string
+        productResourceId:
+          description: 상품 리소스 아이디
+          example: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+          type: string
+        productSq:
+          description: 상품 시퀀스
+          example: 7321
+          format: int64
+          type: integer
+        productTargetType:
+          description: 메트릭 대상 유형
+          example: system.core.id 별
+          type: string
+        productTargetTypeEn:
+          description: 메트릭 대상 유형
+          example: By system.core.id
+          type: string
+        updateBy:
+          type: object
+        updateById:
+          type: string
+      required:
+      - eventLevel
+      - eventPolicyId
+      - eventThreshold
+      - ftCount
+      - isLogMetric
+      - metricKey
+      - metricName
+      - productName
+      - productResourceId
+      - productSq
+      title: EventPolicyResponse
+      type: object
+    EventPolicyStatistics:
+      description: 이벤트 정책 통계 정보 객체
+      example:
+        eventPolicyStatisticsType: MAX
+        eventPolicyStatisticsPeriod: 10
+      properties:
+        eventPolicyStatisticsPeriod:
+          description: "이벤트 정책 통계 기간 - 단위: 분"
+          enum:
+          - 5
+          - 10
+          - 30
+          - 60
+          - 180
+          - 360
+          example: 10
+          format: int64
+          type: integer
+        eventPolicyStatisticsType:
+          description: 이벤트 정책 통계 유형
+          enum:
+          - AVG
+          - MAX
+          - SUM
+          - MIN
+          example: MAX
+          type: string
+      required:
+      - eventPolicyStatisticsPeriod
+      - eventPolicyStatisticsType
+      title: EventPolicyStatistics
+      type: object
+    EventPolicyUpdateRequest:
+      description: 이벤트 정책 수정 시 요청 전송 객체
+      example:
+        notificationRecipients:
+        - recipientType: USER
+          notificationMethods:
+          - sendMethod:
+            - MAIL
+            eventLevel: FATAL
+          - sendMethod:
+            - MAIL
+            eventLevel: FATAL
+          recipientKey: "1347"
+        - recipientType: USER
+          notificationMethods:
+          - sendMethod:
+            - MAIL
+            eventLevel: FATAL
+          - sendMethod:
+            - MAIL
+            eventLevel: FATAL
+          recipientKey: "1347"
+        eventPolicyRequest:
+          eventMessagePrefix: SCP
+          eventLevel: WARNING
+          ftCount: 3
+          objectDisplayName: cpu0
+          objectName: cpu0
+          eventThreshold:
+            rangeThreshold:
+              minValue: 80
+              maxValue: 90
+              minComparisonOperator: GT
+              maxComparisonOperator: LT
+            singleThreshold:
+              comparisonOperator: LT
+              value: 10
+            thresholdType: RANGE_VALUE
+            metricFunction: delta
+          podObjectName: cpu0
+          disableYn: "N"
+          eventPolicyStatistics:
+            eventPolicyStatisticsType: MAX
+            eventPolicyStatisticsPeriod: 10
+          eventOccurTimeZone: GMT+9
+          podObjectDisplayName: cpu0
+          objectType: cluster
+      properties:
+        eventPolicyRequest:
+          $ref: '#/components/schemas/EventPolicyInfoEditable'
+        notificationRecipients:
+          description: 이벤트 알림 수신인 정보
+          items:
+            $ref: '#/components/schemas/NotificationRecipient'
+          type: array
+      required:
+      - eventPolicyRequest
+      title: EventPolicyUpdateRequest
+      type: object
+    EventThreshold:
+      description: 이벤트 임계치 객체
+      example:
+        rangeThreshold:
+          minValue: 80
+          maxValue: 90
+          minComparisonOperator: GT
+          maxComparisonOperator: LT
+        singleThreshold:
+          comparisonOperator: LT
+          value: 10
+        thresholdType: RANGE_VALUE
+        metricFunction: delta
+      properties:
+        metricFunction:
+          description: "메트릭 함수 - 유효한 값: [delta] - 이벤트 발생 여부를 판단하기 위해 성능항목의 현재 값을 사\
+            용할지, 이전 값과 현재 값의 차이를 사용할지를 지정합니다. - 이전 값과 현재 값의 차이를 사용하고자 할 경우에만 delta로\
+            \ 지정합니다."
+          example: delta
+          type: string
+        rangeThreshold:
+          $ref: '#/components/schemas/RangeThreshold'
+        singleThreshold:
+          $ref: '#/components/schemas/SingleThreshold'
+        thresholdType:
+          description: "임계치 유형 - 임계치를 범위로 지정할 경우에는 \"RANGE_VALUE\"를, 임계치를 단일값으로 지정\
+            할 경우에는 \"SINGLE_VALUE\" 지정해야 합니다."
+          enum:
+          - SINGLE_VALUE
+          - RANGE_VALUE
+          example: RANGE_VALUE
+          type: string
+      required:
+      - thresholdType
+      title: EventThreshold
+      type: object
+    GroupSummary:
+      description: 그룹 요약 객체
+      example:
+        groupSq: 0
+        groupName: groupName
+        productTypeName: productTypeName
+        productList:
+        - productSq: 6
+          productResourceId: productResourceId
+          productName: productName
+        - productSq: 6
+          productResourceId: productResourceId
+          productName: productName
+        productTypeCode: productTypeCode
+        groupResourceId: groupResourceId
+      properties:
+        groupName:
+          type: string
+        groupResourceId:
+          type: string
+        groupSq:
+          format: int64
+          type: integer
+        productList:
+          items:
+            $ref: '#/components/schemas/ProductList'
+          type: array
+        productTypeCode:
+          type: string
+        productTypeName:
+          type: string
+      title: GroupSummary
+      type: object
+    ListResponseMetricStatisticsDataDtoOpenAPIV2:
+      example:
+        contents:
+        - metricType: NUM
+          statisticsPeriod: 5
+          metricName: system.filesystem.used.bytes
+          metricKey: system.filesystem.used.bytes
+          objectDisplayName: dm-1
+          productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+          objectName: dm-1
+          perfData:
+          - time: 1627378200000
+            value: "0.0766"
+          statisticsType: SUM
+          productName: VM-Server-01
+          metricUnit: bytes
+          objectType: replicaset
+        - metricType: NUM
+          statisticsPeriod: 5
+          metricName: system.filesystem.used.bytes
+          metricKey: system.filesystem.used.bytes
+          objectDisplayName: dm-1
+          productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+          objectName: dm-1
+          perfData:
+          - time: 1627378200000
+            value: "0.0766"
+          statisticsType: SUM
+          productName: VM-Server-01
+          metricUnit: bytes
+          objectType: replicaset
+        totalCount: 0
+      properties:
+        contents:
+          items:
+            $ref: '#/components/schemas/MetricStatisticsDataDtoOpenAPIV2'
+          type: array
+        totalCount:
+          format: int64
+          type: integer
+      type: object
+    Member:
+      example:
+        dst_offset: dst_offset
+        utc_offset: utc_offset
+        last_login_at: last_login_at
+        account_id: account_id
+        timezone: timezone
+        user_name: user_name
+        company_name: company_name
+        id: id
+        password_reuse_count: 0
+        member_created_at: member_created_at
+        email: email
+        tz_id: tz_id
+      properties:
+        account_id:
+          type: string
+        company_name:
+          type: string
+        dst_offset:
+          type: string
+        email:
+          type: string
+        id:
+          type: string
+        last_login_at:
+          type: string
+        member_created_at:
+          type: string
+        password_reuse_count:
+          format: int32
+          type: integer
+        timezone:
+          type: string
+        tz_id:
+          type: string
+        user_name:
+          type: string
+        utc_offset:
+          type: string
+      type: object
+    MetricDataConditionOpenAPIV2:
+      description: 메트릭 데이터 조건 객체 - 조건은 200개까지 지정할 수 있습니다.
+      example:
+        statisticsPeriod: 5
+        metricKey: system.diskio.read.bytes
+        statisticsTypeList:
+        - SUM
+        - MIN
+        productResourceInfos:
+        - productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+          objectList:
+          - kube-01
+          - kube-02
+        - productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+          objectList:
+          - kube-01
+          - kube-02
+        objectType: replicaset
+      properties:
+        metricKey:
+          description: 메트릭
+          example: system.diskio.read.bytes
+          type: string
+        objectType:
+          description: 개별항목 유형
+          example: replicaset
+          type: string
+        productResourceInfos:
+          description: 상품 리소스 아이디 목록 - 상품 리소스 아이디는 50개까지 지정할 수 있습니다.
+          items:
+            $ref: '#/components/schemas/ProductResourceInfo'
+          type: array
+        statisticsPeriod:
+          description: "통계 집계 주기 (단위: 분)"
+          example: 5
+          format: int32
+          type: integer
+        statisticsTypeList:
+          description: "통계 유형 - 유효한 값 : MIN, MAX, AVG, SUM"
+          example:
+          - SUM
+          - MIN
+          items:
+            description: "통계 유형 - 유효한 값 : MIN, MAX, AVG, SUM"
+            example: "[\"SUM\",\"MIN\"]"
+            type: string
+          type: array
+      required:
+      - metricKey
+      - productResourceInfos
+      title: MetricDataConditionOpenAPIV2
+      type: object
+    MetricDataSearchCriteriaOpenAPIV2:
+      description: 메트릭 성능 데이터 조회 시 요청을 전달하기 위한 객체
+      example:
+        metricDataConditions:
+        - statisticsPeriod: 5
+          metricKey: system.diskio.read.bytes
+          statisticsTypeList:
+          - SUM
+          - MIN
+          productResourceInfos:
+          - productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+            objectList:
+            - kube-01
+            - kube-02
+          - productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+            objectList:
+            - kube-01
+            - kube-02
+          objectType: replicaset
+        - statisticsPeriod: 5
+          metricKey: system.diskio.read.bytes
+          statisticsTypeList:
+          - SUM
+          - MIN
+          productResourceInfos:
+          - productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+            objectList:
+            - kube-01
+            - kube-02
+          - productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+            objectList:
+            - kube-01
+            - kube-02
+          objectType: replicaset
+        ignoreInvalid: "Y"
+        queryEndDt: 2022-08-07T23:59:00.000Z
+        queryStartDt: 2022-08-07T23:50:00.000Z
+      properties:
+        ignoreInvalid:
+          description: 유효하지 않은 값 제외 여부
+          enum:
+          - "Y"
+          - "N"
+          example: "Y"
+          type: string
+        metricDataConditions:
+          description: 메트릭 데이터 조건
+          items:
+            $ref: '#/components/schemas/MetricDataConditionOpenAPIV2'
+          type: array
+        queryEndDt:
+          description: 조회 종료 일시
+          example: 2022-08-07T23:59:00.000Z
+          type: string
+        queryStartDt:
+          description: 조회 시작 일시
+          example: 2022-08-07T23:50:00.000Z
+          type: string
+      required:
+      - metricDataConditions
+      - queryEndDt
+      - queryStartDt
+      title: MetricDataSearchCriteriaOpenAPIV2
+      type: object
+    MetricInfoDto:
+      description: 메트릭 정보 조회 시 응답 전달하기 위한 객체
+      example:
+        disableObject: "N"
+        isLogMetric: "N"
+        perfTitle: File System
+        metricName: FileSystem
+        metricKey: system.filesystem.used.bytes
+        metricSetKey: system.filesystem
+        displayUnit: displayUnit
+        isObjectExist: "Y"
+        productTargetType: system.core.id 별
+        metricUnit: bytes
+        objectType: "N"
+        metricOrder: 1
+        metricType: NUM
+        metricDescription: "커널에서 사용한 CPU 시간의 백분율 (core 4개 모두를 100%사용하는 경우 : 400%)"
+        fixedUnit: sec
+        productTypeName: Virtual Server
+        objectTypeNameLoc: "N"
+        metricDescriptionEn: "Percentage of CPU time used in the kernel (if 100% of\
+          \ all 4 cores are used: 400%)"
+        metricSetName: FileSystem
+        objectTypeNameEng: "N"
+        objectKeyName: system.core.iowait.pct
+        productTypeCode: VM
+        productTargetTypeEn: By system.core.id
+      properties:
+        disableObject:
+          description: swagger.product.MetricInfoDto.disableObject.value
+          example: "N"
+          type: string
+        displayUnit:
+          type: string
+        fixedUnit:
+          description: 메트릭 단위 (고정)
+          example: sec
+          type: string
+        isLogMetric:
+          description: 로그 메트릭 여부
+          example: "N"
+          type: string
+        isObjectExist:
+          description: 개별항목 성능 존재 여부
+          example: "Y"
+          type: string
+        metricDescription:
+          description: 메트릭 설명
+          example: "커널에서 사용한 CPU 시간의 백분율 (core 4개 모두를 100%사용하는 경우 : 400%)"
+          type: string
+        metricDescriptionEn:
+          description: 메트릭 설명
+          example: "Percentage of CPU time used in the kernel (if 100% of all 4 cores\
+            \ are used: 400%)"
+          type: string
+        metricKey:
+          description: 메트릭 키
+          example: system.filesystem.used.bytes
+          type: string
+        metricName:
+          description: 메트릭 이름
+          example: FileSystem
+          type: string
+        metricOrder:
+          description: 메트릭 순서
+          example: 1
+          format: int32
+          type: integer
+        metricSetKey:
+          description: swagger.product.MetricInfoDto.metricSetKey.value
+          example: system.filesystem
+          type: string
+        metricSetName:
+          description: 메트릭 세트 이름
+          example: FileSystem
+          type: string
+        metricType:
+          description: 메트릭 유형
+          example: NUM
+          type: string
+        metricUnit:
+          description: 메트릭 단위
+          example: bytes
+          type: string
+        objectKeyName:
+          description: 오브젝트 키 이름
+          example: system.core.iowait.pct
+          type: string
+        objectType:
+          description: swagger.product.MetricInfoDto.disableObject.value
+          example: "N"
+          type: string
+        objectTypeNameEng:
+          description: swagger.product.MetricInfoDto.disableObject.value
+          example: "N"
+          type: string
+        objectTypeNameLoc:
+          description: swagger.product.MetricInfoDto.disableObject.value
+          example: "N"
+          type: string
+        perfTitle:
+          description: swagger.product.MetricInfoDto.perfTitle.value
+          example: File System
+          type: string
+        productTargetType:
+          description: 메트릭 대상 유형
+          example: system.core.id 별
+          type: string
+        productTargetTypeEn:
+          description: 메트릭 대상 유형
+          example: By system.core.id
+          type: string
+        productTypeCode:
+          description: 상품 유형 코드
+          example: VM
+          type: string
+        productTypeName:
+          description: 상품 유형 이름
+          example: Virtual Server
+          type: string
+      required:
+      - isLogMetric
+      - isObjectExist
+      - metricKey
+      - metricName
+      - metricSetKey
+      - metricSetName
+      - metricType
+      - objectKeyName
+      - perfTitle
+      - productTypeCode
+      - productTypeName
+      title: MetricInfoDto
+      type: object
+    MetricStatisticsDataDtoOpenAPIV2:
+      description: 통계 성능 조회 시 응답을 전달하기 위한 객체
+      example:
+        metricType: NUM
+        statisticsPeriod: 5
+        metricName: system.filesystem.used.bytes
+        metricKey: system.filesystem.used.bytes
+        objectDisplayName: dm-1
+        productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+        objectName: dm-1
+        perfData:
+        - time: 1627378200000
+          value: "0.0766"
+        statisticsType: SUM
+        productName: VM-Server-01
+        metricUnit: bytes
+        objectType: replicaset
+      properties:
+        metricKey:
+          description: 메트릭 키
+          example: system.filesystem.used.bytes
+          type: string
+        metricName:
+          description: 메트릭 이름
+          example: system.filesystem.used.bytes
+          type: string
+        metricType:
+          description: 메트릭 유형
+          example: NUM
+          type: string
+        metricUnit:
+          description: 메트릭 단위
+          example: bytes
+          type: string
+        objectDisplayName:
+          description: 개별항목 출력 이름
+          example: dm-1
+          type: string
+        objectName:
+          description: 개별항목 이름
+          example: dm-1
+          type: string
+        objectType:
+          description: 개별항목 유형
+          example: replicaset
+          type: string
+        perfData:
+          description: 성능 데이터
+          example:
+          - time: 1627378200000
+            value: "0.0766"
+          items:
+            description: 성능 데이터
+            example:
+            - time: 1627378200000
+              value: "0.0766"
+            type: object
+          type: array
+        productName:
+          description: 상품의 이름
+          example: VM-Server-01
+          type: string
+        productResourceId:
+          description: 상품 리소스 아이디
+          example: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+          type: string
+        statisticsPeriod:
+          description: "통계 집계 주기 (단위: 분)"
+          example: 5
+          format: int32
+          type: integer
+        statisticsType:
+          description: 통계 유형
+          example: SUM
+          type: string
+      required:
+      - statisticsPeriod
+      - statisticsType
+      title: MetricStatisticsDataDtoOpenAPIV2
+      type: object
+    MetricSummary:
+      description: 메트릭 요약 객체
+      example:
+        isLogMetric: "N"
+        metricType: NUM
+        metricDescription: "커널에서 사용한 CPU 시간의 백분율 (core 4개 모두를 100%사용하는 경우 : 400%)"
+        metricName: system.cpu.system.pct
+        metricKey: system.cpu.system.pct
+        metricSetKey: system.cpu
+        isObjectExist: "Y"
+        metricDescriptionEn: "Percentage of CPU time used in the kernel (if 100% of\
+          \ all 4 cores are used: 400%)"
+        metricSetName: CPU
+        productTargetType: system.core.id 별
+        metricUnit: bytes
+        productTargetTypeEn: By system.core.id
+      properties:
+        isLogMetric:
+          description: 로그 메트릭 여부
+          example: "N"
+          type: string
+        isObjectExist:
+          description: 오브젝트 존재여부
+          example: "Y"
+          type: string
+        metricDescription:
+          description: 메트릭 설명
+          example: "커널에서 사용한 CPU 시간의 백분율 (core 4개 모두를 100%사용하는 경우 : 400%)"
+          type: string
+        metricDescriptionEn:
+          description: 메트릭 설명
+          example: "Percentage of CPU time used in the kernel (if 100% of all 4 cores\
+            \ are used: 400%)"
+          type: string
+        metricKey:
+          description: 메트릭 키
+          example: system.cpu.system.pct
+          type: string
+        metricName:
+          description: 메트릭 이름
+          example: system.cpu.system.pct
+          type: string
+        metricSetKey:
+          description: 메트릭 셋 키
+          example: system.cpu
+          type: string
+        metricSetName:
+          description: 메트릭 셋 이름
+          example: CPU
+          type: string
+        metricType:
+          description: 메트릭 유형
+          example: NUM
+          type: string
+        metricUnit:
+          description: 메트릭 단위
+          example: bytes
+          type: string
+        productTargetType:
+          description: 메트릭 대상 유형
+          example: system.core.id 별
+          type: string
+        productTargetTypeEn:
+          description: 메트릭 대상 유형
+          example: By system.core.id
+          type: string
+      required:
+      - isLogMetric
+      - isObjectExist
+      - metricKey
+      - metricName
+      - metricSetKey
+      - metricSetName
+      - metricType
+      - metricUnit
+      title: MetricSummary
+      type: object
+    NotificationMethod:
+      description: 이벤트 레벨별 알림 방법 정보 객체
+      example:
+        sendMethod:
+        - MAIL
+        eventLevel: FATAL
+      properties:
+        eventLevel:
+          description: 이벤트 레벨
+          enum:
+          - "INFORM, WARNING, FATAL"
+          example: FATAL
+          type: string
+        sendMethod:
+          description: "전송 메소드 - 허용 값: MESSENGER, SMS, MAIL"
+          enum:
+          - "MESSENGER, SMS, MAIL"
+          example:
+          - MAIL
+          items:
+            description: "전송 메소드 - 허용 값: MESSENGER, SMS, MAIL"
+            enum:
+            - "MESSENGER, SMS, MAIL"
+            example: "[\"MAIL\"]"
+            type: string
+          type: array
+      required:
+      - eventLevel
+      - sendMethod
+      title: NotificationMethod
+      type: object
+    NotificationRecipient:
+      description: 이벤트 알림 수신인 정보 객체
+      example:
+        recipientType: USER
+        notificationMethods:
+        - sendMethod:
+          - MAIL
+          eventLevel: FATAL
+        - sendMethod:
+          - MAIL
+          eventLevel: FATAL
+        recipientKey: "1347"
+      properties:
+        notificationMethods:
+          description: 알림 메소드
+          items:
+            $ref: '#/components/schemas/NotificationMethod'
+          type: array
+        recipientKey:
+          description: "수신인 키 - 수신인 키는 @[프로젝트 멤버 조회] 또는 @[사용자의 주소록 목록 조회]를 이용하여 조회\
+            합니다."
+          example: "1347"
+          type: string
+        recipientType:
+          description: "수신인 유형 - USER : 사용자, ADDRBOOK : 주소록"
+          enum:
+          - USER
+          - ADDRBOOK
+          example: USER
+          type: string
+      required:
+      - notificationMethods
+      - recipientKey
+      - recipientType
+      title: NotificationRecipient
+      type: object
+    NotificationRecipientHistory:
+      description: 이벤트 알림 수신인 이력 정보 객체
+      example:
+        userIds:
+        - userIds
+        - userIds
+        userNames:
+        - userNames
+        - userNames
+        addrbookIds:
+        - 0
+        - 0
+      properties:
+        addrbookIds:
+          description: 주소록 아이디
+          items:
+            description: 주소록 아이디
+            format: int64
+            type: integer
+          type: array
+        userIds:
+          description: 사용자 아이디
+          items:
+            description: 사용자 아이디
+            type: string
+          type: array
+        userNames:
+          description: 사용자 이름
+          items:
+            description: 사용자 이름
+            type: string
+          type: array
+      type: object
+    NotificationResponse:
+      description: 이벤트 알림 정보 응답 전송 객체
+      example:
+        userAdditionalInfo:
+          dst_offset: dst_offset
+          utc_offset: utc_offset
+          last_login_at: last_login_at
+          account_id: account_id
+          timezone: timezone
+          user_name: user_name
+          company_name: company_name
+          id: id
+          password_reuse_count: 0
+          member_created_at: member_created_at
+          email: email
+          tz_id: tz_id
+        recipientType: USER
+        addrbookAdditionalInfo:
+          userAdditionalInfo:
+          - dst_offset: dst_offset
+            utc_offset: utc_offset
+            last_login_at: last_login_at
+            account_id: account_id
+            timezone: timezone
+            user_name: user_name
+            company_name: company_name
+            id: id
+            password_reuse_count: 0
+            member_created_at: member_created_at
+            email: email
+            tz_id: tz_id
+          - dst_offset: dst_offset
+            utc_offset: utc_offset
+            last_login_at: last_login_at
+            account_id: account_id
+            timezone: timezone
+            user_name: user_name
+            company_name: company_name
+            id: id
+            password_reuse_count: 0
+            member_created_at: member_created_at
+            email: email
+            tz_id: tz_id
+          memberCount: 4
+        recipientName: 홍길동
+        notificationMethods:
+        - sendMethod:
+          - MAIL
+          eventLevel: FATAL
+        - sendMethod:
+          - MAIL
+          eventLevel: FATAL
+        recipientKey: "1984"
+      properties:
+        addrbookAdditionalInfo:
+          $ref: '#/components/schemas/AddrbookAdditionalInfo'
+        notificationMethods:
+          description: 알림 메소드 정보
+          items:
+            $ref: '#/components/schemas/NotificationMethod'
+          type: array
+        recipientKey:
+          description: "수신인 키 - 수신인 키는 @[프로젝트 멤버 조회] 또는 @[사용자의 주소록 목록 조회]를 이용하여 조회\
+            합니다."
+          example: "1984"
+          type: string
+        recipientName:
+          description: 수신인 이름
+          example: 홍길동
+          type: string
+        recipientType:
+          description: "수신인 유형 - USER : 사용자, ADDRBOOK : 주소록"
+          example: USER
+          type: string
+        userAdditionalInfo:
+          $ref: '#/components/schemas/Member'
+      required:
+      - notificationMethods
+      - recipientKey
+      - recipientName
+      - recipientType
+      title: NotificationResponse
+      type: object
+    NotificationStatus:
+      description: 이벤트 알림 상태 전송 객체
+      example:
+        sendMethod: MAIL
+        sendResult: SUCCESS
+        sendDt: 2021-10-23T18:00:00Z
+        errorMsg: SMS Send become Inactive.
+      properties:
+        errorMsg:
+          description: swagger.event.notificationStatus.errorMsg.value
+          example: SMS Send become Inactive.
+          type: string
+        sendDt:
+          description: 전송일시
+          example: 2021-10-23T18:00:00Z
+          format: date-time
+          type: string
+        sendMethod:
+          description: 전송 메소드
+          enum:
+          - MESSENGER
+          - SMS
+          - MAIL
+          example: MAIL
+          type: string
+        sendResult:
+          description: "전송 결과 - SUCCESS : 전송 성공 - FAIL : 전송을 시도했으나 전송 실패 - NOT SEND\
+            \ : 전송 메소드 미설정으로 전송 안함 - FILTERED : 알림 필터링 설정으로 전송 안함 - NO PERMISSION\
+            \ : 권한이 없어 전송 안함"
+          example: SUCCESS
+          type: string
+      title: NotificationStatus
+      type: object
+    OpenApiEventResponse:
+      description: 이벤트 응답 전송 객체
+      example:
+        eventMessage: eventMessage
+        eventId: eventId
+        metricName: system.cpu.system.norm.pct
+        metricKey: system.cpu.system.norm.pct
+        productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+        objectTypeName: cluster
+        endDt: 2021-10-23T23:59:59Z
+        productTargetType: system.core.id 별
+        objectType: cluster
+        eventLevel: FATAL
+        eventPolicyId: 7240
+        eventState: ACTIVE
+        objectDisplayName: CPU0
+        durationSecond: 100
+        objectName: CPU0
+        productTypeName: Virtual Server
+        startDt: 2021-10-23T18:00:00Z
+        productTargetTypeEn: By system.core.id
+      properties:
+        durationSecond:
+          description: "이벤트 지속 시간 - 단위: 초"
+          example: 100
+          format: int64
+          type: integer
+        endDt:
+          description: 종료일시
+          example: 2021-10-23T23:59:59Z
+          format: date-time
+          type: string
+        eventId:
+          description: 이벤트 아이디
+          type: string
+        eventLevel:
+          description: 이벤트 레벨
+          enum:
+          - INFORM
+          - WARNING
+          - FATAL
+          example: FATAL
+          type: string
+        eventMessage:
+          description: 이벤트 메시지
+          type: string
+        eventPolicyId:
+          description: 이벤트 정책 아이디
+          example: 7240
+          format: int64
+          type: integer
+        eventState:
+          description: Event State
+          enum:
+          - ACTIVE
+          - INACTIVE
+          example: ACTIVE
+          type: string
+        metricKey:
+          description: 메트릭 키
+          example: system.cpu.system.norm.pct
+          type: string
+        metricName:
+          description: 메트릭 이름
+          example: system.cpu.system.norm.pct
+          type: string
+        objectDisplayName:
+          description: 오브젝트 이름
+          example: CPU0
+          type: string
+        objectName:
+          description: 오브젝트 이름
+          example: CPU0
+          type: string
+        objectType:
+          description: 개별항목 유형
+          example: cluster
+          type: string
+        objectTypeName:
+          description: 개별항목 유형 이름
+          example: cluster
+          type: string
+        productResourceId:
+          description: 상품 리소스 아이디
+          example: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+          type: string
+        productTargetType:
+          description: 메트릭 대상 유형
+          example: system.core.id 별
+          type: string
+        productTargetTypeEn:
+          description: 메트릭 대상 유형
+          example: By system.core.id
+          type: string
+        productTypeName:
+          description: 상품 유형 이름
+          example: Virtual Server
+          type: string
+        startDt:
+          description: 시작일시
+          example: 2021-10-23T18:00:00Z
+          format: date-time
+          type: string
+      required:
+      - durationSecond
+      - eventId
+      - eventLevel
+      - eventMessage
+      - eventPolicyId
+      - eventState
+      - metricKey
+      - metricName
+      - productResourceId
+      - productTypeName
+      - startDt
+      title: OpenApiEventResponse
+      type: object
+    PageResponseAccountProductDto:
+      example:
+        sortableFields:
+        - sortableFields
+        - sortableFields
+        returnCount: 0
+        contents:
+        - lastEventLevel: WARNING
+          accountId: UqXgOSnoqOfKB0_LKO6xId
+          productIpAddress: 192.168.245.161
+          productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+          endDt: 9999-12-31T23:59:59.999Z
+          productTypeName: Virtual Server
+          startDt: 2021-10-23T08:30:00Z
+          productState: Running
+          productName: VM-Server-01
+          productTypeCode: VM
+          poolName: POOL-A8-C1DpGqRdQMlfNXdJxLb
+        - lastEventLevel: WARNING
+          accountId: UqXgOSnoqOfKB0_LKO6xId
+          productIpAddress: 192.168.245.161
+          productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+          endDt: 9999-12-31T23:59:59.999Z
+          productTypeName: Virtual Server
+          startDt: 2021-10-23T08:30:00Z
+          productState: Running
+          productName: VM-Server-01
+          productTypeCode: VM
+          poolName: POOL-A8-C1DpGqRdQMlfNXdJxLb
+        isChanged: true
+        sort:
+        - sort
+        - sort
+        totalCount: 1
+        returnPage: 6
+      properties:
+        contents:
+          items:
+            $ref: '#/components/schemas/AccountProductDto'
+          type: array
+        isChanged:
+          type: boolean
+        returnCount:
+          format: int64
+          type: integer
+        returnPage:
+          format: int64
+          type: integer
+        sort:
+          items:
+            type: string
+          type: array
+        sortableFields:
+          items:
+            type: string
+          type: array
+        totalCount:
+          format: int64
+          type: integer
+      type: object
+    PageResponseAlarmAddrBookDto:
+      example:
+        sortableFields:
+        - sortableFields
+        - sortableFields
+        returnCount: 0
+        contents:
+        - createdByName: 김삼성
+          createdDt: 2021-10-23T22:00:00Z
+          addrbookId: "74"
+          createdBy: "1984"
+          addrBookName: contact name
+          memberCount: 10
+        - createdByName: 김삼성
+          createdDt: 2021-10-23T22:00:00Z
+          addrbookId: "74"
+          createdBy: "1984"
+          addrBookName: contact name
+          memberCount: 10
+        isChanged: true
+        sort:
+        - sort
+        - sort
+        totalCount: 1
+        returnPage: 6
+      properties:
+        contents:
+          items:
+            $ref: '#/components/schemas/AlarmAddrBookDto'
+          type: array
+        isChanged:
+          type: boolean
+        returnCount:
+          format: int64
+          type: integer
+        returnPage:
+          format: int64
+          type: integer
+        sort:
+          items:
+            type: string
+          type: array
+        sortableFields:
+          items:
+            type: string
+          type: array
+        totalCount:
+          format: int64
+          type: integer
+      type: object
+    PageResponseAlarmAddrBookMemberDto:
+      example:
+        sortableFields:
+        - sortableFields
+        - sortableFields
+        returnCount: 0
+        contents:
+        - userMobileTelNo: 010-0000-0000
+          userEmail: kdhong@cloud.com
+          userName: 홍길동
+          userId: "1346"
+          userTimezone: Asia/Seoul
+          userLanguage: ko
+        - userMobileTelNo: 010-0000-0000
+          userEmail: kdhong@cloud.com
+          userName: 홍길동
+          userId: "1346"
+          userTimezone: Asia/Seoul
+          userLanguage: ko
+        isChanged: true
+        sort:
+        - sort
+        - sort
+        totalCount: 1
+        returnPage: 6
+      properties:
+        contents:
+          items:
+            $ref: '#/components/schemas/AlarmAddrBookMemberDto'
+          type: array
+        isChanged:
+          type: boolean
+        returnCount:
+          format: int64
+          type: integer
+        returnPage:
+          format: int64
+          type: integer
+        sort:
+          items:
+            type: string
+          type: array
+        sortableFields:
+          items:
+            type: string
+          type: array
+        totalCount:
+          format: int64
+          type: integer
+      type: object
+    PageResponseEventNotificationResponse:
+      example:
+        sortableFields:
+        - sortableFields
+        - sortableFields
+        returnCount: 0
+        contents:
+        - userMobileTelNo: 010-000-0000
+          notificationStates:
+          - sendMethod: MAIL
+            sendResult: SUCCESS
+            sendDt: 2021-10-23T18:00:00Z
+            errorMsg: SMS Send become Inactive.
+          - sendMethod: MAIL
+            sendResult: SUCCESS
+            sendDt: 2021-10-23T18:00:00Z
+            errorMsg: SMS Send become Inactive.
+          userEmail: kdhong@cloud.com
+          user: "{}"
+          userId: "1984"
+          userNameNotification: 홍길동
+        - userMobileTelNo: 010-000-0000
+          notificationStates:
+          - sendMethod: MAIL
+            sendResult: SUCCESS
+            sendDt: 2021-10-23T18:00:00Z
+            errorMsg: SMS Send become Inactive.
+          - sendMethod: MAIL
+            sendResult: SUCCESS
+            sendDt: 2021-10-23T18:00:00Z
+            errorMsg: SMS Send become Inactive.
+          userEmail: kdhong@cloud.com
+          user: "{}"
+          userId: "1984"
+          userNameNotification: 홍길동
+        isChanged: true
+        sort:
+        - sort
+        - sort
+        totalCount: 1
+        returnPage: 6
+      properties:
+        contents:
+          items:
+            $ref: '#/components/schemas/EventNotificationResponse'
+          type: array
+        isChanged:
+          type: boolean
+        returnCount:
+          format: int64
+          type: integer
+        returnPage:
+          format: int64
+          type: integer
+        sort:
+          items:
+            type: string
+          type: array
+        sortableFields:
+          items:
+            type: string
+          type: array
+        totalCount:
+          format: int64
+          type: integer
+      type: object
+    PageResponseEventPolicyHistoryResponse:
+      example:
+        sortableFields:
+        - sortableFields
+        - sortableFields
+        returnCount: 6
+        contents:
+        - disableObject: "N"
+          eventMessagePrefix: SCP
+          metricName: system.cpu.system.pct
+          metricKey: system.cpu.system.pct
+          productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+          notificationRecipientHistory:
+            userIds:
+            - userIds
+            - userIds
+            userNames:
+            - userNames
+            - userNames
+            addrbookIds:
+            - 0
+            - 0
+          productName: VM-Server-01
+          metricUnit: '%'
+          objectType: cluster
+          eventLevel: WARNING
+          modifiedByName: modifiedByName
+          updateBy: "{}"
+          modifiedBy: modifiedBy
+          eventPolicyHistoryId: 8759
+          productTargetTypeEn: By system.core.id
+          modifiedDt: 2000-01-23T04:56:07.000+00:00
+          eventThreshold:
+            rangeThreshold:
+              minValue: 80
+              maxValue: 90
+              minComparisonOperator: GT
+              maxComparisonOperator: LT
+            singleThreshold:
+              comparisonOperator: LT
+              value: 10
+            thresholdType: RANGE_VALUE
+            metricFunction: delta
+          productTargetType: system.core.id 별
+          updateById: updateById
+          eventPolicyHistoryType: U
+          createBy: "{}"
+          ftCount: 3
+          metricDescription: "커널에서 사용한 CPU 시간의 백분율 (core 4개 모두를 100%사용하는 경우 : 400%)"
+          eventPolicyId: 7240
+          objectDisplayName: cpu0
+          objectName: cpu0
+          createById: createById
+          metricDescriptionEn: "Percentage of CPU time used in the kernel (if 100%\
+            \ of all 4 cores are used: 400%)"
+          disableYn: "N"
+          eventPolicyStatistics:
+            eventPolicyStatisticsType: MAX
+            eventPolicyStatisticsPeriod: 10
+          eventOccurTimeZone: GMT+9
+        - disableObject: "N"
+          eventMessagePrefix: SCP
+          metricName: system.cpu.system.pct
+          metricKey: system.cpu.system.pct
+          productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+          notificationRecipientHistory:
+            userIds:
+            - userIds
+            - userIds
+            userNames:
+            - userNames
+            - userNames
+            addrbookIds:
+            - 0
+            - 0
+          productName: VM-Server-01
+          metricUnit: '%'
+          objectType: cluster
+          eventLevel: WARNING
+          modifiedByName: modifiedByName
+          updateBy: "{}"
+          modifiedBy: modifiedBy
+          eventPolicyHistoryId: 8759
+          productTargetTypeEn: By system.core.id
+          modifiedDt: 2000-01-23T04:56:07.000+00:00
+          eventThreshold:
+            rangeThreshold:
+              minValue: 80
+              maxValue: 90
+              minComparisonOperator: GT
+              maxComparisonOperator: LT
+            singleThreshold:
+              comparisonOperator: LT
+              value: 10
+            thresholdType: RANGE_VALUE
+            metricFunction: delta
+          productTargetType: system.core.id 별
+          updateById: updateById
+          eventPolicyHistoryType: U
+          createBy: "{}"
+          ftCount: 3
+          metricDescription: "커널에서 사용한 CPU 시간의 백분율 (core 4개 모두를 100%사용하는 경우 : 400%)"
+          eventPolicyId: 7240
+          objectDisplayName: cpu0
+          objectName: cpu0
+          createById: createById
+          metricDescriptionEn: "Percentage of CPU time used in the kernel (if 100%\
+            \ of all 4 cores are used: 400%)"
+          disableYn: "N"
+          eventPolicyStatistics:
+            eventPolicyStatisticsType: MAX
+            eventPolicyStatisticsPeriod: 10
+          eventOccurTimeZone: GMT+9
+        isChanged: true
+        sort:
+        - sort
+        - sort
+        totalCount: 5
+        returnPage: 1
+      properties:
+        contents:
+          items:
+            $ref: '#/components/schemas/EventPolicyHistoryResponse'
+          type: array
+        isChanged:
+          type: boolean
+        returnCount:
+          format: int64
+          type: integer
+        returnPage:
+          format: int64
+          type: integer
+        sort:
+          items:
+            type: string
+          type: array
+        sortableFields:
+          items:
+            type: string
+          type: array
+        totalCount:
+          format: int64
+          type: integer
+      type: object
+    PageResponseEventPolicyResponse:
+      example:
+        sortableFields:
+        - sortableFields
+        - sortableFields
+        returnCount: 0
+        contents:
+        - isLogMetric: "N"
+          eventMessagePrefix: SCP
+          metricName: system.cpu.system.pct
+          productSq: 7321
+          metricKey: system.cpu.system.pct
+          productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+          eventThreshold:
+            rangeThreshold:
+              minValue: 80
+              maxValue: 90
+              minComparisonOperator: GT
+              maxComparisonOperator: LT
+            singleThreshold:
+              comparisonOperator: LT
+              value: 10
+            thresholdType: RANGE_VALUE
+            metricFunction: delta
+          productName: VM-002
+          productTargetType: system.core.id 별
+          updateById: updateById
+          createBy: "{}"
+          eventLevel: WARNING
+          ftCount: 3
+          metricDescription: "커널에서 사용한 CPU 시간의 백분율 (core 4개 모두를 100%사용하는 경우 : 400%)"
+          eventPolicyId: 7226
+          updateBy: "{}"
+          checkAsg: true
+          objectName: cpu0
+          createById: createById
+          metricDescriptionEn: "Percentage of CPU time used in the kernel (if 100%\
+            \ of all 4 cores are used: 400%)"
+          eventPolicyStatistics:
+            eventPolicyStatisticsType: MAX
+            eventPolicyStatisticsPeriod: 10
+          eventOccurTimeZone: GMT+9
+          productTargetTypeEn: By system.core.id
+        - isLogMetric: "N"
+          eventMessagePrefix: SCP
+          metricName: system.cpu.system.pct
+          productSq: 7321
+          metricKey: system.cpu.system.pct
+          productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+          eventThreshold:
+            rangeThreshold:
+              minValue: 80
+              maxValue: 90
+              minComparisonOperator: GT
+              maxComparisonOperator: LT
+            singleThreshold:
+              comparisonOperator: LT
+              value: 10
+            thresholdType: RANGE_VALUE
+            metricFunction: delta
+          productName: VM-002
+          productTargetType: system.core.id 별
+          updateById: updateById
+          createBy: "{}"
+          eventLevel: WARNING
+          ftCount: 3
+          metricDescription: "커널에서 사용한 CPU 시간의 백분율 (core 4개 모두를 100%사용하는 경우 : 400%)"
+          eventPolicyId: 7226
+          updateBy: "{}"
+          checkAsg: true
+          objectName: cpu0
+          createById: createById
+          metricDescriptionEn: "Percentage of CPU time used in the kernel (if 100%\
+            \ of all 4 cores are used: 400%)"
+          eventPolicyStatistics:
+            eventPolicyStatisticsType: MAX
+            eventPolicyStatisticsPeriod: 10
+          eventOccurTimeZone: GMT+9
+          productTargetTypeEn: By system.core.id
+        isChanged: true
+        sort:
+        - sort
+        - sort
+        totalCount: 1
+        returnPage: 6
+      properties:
+        contents:
+          items:
+            $ref: '#/components/schemas/EventPolicyResponse'
+          type: array
+        isChanged:
+          type: boolean
+        returnCount:
+          format: int64
+          type: integer
+        returnPage:
+          format: int64
+          type: integer
+        sort:
+          items:
+            type: string
+          type: array
+        sortableFields:
+          items:
+            type: string
+          type: array
+        totalCount:
+          format: int64
+          type: integer
+      type: object
+    PageResponseJsonArrayProjectMemberResponseForOpenAPI:
+      example:
+        sortableFields:
+        - sortableFields
+        - sortableFields
+        returnCount: 10
+        contents:
+        - createdByName: 이순신
+          modifiedDt: 2021-08-06T10:23:41.547Z
+          userGroupCount: "10"
+          companyName: 삼성SDS
+          lastAccessDt: 2022-11-06T10:23:41.547Z
+          userName: 홍길동
+          userId: "1984"
+          createdByEmail: soonshin.lee@cloud.com
+          organizationId: organizationId
+          positionName: 프로
+          createdDt: 2021-08-06T10:23:41.547Z
+          modifiedByName: 이순신
+          createdBy: "469"
+          modifiedByEmail: soonshin.lee@cloud.com
+          modifiedBy: "469"
+          email: kdhong@cloud.com
+        - createdByName: 이순신
+          modifiedDt: 2021-08-06T10:23:41.547Z
+          userGroupCount: "10"
+          companyName: 삼성SDS
+          lastAccessDt: 2022-11-06T10:23:41.547Z
+          userName: 홍길동
+          userId: "1984"
+          createdByEmail: soonshin.lee@cloud.com
+          organizationId: organizationId
+          positionName: 프로
+          createdDt: 2021-08-06T10:23:41.547Z
+          modifiedByName: 이순신
+          createdBy: "469"
+          modifiedByEmail: soonshin.lee@cloud.com
+          modifiedBy: "469"
+          email: kdhong@cloud.com
+        sort:
+        - sort
+        - sort
+        totalCount: 100
+        returnPage: 1
+      properties:
+        contents:
+          description: Contents
+          items:
+            $ref: '#/components/schemas/ProjectMemberResponseForOpenAPI'
+          type: array
+        returnCount:
+          description: Return Count
+          example: 10
+          format: int64
+          type: integer
+        returnPage:
+          description: Return Page
+          example: 1
+          format: int64
+          type: integer
+        sort:
+          description: Sorting Field List
+          items:
+            description: Sorting Field List
+            type: string
+          type: array
+        sortableFields:
+          description: Sortable Field List
+          items:
+            description: Sortable Field List
+            type: string
+          type: array
+        totalCount:
+          description: Total Count
+          example: 100
+          format: int64
+          type: integer
+      type: object
+    PageResponseMetricInfoDto:
+      example:
+        sortableFields:
+        - sortableFields
+        - sortableFields
+        returnCount: 0
+        contents:
+        - disableObject: "N"
+          isLogMetric: "N"
+          perfTitle: File System
+          metricName: FileSystem
+          metricKey: system.filesystem.used.bytes
+          metricSetKey: system.filesystem
+          displayUnit: displayUnit
+          isObjectExist: "Y"
+          productTargetType: system.core.id 별
+          metricUnit: bytes
+          objectType: "N"
+          metricOrder: 1
+          metricType: NUM
+          metricDescription: "커널에서 사용한 CPU 시간의 백분율 (core 4개 모두를 100%사용하는 경우 : 400%)"
+          fixedUnit: sec
+          productTypeName: Virtual Server
+          objectTypeNameLoc: "N"
+          metricDescriptionEn: "Percentage of CPU time used in the kernel (if 100%\
+            \ of all 4 cores are used: 400%)"
+          metricSetName: FileSystem
+          objectTypeNameEng: "N"
+          objectKeyName: system.core.iowait.pct
+          productTypeCode: VM
+          productTargetTypeEn: By system.core.id
+        - disableObject: "N"
+          isLogMetric: "N"
+          perfTitle: File System
+          metricName: FileSystem
+          metricKey: system.filesystem.used.bytes
+          metricSetKey: system.filesystem
+          displayUnit: displayUnit
+          isObjectExist: "Y"
+          productTargetType: system.core.id 별
+          metricUnit: bytes
+          objectType: "N"
+          metricOrder: 1
+          metricType: NUM
+          metricDescription: "커널에서 사용한 CPU 시간의 백분율 (core 4개 모두를 100%사용하는 경우 : 400%)"
+          fixedUnit: sec
+          productTypeName: Virtual Server
+          objectTypeNameLoc: "N"
+          metricDescriptionEn: "Percentage of CPU time used in the kernel (if 100%\
+            \ of all 4 cores are used: 400%)"
+          metricSetName: FileSystem
+          objectTypeNameEng: "N"
+          objectKeyName: system.core.iowait.pct
+          productTypeCode: VM
+          productTargetTypeEn: By system.core.id
+        isChanged: true
+        sort:
+        - sort
+        - sort
+        totalCount: 1
+        returnPage: 6
+      properties:
+        contents:
+          items:
+            $ref: '#/components/schemas/MetricInfoDto'
+          type: array
+        isChanged:
+          type: boolean
+        returnCount:
+          format: int64
+          type: integer
+        returnPage:
+          format: int64
+          type: integer
+        sort:
+          items:
+            type: string
+          type: array
+        sortableFields:
+          items:
+            type: string
+          type: array
+        totalCount:
+          format: int64
+          type: integer
+      type: object
+    PageResponseNotificationResponse:
+      example:
+        sortableFields:
+        - sortableFields
+        - sortableFields
+        returnCount: 6
+        contents:
+        - userAdditionalInfo:
+            dst_offset: dst_offset
+            utc_offset: utc_offset
+            last_login_at: last_login_at
+            account_id: account_id
+            timezone: timezone
+            user_name: user_name
+            company_name: company_name
+            id: id
+            password_reuse_count: 0
+            member_created_at: member_created_at
+            email: email
+            tz_id: tz_id
+          recipientType: USER
+          addrbookAdditionalInfo:
+            userAdditionalInfo:
+            - dst_offset: dst_offset
+              utc_offset: utc_offset
+              last_login_at: last_login_at
+              account_id: account_id
+              timezone: timezone
+              user_name: user_name
+              company_name: company_name
+              id: id
+              password_reuse_count: 0
+              member_created_at: member_created_at
+              email: email
+              tz_id: tz_id
+            - dst_offset: dst_offset
+              utc_offset: utc_offset
+              last_login_at: last_login_at
+              account_id: account_id
+              timezone: timezone
+              user_name: user_name
+              company_name: company_name
+              id: id
+              password_reuse_count: 0
+              member_created_at: member_created_at
+              email: email
+              tz_id: tz_id
+            memberCount: 4
+          recipientName: 홍길동
+          notificationMethods:
+          - sendMethod:
+            - MAIL
+            eventLevel: FATAL
+          - sendMethod:
+            - MAIL
+            eventLevel: FATAL
+          recipientKey: "1984"
+        - userAdditionalInfo:
+            dst_offset: dst_offset
+            utc_offset: utc_offset
+            last_login_at: last_login_at
+            account_id: account_id
+            timezone: timezone
+            user_name: user_name
+            company_name: company_name
+            id: id
+            password_reuse_count: 0
+            member_created_at: member_created_at
+            email: email
+            tz_id: tz_id
+          recipientType: USER
+          addrbookAdditionalInfo:
+            userAdditionalInfo:
+            - dst_offset: dst_offset
+              utc_offset: utc_offset
+              last_login_at: last_login_at
+              account_id: account_id
+              timezone: timezone
+              user_name: user_name
+              company_name: company_name
+              id: id
+              password_reuse_count: 0
+              member_created_at: member_created_at
+              email: email
+              tz_id: tz_id
+            - dst_offset: dst_offset
+              utc_offset: utc_offset
+              last_login_at: last_login_at
+              account_id: account_id
+              timezone: timezone
+              user_name: user_name
+              company_name: company_name
+              id: id
+              password_reuse_count: 0
+              member_created_at: member_created_at
+              email: email
+              tz_id: tz_id
+            memberCount: 4
+          recipientName: 홍길동
+          notificationMethods:
+          - sendMethod:
+            - MAIL
+            eventLevel: FATAL
+          - sendMethod:
+            - MAIL
+            eventLevel: FATAL
+          recipientKey: "1984"
+        isChanged: true
+        sort:
+        - sort
+        - sort
+        totalCount: 5
+        returnPage: 1
+      properties:
+        contents:
+          items:
+            $ref: '#/components/schemas/NotificationResponse'
+          type: array
+        isChanged:
+          type: boolean
+        returnCount:
+          format: int64
+          type: integer
+        returnPage:
+          format: int64
+          type: integer
+        sort:
+          items:
+            type: string
+          type: array
+        sortableFields:
+          items:
+            type: string
+          type: array
+        totalCount:
+          format: int64
+          type: integer
+      type: object
+    PageResponseOpenApiEventResponse:
+      example:
+        sortableFields:
+        - sortableFields
+        - sortableFields
+        returnCount: 0
+        contents:
+        - eventMessage: eventMessage
+          eventId: eventId
+          metricName: system.cpu.system.norm.pct
+          metricKey: system.cpu.system.norm.pct
+          productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+          objectTypeName: cluster
+          endDt: 2021-10-23T23:59:59Z
+          productTargetType: system.core.id 별
+          objectType: cluster
+          eventLevel: FATAL
+          eventPolicyId: 7240
+          eventState: ACTIVE
+          objectDisplayName: CPU0
+          durationSecond: 100
+          objectName: CPU0
+          productTypeName: Virtual Server
+          startDt: 2021-10-23T18:00:00Z
+          productTargetTypeEn: By system.core.id
+        - eventMessage: eventMessage
+          eventId: eventId
+          metricName: system.cpu.system.norm.pct
+          metricKey: system.cpu.system.norm.pct
+          productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+          objectTypeName: cluster
+          endDt: 2021-10-23T23:59:59Z
+          productTargetType: system.core.id 별
+          objectType: cluster
+          eventLevel: FATAL
+          eventPolicyId: 7240
+          eventState: ACTIVE
+          objectDisplayName: CPU0
+          durationSecond: 100
+          objectName: CPU0
+          productTypeName: Virtual Server
+          startDt: 2021-10-23T18:00:00Z
+          productTargetTypeEn: By system.core.id
+        isChanged: true
+        sort:
+        - sort
+        - sort
+        totalCount: 1
+        returnPage: 6
+      properties:
+        contents:
+          items:
+            $ref: '#/components/schemas/OpenApiEventResponse'
+          type: array
+        isChanged:
+          type: boolean
+        returnCount:
+          format: int64
+          type: integer
+        returnPage:
+          format: int64
+          type: integer
+        sort:
+          items:
+            type: string
+          type: array
+        sortableFields:
+          items:
+            type: string
+          type: array
+        totalCount:
+          format: int64
+          type: integer
+      type: object
+    PageResponseProductTypeInfoDto:
+      example:
+        sortableFields:
+        - sortableFields
+        - sortableFields
+        returnCount: 0
+        contents:
+        - stateMetricKey: vsphere.mxvm.runtime.state
+          productTypeName: Virtual Server
+          parentProductTypeName: Compute
+          productTypeCode: VM
+        - stateMetricKey: vsphere.mxvm.runtime.state
+          productTypeName: Virtual Server
+          parentProductTypeName: Compute
+          productTypeCode: VM
+        isChanged: true
+        sort:
+        - sort
+        - sort
+        totalCount: 1
+        returnPage: 6
+      properties:
+        contents:
+          items:
+            $ref: '#/components/schemas/ProductTypeInfoDto'
+          type: array
+        isChanged:
+          type: boolean
+        returnCount:
+          format: int64
+          type: integer
+        returnPage:
+          format: int64
+          type: integer
+        sort:
+          items:
+            type: string
+          type: array
+        sortableFields:
+          items:
+            type: string
+          type: array
+        totalCount:
+          format: int64
+          type: integer
+      type: object
+    ProductInfoAttr:
+      properties:
+        attrName:
+          type: string
+        attrValue:
+          type: string
+      type: object
+    ProductList:
+      example:
+        productSq: 6
+        productResourceId: productResourceId
+        productName: productName
+      properties:
+        productName:
+          type: string
+        productResourceId:
+          type: string
+        productSq:
+          format: int64
+          type: integer
+      type: object
+    ProductResourceInfo:
+      description: 리소스 정보를 전달하기 위한 객체
+      example:
+        productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+        objectList:
+        - kube-01
+        - kube-02
+      properties:
+        objectList:
+          description: 개별항목 목록
+          example:
+          - kube-01
+          - kube-02
+          items:
+            description: 개별항목 목록
+            example: "[\"kube-01\",\"kube-02\"]"
+            type: string
+          type: array
+        productResourceId:
+          description: 상품 리소스 아이디
+          example: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+          type: string
+      required:
+      - productResourceId
+      title: ProductResourceInfo
+      type: object
+    ProductSummary:
+      description: 상품 요약 객체
+      example:
+        lbSize: MEDIUM
+        productIpAddress: 192.168.1.2
+        vpcName: vpcName
+        productSq: 8703
+        productResourceId: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+        productState: Running
+        productSubType: replicaset
+        productName: VM-002
+        lbName: lbName
+        agentState: Running
+        productTypeName: Virtual Server
+        productTypeCode: VM
+        productSubName: productSubName
+      properties:
+        agentState:
+          description: 상품 상태
+          enum:
+          - Running
+          - Down
+          example: Running
+          type: string
+        lbName:
+          description: swagger.event.productSummary.lbName.value
+          example: lbName
+          type: string
+        lbSize:
+          description: swagger.event.productSummary.lbSize.value
+          example: MEDIUM
+          type: string
+        productIpAddress:
+          description: 상품 IP주소
+          example: 192.168.1.2
+          type: string
+        productName:
+          description: 상품 이름
+          example: VM-002
+          type: string
+        productResourceId:
+          description: 상품 리소스 아이디
+          example: INSTANCE-c4Hsd27ttDaLw533X4B6Sp
+          type: string
+        productSq:
+          description: 상품 시퀀스
+          example: 8703
+          format: int64
+          type: integer
+        productState:
+          description: 상품 상태
+          enum:
+          - Running
+          - Down
+          example: Running
+          type: string
+        productSubName:
+          description: swagger.event.productSummary.productSubName.value
+          example: productSubName
+          type: string
+        productSubType:
+          description: swagger.event.productSummary.productSubType.value
+          example: replicaset
+          type: string
+        productTypeCode:
+          description: 상품 유형 코드
+          example: VM
+          type: string
+        productTypeName:
+          description: 상품 유형 이름
+          example: Virtual Server
+          type: string
+        vpcName:
+          description: swagger.event.productSummary.vpcName.value
+          example: vpcName
+          type: string
+      required:
+      - agentState
+      - productName
+      - productResourceId
+      - productState
+      - productTypeCode
+      - productTypeName
+      title: ProductSummary
+      type: object
+    ProductTypeInfoDto:
+      description: 상품 정보 조회 시 응답을 전달하기 위한 객체
+      example:
+        stateMetricKey: vsphere.mxvm.runtime.state
+        productTypeName: Virtual Server
+        parentProductTypeName: Compute
+        productTypeCode: VM
+      properties:
+        parentProductTypeName:
+          description: 부모 상품 이름
+          example: Compute
+          type: string
+        productTypeCode:
+          description: 상품 코드
+          example: VM
+          type: string
+        productTypeName:
+          description: 상품 이름
+          example: Virtual Server
+          type: string
+        stateMetricKey:
+          description: 상태 메트릭 키
+          example: vsphere.mxvm.runtime.state
+          type: string
+      required:
+      - parentProductTypeName
+      - productTypeCode
+      - productTypeName
+      - stateMetricKey
+      title: ProductTypeInfoDto
+      type: object
+    ProjectMemberResponseForOpenAPI:
+      description: swagger.product.ProjectMemberDto.description
+      example:
+        createdByName: 이순신
+        modifiedDt: 2021-08-06T10:23:41.547Z
+        userGroupCount: "10"
+        companyName: 삼성SDS
+        lastAccessDt: 2022-11-06T10:23:41.547Z
+        userName: 홍길동
+        userId: "1984"
+        createdByEmail: soonshin.lee@cloud.com
+        organizationId: organizationId
+        positionName: 프로
+        createdDt: 2021-08-06T10:23:41.547Z
+        modifiedByName: 이순신
+        createdBy: "469"
+        modifiedByEmail: soonshin.lee@cloud.com
+        modifiedBy: "469"
+        email: kdhong@cloud.com
+      properties:
+        companyName:
+          description: swagger.product.ProjectMemberDto.companyName.value
+          example: 삼성SDS
+          type: string
+        createdBy:
+          description: swagger.product.ProjectMemberDto.createdBy.value
+          example: "469"
+          type: string
+        createdByEmail:
+          description: swagger.product.ProjectMemberDto.createdByEmail.value
+          example: soonshin.lee@cloud.com
+          type: string
+        createdByName:
+          description: swagger.product.ProjectMemberDto.createdByName.value
+          example: 이순신
+          type: string
+        createdDt:
+          description: swagger.product.ProjectMemberDto.userTimezone.value
+          example: 2021-08-06T10:23:41.547Z
+          type: string
+        email:
+          description: swagger.product.ProjectMemberDto.userEmail.value
+          example: kdhong@cloud.com
+          type: string
+        lastAccessDt:
+          description: swagger.product.ProjectMemberDto.lastAccessDt.value
+          example: 2022-11-06T10:23:41.547Z
+          type: string
+        modifiedBy:
+          description: swagger.product.ProjectMemberDto.modifiedBy.value
+          example: "469"
+          type: string
+        modifiedByEmail:
+          description: swagger.product.ProjectMemberDto.modifiedByEmail.value
+          example: soonshin.lee@cloud.com
+          type: string
+        modifiedByName:
+          description: swagger.product.ProjectMemberDto.modifiedByName.value
+          example: 이순신
+          type: string
+        modifiedDt:
+          description: swagger.product.ProjectMemberDto.modifiedDt.value
+          example: 2021-08-06T10:23:41.547Z
+          type: string
+        organizationId:
+          description: swagger.product.ProjectMemberDto.organizationId.value
+          type: string
+        positionName:
+          description: swagger.product.ProjectMemberDto.positionName.value
+          example: 프로
+          type: string
+        userGroupCount:
+          description: swagger.product.ProjectMemberDto.userGroupCount.value
+          example: "10"
+          type: string
+        userId:
+          description: swagger.product.ProjectMemberDto.userId.value
+          example: "1984"
+          type: string
+        userName:
+          description: swagger.product.ProjectMemberDto.userName.value
+          example: 홍길동
+          type: string
+      title: ProjectMemberResponseForOpenAPI
+      type: object
+    RangeThreshold:
+      description: 이벤트 임계치 중 범위 임계치 정보 객체
+      example:
+        minValue: 80
+        maxValue: 90
+        minComparisonOperator: GT
+        maxComparisonOperator: LT
+      properties:
+        maxComparisonOperator:
+          description: 최대 비교 연산자
+          enum:
+          - LT
+          - LE
+          example: LT
+          type: string
+        maxValue:
+          description: 최대 값
+          example: 90
+          format: double
+          type: number
+        minComparisonOperator:
+          description: 최소 비교 연산자
+          enum:
+          - GT
+          - GE
+          example: GT
+          type: string
+        minValue:
+          description: 최소 값
+          example: 80
+          format: double
+          type: number
+      required:
+      - maxComparisonOperator
+      - maxValue
+      - minComparisonOperator
+      - minValue
+      title: RangeThreshold
+      type: object
+    SingleThreshold:
+      description: 이벤트 임계치 중 단일 임계치 정보 객체
+      example:
+        comparisonOperator: LT
+        value: 10
+      properties:
+        comparisonOperator:
+          description: 비교 연산자
+          enum:
+          - GT
+          - GE
+          - LT
+          - LE
+          - EQ
+          - NE
+          example: LT
+          type: string
+        value:
+          description: 값
+          example: 10
+          format: double
+          type: number
+      required:
+      - comparisonOperator
+      - value
+      title: SingleThreshold
+      type: object
+  securitySchemes:
+    X-Auth-Token:
+      in: header
+      name: X-Auth-Token
+      type: apiKey
+    X-User-Id:
+      in: header
+      name: X-User-Id
+      type: apiKey
+x-app-name: scp-monitoring
+x-package-name: scp_monitoring
+x-service-type: scp-monitoring

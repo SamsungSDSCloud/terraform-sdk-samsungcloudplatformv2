@@ -1,0 +1,5 @@
+packageName: eventstreams
+generatorName: go
+withGoMod: false
+structPrefix: true
+enumClassPrefix: true

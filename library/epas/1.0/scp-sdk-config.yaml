@@ -1,0 +1,5 @@
+packageName: epas
+generatorName: go
+withGoMod: false
+structPrefix: true
+enumClassPrefix: true

@@ -1,0 +1,4908 @@
+openapi: 3.1.0
+info:
+  description: SCP LoadBalancer Service
+  title: SCP LoadBalancer Service
+  version: 0.0.1.dev1712
+servers:
+- url: http://localhost:8080
+tags:
+- description: Internal Lb Clusters API
+  name: loadbalancer.v1.InternalLbClustersApi
+- description: Internal Lb Devices API
+  name: loadbalancer.v1.InternalLbDevicesApi
+- description: Internal LbListeners API
+  name: loadbalancer.v1.InternalLbListenersApi
+- description: Internal LB Server Group statistics API
+  name: loadbalancer.v1.InternalLBServerGroupStatsApi
+- description: Load Balancer Internal API
+  name: loadbalancer.v1.InternalLoadBalancerApi
+- description: Internal Members API
+  name: loadbalancer.v1.InternalMembersApi
+- description: LB Server Groups API
+  name: loadbalancer.v1.LBServerGroupsApi
+- description: LbListeners API
+  name: loadbalancer.v1.LbListenersApi
+- description: Loadbalancers API
+  name: loadbalancer.v1.LoadbalancersApi
+- description: Member API
+  name: loadbalancer.v1.MemberApi
+- description: LbCertificates API
+  name: loadbalancer.v1.LbCertificatesApi
+- description: LB Health Checks API
+  name: loadbalancer.v1.LBHealthCheckApi
+- description: Internal Lb Servers API
+  name: loadbalancer.v1.InternalLbServersApi
+- description: Lb Resource API
+  name: loadbalancer.v1.LbResourceApi
+- description: Internal A10 password Encryption API
+  name: loadbalancer.v1.InternalPasswordEncryptionApi
+- description: Availability Zones API
+  name: loadbalancer-old.v1.AvailabilityZonesApi
+- description: Conductor Samples API
+  name: loadbalancer-old.v1.ConductorSamplesApi
+- description: Flavor API
+  name: loadbalancer-old.v1.FlavorApi
+- description: Internal API
+  name: loadbalancer-old.v1.InternalApi
+- description: Listeners API
+  name: loadbalancer-old.v1.ListenersApi
+- description: Loadbalancers old API
+  name: loadbalancer-old.v1.LoadbalancersOldApi
+- description: Pool Members API
+  name: loadbalancer-old.v1.PoolMembersApi
+- description: Monitors API
+  name: loadbalancer-old.v1.MonitorsApi
+- description: Pools API
+  name: loadbalancer-old.v1.PoolsApi
+- description: Quotas API
+  name: loadbalancer-old.v1.QuotasApi
+paths:
+  /v1/lb-health-checks:
+    get:
+      description: List LB Health Checks
+      operationId: listLbHealthChecks
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: LB Health Check name
+        example: Test-LbMonitor-01
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: LB Health Check Protocol
+        example:
+        - TCP
+        - UDP
+        explode: true
+        in: query
+        name: protocol
+        required: false
+        schema:
+          $ref: '#/components/schemas/Protocol'
+        style: form
+      - description: Service Subnet ID
+        example: 60fba45cb6c811efba41ba92e4fe7200
+        explode: true
+        in: query
+        name: subnet_id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LbHealthCheckListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ListLBHealthChecks
+      tags:
+      - loadbalancer.v1.LBHealthCheckApi
+      x-action-id: loadbalancer:ListLbHealthChecks
+      x-api-access-level: LIST
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: lb-health-check_list
+      x-not-before: 2026-07-01
+      x-operation-id: listLbHealthChecks
+      x-resource: LbHealthCheck
+    post:
+      description: Create LB Health Check
+      operationId: createLbHealthCheck
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LbHealthCheckCreateRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LbHealthCheckShowResponse'
+          description: Created
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: CreateLBHealthCheck
+      tags:
+      - loadbalancer.v1.LBHealthCheckApi
+      x-action-id: loadbalancer:CreateLbHealthCheck
+      x-api-access-level: CREATE
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: lb-health-check_create
+      x-not-before: 2026-07-01
+      x-operation-id: createLbHealthCheck
+      x-resource: LbHealthCheck
+  /v1/lb-health-checks/{lb_health_check_id}:
+    delete:
+      description: Delete LB Health Check
+      operationId: deleteLbHealthCheck
+      parameters:
+      - description: LB Health Check ID
+        example: e3cd678b11784734bc366148aa37580e
+        explode: false
+        in: path
+        name: lb_health_check_id
+        required: true
+        schema:
+          description: LB Health Check ID
+          example: e3cd678b11784734bc366148aa37580e
+          title: Lb Health Check Id
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: DeleteLBHealthCheck
+      tags:
+      - loadbalancer.v1.LBHealthCheckApi
+      x-action-id: loadbalancer:DeleteLbHealthCheck
+      x-api-access-level: DELETE
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: lb-health-check_delete
+      x-not-before: 2026-07-01
+      x-operation-id: deleteLbHealthCheck
+      x-resource: LbHealthCheck
+    get:
+      description: Get LB Health Check
+      operationId: showLbHealthCheck
+      parameters:
+      - description: LB Health Check ID
+        example: e3cd678b11784734bc366148aa37580e
+        explode: false
+        in: path
+        name: lb_health_check_id
+        required: true
+        schema:
+          description: LB Health Check ID
+          example: e3cd678b11784734bc366148aa37580e
+          title: Lb Health Check Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LbHealthCheckShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ShowLBHealthCheck
+      tags:
+      - loadbalancer.v1.LBHealthCheckApi
+      x-action-id: loadbalancer:ShowLbHealthCheck
+      x-api-access-level: READ
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: lb-health-check_read
+      x-not-before: 2026-07-01
+      x-operation-id: showLbHealthCheck
+      x-resource: LbHealthCheck
+    put:
+      description: Set LB Health Check
+      operationId: setLbHealthCheck
+      parameters:
+      - description: LB Health Check ID
+        example: e3cd678b11784734bc366148aa37580e
+        explode: false
+        in: path
+        name: lb_health_check_id
+        required: true
+        schema:
+          description: LB Health Check ID
+          example: e3cd678b11784734bc366148aa37580e
+          title: Lb Health Check Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LbHealthCheckSetRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LbHealthCheckShowResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: SetLBHealthCheck
+      tags:
+      - loadbalancer.v1.LBHealthCheckApi
+      x-action-id: loadbalancer:SetLbHealthCheck
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: lb-health-check_update
+      x-not-before: 2026-07-01
+      x-operation-id: setLbHealthCheck
+      x-resource: LbHealthCheck
+  /v1/lb-listeners:
+    get:
+      description: get LB listener list
+      operationId: listLbListeners
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: The ID of the load balancer.
+        explode: true
+        in: query
+        name: loadbalancer_id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: The State of the listener.
+        explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: The Name of the listener.
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: The Port of the listener.
+        explode: true
+        in: query
+        name: service_port
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      - description: Protocol
+        example:
+        - TCP
+        - UDP
+        explode: true
+        in: query
+        name: protocol
+        required: false
+        schema:
+          $ref: '#/components/schemas/Protocol_1'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LbListenerListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ListLbListeners
+      tags:
+      - loadbalancer.v1.LbListenersApi
+      x-action-id: loadbalancer:ListLbListeners
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: lb-listener_list
+      x-not-before: 2026-07-01
+      x-operation-id: listLbListeners
+      x-resource: LbListener
+    post:
+      description: create LB listener
+      operationId: createLbListener
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LbListenerCreateRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LbListenerShowResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: CreateLbListener
+      tags:
+      - loadbalancer.v1.LbListenersApi
+      x-action-id: loadbalancer:CreateLbListener
+      x-api-access-level: CREATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250428"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: lb-listener_create
+      x-not-before: 2026-07-01
+      x-operation-id: createLbListener
+      x-resource: LbListener
+  /v1/lb-listeners/{listener_id}:
+    delete:
+      description: delete LB listener
+      operationId: deleteLbListener
+      parameters:
+      - description: The ID of the listener.
+        explode: false
+        in: path
+        name: listener_id
+        required: true
+        schema:
+          description: The ID of the listener.
+          title: Listener Id
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: DeleteLbListener
+      tags:
+      - loadbalancer.v1.LbListenersApi
+      x-action-id: loadbalancer:DeleteLbListener
+      x-api-access-level: DELETE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: lb-listener_delete
+      x-not-before: 2026-07-01
+      x-operation-id: deleteLbListener
+      x-resource: LbListener
+    get:
+      description: show LB listener
+      operationId: showLbListener
+      parameters:
+      - description: The ID of the listener.
+        explode: false
+        in: path
+        name: listener_id
+        required: true
+        schema:
+          description: The ID of the listener.
+          title: Listener Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LbListenerShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ShowLbListener
+      tags:
+      - loadbalancer.v1.LbListenersApi
+      x-action-id: loadbalancer:ShowLbListener
+      x-api-access-level: READ
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: lb-listener_show
+      x-not-before: 2026-07-01
+      x-operation-id: showLbListener
+      x-resource: LbListener
+    put:
+      description: set loadbalancer listener
+      operationId: setLbListener
+      parameters:
+      - description: The ID of the listener.
+        explode: false
+        in: path
+        name: listener_id
+        required: true
+        schema:
+          description: The ID of the listener.
+          title: Listener Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LbListenerSetRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LbListenerShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: SetLbListener
+      tags:
+      - loadbalancer.v1.LbListenersApi
+      x-action-id: loadbalancer:SetLbListener
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250428"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: lb-listener_update
+      x-not-before: 2026-07-01
+      x-operation-id: setLbListener
+      x-resource: LbListener
+  /v1/lb-server-groups:
+    get:
+      description: Get LB Server Group list
+      operationId: listLbServerGroups
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: LB Server Group name
+        example: ServerGroup01
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Protocol
+        example:
+        - TCP
+        - UDP
+        explode: true
+        in: query
+        name: protocol
+        required: false
+        schema:
+          $ref: '#/components/schemas/Protocol_1'
+        style: form
+      - description: Service Subnet ID
+        example: 60fba45cb6c811efba41ba92e4fe7200
+        explode: true
+        in: query
+        name: subnet_id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: VPC ID
+        example: 8acceeb6920c4fc494490d864f67f0b5
+        explode: true
+        in: query
+        name: vpc_id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: LB Health Check ID
+        example: 46c681018e33453085ca7c8db54e0076
+        explode: true
+        in: query
+        name: lb_health_check_id
+        required: false
+        schema:
+          description: LB Health Check ID
+          example: 46c681018e33453085ca7c8db54e0076
+          title: Lb Health Check Id
+          type: string
+        style: form
+      - description: LB Method
+        example: ROUND_ROBIN
+        explode: true
+        in: query
+        name: lb_method
+        required: false
+        schema:
+          $ref: '#/components/schemas/Lb_Method'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LbServerGroupListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ListLBServerGroups
+      tags:
+      - loadbalancer.v1.LBServerGroupsApi
+      x-action-id: loadbalancer:ListLbServerGroups
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: lb-server-group_list
+      x-not-before: 2026-07-01
+      x-operation-id: listLbServerGroups
+      x-resource: LbServerGroup
+    post:
+      description: Create LB Server Group
+      operationId: createLbServerGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LbServerGroupCreateRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LbServerGroupShowResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: CreateLBServerGroup
+      tags:
+      - loadbalancer.v1.LBServerGroupsApi
+      x-action-id: loadbalancer:CreateLbServerGroup
+      x-api-access-level: CREATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: lb-server-group_create
+      x-not-before: 2026-07-01
+      x-operation-id: createLbServerGroup
+      x-resource: LbServerGroup
+  /v1/lb-server-groups/{lb_server_group_id}:
+    delete:
+      description: Delete LB Server Group
+      operationId: deleteLbServerGroup
+      parameters:
+      - description: LB Server Group ID
+        example: 46c68101-8e33-4530-85ca-7c8db54e0076
+        explode: false
+        in: path
+        name: lb_server_group_id
+        required: true
+        schema:
+          description: LB Server Group ID
+          example: 46c68101-8e33-4530-85ca-7c8db54e0076
+          title: Lb Server Group Id
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: DeleteLBServerGroup
+      tags:
+      - loadbalancer.v1.LBServerGroupsApi
+      x-action-id: loadbalancer:DeleteLbServerGroup
+      x-api-access-level: DELETE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: lb-server-group_delete
+      x-not-before: 2026-07-01
+      x-operation-id: deleteLbServerGroup
+      x-resource: LbServerGroup
+    get:
+      description: Show LB Server Group
+      operationId: showLbServerGroup
+      parameters:
+      - description: LB Server Group ID
+        example: 46c68101-8e33-4530-85ca-7c8db54e0076
+        explode: false
+        in: path
+        name: lb_server_group_id
+        required: true
+        schema:
+          description: LB Server Group ID
+          example: 46c68101-8e33-4530-85ca-7c8db54e0076
+          title: Lb Server Group Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LbServerGroupShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ShowLBServerGroup
+      tags:
+      - loadbalancer.v1.LBServerGroupsApi
+      x-action-id: loadbalancer:ShowLbServerGroup
+      x-api-access-level: READ
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: lb-server-group_read
+      x-not-before: 2026-07-01
+      x-operation-id: showLbServerGroup
+      x-resource: LbServerGroup
+    put:
+      description: Set LB Server Group
+      operationId: setLbServerGroup
+      parameters:
+      - description: LB Server Group ID
+        example: 46c68101-8e33-4530-85ca-7c8db54e0076
+        explode: false
+        in: path
+        name: lb_server_group_id
+        required: true
+        schema:
+          description: LB Server Group ID
+          example: 46c68101-8e33-4530-85ca-7c8db54e0076
+          title: Lb Server Group Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LbServerGroupSetRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LbServerGroupShowResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: SetLBServerGroup
+      tags:
+      - loadbalancer.v1.LBServerGroupsApi
+      x-action-id: loadbalancer:SetLbServerGroup
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: lb-server-group_update
+      x-not-before: 2026-07-01
+      x-operation-id: setLbServerGroup
+      x-resource: LbServerGroup
+  /v1/lb-server-groups/{lb_server_group_id}/members:
+    get:
+      description: Get Lb Server Group Member List
+      operationId: listLbServerGroupMembers
+      parameters:
+      - description: ID of Lb Server Group
+        explode: false
+        in: path
+        name: lb_server_group_id
+        required: true
+        schema:
+          description: ID of Lb Server Group
+          title: Lb Server Group Id
+          type: string
+        style: simple
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Name of Member
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: IP of Member
+        explode: true
+        in: query
+        name: member_ip
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Protocol port of Member
+        explode: true
+        in: query
+        name: member_port
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberWithHealthStateListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ListLbServerGroupMembers
+      tags:
+      - loadbalancer.v1.MemberApi
+      x-action-id: loadbalancer:ListLbServerGroupMembers
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: lb-server-group-member_list
+      x-not-before: 2026-07-01
+      x-operation-id: listLbServerGroupMembers
+      x-resource: LbServerGroup
+    post:
+      description: Add Lb Server Group Member bulk
+      operationId: addLbServerGroupMembers
+      parameters:
+      - description: ID of Lb Server Group
+        explode: false
+        in: path
+        name: lb_server_group_id
+        required: true
+        schema:
+          description: ID of Lb Server Group
+          title: Lb Server Group Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MemberListCreateRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberListResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: AddLbServerGroupMembers
+      tags:
+      - loadbalancer.v1.MemberApi
+      x-action-id: loadbalancer:AddLbServerGroupMembers
+      x-api-access-level: CREATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: lb-server-group-members_add
+      x-not-before: 2026-07-01
+      x-operation-id: addLbServerGroupMembers
+      x-resource: LbServerGroup
+  /v1/lb-server-groups/{lb_server_group_id}/members/check-member-exists:
+    get:
+      description: 'Check member exists in server group '
+      operationId: checkMemberExistsInServerGroup
+      parameters:
+      - description: ID of Lb Server Group
+        explode: false
+        in: path
+        name: lb_server_group_id
+        required: true
+        schema:
+          description: ID of Lb Server Group
+          title: Lb Server Group Id
+          type: string
+        style: simple
+      - description: IP of Member
+        explode: true
+        in: query
+        name: member_ip
+        required: true
+        schema:
+          description: IP of Member
+          title: Member Ip
+          type: string
+        style: form
+      - description: Protocol port of Member
+        explode: true
+        in: query
+        name: member_port
+        required: true
+        schema:
+          description: Protocol port of Member
+          title: Member Port
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckMemberExistsResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: CheckMemberExistsInServerGroup
+      tags:
+      - loadbalancer.v1.MemberApi
+      x-action-id: loadbalancer:CheckMemberExistsInServerGroup
+      x-api-access-level: READ
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - CONSOLE
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: lb-server-group-member_check
+      x-not-before: 2026-07-01
+      x-operation-id: checkMemberExistsInServerGroup
+      x-resource: LbServerGroup
+  /v1/lb-server-groups/{lb_server_group_id}/members/{member_id}:
+    delete:
+      description: Remove Lb Server Group Member
+      operationId: removeLbServerGroupMember
+      parameters:
+      - description: ID of Lb Server Group
+        explode: false
+        in: path
+        name: lb_server_group_id
+        required: true
+        schema:
+          description: ID of Lb Server Group
+          title: Lb Server Group Id
+          type: string
+        style: simple
+      - description: ID of Member
+        explode: false
+        in: path
+        name: member_id
+        required: true
+        schema:
+          description: ID of Member
+          title: Member Id
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: RemoveLbServerGroupMember
+      tags:
+      - loadbalancer.v1.MemberApi
+      x-action-id: loadbalancer:RemoveLbServerGroupMember
+      x-api-access-level: DELETE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: lb-server-group-member_remove
+      x-not-before: 2026-07-01
+      x-operation-id: removeLbServerGroupMember
+      x-resource: LbServerGroup
+    get:
+      description: Show Lb Server Group Member
+      operationId: showLbServerGroupMember
+      parameters:
+      - description: ID of Lb Server Group
+        explode: false
+        in: path
+        name: lb_server_group_id
+        required: true
+        schema:
+          description: ID of Lb Server Group
+          title: Lb Server Group Id
+          type: string
+        style: simple
+      - description: ID of Member
+        explode: false
+        in: path
+        name: member_id
+        required: true
+        schema:
+          description: ID of Member
+          title: Member Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ShowLbServerGroupMember
+      tags:
+      - loadbalancer.v1.MemberApi
+      x-action-id: loadbalancer:ShowLbServerGroupMember
+      x-api-access-level: READ
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: lb-server-group-member_show
+      x-not-before: 2026-07-01
+      x-operation-id: showLbServerGroupMember
+      x-resource: LbServerGroup
+    put:
+      description: Set Lb Server Group Member
+      operationId: setLbServerGroupMember
+      parameters:
+      - description: ID of Lb Server Group
+        explode: false
+        in: path
+        name: lb_server_group_id
+        required: true
+        schema:
+          description: ID of Lb Server Group
+          title: Lb Server Group Id
+          type: string
+        style: simple
+      - description: ID of Member
+        explode: false
+        in: path
+        name: member_id
+        required: true
+        schema:
+          description: ID of Member
+          title: Member Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MemberSetRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberShowResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: SetLbServerGroupMember
+      tags:
+      - loadbalancer.v1.MemberApi
+      x-action-id: loadbalancer:SetLbServerGroupMember
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: lb-server-group-member_set
+      x-not-before: 2026-07-01
+      x-operation-id: setLbServerGroupMember
+      x-resource: LbServerGroup
+  /v1/loadbalancers:
+    get:
+      description: get Load Balancer list
+      operationId: listLoadbalancers
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: The name of the load balancer.
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: The state of the load balancer.
+        explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          $ref: '#/components/schemas/State'
+        style: form
+      - description: The service IP of the load balancer.
+        explode: true
+        in: query
+        name: service_ip
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Subnet ID
+        explode: true
+        in: query
+        name: subnet_id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoadbalancerListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: ListLoadbalancers
+      tags:
+      - loadbalancer.v1.LoadbalancersApi
+      x-action-id: loadbalancer:ListLoadbalancers
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: loadbalancer_list
+      x-not-before: 2026-07-01
+      x-operation-id: listLoadbalancers
+      x-resource: Loadbalancer
+    post:
+      description: create Load Balancer
+      operationId: createLoadbalancer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoadbalancerCreateRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoadbalancerShowResponse'
+          description: Created
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: CreateLoadbalancer
+      tags:
+      - loadbalancer.v1.LoadbalancersApi
+      x-action-id: loadbalancer:CreateLoadbalancer
+      x-api-access-level: CREATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250428"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: loadbalancer_create
+      x-not-before: 2026-07-01
+      x-operation-id: createLoadbalancer
+      x-resource: Loadbalancer
+  /v1/loadbalancers/certificates:
+    get:
+      description: get Load Balancer certificate list
+      operationId: listLoadbalancerCertificates
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LbCertificateListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ListLoadbalancerCertificates
+      tags:
+      - loadbalancer.v1.LbCertificatesApi
+      x-action-id: loadbalancer:ListLoadbalancerCertificates
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: loadbalancer-certificate_list
+      x-not-before: 2026-07-01
+      x-operation-id: listLoadbalancerCertificates
+      x-resource: Loadbalancer
+  /v1/loadbalancers/certificates/{lb_certificate_id}:
+    get:
+      description: show Load Balancer certificate
+      operationId: showLoadbalancerCertificate
+      parameters:
+      - description: The ID of the certificate
+        explode: false
+        in: path
+        name: lb_certificate_id
+        required: true
+        schema:
+          description: The ID of the certificate
+          title: Lb Certificate Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LbCertificateShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ShowLoadbalancerCertificate
+      tags:
+      - loadbalancer.v1.LbCertificatesApi
+      x-action-id: loadbalancer:ShowLoadbalancerCertificate
+      x-api-access-level: READ
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: loadbalancer-certificate_show
+      x-not-before: 2026-07-01
+      x-operation-id: showLoadbalancerCertificate
+      x-resource: Loadbalancer
+  /v1/loadbalancers/{loadbalancer_id}:
+    delete:
+      description: delete Load Balancer
+      operationId: deleteLoadbalancer
+      parameters:
+      - description: ID
+        explode: false
+        in: path
+        name: loadbalancer_id
+        required: true
+        schema:
+          description: ID
+          title: Loadbalancer Id
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: DeleteLoadbalancer
+      tags:
+      - loadbalancer.v1.LoadbalancersApi
+      x-action-id: loadbalancer:DeleteLoadbalancer
+      x-api-access-level: DELETE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: loadbalancer_delete
+      x-not-before: 2026-07-01
+      x-operation-id: deleteLoadbalancer
+      x-resource: Loadbalancer
+    get:
+      description: show Load Balancer
+      operationId: showLoadbalancer
+      parameters:
+      - description: ID
+        explode: false
+        in: path
+        name: loadbalancer_id
+        required: true
+        schema:
+          description: ID
+          title: Loadbalancer Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoadbalancerShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ShowLoadbalancer
+      tags:
+      - loadbalancer.v1.LoadbalancersApi
+      x-action-id: loadbalancer:ShowLoadbalancer
+      x-api-access-level: READ
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: loadbalancer_show
+      x-not-before: 2026-07-01
+      x-operation-id: showLoadbalancer
+      x-resource: Loadbalancer
+    put:
+      description: Set Load Balancer
+      operationId: setLoadbalancer
+      parameters:
+      - description: ID
+        explode: false
+        in: path
+        name: loadbalancer_id
+        required: true
+        schema:
+          description: ID
+          title: Loadbalancer Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoadbalancerUpdateRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoadbalancerShowResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: SetLoadbalancer
+      tags:
+      - loadbalancer.v1.LoadbalancersApi
+      x-action-id: loadbalancer:SetLoadbalancer
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250428"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: loadbalancer_update
+      x-not-before: 2026-07-01
+      x-operation-id: setLoadbalancer
+      x-resource: Loadbalancer
+  /v1/loadbalancers/{loadbalancer_id}/static-nats:
+    delete:
+      description: delete Load Balancer Public NAT IP
+      operationId: deleteLoadbalancerPublicNatIp
+      parameters:
+      - description: ID
+        explode: false
+        in: path
+        name: loadbalancer_id
+        required: true
+        schema:
+          description: ID
+          title: Loadbalancer Id
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: DeleteLoadbalancerPublicNatIp
+      tags:
+      - loadbalancer.v1.LoadbalancersApi
+      x-action-id: loadbalancer:DeleteLoadbalancerPublicNatIp
+      x-api-access-level: DELETE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: loadbalancer-public-nat-ip_delete
+      x-not-before: 2026-07-01
+      x-operation-id: deleteLoadbalancerPublicNatIp
+      x-resource: Loadbalancer
+    post:
+      description: create Load Balancer Public NAT IP
+      operationId: createLoadbalancerPublicNatIp
+      parameters:
+      - description: ID
+        explode: false
+        in: path
+        name: loadbalancer_id
+        required: true
+        schema:
+          description: ID
+          title: Loadbalancer Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StaticNatCreateRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StaticNatCreateResponse'
+          description: Created
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: CreateLoadbalancerPublicNatIp
+      tags:
+      - loadbalancer.v1.LoadbalancersApi
+      x-action-id: loadbalancer:CreateLoadbalancerPublicNatIp
+      x-api-access-level: CREATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: loadbalancer-public-nat-ip_create
+      x-not-before: 2026-07-01
+      x-operation-id: createLoadbalancerPublicNatIp
+      x-resource: Loadbalancer
+  /v1/loadbalancers/{subnet_id}/check-lb-create-available:
+    get:
+      description: check Load Balancer creation availability
+      operationId: checkLoadbalancerCreation
+      parameters:
+      - description: Subnet ID
+        explode: false
+        in: path
+        name: subnet_id
+        required: true
+        schema:
+          description: Subnet ID
+          title: Subnet Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoadbalancerCreateValidateResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: CheckLoadbalancerCreation
+      tags:
+      - loadbalancer.v1.LoadbalancersApi
+      x-action-id: loadbalancer:CheckLoadbalancerCreate
+      x-api-access-level: READ
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - CONSOLE
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: loadbalancer-creation_check
+      x-not-before: 2026-07-01
+      x-operation-id: checkLoadbalancerCreation
+      x-resource: Loadbalancer
+  /v1/resources/{resource_type}/usage-limit:
+    get:
+      description: Show Resource Usage Limit
+      operationId: showResourceUsageLimit
+      parameters:
+      - description: resource type
+        explode: false
+        in: path
+        name: resource_type
+        required: true
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/ResourceUsageLimitType'
+          description: resource type
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceUsageLimitResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ShowResourceUsageLimit
+      tags:
+      - loadbalancer.v1.LbResourceApi
+      x-action-id: loadbalancer:ShowResourceUsageLimit
+      x-api-access-level: READ
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - CONSOLE
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: resource_show
+      x-not-before: 2026-07-01
+      x-operation-id: showResourceUsageLimit
+      x-resource: Loadbalancer
+components:
+  schemas:
+    CheckMemberExistsResponse:
+      example:
+        result: true
+      properties:
+        result:
+          title: Result
+          type: boolean
+      required:
+      - result
+      title: CheckMemberExistsResponse
+    LbCertificate:
+      example:
+        not_after_dt: 2000-01-23T04:56:07.000+00:00
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: name
+        created_at: 2024-05-17T00:23:17Z
+        cn: cn
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        state: state
+        cert_kind: cert_kind
+        modified_at: 2024-05-17T00:23:17Z
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        not_before_dt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        cert_kind:
+          title: Cert Kind
+          type: string
+        cn:
+          title: Cn
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        id:
+          description: ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          title: Name
+          type: string
+        not_after_dt:
+          format: date-time
+          title: Not After Dt
+          type: string
+        not_before_dt:
+          format: date-time
+          title: Not Before Dt
+          type: string
+        state:
+          title: State
+          type: string
+      required:
+      - created_at
+      - created_by
+      - id
+      - modified_at
+      - modified_by
+      title: LbCertificate
+    LbCertificateForShow:
+      example:
+        created_at: 2024-05-17T00:23:17Z
+        private_key: private_key
+        cn: cn
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        not_after_dt: 2000-01-23T04:56:07.000+00:00
+        cert_body: cert_body
+        account_id: account_id
+        organization: organization
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: name
+        cert_chain: cert_chain
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        state: state
+        cert_kind: cert_kind
+        modified_at: 2024-05-17T00:23:17Z
+        not_before_dt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        account_id:
+          description: The project ID of the certificate
+          title: Account Id
+          type: string
+        cert_body:
+          description: The body of the certificate
+          title: Cert Body
+          type: string
+        cert_chain:
+          nullable: true
+          type: string
+        cert_kind:
+          title: Cert Kind
+          type: string
+        cn:
+          title: Cn
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        id:
+          description: ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          title: Name
+          type: string
+        not_after_dt:
+          format: date-time
+          title: Not After Dt
+          type: string
+        not_before_dt:
+          format: date-time
+          title: Not Before Dt
+          type: string
+        organization:
+          description: The organization of the certificate
+          title: Organization
+          type: string
+        private_key:
+          description: The private key of the certificate
+          title: Private Key
+          type: string
+        state:
+          title: State
+          type: string
+      required:
+      - account_id
+      - cert_body
+      - created_at
+      - created_by
+      - id
+      - modified_at
+      - modified_by
+      - organization
+      - private_key
+      title: LbCertificateForShow
+    LbCertificateListResponse:
+      example:
+        certificates:
+        - not_after_dt: 2000-01-23T04:56:07.000+00:00
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          created_at: 2024-05-17T00:23:17Z
+          cn: cn
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          state: state
+          cert_kind: cert_kind
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          not_before_dt: 2000-01-23T04:56:07.000+00:00
+        - not_after_dt: 2000-01-23T04:56:07.000+00:00
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          created_at: 2024-05-17T00:23:17Z
+          cn: cn
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          state: state
+          cert_kind: cert_kind
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          not_before_dt: 2000-01-23T04:56:07.000+00:00
+        count: 0
+        links:
+        - ""
+        - ""
+      properties:
+        certificates:
+          items:
+            $ref: '#/components/schemas/LbCertificate'
+          type: array
+        count:
+          nullable: true
+          type: integer
+        links:
+          items: {}
+          nullable: true
+          type: array
+      required:
+      - certificates
+      title: LbCertificateListResponse
+    LbCertificateShowResponse:
+      example:
+        certificate:
+          created_at: 2024-05-17T00:23:17Z
+          private_key: private_key
+          cn: cn
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          not_after_dt: 2000-01-23T04:56:07.000+00:00
+          cert_body: cert_body
+          account_id: account_id
+          organization: organization
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          cert_chain: cert_chain
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          state: state
+          cert_kind: cert_kind
+          modified_at: 2024-05-17T00:23:17Z
+          not_before_dt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        certificate:
+          $ref: '#/components/schemas/LbCertificateForShow'
+      required:
+      - certificate
+      title: LbCertificateShowResponse
+    LbHealthCheckCreate:
+      example:
+        health_check_interval: 5
+        response_code: response_code
+        health_check_timeout: 5
+        vpc_id: 8acceeb6920c4fc494490d864f67f0b5
+        health_check_url: health_check_url
+        description: description
+        health_check_count: 3
+        tags:
+        - value: value
+          key: key
+        - value: value
+          key: key
+        protocol: TCP
+        http_method: GET
+        name: ServerGroup01
+        subnet_id: 60fba45cb6c811efba41ba92e4fe7200
+        request_data: request_data
+        health_check_port: 80
+      properties:
+        description:
+          maxLength: 255
+          nullable: true
+          type: string
+        health_check_count:
+          default: 3
+          description: LB Health Check count
+          example: 3
+          maximum: 10
+          minimum: 1
+          title: Health Check Count
+          type: integer
+        health_check_interval:
+          default: 5
+          description: LB Health Check interval
+          example: 5
+          maximum: 180
+          minimum: 1
+          title: Health Check Interval
+          type: integer
+        health_check_port:
+          description: LB Health Check port
+          example: 80
+          maximum: 65534
+          minimum: 0
+          title: Health Check Port
+          type: integer
+        health_check_timeout:
+          default: 5
+          description: LB Health Check timeout
+          example: 5
+          maximum: 180
+          minimum: 1
+          title: Health Check Timeout
+          type: integer
+        health_check_url:
+          maxLength: 50
+          minLength: 1
+          nullable: true
+          pattern: "^\\/[A-Za-z0-9/._?&=-]*$"
+          type: string
+        http_method:
+          $ref: '#/components/schemas/LbMonitorHttpMethod'
+        name:
+          description: LB Health Check name
+          example: ServerGroup01
+          maxLength: 63
+          minLength: 3
+          pattern: "^[a-zA-Z0-9][-a-zA-Z0-9_]*[a-zA-Z0-9]$"
+          title: Name
+          type: string
+        protocol:
+          allOf:
+          - $ref: '#/components/schemas/LbMonitorProtocol'
+          description: LB Health Check Protocol
+          example: TCP
+        request_data:
+          maxLength: 255
+          nullable: true
+          pattern: "^[A-Za-z0-9/._?&=-]*$"
+          type: string
+        response_code:
+          nullable: true
+          type: string
+        subnet_id:
+          description: Service Subnet ID
+          example: 60fba45cb6c811efba41ba92e4fe7200
+          title: Subnet Id
+          type: string
+        tags:
+          default: []
+          description: Tag List
+          items:
+            $ref: '#/components/schemas/Tag'
+          type: array
+        vpc_id:
+          description: VPC ID
+          example: 8acceeb6920c4fc494490d864f67f0b5
+          title: Vpc Id
+          type: string
+      required:
+      - name
+      - protocol
+      - subnet_id
+      - vpc_id
+      title: LbHealthCheckCreate
+    LbHealthCheckCreateRequest:
+      example:
+        lb_health_check:
+          health_check_interval: 5
+          response_code: response_code
+          health_check_timeout: 5
+          vpc_id: 8acceeb6920c4fc494490d864f67f0b5
+          health_check_url: health_check_url
+          description: description
+          health_check_count: 3
+          tags:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          protocol: TCP
+          http_method: GET
+          name: ServerGroup01
+          subnet_id: 60fba45cb6c811efba41ba92e4fe7200
+          request_data: request_data
+          health_check_port: 80
+      properties:
+        lb_health_check:
+          $ref: '#/components/schemas/LbHealthCheckCreate'
+      required:
+      - lb_health_check
+      title: LbHealthCheckCreateRequest
+    LbHealthCheckList:
+      example:
+        lb_server_group_count: 2
+        health_check_type: DEFAULT
+        protocol: TCP
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: Test-LbMonitor-01
+        created_at: 2024-05-17T00:23:17Z
+        subnet_id: 60fba45cb6c811efba41ba92e4fe7200
+        id: 46c681018e33453085ca7c8db54e0076
+        state: ACTIVE
+        modified_at: 2024-05-17T00:23:17Z
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+      properties:
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        health_check_type:
+          allOf:
+          - $ref: '#/components/schemas/LbMonitorType'
+          description: LB Health Check type
+          example: DEFAULT
+        id:
+          description: LB Health Check ID
+          example: 46c681018e33453085ca7c8db54e0076
+          title: Id
+          type: string
+        lb_server_group_count:
+          description: LB Server Group count
+          example: 2
+          title: Lb Server Group Count
+          type: integer
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: LB Health Check name
+          example: Test-LbMonitor-01
+          title: Name
+          type: string
+        protocol:
+          allOf:
+          - $ref: '#/components/schemas/LbMonitorProtocol'
+          description: LB Health Check Protocol
+          example: TCP
+        state:
+          description: LB Health Check state
+          example: ACTIVE
+          title: State
+          type: string
+        subnet_id:
+          description: Service Subnet ID
+          example: 60fba45cb6c811efba41ba92e4fe7200
+          title: Subnet Id
+          type: string
+      required:
+      - created_at
+      - created_by
+      - health_check_type
+      - id
+      - lb_server_group_count
+      - modified_at
+      - modified_by
+      - name
+      - protocol
+      - state
+      - subnet_id
+      title: LbHealthCheckList
+    LbHealthCheckListResponse:
+      example:
+        size: 20
+        count: 20
+        lb_health_checks:
+        - lb_server_group_count: 2
+          health_check_type: DEFAULT
+          protocol: TCP
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: Test-LbMonitor-01
+          created_at: 2024-05-17T00:23:17Z
+          subnet_id: 60fba45cb6c811efba41ba92e4fe7200
+          id: 46c681018e33453085ca7c8db54e0076
+          state: ACTIVE
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        - lb_server_group_count: 2
+          health_check_type: DEFAULT
+          protocol: TCP
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: Test-LbMonitor-01
+          created_at: 2024-05-17T00:23:17Z
+          subnet_id: 60fba45cb6c811efba41ba92e4fe7200
+          id: 46c681018e33453085ca7c8db54e0076
+          state: ACTIVE
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        page: 0
+        sort:
+        - sort
+        - sort
+      properties:
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        lb_health_checks:
+          items:
+            $ref: '#/components/schemas/LbHealthCheckList'
+          type: array
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - count
+      - lb_health_checks
+      - page
+      - size
+      title: LbHealthCheckListResponse
+    LbHealthCheckSet:
+      example:
+        health_check_interval: 108
+        protocol: TCP
+        response_code: response_code
+        http_method: GET
+        health_check_timeout: 107
+        health_check_url: health_check_url
+        description: description
+        health_check_count: 1
+        request_data: request_data
+        health_check_port: 9606
+      properties:
+        description:
+          maxLength: 255
+          nullable: true
+          type: string
+        health_check_count:
+          maximum: 10
+          minimum: 1
+          nullable: true
+          type: integer
+        health_check_interval:
+          maximum: 180
+          minimum: 1
+          nullable: true
+          type: integer
+        health_check_port:
+          maximum: 65534
+          minimum: 0
+          nullable: true
+          type: integer
+        health_check_timeout:
+          maximum: 180
+          minimum: 1
+          nullable: true
+          type: integer
+        health_check_url:
+          maxLength: 50
+          minLength: 1
+          nullable: true
+          pattern: "^\\/[A-Za-z0-9/._?&=-]*$"
+          type: string
+        http_method:
+          $ref: '#/components/schemas/LbMonitorHttpMethod'
+        protocol:
+          $ref: '#/components/schemas/LbMonitorProtocol'
+        request_data:
+          maxLength: 255
+          nullable: true
+          pattern: "^[A-Za-z0-9/._?&=-]*$"
+          type: string
+        response_code:
+          nullable: true
+          type: string
+      title: LbHealthCheckSet
+    LbHealthCheckSetRequest:
+      example:
+        lb_health_check:
+          health_check_interval: 108
+          protocol: TCP
+          response_code: response_code
+          http_method: GET
+          health_check_timeout: 107
+          health_check_url: health_check_url
+          description: description
+          health_check_count: 1
+          request_data: request_data
+          health_check_port: 9606
+      properties:
+        lb_health_check:
+          $ref: '#/components/schemas/LbHealthCheckSet'
+      required:
+      - lb_health_check
+      title: LbHealthCheckSetRequest
+    LbHealthCheckShow:
+      example:
+        health_check_interval: 5
+        response_code: response_code
+        health_check_timeout: 5
+        vpc_id: vpc_id
+        health_check_url: health_check_url
+        created_at: 2024-05-17T00:23:17Z
+        description: description
+        health_check_count: 3
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        health_check_type: DEFAULT
+        protocol: TCP
+        account_id: account_id
+        http_method: http_method
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: name
+        subnet_id: subnet_id
+        id: 46c681018e33453085ca7c8db54e0076
+        state: ACTIVE
+        modified_at: 2024-05-17T00:23:17Z
+        request_data: request_data
+        health_check_port: 80
+      properties:
+        account_id:
+          nullable: true
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        description:
+          nullable: true
+          type: string
+        health_check_count:
+          default: 3
+          description: LB Health Check count
+          example: 3
+          title: Health Check Count
+          type: integer
+        health_check_interval:
+          default: 5
+          description: LB Health Check interval
+          example: 5
+          title: Health Check Interval
+          type: integer
+        health_check_port:
+          description: LB Health Check port
+          example: 80
+          title: Health Check Port
+          type: integer
+        health_check_timeout:
+          default: 5
+          description: LB Health Check timeout
+          example: 5
+          title: Health Check Timeout
+          type: integer
+        health_check_type:
+          allOf:
+          - $ref: '#/components/schemas/LbMonitorType'
+          description: LB Health Check type
+          example: DEFAULT
+        health_check_url:
+          nullable: true
+          type: string
+        http_method:
+          nullable: true
+          type: string
+        id:
+          description: LB Health Check ID
+          example: 46c681018e33453085ca7c8db54e0076
+          title: Id
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          nullable: true
+          type: string
+        protocol:
+          allOf:
+          - $ref: '#/components/schemas/LbMonitorProtocol'
+          default: TCP
+          description: LB Health Check Protocol
+          example: TCP
+        request_data:
+          nullable: true
+          type: string
+        response_code:
+          nullable: true
+          type: string
+        state:
+          description: LB Health Check state
+          example: ACTIVE
+          title: State
+          type: string
+        subnet_id:
+          nullable: true
+          type: string
+        vpc_id:
+          nullable: true
+          type: string
+      required:
+      - account_id
+      - created_at
+      - created_by
+      - health_check_port
+      - health_check_type
+      - health_check_url
+      - http_method
+      - id
+      - modified_at
+      - modified_by
+      - request_data
+      - response_code
+      - state
+      - subnet_id
+      - vpc_id
+      title: LbHealthCheckShow
+    LbHealthCheckShowResponse:
+      example:
+        lb_health_check:
+          health_check_interval: 5
+          response_code: response_code
+          health_check_timeout: 5
+          vpc_id: vpc_id
+          health_check_url: health_check_url
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          health_check_count: 3
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          health_check_type: DEFAULT
+          protocol: TCP
+          account_id: account_id
+          http_method: http_method
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          subnet_id: subnet_id
+          id: 46c681018e33453085ca7c8db54e0076
+          state: ACTIVE
+          modified_at: 2024-05-17T00:23:17Z
+          request_data: request_data
+          health_check_port: 80
+      properties:
+        lb_health_check:
+          $ref: '#/components/schemas/LbHealthCheckShow'
+      required:
+      - lb_health_check
+      title: LbHealthCheckShowResponse
+    LbListenerCreateRequest:
+      example:
+        listener:
+          ssl_certificate:
+            client_cert_id: client_cert_id
+            server_cert_id: server_cert_id
+            server_cert_level: server_cert_level
+            client_cert_level: client_cert_level
+          response_timeout: 0
+          loadbalancer_id: loadbalancer_id
+          description: description
+          url_handler:
+          - ""
+          - ""
+          session_duration_time: 1
+          tags:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          x_forwarded_for: true
+          https_redirection: true
+          protocol: protocol
+          x_forwarded_port: true
+          url_redirection:
+          - ""
+          - ""
+          support_http2: true
+          name: name
+          x_forwarded_proto: true
+          persistence: persistence
+          server_group_id: server_group_id
+          insert_client_ip: true
+          service_port: 39500
+      properties:
+        listener:
+          $ref: '#/components/schemas/ListenerForCreate'
+      required:
+      - listener
+      title: LbListenerCreateRequest
+    LbListenerListResponse:
+      example:
+        listeners:
+        - protocol: protocol
+          server_groups:
+          - ""
+          - ""
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          created_at: 2024-05-17T00:23:17Z
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          state: state
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          service_port: 5249
+        - protocol: protocol
+          server_groups:
+          - ""
+          - ""
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          created_at: 2024-05-17T00:23:17Z
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          state: state
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          service_port: 5249
+        size: 20
+        count: 20
+        page: 0
+        sort:
+        - sort
+        - sort
+      properties:
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        listeners:
+          description: A list of listeners.
+          items:
+            $ref: '#/components/schemas/ListenerForList'
+          type: array
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - count
+      - listeners
+      - page
+      - size
+      title: LbListenerListResponse
+    LbListenerSetRequest:
+      example:
+        listener:
+          ssl_certificate:
+            client_cert_id: client_cert_id
+            server_cert_id: server_cert_id
+            server_cert_level: server_cert_level
+            client_cert_level: client_cert_level
+          response_timeout: 0
+          description: description
+          url_handler:
+          - ""
+          - ""
+          session_duration_time: 6
+          x_forwarded_for: true
+          https_redirection: true
+          x_forwarded_port: true
+          url_redirection:
+          - ""
+          - ""
+          support_http2: true
+          x_forwarded_proto: true
+          persistence: persistence
+          server_group_id: server_group_id
+          insert_client_ip: true
+      properties:
+        listener:
+          $ref: '#/components/schemas/ListenerForSet'
+      required:
+      - listener
+      title: LbListenerSetRequest
+    LbListenerShowResponse:
+      example:
+        listener:
+          ssl_certificate:
+            client_cert_id: client_cert_id
+            server_cert_id: server_cert_id
+            server_cert_level: server_cert_level
+            client_cert_level: client_cert_level
+          response_timeout: 0
+          server_group_name: server_group_name
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          url_handler:
+          - ""
+          - ""
+          session_duration_time: 1
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          x_forwarded_for: true
+          https_redirection: true
+          protocol: protocol
+          x_forwarded_port: true
+          url_redirection:
+          - ""
+          - ""
+          support_http2: true
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          x_forwarded_proto: true
+          persistence: persistence
+          server_group_id: server_group_id
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          insert_client_ip: true
+          state: state
+          modified_at: 2024-05-17T00:23:17Z
+          service_port: 39500
+      properties:
+        listener:
+          $ref: '#/components/schemas/ListenerForShow'
+      required:
+      - listener
+      title: LbListenerShowResponse
+    LbMonitorHttpMethod:
+      enum:
+      - GET
+      - POST
+      title: LbMonitorHttpMethod
+      type: string
+    LbMonitorProtocol:
+      enum:
+      - TCP
+      - HTTP
+      title: LbMonitorProtocol
+      type: string
+    LbMonitorType:
+      enum:
+      - DEFAULT
+      - CUSTOM
+      title: LbMonitorType
+      type: string
+    LbServerGroup:
+      example:
+        vpc_id: 8acceeb6920c4fc494490d864f67f0b5
+        loadbalancer_id: loadbalancer_id
+        created_at: 2024-05-17T00:23:17Z
+        description: description
+        lb_health_check_id: lb_health_check_id
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        lb_method: ROUND_ROBIN
+        protocol: TCP
+        account_id: e3cd678b11784734bc366148aa37580e
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: ServerGroup01
+        subnet_id: 60fba45cb6c811efba41ba92e4fe7200
+        id: 46c68101-8e33-4530-85ca-7c8db54e0076
+        state: ACTIVE
+        modified_at: 2024-05-17T00:23:17Z
+        lb_name: lb_name
+      properties:
+        account_id:
+          description: Account ID
+          example: e3cd678b11784734bc366148aa37580e
+          title: Account Id
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        description:
+          nullable: true
+          type: string
+        id:
+          description: LB Server Group ID
+          example: 46c68101-8e33-4530-85ca-7c8db54e0076
+          title: Id
+          type: string
+        lb_health_check_id:
+          nullable: true
+          type: string
+        lb_method:
+          allOf:
+          - $ref: '#/components/schemas/LbServerGroupLbMethod'
+          description: LB Method
+          example: ROUND_ROBIN
+        lb_name:
+          nullable: true
+          type: string
+        loadbalancer_id:
+          nullable: true
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: LB Server Group name
+          example: ServerGroup01
+          title: Name
+          type: string
+        protocol:
+          allOf:
+          - $ref: '#/components/schemas/LbServerGroupProtocol'
+          description: Protocol
+          example: TCP
+        state:
+          description: LB Server Group state
+          example: ACTIVE
+          title: State
+          type: string
+        subnet_id:
+          description: Service Subnet ID
+          example: 60fba45cb6c811efba41ba92e4fe7200
+          title: Subnet Id
+          type: string
+        vpc_id:
+          description: VPC ID
+          example: 8acceeb6920c4fc494490d864f67f0b5
+          title: Vpc Id
+          type: string
+      required:
+      - account_id
+      - created_at
+      - created_by
+      - id
+      - lb_health_check_id
+      - lb_method
+      - modified_at
+      - modified_by
+      - name
+      - protocol
+      - state
+      - subnet_id
+      - vpc_id
+      title: LbServerGroup
+    LbServerGroupCreate:
+      example:
+        protocol: TCP
+        vpc_id: 8acceeb6920c4fc494490d864f67f0b5
+        name: ServerGroup01
+        description: description
+        lb_health_check_id: lb_health_check_id
+        subnet_id: 60fba45cb6c811efba41ba92e4fe7200
+        lb_method: ROUND_ROBIN
+        tags:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      properties:
+        description:
+          maxLength: 255
+          nullable: true
+          type: string
+        lb_health_check_id:
+          nullable: true
+          type: string
+        lb_method:
+          allOf:
+          - $ref: '#/components/schemas/LbServerGroupLbMethod'
+          description: LB Method
+          example: ROUND_ROBIN
+        name:
+          description: LB Health Check name
+          example: ServerGroup01
+          maxLength: 63
+          minLength: 3
+          pattern: "^[a-zA-Z0-9][-a-zA-Z0-9_]*[a-zA-Z0-9]$"
+          title: Name
+          type: string
+        protocol:
+          allOf:
+          - $ref: '#/components/schemas/LbServerGroupProtocol'
+          description: Protocol
+          example: TCP
+        subnet_id:
+          description: Service Subnet ID
+          example: 60fba45cb6c811efba41ba92e4fe7200
+          title: Subnet Id
+          type: string
+        tags:
+          default: []
+          description: Tag List
+          items:
+            $ref: '#/components/schemas/Tag'
+          type: array
+        vpc_id:
+          description: VPC ID
+          example: 8acceeb6920c4fc494490d864f67f0b5
+          title: Vpc Id
+          type: string
+      required:
+      - lb_method
+      - name
+      - protocol
+      - subnet_id
+      - vpc_id
+      title: LbServerGroupCreate
+    LbServerGroupCreateRequest:
+      example:
+        lb_server_group:
+          protocol: TCP
+          vpc_id: 8acceeb6920c4fc494490d864f67f0b5
+          name: ServerGroup01
+          description: description
+          lb_health_check_id: lb_health_check_id
+          subnet_id: 60fba45cb6c811efba41ba92e4fe7200
+          lb_method: ROUND_ROBIN
+          tags:
+          - value: value
+            key: key
+          - value: value
+            key: key
+      properties:
+        lb_server_group:
+          $ref: '#/components/schemas/LbServerGroupCreate'
+      required:
+      - lb_server_group
+      title: LbServerGroupCreateRequest
+    LbServerGroupLbMethod:
+      enum:
+      - ROUND_ROBIN
+      - LEAST_CONNECTION
+      - IP_HASH
+      - WEIGHTED_ROUND_ROBIN
+      - WEIGHTED_LEAST_CONNECTION
+      title: LbServerGroupLbMethod
+      type: string
+    LbServerGroupList:
+      example:
+        vpc_id: 8acceeb6920c4fc494490d864f67f0b5
+        loadbalancer_id: loadbalancer_id
+        created_at: 2024-05-17T00:23:17Z
+        lb_health_check_id: lb_health_check_id
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        protocol: TCP
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: ServerGroup01
+        lb_server_group_member_count: 2
+        id: 46c68101-8e33-4530-85ca-7c8db54e0076
+        state: ACTIVE
+        modified_at: 2024-05-17T00:23:17Z
+        lb_name: lb_name
+      properties:
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        id:
+          description: LB Server Group ID
+          example: 46c68101-8e33-4530-85ca-7c8db54e0076
+          title: Id
+          type: string
+        lb_health_check_id:
+          nullable: true
+          type: string
+        lb_name:
+          nullable: true
+          type: string
+        lb_server_group_member_count:
+          description: LB Server Group Member count
+          example: 2
+          title: Lb Server Group Member Count
+          type: integer
+        loadbalancer_id:
+          nullable: true
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: LB Server Group name
+          example: ServerGroup01
+          title: Name
+          type: string
+        protocol:
+          allOf:
+          - $ref: '#/components/schemas/LbServerGroupProtocol'
+          description: Protocol
+          example: TCP
+        state:
+          description: LB Server Group state
+          example: ACTIVE
+          title: State
+          type: string
+        vpc_id:
+          description: VPC ID
+          example: 8acceeb6920c4fc494490d864f67f0b5
+          title: Vpc Id
+          type: string
+      required:
+      - created_at
+      - created_by
+      - id
+      - lb_health_check_id
+      - lb_server_group_member_count
+      - modified_at
+      - modified_by
+      - name
+      - protocol
+      - state
+      - vpc_id
+      title: LbServerGroupList
+    LbServerGroupListResponse:
+      example:
+        size: 20
+        count: 20
+        lb_server_groups:
+        - vpc_id: 8acceeb6920c4fc494490d864f67f0b5
+          loadbalancer_id: loadbalancer_id
+          created_at: 2024-05-17T00:23:17Z
+          lb_health_check_id: lb_health_check_id
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          protocol: TCP
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: ServerGroup01
+          lb_server_group_member_count: 2
+          id: 46c68101-8e33-4530-85ca-7c8db54e0076
+          state: ACTIVE
+          modified_at: 2024-05-17T00:23:17Z
+          lb_name: lb_name
+        - vpc_id: 8acceeb6920c4fc494490d864f67f0b5
+          loadbalancer_id: loadbalancer_id
+          created_at: 2024-05-17T00:23:17Z
+          lb_health_check_id: lb_health_check_id
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          protocol: TCP
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: ServerGroup01
+          lb_server_group_member_count: 2
+          id: 46c68101-8e33-4530-85ca-7c8db54e0076
+          state: ACTIVE
+          modified_at: 2024-05-17T00:23:17Z
+          lb_name: lb_name
+        page: 0
+        sort:
+        - sort
+        - sort
+      properties:
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        lb_server_groups:
+          items:
+            $ref: '#/components/schemas/LbServerGroupList'
+          type: array
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - count
+      - lb_server_groups
+      - page
+      - size
+      title: LbServerGroupListResponse
+    LbServerGroupProtocol:
+      enum:
+      - TCP
+      - UDP
+      title: LbServerGroupProtocol
+      type: string
+    LbServerGroupSet:
+      example:
+        description: description
+        lb_health_check_id: lb_health_check_id
+        lb_method: ROUND_ROBIN
+      properties:
+        description:
+          maxLength: 255
+          nullable: true
+          type: string
+        lb_health_check_id:
+          nullable: true
+          type: string
+        lb_method:
+          $ref: '#/components/schemas/LbServerGroupLbMethod'
+      title: LbServerGroupSet
+    LbServerGroupSetRequest:
+      example:
+        lb_server_group:
+          description: description
+          lb_health_check_id: lb_health_check_id
+          lb_method: ROUND_ROBIN
+      properties:
+        lb_server_group:
+          $ref: '#/components/schemas/LbServerGroupSet'
+      required:
+      - lb_server_group
+      title: LbServerGroupSetRequest
+    LbServerGroupShowResponse:
+      example:
+        lb_server_group:
+          vpc_id: 8acceeb6920c4fc494490d864f67f0b5
+          loadbalancer_id: loadbalancer_id
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          lb_health_check_id: lb_health_check_id
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          lb_method: ROUND_ROBIN
+          protocol: TCP
+          account_id: e3cd678b11784734bc366148aa37580e
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: ServerGroup01
+          subnet_id: 60fba45cb6c811efba41ba92e4fe7200
+          id: 46c68101-8e33-4530-85ca-7c8db54e0076
+          state: ACTIVE
+          modified_at: 2024-05-17T00:23:17Z
+          lb_name: lb_name
+      properties:
+        lb_server_group:
+          $ref: '#/components/schemas/LbServerGroup'
+      required:
+      - lb_server_group
+      title: LbServerGroupShowResponse
+    ListenerForCreate:
+      example:
+        ssl_certificate:
+          client_cert_id: client_cert_id
+          server_cert_id: server_cert_id
+          server_cert_level: server_cert_level
+          client_cert_level: client_cert_level
+        response_timeout: 0
+        loadbalancer_id: loadbalancer_id
+        description: description
+        url_handler:
+        - ""
+        - ""
+        session_duration_time: 1
+        tags:
+        - value: value
+          key: key
+        - value: value
+          key: key
+        x_forwarded_for: true
+        https_redirection: true
+        protocol: protocol
+        x_forwarded_port: true
+        url_redirection:
+        - ""
+        - ""
+        support_http2: true
+        name: name
+        x_forwarded_proto: true
+        persistence: persistence
+        server_group_id: server_group_id
+        insert_client_ip: true
+        service_port: 39500
+      properties:
+        description:
+          maxLength: 255
+          nullable: true
+          type: string
+        https_redirection:
+          nullable: true
+          type: boolean
+        insert_client_ip:
+          nullable: true
+          type: boolean
+        loadbalancer_id:
+          description: The ID of the load balancer.
+          title: Loadbalancer Id
+          type: string
+        name:
+          description: The name of the listener.
+          maxLength: 63
+          minLength: 3
+          pattern: "^[a-zA-Z0-9-_]*$"
+          title: Name
+          type: string
+        persistence:
+          nullable: true
+          type: string
+        protocol:
+          description: The protocol of the listener.
+          title: Protocol
+          type: string
+        response_timeout:
+          nullable: true
+          type: integer
+        server_group_id:
+          nullable: true
+          type: string
+        service_port:
+          description: The port of the listener.
+          maximum: 65534
+          minimum: 1
+          title: Service Port
+          type: integer
+        session_duration_time:
+          description: The session duration time.
+          title: Session Duration Time
+          type: integer
+        ssl_certificate:
+          $ref: '#/components/schemas/SslCertificate'
+        support_http2:
+          nullable: true
+          type: boolean
+        tags:
+          default: []
+          description: Tag List
+          items:
+            $ref: '#/components/schemas/Tag'
+          type: array
+        url_handler:
+          items: {}
+          nullable: true
+          type: array
+        url_redirection:
+          items: {}
+          nullable: true
+          type: array
+        x_forwarded_for:
+          nullable: true
+          type: boolean
+        x_forwarded_port:
+          nullable: true
+          type: boolean
+        x_forwarded_proto:
+          nullable: true
+          type: boolean
+      required:
+      - loadbalancer_id
+      - name
+      - protocol
+      - service_port
+      - session_duration_time
+      title: ListenerForCreate
+    ListenerForList:
+      example:
+        protocol: protocol
+        server_groups:
+        - ""
+        - ""
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: name
+        created_at: 2024-05-17T00:23:17Z
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        state: state
+        modified_at: 2024-05-17T00:23:17Z
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        service_port: 5249
+      properties:
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        id:
+          description: ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: The name of the listener.
+          maxLength: 63
+          minLength: 3
+          pattern: "^[a-zA-Z0-9-_]*$"
+          title: Name
+          type: string
+        protocol:
+          description: The protocol of the listener.
+          title: Protocol
+          type: string
+        server_groups:
+          items: {}
+          nullable: true
+          type: array
+        service_port:
+          description: The port of the listener.
+          maximum: 65534
+          minimum: 1
+          title: Service Port
+          type: integer
+        state:
+          nullable: true
+          type: string
+      required:
+      - created_at
+      - created_by
+      - id
+      - modified_at
+      - modified_by
+      - name
+      - protocol
+      - service_port
+      title: ListenerForList
+    ListenerForSet:
+      example:
+        ssl_certificate:
+          client_cert_id: client_cert_id
+          server_cert_id: server_cert_id
+          server_cert_level: server_cert_level
+          client_cert_level: client_cert_level
+        response_timeout: 0
+        description: description
+        url_handler:
+        - ""
+        - ""
+        session_duration_time: 6
+        x_forwarded_for: true
+        https_redirection: true
+        x_forwarded_port: true
+        url_redirection:
+        - ""
+        - ""
+        support_http2: true
+        x_forwarded_proto: true
+        persistence: persistence
+        server_group_id: server_group_id
+        insert_client_ip: true
+      properties:
+        description:
+          maxLength: 255
+          nullable: true
+          type: string
+        https_redirection:
+          nullable: true
+          type: boolean
+        insert_client_ip:
+          nullable: true
+          type: boolean
+        persistence:
+          nullable: true
+          type: string
+        response_timeout:
+          nullable: true
+          type: integer
+        server_group_id:
+          nullable: true
+          type: string
+        session_duration_time:
+          nullable: true
+          type: integer
+        ssl_certificate:
+          $ref: '#/components/schemas/SslCertificate'
+        support_http2:
+          description: Whether the HTTP 2.0 is supported
+          title: Support Http2
+          type: boolean
+        url_handler:
+          items: {}
+          nullable: true
+          type: array
+        url_redirection:
+          items: {}
+          nullable: true
+          type: array
+        x_forwarded_for:
+          nullable: true
+          type: boolean
+        x_forwarded_port:
+          nullable: true
+          type: boolean
+        x_forwarded_proto:
+          nullable: true
+          type: boolean
+      title: ListenerForSet
+    ListenerForShow:
+      example:
+        ssl_certificate:
+          client_cert_id: client_cert_id
+          server_cert_id: server_cert_id
+          server_cert_level: server_cert_level
+          client_cert_level: client_cert_level
+        response_timeout: 0
+        server_group_name: server_group_name
+        created_at: 2024-05-17T00:23:17Z
+        description: description
+        url_handler:
+        - ""
+        - ""
+        session_duration_time: 1
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        x_forwarded_for: true
+        https_redirection: true
+        protocol: protocol
+        x_forwarded_port: true
+        url_redirection:
+        - ""
+        - ""
+        support_http2: true
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: name
+        x_forwarded_proto: true
+        persistence: persistence
+        server_group_id: server_group_id
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        insert_client_ip: true
+        state: state
+        modified_at: 2024-05-17T00:23:17Z
+        service_port: 39500
+      properties:
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        description:
+          maxLength: 255
+          nullable: true
+          type: string
+        https_redirection:
+          nullable: true
+          type: boolean
+        id:
+          description: ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        insert_client_ip:
+          nullable: true
+          type: boolean
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: The name of the listener.
+          maxLength: 63
+          minLength: 3
+          pattern: "^[a-zA-Z0-9-_]*$"
+          title: Name
+          type: string
+        persistence:
+          nullable: true
+          type: string
+        protocol:
+          description: The protocol of the listener.
+          title: Protocol
+          type: string
+        response_timeout:
+          nullable: true
+          type: integer
+        server_group_id:
+          nullable: true
+          type: string
+        server_group_name:
+          nullable: true
+          type: string
+        service_port:
+          description: The port of the listener.
+          maximum: 65534
+          minimum: 1
+          title: Service Port
+          type: integer
+        session_duration_time:
+          nullable: true
+          type: integer
+        ssl_certificate:
+          $ref: '#/components/schemas/SslCertificate'
+        state:
+          description: The state of the listener.
+          title: State
+          type: string
+        support_http2:
+          nullable: true
+          type: boolean
+        url_handler:
+          items: {}
+          nullable: true
+          type: array
+        url_redirection:
+          items: {}
+          nullable: true
+          type: array
+        x_forwarded_for:
+          nullable: true
+          type: boolean
+        x_forwarded_port:
+          nullable: true
+          type: boolean
+        x_forwarded_proto:
+          nullable: true
+          type: boolean
+      required:
+      - created_at
+      - created_by
+      - id
+      - modified_at
+      - modified_by
+      - name
+      - protocol
+      - service_port
+      - state
+      title: ListenerForShow
+    LoadBalancerState:
+      enum:
+      - CREATING
+      - ACTIVE
+      - DELETING
+      - DELETED
+      - ERROR
+      title: LoadBalancerState
+      type: string
+    Loadbalancer:
+      example:
+        service_ip: service_ip
+        firewall_id: firewall_id
+        vpc_id: vpc_id
+        created_at: 2024-05-17T00:23:17Z
+        description: description
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        layer_type: layer_type
+        account_id: account_id
+        health_check_ip:
+        - health_check_ip
+        - health_check_ip
+        firewall_name: firewall_name
+        public_nat_state: public_nat_state
+        source_nat_ip: source_nat_ip
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: name
+        public_nat_ip: public_nat_ip
+        subnet_id: subnet_id
+        id: id
+        state: state
+        modified_at: 2024-05-17T00:23:17Z
+      properties:
+        account_id:
+          description: The account ID of the load balancer.
+          title: Account Id
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        description:
+          nullable: true
+          type: string
+        firewall_id:
+          nullable: true
+          type: string
+        firewall_name:
+          nullable: true
+          type: string
+        health_check_ip:
+          description: Health check IP
+          items:
+            type: string
+          type: array
+        id:
+          description: ID
+          title: Id
+          type: string
+        layer_type:
+          description: Layer type
+          title: Layer Type
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: name
+          title: Name
+          type: string
+        public_nat_ip:
+          nullable: true
+          type: string
+        public_nat_state:
+          nullable: true
+          type: string
+        service_ip:
+          description: Service IP
+          title: Service Ip
+          type: string
+        source_nat_ip:
+          description: Source NAT IP
+          title: Source Nat Ip
+          type: string
+        state:
+          description: The state of the load balancer.
+          title: State
+          type: string
+        subnet_id:
+          description: Subnet ID
+          title: Subnet Id
+          type: string
+        vpc_id:
+          description: VPC ID
+          title: Vpc Id
+          type: string
+      required:
+      - account_id
+      - created_at
+      - created_by
+      - health_check_ip
+      - id
+      - layer_type
+      - modified_at
+      - modified_by
+      - name
+      - service_ip
+      - source_nat_ip
+      - state
+      - subnet_id
+      - vpc_id
+      title: Loadbalancer
+    LoadbalancerCreateRequest:
+      example:
+        loadbalancer:
+          publicip_id: publicip_id
+          service_ip: service_ip
+          firewall_enabled: true
+          vpc_id: vpc_id
+          name: name
+          description: description
+          subnet_id: subnet_id
+          firewall_logging_enabled: true
+          layer_type: layer_type
+          tags:
+          - value: value
+            key: key
+          - value: value
+            key: key
+      properties:
+        loadbalancer:
+          $ref: '#/components/schemas/LoadbalancerCreateRequestDetail'
+      required:
+      - loadbalancer
+      title: LoadbalancerCreateRequest
+    LoadbalancerCreateRequestDetail:
+      example:
+        publicip_id: publicip_id
+        service_ip: service_ip
+        firewall_enabled: true
+        vpc_id: vpc_id
+        name: name
+        description: description
+        subnet_id: subnet_id
+        firewall_logging_enabled: true
+        layer_type: layer_type
+        tags:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      properties:
+        description:
+          maxLength: 255
+          nullable: true
+          type: string
+        firewall_enabled:
+          nullable: true
+          type: boolean
+        firewall_logging_enabled:
+          nullable: true
+          type: boolean
+        layer_type:
+          description: Layer type
+          title: Layer Type
+          type: string
+        name:
+          description: name
+          maxLength: 63
+          minLength: 3
+          pattern: "^[a-zA-Z0-9-_]*$"
+          title: Name
+          type: string
+        publicip_id:
+          nullable: true
+          type: string
+        service_ip:
+          nullable: true
+          type: string
+        subnet_id:
+          description: Subnet ID
+          title: Subnet Id
+          type: string
+        tags:
+          default: []
+          description: Tag List
+          items:
+            $ref: '#/components/schemas/Tag'
+          type: array
+        vpc_id:
+          description: VPC ID
+          title: Vpc Id
+          type: string
+      required:
+      - layer_type
+      - name
+      - subnet_id
+      - vpc_id
+      title: LoadbalancerCreateRequestDetail
+    LoadbalancerCreateValidateResponse:
+      example:
+        availability:
+          result: true
+          subnet: true
+          ip: true
+      properties:
+        availability:
+          $ref: '#/components/schemas/LoadbalancerCreateValidateResponseDetail'
+      required:
+      - availability
+      title: LoadbalancerCreateValidateResponse
+    LoadbalancerCreateValidateResponseDetail:
+      example:
+        result: true
+        subnet: true
+        ip: true
+      properties:
+        ip:
+          description: Available IP Quantity Check Result
+          title: Ip
+          type: boolean
+        result:
+          description: Load balancer creation availability
+          title: Result
+          type: boolean
+        subnet:
+          description: Subnet quantity check result
+          title: Subnet
+          type: boolean
+      required:
+      - ip
+      - result
+      - subnet
+      title: LoadbalancerCreateValidateResponseDetail
+    LoadbalancerListResponse:
+      example:
+        size: 20
+        count: 20
+        loadbalancers:
+        - service_ip: service_ip
+          source_nat_ip: source_nat_ip
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          public_nat_ip: public_nat_ip
+          created_at: 2024-05-17T00:23:17Z
+          id: id
+          listener_count: 0
+          state: state
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        - service_ip: service_ip
+          source_nat_ip: source_nat_ip
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          public_nat_ip: public_nat_ip
+          created_at: 2024-05-17T00:23:17Z
+          id: id
+          listener_count: 0
+          state: state
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        page: 0
+        sort:
+        - sort
+        - sort
+      properties:
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        loadbalancers:
+          items:
+            $ref: '#/components/schemas/LoadbalancerListResponseDetail'
+          type: array
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - count
+      - loadbalancers
+      - page
+      - size
+      title: LoadbalancerListResponse
+    LoadbalancerListResponseDetail:
+      example:
+        service_ip: service_ip
+        source_nat_ip: source_nat_ip
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: name
+        public_nat_ip: public_nat_ip
+        created_at: 2024-05-17T00:23:17Z
+        id: id
+        listener_count: 0
+        state: state
+        modified_at: 2024-05-17T00:23:17Z
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+      properties:
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        id:
+          description: ID
+          title: Id
+          type: string
+        listener_count:
+          nullable: true
+          type: integer
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          nullable: true
+          type: string
+        public_nat_ip:
+          nullable: true
+          type: string
+        service_ip:
+          nullable: true
+          type: string
+        source_nat_ip:
+          nullable: true
+          type: string
+        state:
+          nullable: true
+          type: string
+      required:
+      - created_at
+      - created_by
+      - id
+      - modified_at
+      - modified_by
+      title: LoadbalancerListResponseDetail
+    LoadbalancerShowResponse:
+      example:
+        loadbalancer:
+          service_ip: service_ip
+          firewall_id: firewall_id
+          vpc_id: vpc_id
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          layer_type: layer_type
+          account_id: account_id
+          health_check_ip:
+          - health_check_ip
+          - health_check_ip
+          firewall_name: firewall_name
+          public_nat_state: public_nat_state
+          source_nat_ip: source_nat_ip
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          public_nat_ip: public_nat_ip
+          subnet_id: subnet_id
+          id: id
+          state: state
+          modified_at: 2024-05-17T00:23:17Z
+      properties:
+        loadbalancer:
+          $ref: '#/components/schemas/Loadbalancer'
+      required:
+      - loadbalancer
+      title: LoadbalancerShowResponse
+    LoadbalancerUpdateRequest:
+      example:
+        loadbalancer:
+          description: description
+      properties:
+        loadbalancer:
+          $ref: '#/components/schemas/LoadbalancerUpdateRequestDetail'
+      required:
+      - loadbalancer
+      title: LoadbalancerUpdateRequest
+    LoadbalancerUpdateRequestDetail:
+      example:
+        description: description
+      properties:
+        description:
+          description: description
+          maxLength: 255
+          title: Description
+          type: string
+      required:
+      - description
+      title: LoadbalancerUpdateRequestDetail
+    Member:
+      example:
+        object_type: ""
+        created_at: 2024-05-17T00:23:17Z
+        lb_server_group_id: lb_server_group_id
+        member_ip: member_ip
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        object_id: object_id
+        uuid: uuid
+        member_state: member_state
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: name
+        member_weight: 1
+        subnet_id: subnet_id
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        member_port: 6
+        state: ""
+        modified_at: 2024-05-17T00:23:17Z
+      properties:
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        id:
+          description: ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        lb_server_group_id:
+          description: ID of Lb Server Group
+          title: Lb Server Group Id
+          type: string
+        member_ip:
+          description: IP of Member
+          title: Member Ip
+          type: string
+        member_port:
+          description: Protocol port of Member
+          title: Member Port
+          type: integer
+        member_state:
+          description: Member State of Member
+          title: Member State
+          type: string
+        member_weight:
+          description: Weight of Member
+          title: Member Weight
+          type: integer
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: Name of Member
+          title: Name
+          type: string
+        object_id:
+          nullable: true
+          type: string
+        object_type:
+          allOf:
+          - $ref: '#/components/schemas/MemberType'
+          description: Object Type of Member
+        state:
+          allOf:
+          - $ref: '#/components/schemas/MemberState'
+          description: State of Member
+        subnet_id:
+          description: ID of Subnet
+          title: Subnet Id
+          type: string
+        uuid:
+          description: UUID of Member
+          title: Uuid
+          type: string
+      required:
+      - created_at
+      - created_by
+      - id
+      - lb_server_group_id
+      - member_ip
+      - member_port
+      - member_state
+      - member_weight
+      - modified_at
+      - modified_by
+      - name
+      - object_type
+      - state
+      - subnet_id
+      - uuid
+      title: Member
+    MemberCreateRequest:
+      example:
+        object_type: VM
+        name: virtualserver-1
+        member_weight: 100
+        member_port: 80
+        member_ip: 192.168.0.1
+        object_id: "1"
+      properties:
+        member_ip:
+          description: IP of Member
+          example: 192.168.0.1
+          title: Member Ip
+          type: string
+        member_port:
+          description: Protocol port of Member
+          example: 80
+          title: Member Port
+          type: integer
+        member_weight:
+          description: Weight of Member
+          example: 100
+          title: Member Weight
+          type: integer
+        name:
+          description: Name of Member
+          example: virtualserver-1
+          maxLength: 63
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\s\\-_\\.]*$"
+          title: Name
+          type: string
+        object_id:
+          description: Object ID of Member
+          example: "1"
+          title: Object Id
+          type: string
+        object_type:
+          description: Object Type of Member
+          example: VM
+          title: Object Type
+          type: string
+      required:
+      - member_ip
+      - member_port
+      - name
+      - object_type
+      title: MemberCreateRequest
+    MemberListCreateRequest:
+      example:
+        members:
+        - object_type: VM
+          name: virtualserver-1
+          member_weight: 100
+          member_port: 80
+          member_ip: 192.168.0.1
+          object_id: "1"
+        - object_type: VM
+          name: virtualserver-1
+          member_weight: 100
+          member_port: 80
+          member_ip: 192.168.0.1
+          object_id: "1"
+      properties:
+        members:
+          items:
+            $ref: '#/components/schemas/MemberCreateRequest'
+          type: array
+      required:
+      - members
+      title: MemberListCreateRequest
+    MemberListResponse:
+      example:
+        members:
+        - object_type: ""
+          created_at: 2024-05-17T00:23:17Z
+          lb_server_group_id: lb_server_group_id
+          member_ip: member_ip
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          object_id: object_id
+          uuid: uuid
+          member_state: member_state
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          member_weight: 1
+          subnet_id: subnet_id
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          member_port: 6
+          state: ""
+          modified_at: 2024-05-17T00:23:17Z
+        - object_type: ""
+          created_at: 2024-05-17T00:23:17Z
+          lb_server_group_id: lb_server_group_id
+          member_ip: member_ip
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          object_id: object_id
+          uuid: uuid
+          member_state: member_state
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          member_weight: 1
+          subnet_id: subnet_id
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          member_port: 6
+          state: ""
+          modified_at: 2024-05-17T00:23:17Z
+        count: 0
+        links:
+        - ""
+        - ""
+      properties:
+        count:
+          nullable: true
+          type: integer
+        links:
+          items: {}
+          nullable: true
+          type: array
+        members:
+          items:
+            $ref: '#/components/schemas/Member'
+          type: array
+      required:
+      - members
+      title: MemberListResponse
+    MemberSet:
+      example:
+        member_state: ENABLE
+        member_weight: 6
+        member_port: 5249
+      properties:
+        member_port:
+          maximum: 65534
+          minimum: 1
+          nullable: true
+          type: integer
+        member_state:
+          $ref: '#/components/schemas/StatusType'
+        member_weight:
+          nullable: true
+          type: integer
+      title: MemberSet
+    MemberSetRequest:
+      example:
+        member:
+          member_state: ENABLE
+          member_weight: 6
+          member_port: 5249
+      properties:
+        member:
+          $ref: '#/components/schemas/MemberSet'
+      required:
+      - member
+      title: MemberSetRequest
+    MemberShowResponse:
+      example:
+        member:
+          object_type: ""
+          created_at: 2024-05-17T00:23:17Z
+          lb_server_group_id: lb_server_group_id
+          member_ip: member_ip
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          object_id: object_id
+          uuid: uuid
+          member_state: member_state
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          member_weight: 1
+          subnet_id: subnet_id
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          member_port: 6
+          state: ""
+          modified_at: 2024-05-17T00:23:17Z
+      properties:
+        member:
+          $ref: '#/components/schemas/Member'
+      required:
+      - member
+      title: MemberShowResponse
+    MemberState:
+      enum:
+      - CREATING
+      - ACTIVE
+      - DELETING
+      - DELETED
+      - EDITING
+      - ERROR
+      title: MemberState
+      type: string
+    MemberType:
+      enum:
+      - VM
+      - BM
+      - MANUAL
+      title: MemberType
+      type: string
+    MemberWithHealthState:
+      example:
+        health_state: health_state
+        object_type: ""
+        created_at: 2024-05-17T00:23:17Z
+        lb_server_group_id: lb_server_group_id
+        member_ip: member_ip
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        object_id: object_id
+        member_state: member_state
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: name
+        member_weight: 6
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        member_port: 0
+        state: ""
+        modified_at: 2024-05-17T00:23:17Z
+      properties:
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        health_state:
+          description: Health State of Member
+          title: Health State
+          type: string
+        id:
+          description: ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        lb_server_group_id:
+          description: ID of Lb Server Group
+          title: Lb Server Group Id
+          type: string
+        member_ip:
+          description: IP of Member
+          title: Member Ip
+          type: string
+        member_port:
+          description: Protocol port of Member
+          title: Member Port
+          type: integer
+        member_state:
+          description: Member State of Member
+          title: Member State
+          type: string
+        member_weight:
+          description: Weight of Member
+          title: Member Weight
+          type: integer
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: Name of Member
+          title: Name
+          type: string
+        object_id:
+          nullable: true
+          type: string
+        object_type:
+          allOf:
+          - $ref: '#/components/schemas/MemberType'
+          description: Object Type of Member
+        state:
+          allOf:
+          - $ref: '#/components/schemas/MemberState'
+          description: State of Member
+      required:
+      - created_at
+      - created_by
+      - health_state
+      - id
+      - lb_server_group_id
+      - member_ip
+      - member_port
+      - member_state
+      - member_weight
+      - modified_at
+      - modified_by
+      - name
+      - object_id
+      - object_type
+      - state
+      title: MemberWithHealthState
+    MemberWithHealthStateListResponse:
+      example:
+        size: 20
+        members:
+        - health_state: health_state
+          object_type: ""
+          created_at: 2024-05-17T00:23:17Z
+          lb_server_group_id: lb_server_group_id
+          member_ip: member_ip
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          object_id: object_id
+          member_state: member_state
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          member_weight: 6
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          member_port: 0
+          state: ""
+          modified_at: 2024-05-17T00:23:17Z
+        - health_state: health_state
+          object_type: ""
+          created_at: 2024-05-17T00:23:17Z
+          lb_server_group_id: lb_server_group_id
+          member_ip: member_ip
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          object_id: object_id
+          member_state: member_state
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          member_weight: 6
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          member_port: 0
+          state: ""
+          modified_at: 2024-05-17T00:23:17Z
+        count: 20
+        page: 0
+        sort:
+        - sort
+        - sort
+      properties:
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        members:
+          items:
+            $ref: '#/components/schemas/MemberWithHealthState'
+          type: array
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - count
+      - members
+      - page
+      - size
+      title: MemberWithHealthStateListResponse
+    ResourceUsageLimitResponse:
+      example:
+        limitation: 0
+        remain: 6
+        usage: 1
+      properties:
+        limitation:
+          description: resource limitation count
+          title: Limitation
+          type: integer
+        remain:
+          description: resource remain count
+          title: Remain
+          type: integer
+        usage:
+          description: resource usage count
+          title: Usage
+          type: integer
+      required:
+      - limitation
+      - remain
+      - usage
+      title: ResourceUsageLimitResponse
+    ResourceUsageLimitType:
+      enum:
+      - LOADBALANCER
+      - LISTENER
+      - LB_SERVER_GROUP
+      - MEMBER
+      title: ResourceUsageLimitType
+      type: string
+    SslCertificate:
+      example:
+        client_cert_id: client_cert_id
+        server_cert_id: server_cert_id
+        server_cert_level: server_cert_level
+        client_cert_level: client_cert_level
+      properties:
+        client_cert_id:
+          nullable: true
+          type: string
+        client_cert_level:
+          nullable: true
+          type: string
+        server_cert_id:
+          nullable: true
+          type: string
+        server_cert_level:
+          nullable: true
+          type: string
+      title: SslCertificate
+    StaticNatCreateRequest:
+      example:
+        static_nat:
+          publicip_id: publicip_id
+      properties:
+        static_nat:
+          $ref: '#/components/schemas/StaticNatCreateRequestDetail'
+      required:
+      - static_nat
+      title: StaticNatCreateRequest
+    StaticNatCreateRequestDetail:
+      example:
+        publicip_id: publicip_id
+      properties:
+        publicip_id:
+          description: publicip_id
+          title: Publicip Id
+          type: string
+      required:
+      - publicip_id
+      title: StaticNatCreateRequestDetail
+    StaticNatCreateResponse:
+      example:
+        static_nat:
+          publicip_id: publicip_id
+          owner_name: owner_name
+          action_type: action_type
+          vpc_id: vpc_id
+          owner_id: owner_id
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          type: type
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          account_id: account_id
+          service_ip_port_id: service_ip_port_id
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          subnet_id: subnet_id
+          id: id
+          internal_ip_address: internal_ip_address
+          state: state
+          modified_at: 2024-05-17T00:23:17Z
+          external_ip_address: external_ip_address
+          owner_type: owner_type
+      properties:
+        static_nat:
+          $ref: '#/components/schemas/StaticNatCreateResponseDetail'
+      required:
+      - static_nat
+      title: StaticNatCreateResponse
+    StaticNatCreateResponseDetail:
+      example:
+        publicip_id: publicip_id
+        owner_name: owner_name
+        action_type: action_type
+        vpc_id: vpc_id
+        owner_id: owner_id
+        created_at: 2024-05-17T00:23:17Z
+        description: description
+        type: type
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        account_id: account_id
+        service_ip_port_id: service_ip_port_id
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: name
+        subnet_id: subnet_id
+        id: id
+        internal_ip_address: internal_ip_address
+        state: state
+        modified_at: 2024-05-17T00:23:17Z
+        external_ip_address: external_ip_address
+        owner_type: owner_type
+      properties:
+        account_id:
+          description: account_id
+          title: Account Id
+          type: string
+        action_type:
+          description: action_type
+          title: Action Type
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        description:
+          description: description
+          title: Description
+          type: string
+        external_ip_address:
+          description: external_ip_address
+          title: External Ip Address
+          type: string
+        id:
+          description: ID
+          title: Id
+          type: string
+        internal_ip_address:
+          description: internal_ip_address
+          title: Internal Ip Address
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: name
+          title: Name
+          type: string
+        owner_id:
+          description: owner_id
+          title: Owner Id
+          type: string
+        owner_name:
+          description: owner_name
+          title: Owner Name
+          type: string
+        owner_type:
+          description: owner_type
+          title: Owner Type
+          type: string
+        publicip_id:
+          description: publicip_id
+          title: Publicip Id
+          type: string
+        service_ip_port_id:
+          description: service_ip_port_id
+          title: Service Ip Port Id
+          type: string
+        state:
+          description: state
+          title: State
+          type: string
+        subnet_id:
+          description: subnet_id
+          title: Subnet Id
+          type: string
+        type:
+          description: type
+          title: Type
+          type: string
+        vpc_id:
+          description: vpc_id
+          title: Vpc Id
+          type: string
+      required:
+      - account_id
+      - action_type
+      - created_at
+      - created_by
+      - description
+      - external_ip_address
+      - id
+      - internal_ip_address
+      - modified_at
+      - modified_by
+      - name
+      - owner_id
+      - owner_name
+      - owner_type
+      - publicip_id
+      - service_ip_port_id
+      - state
+      - subnet_id
+      - type
+      - vpc_id
+      title: StaticNatCreateResponseDetail
+    StatusType:
+      enum:
+      - ENABLE
+      - DISABLE
+      title: StatusType
+      type: string
+    Tag:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          description: tag key
+          title: Key
+          type: string
+        value:
+          description: tag value
+          title: Value
+          type: string
+      required:
+      - key
+      - value
+      title: Tag
+    Protocol:
+      anyOf:
+      - items:
+          $ref: '#/components/schemas/LbMonitorProtocol'
+        type: array
+      - $ref: '#/components/schemas/LbMonitorProtocol'
+      description: LB Health Check Protocol
+      example:
+      - TCP
+      - UDP
+      nullable: true
+      title: Protocol
+    Protocol_1:
+      anyOf:
+      - items:
+          $ref: '#/components/schemas/LbServerGroupProtocol'
+        type: array
+      - $ref: '#/components/schemas/LbServerGroupProtocol'
+      description: Protocol
+      example:
+      - TCP
+      - UDP
+      nullable: true
+      title: Protocol
+    Lb_Method:
+      anyOf:
+      - items:
+          $ref: '#/components/schemas/LbServerGroupLbMethod'
+        type: array
+      - $ref: '#/components/schemas/LbServerGroupLbMethod'
+      description: LB Method
+      example: ROUND_ROBIN
+      nullable: true
+      title: Lb Method
+    State:
+      anyOf:
+      - $ref: '#/components/schemas/LoadBalancerState'
+      - items:
+          $ref: '#/components/schemas/LoadBalancerState'
+        type: array
+      default: ""
+      description: The state of the load balancer.
+      title: State
+  securitySchemes:
+    X-Auth-Token:
+      in: header
+      name: X-Auth-Token
+      type: apiKey
+x-app-name: scp-loadbalancer
+x-package-name: scp_loadbalancer
+x-service-type: scp-loadbalancer
+x-service-versions:
+  loadbalancer:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  loadbalancer-old:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+x-url-prefix: ""

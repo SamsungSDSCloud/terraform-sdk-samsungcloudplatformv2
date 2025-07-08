@@ -1,0 +1,692 @@
+openapi: 3.1.0
+info:
+  description: SCP Network Service
+  title: SCP Network Service
+  version: 0.0.1.dev6882
+servers:
+- url: ""
+tags:
+- description: Internal IP Pool API
+  name: vpc.v1.InternalIpPoolsApi
+- description: Internal Subnets API
+  name: vpc.v1.InternalSubnetsApi
+- description: Internal Vpc Endpoints API
+  name: vpc.v1.InternalVpcEndpointApi
+- description: Internal VPC Static Nat API
+  name: vpc.v1.InternalVpcStaticNatsApi
+- description: Internet Gateways API
+  name: vpc.v1.InternetGatewaysApi
+- description: Internal Private NAT API
+  name: vpc.v1.InternalPrivateNatsApi
+- description: Nat Gateways API
+  name: vpc.v1.NatGatewayApi
+- description: Ports API
+  name: vpc.v1.PortsApi
+- description: publicIps API
+  name: vpc.v1.PublicIpApi
+- description: Subnets API
+  name: vpc.v1.SubnetsApi
+- description: Vpc Endpoints API
+  name: vpc.v1.VpcEndpointApi
+- description: Vpcs API
+  name: vpc.v1.VpcsApi
+- description: Private NAT API
+  name: vpc.v1.PrivateNatApi
+- description: Private NAT IP API
+  name: vpc.v1.PrivateNatIpApi
+- description: VPC Peerings API
+  name: vpc.v1.VpcPeeringApi
+- description: VPC Peering Rules API
+  name: vpc.v1.VpcPeeringRuleApi
+- description: Transit Gateways API
+  name: vpc.v1.TransitGatewayApi
+- description: Transit Gateway VPC Connections API
+  name: vpc.v1.TransitGatewayVpcConnectionApi
+- description: Transit Gateway Rules API
+  name: vpc.v1.TransitGatewayRulesApi
+- description: Direct Connects API
+  name: direct-connect.v1.DirectConnectsApi
+- description: Direct Connects Rules API
+  name: direct-connect.v1.DirectConnectsRulesApi
+- description: Internal Security Groups API
+  name: security-group.v1.InternalSecurityGroupApi
+- description: Security Group Rules API
+  name: security-group.v1.SecurityGroupRuleApi
+- description: Security Groups API
+  name: security-group.v1.SecurityGroupApi
+- description: Firewall Rules API
+  name: firewall.v1.FirewallRulesApi
+- description: Firewalls API
+  name: firewall.v1.FirewallApi
+- description: VPN Gateways API
+  name: vpn.v1.VpnGatewaysApi
+- description: VPN Tunnels API
+  name: vpn.v1.VpnTunnelsApi
+- description: NetworkLoggingConfiguration API
+  name: network-logging.v1.NetworkLoggingConfigurationApi
+- description: NetworkLoggingStorage API
+  name: network-logging.v1.NetworkLoggingStorageApi
+- description: Internal Firewall Engine API
+  name: network-common.v1.InternalFirewallEngineApi
+- description: Network Natives API
+  name: network-common.v1.NetworkNativesApi
+- description: Sample Vpc API
+  name: network-common.v1.SampleVpcsApi
+- description: Cdn API
+  name: cdn.v1.CdnApi
+- description: Gslbs API
+  name: gslb.v1.GslbsApi
+- description: GslbResources API
+  name: gslb.v1.GslbResourcesApi
+- description: Public Domain Name API
+  name: dns.v1.PublicDomainNameApi
+- description: Hosted Zones API
+  name: dns.v1.HostedZonesApi
+- description: Private DNS API
+  name: dns.v1.PrivateDnsApi
+- description: Records API
+  name: dns.v1.RecordsApi
+paths:
+  /v1/network-logging/configurations:
+    get:
+      description: Get Network Logging Configuration list.
+      operationId: listNetworkLoggingConfigurations
+      parameters:
+      - description: with count
+        example: "true"
+        explode: true
+        in: query
+        name: with_count
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: limit
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      - description: marker
+        example: 607e0938521643b5b4b266f343fae693
+        explode: true
+        in: query
+        name: marker
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Resource ID
+        explode: true
+        in: query
+        name: resource_id
+        required: false
+        schema:
+          description: Resource ID
+          title: Resource Id
+          type: string
+        style: form
+      - description: Resource Name
+        explode: true
+        in: query
+        name: resource_name
+        required: false
+        schema:
+          description: Resource Name
+          title: Resource Name
+          type: string
+        style: form
+      - description: Resource Type
+        explode: true
+        in: query
+        name: resource_type
+        required: true
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/NetworkLoggingResourceType'
+          description: Resource Type
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkLoggingConfigurationListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Network Logging Configurations
+      tags:
+      - network-logging.v1.NetworkLoggingConfigurationApi
+      x-action-id: network-logging:ListNetworkLoggingConfigurations
+      x-api-access-level: LIST
+      x-api-created-date: "20241223"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: network-logging-configuration_list
+      x-not-before: 2026-07-01
+      x-operation-id: listNetworkLoggingConfigurations
+      x-resource: network_logging
+  /v1/network-logging/storages:
+    get:
+      description: Get Network Logging Storage list.
+      operationId: listNetworkLoggingStorages
+      parameters:
+      - description: with count
+        example: "true"
+        explode: true
+        in: query
+        name: with_count
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: limit
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      - description: marker
+        example: 607e0938521643b5b4b266f343fae693
+        explode: true
+        in: query
+        name: marker
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Resource Type
+        explode: true
+        in: query
+        name: resource_type
+        required: true
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/NetworkLoggingResourceType'
+          description: Resource Type
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkLoggingStorageListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Network Logging Storages
+      tags:
+      - network-logging.v1.NetworkLoggingStorageApi
+      x-action-id: network-logging:ListNetworkLoggingStorages
+      x-api-access-level: LIST
+      x-api-created-date: "20241223"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: network-logging-storage_list
+      x-not-before: 2026-07-01
+      x-operation-id: listNetworkLoggingStorages
+      x-resource: network_logging
+    post:
+      description: Create Network Logging Storage.
+      operationId: createNetworkLoggingStorage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NetworkLoggingStorageCreateRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkLoggingStorageShowResponse'
+          description: Created
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "409":
+          description: Conflict
+      security:
+      - X-Auth-Token: []
+      summary: Create Network Logging Storage
+      tags:
+      - network-logging.v1.NetworkLoggingStorageApi
+      x-action-id: network-logging:CreateNetworkLoggingStorage
+      x-api-access-level: CREATE
+      x-api-created-date: "20241223"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: network-logging-storage_create
+      x-not-before: 2026-07-01
+      x-operation-id: createNetworkLoggingStorage
+      x-resource: network_logging
+  /v1/network-logging/storages/{network_logging_storage_id}:
+    delete:
+      description: Delete Network Logging Storage.
+      operationId: deleteNetworkLoggingStorage
+      parameters:
+      - description: Network Logging Storage ID
+        explode: false
+        in: path
+        name: network_logging_storage_id
+        required: true
+        schema:
+          description: Network Logging Storage ID
+          title: Network Logging Storage Id
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Delete Network Logging Storage
+      tags:
+      - network-logging.v1.NetworkLoggingStorageApi
+      x-action-id: network-logging:DeleteNetworkLoggingStorage
+      x-api-access-level: DELETE
+      x-api-created-date: "20241223"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: network-logging-storage_delete
+      x-not-before: 2026-07-01
+      x-operation-id: deleteNetworkLoggingStorage
+      x-resource: network_logging
+components:
+  schemas:
+    NetworkLoggingConfiguration:
+      example:
+        up_interface: up_interface
+        security_group_log_id: security_group_log_id
+        bucket_name: bucket_name
+        resource_type: ""
+        created_at: 2024-05-17T00:23:17Z
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        account_id: account_id
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        resource_id: resource_id
+        id: id
+        modified_at: 2024-05-17T00:23:17Z
+        resource_name: resource_name
+        down_interface: down_interface
+      properties:
+        account_id:
+          description: Account ID
+          title: Account Id
+          type: string
+        bucket_name:
+          description: Storage Bucket Name
+          title: Bucket Name
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        down_interface:
+          nullable: true
+          type: string
+        id:
+          description: Network Logging Configuration ID
+          title: Id
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        resource_id:
+          description: Resource ID
+          title: Resource Id
+          type: string
+        resource_name:
+          description: Resource Name
+          title: Resource Name
+          type: string
+        resource_type:
+          allOf:
+          - $ref: '#/components/schemas/NetworkLoggingResourceType'
+          description: Resource Type
+        security_group_log_id:
+          nullable: true
+          type: string
+        up_interface:
+          nullable: true
+          type: string
+      required:
+      - account_id
+      - bucket_name
+      - created_at
+      - created_by
+      - id
+      - modified_at
+      - modified_by
+      - resource_id
+      - resource_name
+      - resource_type
+      title: NetworkLoggingConfiguration
+    NetworkLoggingConfigurationListResponse:
+      example:
+        network_logging_configurations:
+        - up_interface: up_interface
+          security_group_log_id: security_group_log_id
+          bucket_name: bucket_name
+          resource_type: ""
+          created_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          account_id: account_id
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          resource_id: resource_id
+          id: id
+          modified_at: 2024-05-17T00:23:17Z
+          resource_name: resource_name
+          down_interface: down_interface
+        - up_interface: up_interface
+          security_group_log_id: security_group_log_id
+          bucket_name: bucket_name
+          resource_type: ""
+          created_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          account_id: account_id
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          resource_id: resource_id
+          id: id
+          modified_at: 2024-05-17T00:23:17Z
+          resource_name: resource_name
+          down_interface: down_interface
+        count: 0
+        links:
+        - ""
+        - ""
+      properties:
+        count:
+          nullable: true
+          type: integer
+        links:
+          items: {}
+          nullable: true
+          type: array
+        network_logging_configurations:
+          items:
+            $ref: '#/components/schemas/NetworkLoggingConfiguration'
+          type: array
+      required:
+      - network_logging_configurations
+      title: NetworkLoggingConfigurationListResponse
+    NetworkLoggingResourceType:
+      enum:
+      - FIREWALL
+      - SECURITY_GROUP
+      - NAT
+      title: NetworkLoggingResourceType
+      type: string
+    NetworkLoggingStorage:
+      example:
+        account_id: account_id
+        bucket_name: bucket_name
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        resource_type: ""
+        created_at: 2024-05-17T00:23:17Z
+        id: id
+        modified_at: 2024-05-17T00:23:17Z
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+      properties:
+        account_id:
+          description: Account ID
+          title: Account Id
+          type: string
+        bucket_name:
+          description: Storage Bucket Name
+          title: Bucket Name
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        id:
+          description: Network Logging Storage ID
+          title: Id
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        resource_type:
+          allOf:
+          - $ref: '#/components/schemas/NetworkLoggingResourceType'
+          description: Resource Type
+      required:
+      - account_id
+      - bucket_name
+      - created_at
+      - created_by
+      - id
+      - modified_at
+      - modified_by
+      - resource_type
+      title: NetworkLoggingStorage
+    NetworkLoggingStorageCreateRequest:
+      example:
+        bucket_name: bucket_name
+        resource_type: ""
+      properties:
+        bucket_name:
+          description: Storage Bucket Name
+          title: Bucket Name
+          type: string
+        resource_type:
+          allOf:
+          - $ref: '#/components/schemas/NetworkLoggingResourceType'
+          description: Resource Type
+      required:
+      - bucket_name
+      - resource_type
+      title: NetworkLoggingStorageCreateRequest
+    NetworkLoggingStorageListResponse:
+      example:
+        network_logging_storages:
+        - account_id: account_id
+          bucket_name: bucket_name
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          resource_type: ""
+          created_at: 2024-05-17T00:23:17Z
+          id: id
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        - account_id: account_id
+          bucket_name: bucket_name
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          resource_type: ""
+          created_at: 2024-05-17T00:23:17Z
+          id: id
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        count: 0
+        links:
+        - ""
+        - ""
+      properties:
+        count:
+          nullable: true
+          type: integer
+        links:
+          items: {}
+          nullable: true
+          type: array
+        network_logging_storages:
+          items:
+            $ref: '#/components/schemas/NetworkLoggingStorage'
+          type: array
+      required:
+      - network_logging_storages
+      title: NetworkLoggingStorageListResponse
+    NetworkLoggingStorageShowResponse:
+      example:
+        network_logging_storage:
+          account_id: account_id
+          bucket_name: bucket_name
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          resource_type: ""
+          created_at: 2024-05-17T00:23:17Z
+          id: id
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+      properties:
+        network_logging_storage:
+          $ref: '#/components/schemas/NetworkLoggingStorage'
+      required:
+      - network_logging_storage
+      title: NetworkLoggingStorageShowResponse
+  securitySchemes:
+    X-Auth-Token:
+      in: header
+      name: X-Auth-Token
+      type: apiKey
+x-app-name: scp-network
+x-package-name: scp_network
+x-service-type: scp-network
+x-service-versions:
+  cdn:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  direct-connect:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  dns:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  firewall:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  gslb:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  network-common:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  network-logging:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  security-group:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  vpc:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  vpn:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+x-url-prefix: ""

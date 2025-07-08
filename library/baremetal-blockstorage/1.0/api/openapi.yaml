@@ -1,0 +1,3721 @@
+openapi: 3.1.0
+info:
+  description: SCP Baremetal BlockStorage Service
+  title: SCP Baremetal BlockStorage Service
+  version: 0.0.1.dev1719
+servers:
+- url: http://70.50.166.119:8080
+tags:
+- description: List of Volume Console V1 APIs
+  name: baremetal-blockstorage.v1.VolumeConsoleV1APIs
+- description: List of Volume V1 APIs
+  name: baremetal-blockstorage.v1.VolumeV1APIs
+- description: List of Volume Client V1 APIs
+  name: baremetal-blockstorage.v1.VolumeClientV1APIs
+- description: List of Volume Replication V1 APIs
+  name: baremetal-blockstorage.v1.VolumeReplicationV1APIs
+- description: List of Volume Snapshot V1 APIs
+  name: baremetal-blockstorage.v1.VolumeSnapshotV1APIs
+- description: List of VolumeGroup V1 Console APIs
+  name: baremetal-blockstorage.v1.VolumeGroupConsoleV1APIs
+- description: List of VolumeGroup V1 APIs
+  name: baremetal-blockstorage.v1.VolumeGroupV1APIs
+- description: List of Volume Group Client V1 APIs
+  name: baremetal-blockstorage.v1.VolumeGroupClientV1APIs
+- description: List of Volume Group Replication V1 APIs
+  name: baremetal-blockstorage.v1.VolumeGroupReplicationV1APIs
+- description: List of VolumeGroup Snapshot V1 APIs
+  name: baremetal-blockstorage.v1.VolumeGroupSnapshotV1APIS
+paths:
+  /v1/volume-groups:
+    get:
+      description: Get a list of Volume Groups.
+      operationId: listVolumeGroups
+      parameters:
+      - description: Number to be displayed on the page
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 20
+          description: Number to be displayed on the page
+          example: 20
+          title: Limit
+          type: integer
+        style: form
+      - description: Offset
+        example: 0
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          description: Offset
+          example: 0
+          title: Offset
+          type: integer
+        style: form
+      - description: Sort
+        example: "created_at:desc,name:asc"
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          description: Sort
+          example: "created_at:desc,name:asc"
+          title: Sort
+          type: string
+        style: form
+      - description: Volume group name
+        example: cg-01
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          description: Volume group name
+          example: cg-01
+          title: Name
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeGroupListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: List Volume Groups
+      tags:
+      - baremetal-blockstorage.v1.VolumeGroupV1APIs
+      x-action-id: baremetal-blockstorage:ListVolumeGroups
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume-group_list
+      x-not-before: 2026-02-23
+      x-operation-id: listVolumeGroups
+      x-resource: VolumeGroup
+    post:
+      description: Create Volume Group
+      operationId: createVolumeGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolumeGroupCreationRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Create Volume Group
+      tags:
+      - baremetal-blockstorage.v1.VolumeGroupV1APIs
+      x-action-id: baremetal-blockstorage:CreateVolumeGroup
+      x-api-access-level: CREATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume-group_create
+      x-not-before: 2026-02-23
+      x-operation-id: createVolumeGroup
+      x-resource: VolumeGroup
+  /v1/volume-groups/{volume_group_id}:
+    get:
+      description: Show Volume Group
+      operationId: showVolumeGroup
+      parameters:
+      - description: Volume group id
+        example: c9ecae8b973b425c81c3817893cd8063
+        explode: false
+        in: path
+        name: volume_group_id
+        required: true
+        schema:
+          description: Volume group id
+          example: c9ecae8b973b425c81c3817893cd8063
+          title: Volume Group Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeGroupResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Show Volume Group
+      tags:
+      - baremetal-blockstorage.v1.VolumeGroupV1APIs
+      x-action-id: baremetal-blockstorage:ShowVolumeGroup
+      x-api-access-level: READ
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume-group_show
+      x-not-before: 2026-02-23
+      x-operation-id: showVolumeGroup
+      x-resource: VolumeGroup
+  /v1/volume-groups/{volume_group_id}/members/add:
+    put:
+      description: Add Volume Group Member on Volume Group.
+      operationId: addVolumeGroupMembers
+      parameters:
+      - description: Volume group id
+        example: c9ecae8b973b425c81c3817893cd8063
+        explode: false
+        in: path
+        name: volume_group_id
+        required: true
+        schema:
+          description: Volume group id
+          example: c9ecae8b973b425c81c3817893cd8063
+          title: Volume Group Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolumeGroupMemberRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeGroupMemberResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Add Volume Group Member on Volume Group
+      tags:
+      - baremetal-blockstorage.v1.VolumeGroupV1APIs
+      x-action-id: baremetal-blockstorage:AddVolumeGroupMembers
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume-group_member_add
+      x-not-before: 2026-02-23
+      x-operation-id: addVolumeGroupMembers
+      x-resource: VolumeGroup
+  /v1/volume-groups/{volume_group_id}/members/remove:
+    put:
+      description: Remove Volume Group Member on Volume Group.
+      operationId: removeVolumeGroupMembers
+      parameters:
+      - description: Volume group id
+        example: c9ecae8b973b425c81c3817893cd8063
+        explode: false
+        in: path
+        name: volume_group_id
+        required: true
+        schema:
+          description: Volume group id
+          example: c9ecae8b973b425c81c3817893cd8063
+          title: Volume Group Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolumeGroupMemberRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeGroupMemberResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Remove Volume Group Member on Volume Group
+      tags:
+      - baremetal-blockstorage.v1.VolumeGroupV1APIs
+      x-action-id: baremetal-blockstorage:RemoveVolumeGroupMembers
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume-group_member_remove
+      x-not-before: 2026-02-23
+      x-operation-id: removeVolumeGroupMembers
+      x-resource: VolumeGroup
+  /v1/volume-groups/{volume_group_id}/replications:
+    delete:
+      description: Delete Volume Group Replication.
+      operationId: deleteVolumeGroupReplication
+      parameters:
+      - description: Volume group id
+        example: c9ecae8b973b425c81c3817893cd8063
+        explode: false
+        in: path
+        name: volume_group_id
+        required: true
+        schema:
+          description: Volume group id
+          example: c9ecae8b973b425c81c3817893cd8063
+          title: Volume Group Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeGroupReplicationDeleteResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Delete Volume Group Replication
+      tags:
+      - baremetal-blockstorage.v1.VolumeGroupReplicationV1APIs
+      x-action-id: baremetal-blockstorage:DeleteVolumeGroupReplication
+      x-api-access-level: DELETE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume-group_replication_delete
+      x-not-before: 2026-02-23
+      x-operation-id: deleteVolumeGroupReplication
+      x-resource: VolumeGroup
+    get:
+      description: Show Volume Group Replication
+      operationId: showVolumeGroupReplication
+      parameters:
+      - description: Volume group id
+        example: c9ecae8b973b425c81c3817893cd8063
+        explode: false
+        in: path
+        name: volume_group_id
+        required: true
+        schema:
+          description: Volume group id
+          example: c9ecae8b973b425c81c3817893cd8063
+          title: Volume Group Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeGroupReplicationSyncTabResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Show Volume Group Replication
+      tags:
+      - baremetal-blockstorage.v1.VolumeGroupReplicationV1APIs
+      x-action-id: baremetal-blockstorage:ShowVolumeGroupReplication
+      x-api-access-level: READ
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - CLI
+      - CONSOLE
+      - OPENAPI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume-group_replication_show
+      x-not-before: 2026-02-23
+      x-operation-id: showVolumeGroupReplication
+      x-resource: VolumeGroup
+    post:
+      description: Create Volume Group Replication.
+      operationId: createVolumeGroupReplication
+      parameters:
+      - description: Volume group id
+        example: c9ecae8b973b425c81c3817893cd8063
+        explode: false
+        in: path
+        name: volume_group_id
+        required: true
+        schema:
+          description: Volume group id
+          example: c9ecae8b973b425c81c3817893cd8063
+          title: Volume Group Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolumeGroupReplicationCreateRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Create Volume Group Replication
+      tags:
+      - baremetal-blockstorage.v1.VolumeGroupReplicationV1APIs
+      x-action-id: baremetal-blockstorage:CreateVolumeGroupReplication
+      x-api-access-level: CREATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume-group_replication_create
+      x-not-before: 2026-02-23
+      x-operation-id: createVolumeGroupReplication
+      x-resource: VolumeGroup
+  /v1/volume-groups/{volume_group_id}/replications/cycle:
+    put:
+      description: Set Volume Group Replication Cycle.
+      operationId: setVolumeGroupReplicationCycle
+      parameters:
+      - description: Volume group id
+        example: c9ecae8b973b425c81c3817893cd8063
+        explode: false
+        in: path
+        name: volume_group_id
+        required: true
+        schema:
+          description: Volume group id
+          example: c9ecae8b973b425c81c3817893cd8063
+          title: Volume Group Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolumeGroupReplicationUpdateCycleRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeGroupReplicationUpdateCycleResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Set Volume Group Replication Cycle
+      tags:
+      - baremetal-blockstorage.v1.VolumeGroupReplicationV1APIs
+      x-action-id: baremetal-blockstorage:SetVolumeGroupReplicationCycle
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - CLI
+      - CONSOLE
+      - OPENAPI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume-group_replication-cycle_set
+      x-not-before: 2026-02-23
+      x-operation-id: setVolumeGroupReplicationCycle
+      x-resource: VolumeGroup
+  /v1/volume-groups/{volume_group_id}/replications/policy:
+    put:
+      description: Set Volume Group Replication Policy.
+      operationId: setVolumeGroupReplicationPolicy
+      parameters:
+      - description: Volume group id
+        example: c9ecae8b973b425c81c3817893cd8063
+        explode: false
+        in: path
+        name: volume_group_id
+        required: true
+        schema:
+          description: Volume group id
+          example: c9ecae8b973b425c81c3817893cd8063
+          title: Volume Group Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolumeGroupReplicationUpdatePolicyRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeGroupReplicationUpdatePolicyResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Set Volume Group Replication Policy
+      tags:
+      - baremetal-blockstorage.v1.VolumeGroupReplicationV1APIs
+      x-action-id: baremetal-blockstorage:SetVolumeGroupReplicationPolicy
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - CLI
+      - CONSOLE
+      - OPENAPI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume-group_replication-policy_set
+      x-not-before: 2026-02-23
+      x-operation-id: setVolumeGroupReplicationPolicy
+      x-resource: VolumeGroup
+  /v1/volume-groups/{volume_group_id}/snapshot-schedules:
+    delete:
+      deprecated: false
+      description: Delete Volume Group Snapshot Schedule.
+      operationId: deleteVolumeGroupSnapshotSchedule
+      parameters:
+      - description: Volume group id
+        example: c9ecae8b973b425c81c3817893cd8063
+        explode: false
+        in: path
+        name: volume_group_id
+        required: true
+        schema:
+          description: Volume group id
+          example: c9ecae8b973b425c81c3817893cd8063
+          title: Volume Group Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeGroupSnapshotScheduleResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Delete Volume Group Snapshot Schedule
+      tags:
+      - baremetal-blockstorage.v1.VolumeGroupSnapshotV1APIS
+      x-action-id: baremetal-blockstorage:DeleteVolumeGroupSnapshotSchedule
+      x-api-access-level: DELETE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume-group_snapshot-schedule_delete
+      x-not-before: 2026-02-23
+      x-operation-id: deleteVolumeGroupSnapshotSchedule
+      x-resource: VolumeGroup
+    post:
+      deprecated: false
+      description: Create Volume Group Snapshot Schedule.
+      operationId: createVolumeGroupSnapshotSchedule
+      parameters:
+      - description: Volume group id
+        example: c9ecae8b973b425c81c3817893cd8063
+        explode: false
+        in: path
+        name: volume_group_id
+        required: true
+        schema:
+          description: Volume group id
+          example: c9ecae8b973b425c81c3817893cd8063
+          title: Volume Group Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolumeGroupSnapshotScheduleRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeGroupSnapshotScheduleResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Create Volume Group Snapshot Schedule
+      tags:
+      - baremetal-blockstorage.v1.VolumeGroupSnapshotV1APIS
+      x-action-id: baremetal-blockstorage:CreateVolumeGroupSnapshotSchedule
+      x-api-access-level: CREATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume-group_snapshot-schedule_create
+      x-not-before: 2026-02-23
+      x-operation-id: createVolumeGroupSnapshotSchedule
+      x-resource: VolumeGroup
+    put:
+      deprecated: false
+      description: Set Volume Group Snapshot Schedule.
+      operationId: setVolumeGroupSnapshotSchedule
+      parameters:
+      - description: Volume group id
+        example: c9ecae8b973b425c81c3817893cd8063
+        explode: false
+        in: path
+        name: volume_group_id
+        required: true
+        schema:
+          description: Volume group id
+          example: c9ecae8b973b425c81c3817893cd8063
+          title: Volume Group Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolumeGroupSnapshotScheduleRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeGroupSnapshotScheduleResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Set Volume Group Snapshot Schedule
+      tags:
+      - baremetal-blockstorage.v1.VolumeGroupSnapshotV1APIS
+      x-action-id: baremetal-blockstorage:SetVolumeGroupSnapshotSchedule
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume-group_snapshot-schedule_set
+      x-not-before: 2026-02-23
+      x-operation-id: setVolumeGroupSnapshotSchedule
+      x-resource: VolumeGroup
+  /v1/volume-groups/{volume_group_id}/snapshots:
+    get:
+      deprecated: false
+      description: Get a list of Volume Group snapshots.
+      operationId: listVolumeGroupSnapshots
+      parameters:
+      - description: Volume group id
+        example: c9ecae8b973b425c81c3817893cd8063
+        explode: false
+        in: path
+        name: volume_group_id
+        required: true
+        schema:
+          description: Volume group id
+          example: c9ecae8b973b425c81c3817893cd8063
+          title: Volume Group Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeGroupSnapshotListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: List Volume Group Snapshots
+      tags:
+      - baremetal-blockstorage.v1.VolumeGroupSnapshotV1APIS
+      x-action-id: baremetal-blockstorage:ListVolumeGroupSnapshots
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume-group_snapshot_list
+      x-not-before: 2026-02-23
+      x-operation-id: listVolumeGroupSnapshots
+      x-resource: VolumeGroup
+    post:
+      deprecated: false
+      description: Create Volume Group Snapshot
+      operationId: createVolumeGroupSnapshot
+      parameters:
+      - description: Volume group id
+        example: c9ecae8b973b425c81c3817893cd8063
+        explode: false
+        in: path
+        name: volume_group_id
+        required: true
+        schema:
+          description: Volume group id
+          example: c9ecae8b973b425c81c3817893cd8063
+          title: Volume Group Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeGroupSnapshotResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Create Volume Group Snapshot
+      tags:
+      - baremetal-blockstorage.v1.VolumeGroupSnapshotV1APIS
+      x-action-id: baremetal-blockstorage:CreateVolumeGroupSnapshot
+      x-api-access-level: CREATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume-group_snapshot_create
+      x-not-before: 2026-02-23
+      x-operation-id: createVolumeGroupSnapshot
+      x-resource: VolumeGroup
+  /v1/volume-groups/{volume_group_id}/snapshots/{snapshot_id}:
+    delete:
+      deprecated: false
+      description: Delete Volume Group snapshot.
+      operationId: deleteVolumeGroupSnapshot
+      parameters:
+      - description: Volume group id
+        example: d9b05e9d377d4dbd9c14e4fa20b4cadd
+        explode: false
+        in: path
+        name: volume_group_id
+        required: true
+        schema:
+          description: Volume group id
+          example: d9b05e9d377d4dbd9c14e4fa20b4cadd
+          title: Volume Group Id
+          type: string
+        style: simple
+      - description: Snapshot id
+        example: f765e80a-8cfb-11ef-9f89-00a0b8c90a2c
+        explode: false
+        in: path
+        name: snapshot_id
+        required: true
+        schema:
+          description: Snapshot id
+          example: f765e80a-8cfb-11ef-9f89-00a0b8c90a2c
+          title: Snapshot Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeGroupSnapshotDeleteResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Delete Volume Group Snapshot
+      tags:
+      - baremetal-blockstorage.v1.VolumeGroupSnapshotV1APIS
+      x-action-id: baremetal-blockstorage:DeleteVolumeGroupSnapshot
+      x-api-access-level: DELETE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume-group_snapshot_delete
+      x-not-before: 2026-02-23
+      x-operation-id: deleteVolumeGroupSnapshot
+      x-resource: VolumeGroup
+  /v1/volume-groups/{volume_group_id}/snapshots/{snapshot_id}/restore:
+    put:
+      deprecated: false
+      description: Restore Volume Group snapshot.
+      operationId: restoreVolumeGroupSnapshot
+      parameters:
+      - description: Volume group id
+        example: d9b05e9d377d4dbd9c14e4fa20b4cadd
+        explode: false
+        in: path
+        name: volume_group_id
+        required: true
+        schema:
+          description: Volume group id
+          example: d9b05e9d377d4dbd9c14e4fa20b4cadd
+          title: Volume Group Id
+          type: string
+        style: simple
+      - description: Snapshot id
+        example: f765e80a-8cfb-11ef-9f89-00a0b8c90a2c
+        explode: false
+        in: path
+        name: snapshot_id
+        required: true
+        schema:
+          description: Snapshot id
+          example: f765e80a-8cfb-11ef-9f89-00a0b8c90a2c
+          title: Snapshot Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeGroupSnapshotRestoreResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Restore Volume Group Snapshot
+      tags:
+      - baremetal-blockstorage.v1.VolumeGroupSnapshotV1APIS
+      x-action-id: baremetal-blockstorage:RestoreVolumeGroupSnapshot
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume-group_snapshot_restore
+      x-not-before: 2026-02-23
+      x-operation-id: restoreVolumeGroupSnapshot
+      x-resource: VolumeGroup
+  /v1/volumes:
+    get:
+      description: Get a list of Volumes.
+      operationId: listVolumes
+      parameters:
+      - description: Number to be displayed on the page
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 20
+          description: Number to be displayed on the page
+          example: 20
+          title: Limit
+          type: integer
+        style: form
+      - description: Offset
+        example: 0
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          description: Offset
+          example: 0
+          title: Offset
+          type: integer
+        style: form
+      - description: Sort
+        example: "created_at:desc,name:asc"
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          description: Sort
+          example: "created_at:desc,name:asc"
+          title: Sort
+          type: string
+        style: form
+      - description: Volume name
+        example: storage-01
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          description: Volume name
+          example: storage-01
+          title: Name
+          type: string
+        style: form
+      - description: Attached server name
+        example: baremetal-server-name
+        explode: true
+        in: query
+        name: object_name
+        required: false
+        schema:
+          description: Attached server name
+          example: baremetal-server-name
+          title: Object Name
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: List Volumes
+      tags:
+      - baremetal-blockstorage.v1.VolumeV1APIs
+      x-action-id: baremetal-blockstorage:ListVolumes
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_list
+      x-not-before: 2026-02-23
+      x-operation-id: listVolumes
+      x-resource: Volume
+    post:
+      description: Create Volume.
+      operationId: createVolume
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolumeCreateRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Create Volume
+      tags:
+      - baremetal-blockstorage.v1.VolumeV1APIs
+      x-action-id: baremetal-blockstorage:CreateVolume
+      x-api-access-level: CREATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_create
+      x-not-before: 2026-02-23
+      x-operation-id: createVolume
+      x-resource: Volume
+  /v1/volumes/{volume_id}:
+    delete:
+      description: Delete Volume.
+      operationId: deleteVolume
+      parameters:
+      - description: Volume id
+        example: 001e77a81de74b7883ce105760c97cf9
+        explode: false
+        in: path
+        name: volume_id
+        required: true
+        schema:
+          description: Volume id
+          example: 001e77a81de74b7883ce105760c97cf9
+          title: Volume Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Delete Volume
+      tags:
+      - baremetal-blockstorage.v1.VolumeV1APIs
+      x-action-id: baremetal-blockstorage:DeleteVolume
+      x-api-access-level: DELETE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_delete
+      x-not-before: 2026-02-23
+      x-operation-id: deleteVolume
+      x-resource: Volume
+    get:
+      description: Show Volume.
+      operationId: showVolume
+      parameters:
+      - description: Volume id
+        example: 001e77a81de74b7883ce105760c97cf9
+        explode: false
+        in: path
+        name: volume_id
+        required: true
+        schema:
+          description: Volume id
+          example: 001e77a81de74b7883ce105760c97cf9
+          title: Volume Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Show Volume
+      tags:
+      - baremetal-blockstorage.v1.VolumeV1APIs
+      x-action-id: baremetal-blockstorage:ShowVolume
+      x-api-access-level: READ
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_show
+      x-not-before: 2026-02-23
+      x-operation-id: showVolume
+      x-resource: Volume
+  /v1/volumes/{volume_id}/attachments:
+    delete:
+      description: Detach Volume from servers.
+      operationId: deleteVolumeAttachments
+      parameters:
+      - description: Volume id
+        example: 001e77a81de74b7883ce105760c97cf9
+        explode: false
+        in: path
+        name: volume_id
+        required: true
+        schema:
+          description: Volume id
+          example: 001e77a81de74b7883ce105760c97cf9
+          title: Volume Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolumeDetachRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Detach Volume
+      tags:
+      - baremetal-blockstorage.v1.VolumeV1APIs
+      x-action-id: baremetal-blockstorage:DeleteVolumeAttachments
+      x-api-access-level: DELETE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_attachment_delete
+      x-not-before: 2026-02-23
+      x-operation-id: deleteVolumeAttachments
+      x-resource: Volume
+    post:
+      description: Attach Volume to servers.
+      operationId: createVolumeAttachments
+      parameters:
+      - description: Volume id
+        example: 001e77a81de74b7883ce105760c97cf9
+        explode: false
+        in: path
+        name: volume_id
+        required: true
+        schema:
+          description: Volume id
+          example: 001e77a81de74b7883ce105760c97cf9
+          title: Volume Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolumeAttachmentRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Attach Volume
+      tags:
+      - baremetal-blockstorage.v1.VolumeV1APIs
+      x-action-id: baremetal-blockstorage:CreateVolumeAttachments
+      x-api-access-level: CREATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_attachment_create
+      x-not-before: 2026-02-23
+      x-operation-id: createVolumeAttachments
+      x-resource: Volume
+  /v1/volumes/{volume_id}/replications:
+    delete:
+      description: Delete Volume Replication.
+      operationId: deleteVolumeReplication
+      parameters:
+      - description: Volume id
+        example: 001e77a81de74b7883ce105760c97cf9
+        explode: false
+        in: path
+        name: volume_id
+        required: true
+        schema:
+          description: Volume id
+          example: 001e77a81de74b7883ce105760c97cf9
+          title: Volume Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Delete Volume Replication
+      tags:
+      - baremetal-blockstorage.v1.VolumeReplicationV1APIs
+      x-action-id: baremetal-blockstorage:DeleteVolumeReplication
+      x-api-access-level: DELETE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - CLI
+      - CONSOLE
+      - OPENAPI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_replication_delete
+      x-not-before: 2026-02-23
+      x-operation-id: deleteVolumeReplication
+      x-resource: Volume
+    get:
+      description: Show Volume Replication.
+      operationId: showVolumeReplication
+      parameters:
+      - description: Volume id
+        example: 001e77a81de74b7883ce105760c97cf9
+        explode: false
+        in: path
+        name: volume_id
+        required: true
+        schema:
+          description: Volume id
+          example: 001e77a81de74b7883ce105760c97cf9
+          title: Volume Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeReplicationResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Show Volume Replication
+      tags:
+      - baremetal-blockstorage.v1.VolumeReplicationV1APIs
+      x-action-id: baremetal-blockstorage:ShowVolumeReplication
+      x-api-access-level: READ
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - CLI
+      - CONSOLE
+      - OPENAPI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_replication_show
+      x-not-before: 2026-02-23
+      x-operation-id: showVolumeReplication
+      x-resource: Volume
+    post:
+      description: Create Volume Replication.
+      operationId: createVolumeReplication
+      parameters:
+      - description: Volume id
+        example: 001e77a81de74b7883ce105760c97cf9
+        explode: false
+        in: path
+        name: volume_id
+        required: true
+        schema:
+          description: Volume id
+          example: 001e77a81de74b7883ce105760c97cf9
+          title: Volume Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolumeReplicationCreateRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Create Volume Replication
+      tags:
+      - baremetal-blockstorage.v1.VolumeReplicationV1APIs
+      x-action-id: baremetal-blockstorage:CreateVolumeReplication
+      x-api-access-level: CREATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_replication_create
+      x-not-before: 2026-02-23
+      x-operation-id: createVolumeReplication
+      x-resource: Volume
+  /v1/volumes/{volume_id}/replications/cycle:
+    put:
+      description: Set Volume Replication Cycle.
+      operationId: setVolumeReplicationCycle
+      parameters:
+      - description: Volume id
+        example: 001e77a81de74b7883ce105760c97cf9
+        explode: false
+        in: path
+        name: volume_id
+        required: true
+        schema:
+          description: Volume id
+          example: 001e77a81de74b7883ce105760c97cf9
+          title: Volume Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolumeReplicationCycleRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeReplicationCycleResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Set Volume Replication Cycle
+      tags:
+      - baremetal-blockstorage.v1.VolumeReplicationV1APIs
+      x-action-id: baremetal-blockstorage:SetVolumeReplicationCycle
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - CLI
+      - CONSOLE
+      - OPENAPI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_replication-cycle_set
+      x-not-before: 2026-02-23
+      x-operation-id: setVolumeReplicationCycle
+      x-resource: Volume
+  /v1/volumes/{volume_id}/replications/policy:
+    put:
+      description: Set Volume Replication Policy.
+      operationId: setVolumeReplicationPolicy
+      parameters:
+      - description: Volume id
+        example: 001e77a81de74b7883ce105760c97cf9
+        explode: false
+        in: path
+        name: volume_id
+        required: true
+        schema:
+          description: Volume id
+          example: 001e77a81de74b7883ce105760c97cf9
+          title: Volume Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolumeReplicationPolicyRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeReplicationPolicyResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Set Volume Replication Policy
+      tags:
+      - baremetal-blockstorage.v1.VolumeReplicationV1APIs
+      x-action-id: baremetal-blockstorage:SetVolumeReplicationPolicy
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - CLI
+      - CONSOLE
+      - OPENAPI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_replication-policy_set
+      x-not-before: 2026-02-23
+      x-operation-id: setVolumeReplicationPolicy
+      x-resource: Volume
+  /v1/volumes/{volume_id}/snapshot-rates:
+    delete:
+      description: Delete Volume snapshot rate.
+      operationId: deleteVolumeSnapshotRate
+      parameters:
+      - description: Volume id
+        example: 001e77a81de74b7883ce105760c97cf9
+        explode: false
+        in: path
+        name: volume_id
+        required: true
+        schema:
+          description: Volume id
+          example: 001e77a81de74b7883ce105760c97cf9
+          title: Volume Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeSnapshotRateResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Delete Volume Snapshot Rate
+      tags:
+      - baremetal-blockstorage.v1.VolumeSnapshotV1APIs
+      x-action-id: baremetal-blockstorage:DeleteVolumeSnapshotRate
+      x-api-access-level: DELETE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_snapshot-rate_delete
+      x-not-before: 2026-02-23
+      x-operation-id: deleteVolumeSnapshotRate
+      x-resource: Volume
+    post:
+      description: Create Volume snapshot rate.
+      operationId: createVolumeSnapshotRate
+      parameters:
+      - description: Volume id
+        example: 001e77a81de74b7883ce105760c97cf9
+        explode: false
+        in: path
+        name: volume_id
+        required: true
+        schema:
+          description: Volume id
+          example: 001e77a81de74b7883ce105760c97cf9
+          title: Volume Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolumeSnapshotRateRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeSnapshotRateResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Create Volume Snapshot Rate
+      tags:
+      - baremetal-blockstorage.v1.VolumeSnapshotV1APIs
+      x-action-id: baremetal-blockstorage:CreateVolumeSnapshotRate
+      x-api-access-level: CREATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_snapshot-rate_create
+      x-not-before: 2026-02-23
+      x-operation-id: createVolumeSnapshotRate
+      x-resource: Volume
+    put:
+      description: Set Volume snapshot rate.
+      operationId: setVolumeSnapshotRate
+      parameters:
+      - description: Volume id
+        example: 001e77a81de74b7883ce105760c97cf9
+        explode: false
+        in: path
+        name: volume_id
+        required: true
+        schema:
+          description: Volume id
+          example: 001e77a81de74b7883ce105760c97cf9
+          title: Volume Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolumeSnapshotRateRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeSnapshotRateResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Set Volume Snapshot Rate
+      tags:
+      - baremetal-blockstorage.v1.VolumeSnapshotV1APIs
+      x-action-id: baremetal-blockstorage:SetVolumeSnapshotRate
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_snapshot-rate_set
+      x-not-before: 2026-02-23
+      x-operation-id: setVolumeSnapshotRate
+      x-resource: Volume
+  /v1/volumes/{volume_id}/snapshot-schedules:
+    delete:
+      deprecated: false
+      description: Delete Volume snapshot schedule.
+      operationId: deleteVolumeSnapshotSchedule
+      parameters:
+      - description: Volume id
+        example: 001e77a81de74b7883ce105760c97cf9
+        explode: false
+        in: path
+        name: volume_id
+        required: true
+        schema:
+          description: Volume id
+          example: 001e77a81de74b7883ce105760c97cf9
+          title: Volume Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeSnapshotScheduleResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Delete Volume Snapshot Schedule
+      tags:
+      - baremetal-blockstorage.v1.VolumeSnapshotV1APIs
+      x-action-id: baremetal-blockstorage:DeleteVolumeSnapshotSchedule
+      x-api-access-level: DELETE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_snapshot-schedule_delete
+      x-not-before: 2026-02-23
+      x-operation-id: deleteVolumeSnapshotSchedule
+      x-resource: Volume
+    post:
+      deprecated: false
+      description: Create Volume snapshot schedule.
+      operationId: createVolumeSnapshotSchedule
+      parameters:
+      - description: Volume id
+        example: 001e77a81de74b7883ce105760c97cf9
+        explode: false
+        in: path
+        name: volume_id
+        required: true
+        schema:
+          description: Volume id
+          example: 001e77a81de74b7883ce105760c97cf9
+          title: Volume Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolumeSnapshotScheduleRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeSnapshotScheduleResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Create Volume Snapshot Schedule
+      tags:
+      - baremetal-blockstorage.v1.VolumeSnapshotV1APIs
+      x-action-id: baremetal-blockstorage:CreateVolumeSnapshotSchedule
+      x-api-access-level: CREATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_snapshot-schedule_create
+      x-not-before: 2026-02-23
+      x-operation-id: createVolumeSnapshotSchedule
+      x-resource: Volume
+    put:
+      deprecated: false
+      description: Set Volume snapshot schedule.
+      operationId: setVolumeSnapshotSchedule
+      parameters:
+      - description: Volume id
+        example: 001e77a81de74b7883ce105760c97cf9
+        explode: false
+        in: path
+        name: volume_id
+        required: true
+        schema:
+          description: Volume id
+          example: 001e77a81de74b7883ce105760c97cf9
+          title: Volume Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolumeSnapshotScheduleRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeSnapshotScheduleResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Set Volume Snapshot Schedule
+      tags:
+      - baremetal-blockstorage.v1.VolumeSnapshotV1APIs
+      x-action-id: baremetal-blockstorage:SetVolumeSnapshotSchedule
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_snapshot-schedule_set
+      x-not-before: 2026-02-23
+      x-operation-id: setVolumeSnapshotSchedule
+      x-resource: Volume
+  /v1/volumes/{volume_id}/snapshots:
+    get:
+      deprecated: false
+      description: Get a list of Volume snapshots.
+      operationId: listVolumeSnapshots
+      parameters:
+      - description: Volume id
+        example: 001e77a81de74b7883ce105760c97cf9
+        explode: false
+        in: path
+        name: volume_id
+        required: true
+        schema:
+          description: Volume id
+          example: 001e77a81de74b7883ce105760c97cf9
+          title: Volume Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeSnapshotListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: List Volume Snapshots
+      tags:
+      - baremetal-blockstorage.v1.VolumeSnapshotV1APIs
+      x-action-id: baremetal-blockstorage:ListVolumeSnapshots
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_snapshot_list
+      x-not-before: 2026-02-23
+      x-operation-id: listVolumeSnapshots
+      x-resource: Volume
+    post:
+      deprecated: false
+      description: Create Volume snapshot.
+      operationId: createVolumeSnapshot
+      parameters:
+      - description: Volume id
+        example: 001e77a81de74b7883ce105760c97cf9
+        explode: false
+        in: path
+        name: volume_id
+        required: true
+        schema:
+          description: Volume id
+          example: 001e77a81de74b7883ce105760c97cf9
+          title: Volume Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeSnapshotResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Create Volume Snapshot
+      tags:
+      - baremetal-blockstorage.v1.VolumeSnapshotV1APIs
+      x-action-id: baremetal-blockstorage:CreateVolumeSnapshot
+      x-api-access-level: CREATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_snapshot_create
+      x-not-before: 2026-02-23
+      x-operation-id: createVolumeSnapshot
+      x-resource: Volume
+  /v1/volumes/{volume_id}/snapshots/{snapshot_id}:
+    delete:
+      deprecated: false
+      description: Delete Volume snapshot.
+      operationId: deleteVolumeSnapshot
+      parameters:
+      - description: Volume id
+        example: 8bf55e738d4e44b5a21dbe133a42ecbe
+        explode: false
+        in: path
+        name: volume_id
+        required: true
+        schema:
+          description: Volume id
+          example: 8bf55e738d4e44b5a21dbe133a42ecbe
+          title: Volume Id
+          type: string
+        style: simple
+      - description: Snapshot id
+        example: gjireo3921kdkwskjwowo32901mkj
+        explode: false
+        in: path
+        name: snapshot_id
+        required: true
+        schema:
+          description: Snapshot id
+          example: gjireo3921kdkwskjwowo32901mkj
+          title: Snapshot Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeSnapshotDeleteResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Delete Volume Snapshot
+      tags:
+      - baremetal-blockstorage.v1.VolumeSnapshotV1APIs
+      x-action-id: baremetal-blockstorage:DeleteVolumeSnapshot
+      x-api-access-level: DELETE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_snapshot_delete
+      x-not-before: 2026-02-23
+      x-operation-id: deleteVolumeSnapshot
+      x-resource: Volume
+  /v1/volumes/{volume_id}/snapshots/{snapshot_id}/restore:
+    put:
+      deprecated: false
+      description: Restore Volume from snapshot.
+      operationId: restoreVolumeSnapshot
+      parameters:
+      - description: Volume id
+        example: 8bf55e738d4e44b5a21dbe133a42ecbe
+        explode: false
+        in: path
+        name: volume_id
+        required: true
+        schema:
+          description: Volume id
+          example: 8bf55e738d4e44b5a21dbe133a42ecbe
+          title: Volume Id
+          type: string
+        style: simple
+      - description: Snapshot id
+        example: gjireo3921kdkwskjwowo32901mkj
+        explode: false
+        in: path
+        name: snapshot_id
+        required: true
+        schema:
+          description: Snapshot id
+          example: gjireo3921kdkwskjwowo32901mkj
+          title: Snapshot Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeSnapshotRestoreResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Restore Volume Snapshot
+      tags:
+      - baremetal-blockstorage.v1.VolumeSnapshotV1APIs
+      x-action-id: baremetal-blockstorage:RestoreVolumeSnapshot
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: volume_snapshot_restore
+      x-not-before: 2026-02-23
+      x-operation-id: restoreVolumeSnapshot
+      x-resource: Volume
+components:
+  schemas:
+    AsyncResponse:
+      example:
+        resource_id: 8bf55e738d4e44b5a21dbe133a42ecbe
+        request_id: request_id
+      properties:
+        request_id:
+          description: Request id
+          title: Request Id
+          type: string
+        resource_id:
+          description: Resource id
+          example: 8bf55e738d4e44b5a21dbe133a42ecbe
+          title: Resource Id
+          type: string
+      title: AsyncResponse
+    AttachedServer:
+      properties:
+        id:
+          description: Server id
+          example: 92cd16fe8ebc4f73832513a172bf0000
+          title: Id
+          type: string
+        image_name:
+          description: Image name
+          example: RHEL 8.8 for BM
+          title: Image Name
+          type: string
+        name:
+          description: Server name
+          example: baremetal-01
+          title: Name
+          type: string
+        srn:
+          description: SRN
+          example: srn:dev1::b7dcf0aaac7446b3810d3435999b5951:RegionOne::scp-baremetal:baremetal/2abaf2635c864bf9a5b5ae4f3bb10ac5
+          title: Srn
+          type: string
+        state:
+          description: Server state
+          example: RUNNING
+          title: State
+          type: string
+        type:
+          allOf:
+          - $ref: '#/components/schemas/BlockStorageAttachmentObjectType'
+          description: Server type
+      title: AttachedServer
+    AttachmentListModel:
+      example:
+        object_type: ""
+        object_id: 83c3c73d457345e3829ee6d5557c0016
+      properties:
+        object_id:
+          description: Object id
+          example: 83c3c73d457345e3829ee6d5557c0016
+          title: Object Id
+          type: string
+        object_type:
+          allOf:
+          - $ref: '#/components/schemas/BlockStorageAttachmentObjectType'
+          description: Object type
+      title: AttachmentListModel
+    BlockStorageAttachmentObjectType:
+      enum:
+      - BM
+      - MNGC
+      title: BlockStorageAttachmentObjectType
+      type: string
+    BlockStoragePurpose:
+      enum:
+      - ORG
+      - REPL
+      - BACKUP
+      - CLONE
+      title: BlockStoragePurpose
+      type: string
+    BlockStorageState:
+      enum:
+      - CREATING
+      - IN_USE
+      - EDITING
+      - DELETING
+      - DELETED
+      - ATTACHING
+      - DETACHING
+      - AVAILABLE
+      - ERROR_DELETING
+      - ERROR_EDITING
+      - ERROR
+      title: BlockStorageState
+      type: string
+    DayOfWeek:
+      enum:
+      - SUN
+      - MON
+      - TUE
+      - WED
+      - THU
+      - FRI
+      - SAT
+      title: DayOfWeek
+      type: string
+    DiskType:
+      enum:
+      - SSD
+      - HDD
+      title: DiskType
+      type: string
+    ExternalError:
+      properties:
+        code:
+          description: Code
+          example: Forbidden
+          title: Code
+          type: string
+        object_type:
+          allOf:
+          - $ref: '#/components/schemas/BlockStorageAttachmentObjectType'
+          description: Server type
+        status:
+          description: Status
+          example: 403
+          title: Status
+          type: integer
+      title: ExternalError
+    MemberVolume:
+      example:
+        so_volume_id: so_volume_id
+        purpose: ""
+        disk_type: ""
+        name: volume-01
+        size_gb: 10
+        so_volume_name: so_volume_name
+        id: 92cd16fe8ebc4f73832513a172bf0000
+      properties:
+        disk_type:
+          allOf:
+          - $ref: '#/components/schemas/DiskType'
+          description: disk_type
+        id:
+          description: volume id
+          example: 92cd16fe8ebc4f73832513a172bf0000
+          title: Id
+          type: string
+        name:
+          description: volume name
+          example: volume-01
+          title: Name
+          type: string
+        purpose:
+          allOf:
+          - $ref: '#/components/schemas/BlockStoragePurpose'
+          description: volume purpose
+        size_gb:
+          description: size_gb
+          example: 10
+          title: Size Gb
+          type: integer
+        so_volume_id:
+          description: so volume id
+          title: So Volume Id
+          type: string
+        so_volume_name:
+          description: so volume name
+          title: So Volume Name
+          type: string
+      title: MemberVolume
+    RelationVolumeGroupModel:
+      properties:
+        auth:
+          allOf:
+          - $ref: '#/components/schemas/VolumePermission'
+          description: Auth
+          example: READ
+        id:
+          description: Id
+          example: 5013a8a8adc648058438da76f6663c7a
+          title: Id
+          type: string
+        name:
+          description: Volume group name
+          example: vg-01
+          title: Name
+          type: string
+        purpose:
+          allOf:
+          - $ref: '#/components/schemas/VolumeGroupPurpose'
+          description: Volume group purpose
+        region:
+          description: Region
+          example: kr-west1
+          title: Region
+          type: string
+      title: RelationVolumeGroupModel
+    RelationVolumeModel:
+      properties:
+        auth:
+          allOf:
+          - $ref: '#/components/schemas/VolumePermission'
+          description: Auth
+          example: READ
+        id:
+          description: Id
+          example: 5013a8a8adc648058438da76f6663c7a
+          title: Id
+          type: string
+        name:
+          description: Volume name
+          example: bs-01
+          title: Name
+          type: string
+        purpose:
+          allOf:
+          - $ref: '#/components/schemas/BlockStoragePurpose'
+          description: Volume purpose
+        region:
+          description: Region
+          example: kr-west1
+          title: Region
+          type: string
+      title: RelationVolumeModel
+    ReplicationCycle:
+      enum:
+      - 5MIN
+      - HOURLY
+      - DAILY
+      - WEEKLY
+      - MONTHLY
+      title: ReplicationCycle
+      type: string
+    ReplicationPolicyMode:
+      enum:
+      - RESYNC
+      - BREAK
+      title: ReplicationPolicyMode
+      type: string
+    SnapshotFrequency:
+      enum:
+      - DAILY
+      - WEEKLY
+      - NONE
+      title: SnapshotFrequency
+      type: string
+    SnapshotSchedule:
+      properties:
+        day_of_week:
+          default: MON
+          description: Day of week
+          example: MON
+          title: Day Of Week
+          type: string
+        frequency:
+          allOf:
+          - $ref: '#/components/schemas/SnapshotFrequency'
+          description: Frequency
+        hour:
+          default: 0
+          description: Hour
+          example: 18
+          title: Hour
+          type: integer
+      title: SnapshotSchedule
+    TagModel:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          nullable: true
+          type: string
+        value:
+          nullable: true
+          type: string
+      title: TagModel
+    VolumeAttachmentRequest:
+      example:
+        attachments:
+        - object_type: ""
+          object_id: 83c3c73d457345e3829ee6d5557c0016
+        - object_type: ""
+          object_id: 83c3c73d457345e3829ee6d5557c0016
+      properties:
+        attachments:
+          description: List of object info to attach
+          items:
+            $ref: '#/components/schemas/AttachmentListModel'
+          type: array
+      required:
+      - attachments
+      title: VolumeAttachmentRequest
+    VolumeCreateRequest:
+      example:
+        attachments:
+        - object_type: ""
+          object_id: 83c3c73d457345e3829ee6d5557c0016
+        - object_type: ""
+          object_id: 83c3c73d457345e3829ee6d5557c0016
+        disk_type: ""
+        name: my-bs-01
+        size_gb: 10
+        tags:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      properties:
+        attachments:
+          description: List of server id and type
+          items:
+            $ref: '#/components/schemas/AttachmentListModel'
+          type: array
+        disk_type:
+          allOf:
+          - $ref: '#/components/schemas/DiskType'
+          description: Disk type
+        name:
+          description: Volume name
+          example: my-bs-01
+          title: Name
+          type: string
+        size_gb:
+          description: Volume capacity(GB)
+          example: 10
+          title: Size Gb
+          type: integer
+        tags:
+          items:
+            $ref: '#/components/schemas/TagModel'
+          nullable: true
+          type: array
+      required:
+      - attachments
+      - disk_type
+      - name
+      - size_gb
+      title: VolumeCreateRequest
+    VolumeDetachRequest:
+      example:
+        attachments:
+        - attachments
+        - attachments
+      properties:
+        attachments:
+          description: List of object id to detach
+          items:
+            type: string
+          type: array
+      required:
+      - attachments
+      title: VolumeDetachRequest
+    VolumeGroupCreationRequest:
+      example:
+        name: cg-name01
+        volume_ids:
+        - 17e0b4fd27784dfb843440ec08bdd148
+        tags:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      properties:
+        name:
+          description: Volume group name
+          example: cg-name01
+          title: Name
+          type: string
+        tags:
+          items:
+            $ref: '#/components/schemas/TagModel'
+          nullable: true
+          type: array
+        volume_ids:
+          description: List of volume(Block Storage) id to add
+          example:
+          - 17e0b4fd27784dfb843440ec08bdd148
+          items:
+            type: string
+          type: array
+      required:
+      - name
+      - volume_ids
+      title: VolumeGroupCreationRequest
+    VolumeGroupInfo:
+      properties:
+        id:
+          description: Server id
+          example: 92cd16fe8ebc4f73832513a172bf0000
+          title: Id
+          type: string
+        name:
+          description: Volume group name
+          example: cg-01
+          title: Name
+          type: string
+      title: VolumeGroupInfo
+    VolumeGroupListModel:
+      example:
+        account_id: b7dcf0aaac7446b3810d3435999b5951
+        purpose: purpose
+        modified_by: samsung-cloud-platform2@samsung.com
+        name: cg-01
+        created_at: 2024-08-01T07:06:23.315Z
+        id: 5013a8a8adc648058438da76f6663c7a
+        state: ""
+        modified_at: 2024-08-01T07:06:23.315Z
+        created_by: samsung-cloud-platform1@samsung.com
+        num_of_block_storages: 0
+      properties:
+        account_id:
+          description: Account id
+          example: b7dcf0aaac7446b3810d3435999b5951
+          title: Account Id
+          type: string
+        created_at:
+          description: Created at
+          example: 2024-08-01T07:06:23.315Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created by
+          example: samsung-cloud-platform1@samsung.com
+          title: Created By
+          type: string
+        id:
+          description: Id
+          example: 5013a8a8adc648058438da76f6663c7a
+          title: Id
+          type: string
+        modified_at:
+          description: Modified at
+          example: 2024-08-01T07:06:23.315Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified by
+          example: samsung-cloud-platform2@samsung.com
+          title: Modified By
+          type: string
+        name:
+          description: Volume group name
+          example: cg-01
+          title: Name
+          type: string
+        num_of_block_storages:
+          default: 1
+          description: Number of volumes
+          title: Num Of Block Storages
+          type: integer
+        purpose:
+          description: Purpose
+          title: Purpose
+          type: string
+        state:
+          allOf:
+          - $ref: '#/components/schemas/VolumeGroupState'
+          description: Current state
+      title: VolumeGroupListModel
+    VolumeGroupListResponse:
+      example:
+        total_count: 1
+        volume_groups:
+        - account_id: b7dcf0aaac7446b3810d3435999b5951
+          purpose: purpose
+          modified_by: samsung-cloud-platform2@samsung.com
+          name: cg-01
+          created_at: 2024-08-01T07:06:23.315Z
+          id: 5013a8a8adc648058438da76f6663c7a
+          state: ""
+          modified_at: 2024-08-01T07:06:23.315Z
+          created_by: samsung-cloud-platform1@samsung.com
+          num_of_block_storages: 0
+        - account_id: b7dcf0aaac7446b3810d3435999b5951
+          purpose: purpose
+          modified_by: samsung-cloud-platform2@samsung.com
+          name: cg-01
+          created_at: 2024-08-01T07:06:23.315Z
+          id: 5013a8a8adc648058438da76f6663c7a
+          state: ""
+          modified_at: 2024-08-01T07:06:23.315Z
+          created_by: samsung-cloud-platform1@samsung.com
+          num_of_block_storages: 0
+      properties:
+        total_count:
+          default: 0
+          description: Total count
+          example: 1
+          title: Total Count
+          type: integer
+        volume_groups:
+          description: List of volume groups
+          items:
+            $ref: '#/components/schemas/VolumeGroupListModel'
+          type: array
+      title: VolumeGroupListResponse
+    VolumeGroupMemberRequest:
+      example:
+        volume_ids:
+        - 13666d6c32d4456e8421f7768d0bf225
+      properties:
+        volume_ids:
+          description: List of volume(Block Storage) id
+          example:
+          - 13666d6c32d4456e8421f7768d0bf225
+          items:
+            type: string
+          type: array
+      required:
+      - volume_ids
+      title: VolumeGroupMemberRequest
+    VolumeGroupMemberResponse:
+      example:
+        member_volumes:
+        - so_volume_id: so_volume_id
+          purpose: ""
+          disk_type: ""
+          name: volume-01
+          size_gb: 10
+          so_volume_name: so_volume_name
+          id: 92cd16fe8ebc4f73832513a172bf0000
+        - so_volume_id: so_volume_id
+          purpose: ""
+          disk_type: ""
+          name: volume-01
+          size_gb: 10
+          so_volume_name: so_volume_name
+          id: 92cd16fe8ebc4f73832513a172bf0000
+        id: id
+      properties:
+        id:
+          description: Volume group id
+          title: Id
+          type: string
+        member_volumes:
+          description: List of member volumes
+          items:
+            $ref: '#/components/schemas/MemberVolume'
+          type: array
+      title: VolumeGroupMemberResponse
+    VolumeGroupModel:
+      properties:
+        account_id:
+          description: Account id
+          example: b7dcf0aaac7446b3810d3435999b5951
+          title: Account Id
+          type: string
+        created_at:
+          description: Created at
+          example: 2024-08-01T07:06:23.315Z
+          title: Created At
+          type: string
+        created_by:
+          description: Created by
+          example: samsung-cloud-platform1@samsung.com
+          title: Created By
+          type: string
+        has_origin:
+          description: Whether origin relation exists
+          example: true
+          title: Has Origin
+          type: boolean
+        has_replication:
+          description: Whether replication relation exists
+          example: true
+          title: Has Replication
+          type: boolean
+        id:
+          description: Volume group id
+          example: 5013a8a8adc648058438da76f6663c7a
+          title: Id
+          type: string
+        member_volumes:
+          description: List of member volumes
+          items:
+            $ref: '#/components/schemas/MemberVolume'
+          type: array
+        modified_at:
+          description: Modified at
+          example: 2024-08-01T07:06:23.315Z
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified by
+          example: samsung-cloud-platform2@samsung.com
+          title: Modified By
+          type: string
+        name:
+          description: Volume group name
+          example: volume-group-01
+          title: Name
+          type: string
+        purpose:
+          allOf:
+          - $ref: '#/components/schemas/VolumeGroupPurpose'
+          description: Volume group purpose
+        snapshot_schedule:
+          allOf:
+          - $ref: '#/components/schemas/SnapshotSchedule'
+          description: Snapshot schedule
+        so_storage_id:
+          description: SO Storage ID
+          example: 200
+          title: So Storage Id
+          type: integer
+        so_volume_pool_id:
+          description: SO Volume Pool ID
+          example: bm-01
+          title: So Volume Pool Id
+          type: string
+        state:
+          allOf:
+          - $ref: '#/components/schemas/VolumeGroupState'
+          description: Current state
+        storage_volume_group_name:
+          description: Volume group name
+          example: go02407310544da8aadc775f
+          title: Storage Volume Group Name
+          type: string
+      title: VolumeGroupModel
+    VolumeGroupPurpose:
+      enum:
+      - ORG
+      - REPL
+      title: VolumeGroupPurpose
+      type: string
+    VolumeGroupReplicationCreateRequest:
+      example:
+        name: replica-vg-01
+        replication_volume_name_prefix: dr
+        region: kr-west2
+        cycle: ""
+      properties:
+        cycle:
+          allOf:
+          - $ref: '#/components/schemas/ReplicationCycle'
+          description: Replication cycle
+        name:
+          description: Replication volume group name
+          example: replica-vg-01
+          title: Name
+          type: string
+        region:
+          description: Region
+          example: kr-west2
+          title: Region
+          type: string
+        replication_volume_name_prefix:
+          description: Replication volume name prefix
+          example: dr
+          title: Replication Volume Name Prefix
+          type: string
+      required:
+      - cycle
+      - name
+      - region
+      - replication_volume_name_prefix
+      title: VolumeGroupReplicationCreateRequest
+    VolumeGroupReplicationDeleteResponse:
+      example:
+        result: true
+      properties:
+        result:
+          description: Result
+          title: Result
+          type: boolean
+      title: VolumeGroupReplicationDeleteResponse
+    VolumeGroupReplicationSyncTabModel:
+      properties:
+        related_volume_groups:
+          default: []
+          description: List of related volume groups
+          items:
+            $ref: '#/components/schemas/RelationVolumeGroupModel'
+          type: array
+        sync_cycle:
+          allOf:
+          - $ref: '#/components/schemas/ReplicationCycle'
+          description: Replication cycle
+          example: 5MIN
+        sync_state:
+          description: Replication state
+          example: SNAPMIRROED
+          title: Sync State
+          type: string
+      title: VolumeGroupReplicationSyncTabModel
+    VolumeGroupReplicationSyncTabResponse:
+      example:
+        result: ""
+      properties:
+        result:
+          allOf:
+          - $ref: '#/components/schemas/VolumeGroupReplicationSyncTabModel'
+          description: Volume group replication detail
+      title: VolumeGroupReplicationSyncTabResponse
+    VolumeGroupReplicationUpdateCycleRequest:
+      example:
+        cycle: ""
+      properties:
+        cycle:
+          allOf:
+          - $ref: '#/components/schemas/ReplicationCycle'
+          description: Replication cycle
+      required:
+      - cycle
+      title: VolumeGroupReplicationUpdateCycleRequest
+    VolumeGroupReplicationUpdateCycleResponse:
+      example:
+        volume_group_id: 8bf55e738d4e44b5a21dbe133a42ecbe
+        cycle: ""
+      properties:
+        cycle:
+          allOf:
+          - $ref: '#/components/schemas/ReplicationCycle'
+          description: Replication cycle
+        volume_group_id:
+          description: Volume group id
+          example: 8bf55e738d4e44b5a21dbe133a42ecbe
+          title: Volume Group Id
+          type: string
+      title: VolumeGroupReplicationUpdateCycleResponse
+    VolumeGroupReplicationUpdatePolicyRequest:
+      example:
+        policy: ""
+      properties:
+        policy:
+          allOf:
+          - $ref: '#/components/schemas/ReplicationPolicyMode'
+          description: Policy
+      required:
+      - policy
+      title: VolumeGroupReplicationUpdatePolicyRequest
+    VolumeGroupReplicationUpdatePolicyResponse:
+      example:
+        sync_state: SNAPMIRROED
+        cycle: ""
+      properties:
+        cycle:
+          allOf:
+          - $ref: '#/components/schemas/ReplicationCycle'
+          description: Replication cycle
+        sync_state:
+          description: Replication state
+          example: SNAPMIRROED
+          title: Sync State
+          type: string
+      title: VolumeGroupReplicationUpdatePolicyResponse
+    VolumeGroupResponse:
+      example:
+        result: ""
+      properties:
+        result:
+          allOf:
+          - $ref: '#/components/schemas/VolumeGroupModel'
+          description: Volume group detail
+      title: VolumeGroupResponse
+    VolumeGroupSnapshotDeleteResponse:
+      example:
+        volume_group_id: 8bf55e738d4e44b5a21dbe133a42ecbe
+        account_id: b7dcf0aaac7446b3810d3435999b5951
+        snapshot_id: jt5408923hjdsjfsdj10298dsfs
+      properties:
+        account_id:
+          default: ""
+          description: Account id
+          example: b7dcf0aaac7446b3810d3435999b5951
+          title: Account Id
+          type: string
+        snapshot_id:
+          default: ""
+          description: Snapshot id
+          example: jt5408923hjdsjfsdj10298dsfs
+          title: Snapshot Id
+          type: string
+        volume_group_id:
+          default: ""
+          description: Volume group id
+          example: 8bf55e738d4e44b5a21dbe133a42ecbe
+          title: Volume Group Id
+          type: string
+      title: VolumeGroupSnapshotDeleteResponse
+    VolumeGroupSnapshotListModel:
+      example:
+        snapshot_name: vo240812063154d4a6abf418e___snapshot-create-bm-cg.2024-08-13_141932
+        created_dt: time
+        snapshot_id: jt5408923hjdsjfsdj10298dsfs
+      properties:
+        created_dt:
+          default: ""
+          description: Created dt
+          example: time
+          title: Created Dt
+          type: string
+        snapshot_id:
+          default: ""
+          description: Snapshot id
+          example: jt5408923hjdsjfsdj10298dsfs
+          title: Snapshot Id
+          type: string
+        snapshot_name:
+          description: Snapshot name
+          example: vo240812063154d4a6abf418e___snapshot-create-bm-cg.2024-08-13_141932
+          title: Snapshot Name
+          type: string
+      title: VolumeGroupSnapshotListModel
+    VolumeGroupSnapshotListResponse:
+      example:
+        snapshots:
+        - snapshot_name: vo240812063154d4a6abf418e___snapshot-create-bm-cg.2024-08-13_141932
+          created_dt: time
+          snapshot_id: jt5408923hjdsjfsdj10298dsfs
+        - snapshot_name: vo240812063154d4a6abf418e___snapshot-create-bm-cg.2024-08-13_141932
+          created_dt: time
+          snapshot_id: jt5408923hjdsjfsdj10298dsfs
+        volume_group_id: 8bf55e738d4e44b5a21dbe133a42ecbe
+        is_snapshot_policy: false
+      properties:
+        is_snapshot_policy:
+          default: false
+          description: Whether to activate snapshot
+          example: false
+          title: Is Snapshot Policy
+          type: boolean
+        snapshots:
+          default: []
+          description: List of snapshots
+          items:
+            $ref: '#/components/schemas/VolumeGroupSnapshotListModel'
+          type: array
+        volume_group_id:
+          default: ""
+          description: Volume group id
+          example: 8bf55e738d4e44b5a21dbe133a42ecbe
+          title: Volume Group Id
+          type: string
+      title: VolumeGroupSnapshotListResponse
+    VolumeGroupSnapshotResponse:
+      example:
+        snapshot_name: vo240812063154d4a6abf418e___snapshot-create-bm-cg.2024-08-13_141932
+        volume_group_id: 8bf55e738d4e44b5a21dbe133a42ecbe
+        account_id: b7dcf0aaac7446b3810d3435999b5951
+        snapshot_id: jt5408923hjdsjfsdj10298dsfs
+      properties:
+        account_id:
+          default: ""
+          description: Account id
+          example: b7dcf0aaac7446b3810d3435999b5951
+          title: Account Id
+          type: string
+        snapshot_id:
+          default: ""
+          description: Snapshot id
+          example: jt5408923hjdsjfsdj10298dsfs
+          title: Snapshot Id
+          type: string
+        snapshot_name:
+          description: Snapshot name
+          example: vo240812063154d4a6abf418e___snapshot-create-bm-cg.2024-08-13_141932
+          title: Snapshot Name
+          type: string
+        volume_group_id:
+          default: ""
+          description: Volume group id
+          example: 8bf55e738d4e44b5a21dbe133a42ecbe
+          title: Volume Group Id
+          type: string
+      title: VolumeGroupSnapshotResponse
+    VolumeGroupSnapshotRestoreResponse:
+      example:
+        volume_group_id: 8bf55e738d4e44b5a21dbe133a42ecbe
+        account_id: b7dcf0aaac7446b3810d3435999b5951
+        snapshot_id: jt5408923hjdsjfsdj10298dsfs
+      properties:
+        account_id:
+          default: ""
+          description: Account id
+          example: b7dcf0aaac7446b3810d3435999b5951
+          title: Account Id
+          type: string
+        snapshot_id:
+          default: ""
+          description: Snapshot id
+          example: jt5408923hjdsjfsdj10298dsfs
+          title: Snapshot Id
+          type: string
+        volume_group_id:
+          default: ""
+          description: Volume group id
+          example: 8bf55e738d4e44b5a21dbe133a42ecbe
+          title: Volume Group Id
+          type: string
+      title: VolumeGroupSnapshotRestoreResponse
+    VolumeGroupSnapshotScheduleRequest:
+      example:
+        hour: 18
+        day_of_week: ""
+      properties:
+        day_of_week:
+          allOf:
+          - $ref: '#/components/schemas/DayOfWeek'
+          description: "Day of week(If this field is excluded, the schedule frequency\
+            \ is set to DAILY.)"
+        hour:
+          description: Hour
+          example: 18
+          title: Hour
+          type: integer
+      required:
+      - hour
+      title: VolumeGroupSnapshotScheduleRequest
+    VolumeGroupSnapshotScheduleResponse:
+      example:
+        volume_group_id: 5013a8a8adc648058438da76f6663c7a
+        hour: 18
+        day_of_week: ""
+        frequency: ""
+      properties:
+        day_of_week:
+          allOf:
+          - $ref: '#/components/schemas/DayOfWeek'
+          description: Day of week
+        frequency:
+          allOf:
+          - $ref: '#/components/schemas/SnapshotFrequency'
+          description: Frequency DAILY|WEEKLY|NONE
+        hour:
+          default: 0
+          description: Hour
+          example: 18
+          title: Hour
+          type: integer
+        volume_group_id:
+          description: Volume group id
+          example: 5013a8a8adc648058438da76f6663c7a
+          title: Volume Group Id
+          type: string
+      title: VolumeGroupSnapshotScheduleResponse
+    VolumeGroupState:
+      enum:
+      - CREATING
+      - AVAILABLE
+      - DELETING
+      - EDITING
+      - DELETED
+      - ERROR_DELETING
+      - ERROR_EDITING
+      - ERROR
+      title: VolumeGroupState
+      type: string
+    VolumeListModel:
+      example:
+        attachments:
+          id: d7682135392e42489948c189e29011cc
+          name: baremetal-01
+        purpose: ""
+        has_relation: false
+        iscsi_target_ips:
+        - 172.30.4.3
+        - 172.30.4.4
+        created_at: 2000-01-23T04:56:07.000+00:00
+        is_snapshot_activated: true
+        created_by: samsung-cloud-platform3@samsung.com
+        is_in_volume_group: false
+        disk_type: ""
+        modified_by: samsung-cloud-platform3@samsung.com
+        name: bs-01
+        size_gb: 10
+        id: 40d26841571e4a3cb97090e5efd39c9f
+        state: ""
+        volume_group: "{}"
+        modified_at: 2000-01-23T04:56:07.000+00:00
+      properties:
+        attachments:
+          description: Attached server
+          example:
+            id: d7682135392e42489948c189e29011cc
+            name: baremetal-01
+          items:
+            type: object
+          type: array
+        created_at:
+          description: Created at
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created by
+          example: samsung-cloud-platform3@samsung.com
+          title: Created By
+          type: string
+        disk_type:
+          allOf:
+          - $ref: '#/components/schemas/DiskType'
+          description: Disk type
+        has_relation:
+          description: Whether relation exists
+          example: false
+          title: Has Relation
+          type: boolean
+        id:
+          description: Id
+          example: 40d26841571e4a3cb97090e5efd39c9f
+          title: Id
+          type: string
+        is_in_volume_group:
+          description: Whether to belong to the volume group
+          example: false
+          title: Is In Volume Group
+          type: boolean
+        is_snapshot_activated:
+          description: Whether to activate snapshot
+          example: true
+          title: Is Snapshot Activated
+          type: boolean
+        iscsi_target_ips:
+          description: List of iscsi ips
+          example:
+          - 172.30.4.3
+          - 172.30.4.4
+          items:
+            type: string
+          type: array
+        modified_at:
+          description: Modified at
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified by
+          example: samsung-cloud-platform3@samsung.com
+          title: Modified By
+          type: string
+        name:
+          description: Name
+          example: bs-01
+          title: Name
+          type: string
+        purpose:
+          allOf:
+          - $ref: '#/components/schemas/BlockStoragePurpose'
+          description: Purpose
+        size_gb:
+          description: Size gb
+          example: 10
+          title: Size Gb
+          type: integer
+        state:
+          allOf:
+          - $ref: '#/components/schemas/BlockStorageState'
+          description: State
+        volume_group:
+          description: Volume group
+          title: Volume Group
+          type: object
+      title: VolumeListModel
+    VolumeListResponse:
+      example:
+        total_count: 1
+        volumes:
+        - attachments:
+            id: d7682135392e42489948c189e29011cc
+            name: baremetal-01
+          purpose: ""
+          has_relation: false
+          iscsi_target_ips:
+          - 172.30.4.3
+          - 172.30.4.4
+          created_at: 2000-01-23T04:56:07.000+00:00
+          is_snapshot_activated: true
+          created_by: samsung-cloud-platform3@samsung.com
+          is_in_volume_group: false
+          disk_type: ""
+          modified_by: samsung-cloud-platform3@samsung.com
+          name: bs-01
+          size_gb: 10
+          id: 40d26841571e4a3cb97090e5efd39c9f
+          state: ""
+          volume_group: "{}"
+          modified_at: 2000-01-23T04:56:07.000+00:00
+        - attachments:
+            id: d7682135392e42489948c189e29011cc
+            name: baremetal-01
+          purpose: ""
+          has_relation: false
+          iscsi_target_ips:
+          - 172.30.4.3
+          - 172.30.4.4
+          created_at: 2000-01-23T04:56:07.000+00:00
+          is_snapshot_activated: true
+          created_by: samsung-cloud-platform3@samsung.com
+          is_in_volume_group: false
+          disk_type: ""
+          modified_by: samsung-cloud-platform3@samsung.com
+          name: bs-01
+          size_gb: 10
+          id: 40d26841571e4a3cb97090e5efd39c9f
+          state: ""
+          volume_group: "{}"
+          modified_at: 2000-01-23T04:56:07.000+00:00
+      properties:
+        total_count:
+          default: 0
+          description: Total count
+          example: 1
+          title: Total Count
+          type: integer
+        volumes:
+          description: List of volumes
+          items:
+            $ref: '#/components/schemas/VolumeListModel'
+          type: array
+      title: VolumeListResponse
+    VolumeModel:
+      properties:
+        account_id:
+          description: Account id
+          example: b7dcf0aaac7446b3810d3435999b5951
+          title: Account Id
+          type: string
+        attachments:
+          description: Attached server
+          items:
+            $ref: '#/components/schemas/AttachedServer'
+          type: array
+        created_at:
+          description: Created at
+          example: 2024-08-01T07:06:23.315Z
+          title: Created At
+          type: string
+        created_by:
+          description: Created by
+          example: samsung-cloud-platform1@samsung.com
+          title: Created By
+          type: string
+        disk_type:
+          allOf:
+          - $ref: '#/components/schemas/DiskType'
+          description: Disk type
+        external_errors:
+          description: Error during external call
+          items:
+            $ref: '#/components/schemas/ExternalError'
+          type: array
+        has_origin:
+          description: Whether origin relation exists
+          example: true
+          title: Has Origin
+          type: boolean
+        has_replication:
+          description: Whether replication relation exists
+          example: true
+          title: Has Replication
+          type: boolean
+        id:
+          description: Id
+          example: 5013a8a8adc648058438da76f6663c7a
+          title: Id
+          type: string
+        is_encryption:
+          description: Whether to apply encryption
+          example: true
+          title: Is Encryption
+          type: boolean
+        iscsi_target_ips:
+          description: List of iscsi ips
+          example:
+          - 172.30.4.3
+          - 172.30.4.4
+          items:
+            type: string
+          type: array
+        modified_at:
+          description: Modified at
+          example: 2024-08-01T07:06:23.315Z
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified by
+          example: samsung-cloud-platform2@samsung.com
+          title: Modified By
+          type: string
+        name:
+          description: Volume name
+          example: bs-01
+          title: Name
+          type: string
+        previous_state:
+          allOf:
+          - $ref: '#/components/schemas/BlockStorageState'
+          description: Previous state
+        purpose:
+          allOf:
+          - $ref: '#/components/schemas/BlockStoragePurpose'
+          description: Volume purpose
+        size_gb:
+          description: Size gb
+          example: 10
+          title: Size Gb
+          type: integer
+        snapshot_rate:
+          default: 0
+          description: Snapshot rate
+          example: 100
+          title: Snapshot Rate
+          type: integer
+        snapshot_schedule:
+          allOf:
+          - $ref: '#/components/schemas/SnapshotSchedule'
+          description: Snapshot schedule
+        srn:
+          description: SRN
+          example: srn:dev1::b7dcf0aaac7446b3810d3435999b5951:RegionOne::scp-baremetal-blockstorage:volume/2abaf2635c864bf9a5b5ae4f3bb10ac5
+          title: Srn
+          type: string
+        state:
+          allOf:
+          - $ref: '#/components/schemas/BlockStorageState'
+          description: Current state
+        storage_volume_name:
+          description: Storage volume name
+          example: vo202407310544da8aadc775f
+          title: Storage Volume Name
+          type: string
+        volume_group:
+          allOf:
+          - $ref: '#/components/schemas/VolumeGroupInfo'
+          description: Volume group
+      title: VolumeModel
+    VolumePermission:
+      enum:
+      - READ
+      - READ_WRITE
+      - UNKNOWN
+      title: VolumePermission
+      type: string
+    VolumeReplicationCreateRequest:
+      example:
+        name: replica-bs-01
+        region: kr-west1
+        cycle: ""
+      properties:
+        cycle:
+          allOf:
+          - $ref: '#/components/schemas/ReplicationCycle'
+          description: Replication cycle
+        name:
+          description: Replication volume name
+          example: replica-bs-01
+          title: Name
+          type: string
+        region:
+          description: Region
+          example: kr-west1
+          title: Region
+          type: string
+      required:
+      - cycle
+      - name
+      - region
+      title: VolumeReplicationCreateRequest
+    VolumeReplicationCycleRequest:
+      example:
+        cycle: 5MIN
+      properties:
+        cycle:
+          allOf:
+          - $ref: '#/components/schemas/ReplicationCycle'
+          description: Replication cycle
+          example: 5MIN
+      required:
+      - cycle
+      title: VolumeReplicationCycleRequest
+    VolumeReplicationCycleResponse:
+      example:
+        volume_id: 8bf55e738d4e44b5a21dbe133a42ecbe
+        cycle: 5MIN
+      properties:
+        cycle:
+          allOf:
+          - $ref: '#/components/schemas/ReplicationCycle'
+          description: Replication cycle
+          example: 5MIN
+        volume_id:
+          description: Volume id
+          example: 8bf55e738d4e44b5a21dbe133a42ecbe
+          title: Volume Id
+          type: string
+      title: VolumeReplicationCycleResponse
+    VolumeReplicationModel:
+      properties:
+        related_volumes:
+          default: []
+          description: List of related volumes
+          items:
+            $ref: '#/components/schemas/RelationVolumeModel'
+          type: array
+        sync_cycle:
+          allOf:
+          - $ref: '#/components/schemas/ReplicationCycle'
+          description: Replication cycle
+          example: 5MIN
+        sync_state:
+          description: Replication state
+          example: SNAPMIRROED
+          title: Sync State
+          type: string
+      title: VolumeReplicationModel
+    VolumeReplicationPolicyRequest:
+      example:
+        policy: ""
+      properties:
+        policy:
+          allOf:
+          - $ref: '#/components/schemas/ReplicationPolicyMode'
+          description: Policy
+      required:
+      - policy
+      title: VolumeReplicationPolicyRequest
+    VolumeReplicationPolicyResponse:
+      example:
+        sync_cycle: ""
+        sync_state: SNAPMIRROED
+      properties:
+        sync_cycle:
+          allOf:
+          - $ref: '#/components/schemas/ReplicationCycle'
+          description: Replication cycle
+        sync_state:
+          description: Replication state
+          example: SNAPMIRROED
+          title: Sync State
+          type: string
+      title: VolumeReplicationPolicyResponse
+    VolumeReplicationResponse:
+      example:
+        result: ""
+      properties:
+        result:
+          allOf:
+          - $ref: '#/components/schemas/VolumeReplicationModel'
+          description: Volume replication detail
+      title: VolumeReplicationResponse
+    VolumeResponse:
+      example:
+        result: ""
+      properties:
+        result:
+          allOf:
+          - $ref: '#/components/schemas/VolumeModel'
+          description: Volume detail
+      title: VolumeResponse
+    VolumeSnapshotDeleteResponse:
+      example:
+        account_id: b7dcf0aaac7446b3810d3435999b5951
+        volume_id: 8bf55e738d4e44b5a21dbe133a42ecbe
+        snapshot_id: jt5408923hjdsjfsdj10298dsfs
+      properties:
+        account_id:
+          default: ""
+          description: Account id
+          example: b7dcf0aaac7446b3810d3435999b5951
+          title: Account Id
+          type: string
+        snapshot_id:
+          default: ""
+          description: Snapshot id
+          example: jt5408923hjdsjfsdj10298dsfs
+          title: Snapshot Id
+          type: string
+        volume_id:
+          default: ""
+          description: Volume id
+          example: 8bf55e738d4e44b5a21dbe133a42ecbe
+          title: Volume Id
+          type: string
+      title: VolumeSnapshotDeleteResponse
+    VolumeSnapshotListModel:
+      example:
+        snapshot_name: vo240812063154d4a6abf418e___snapshot-create-bm-blockstorage.2024-08-13_141932
+        snapshot_size_mb: "0.0"
+        created_dt: time
+        snapshot_id: jt5408923hjdsjfsdj10298dsfs
+      properties:
+        created_dt:
+          default: ""
+          description: Created dt
+          example: time
+          title: Created Dt
+          type: string
+        snapshot_id:
+          default: ""
+          description: Snapshot id
+          example: jt5408923hjdsjfsdj10298dsfs
+          title: Snapshot Id
+          type: string
+        snapshot_name:
+          description: Snapshot name
+          example: vo240812063154d4a6abf418e___snapshot-create-bm-blockstorage.2024-08-13_141932
+          title: Snapshot Name
+          type: string
+        snapshot_size_mb:
+          default: 0
+          description: Snapshot size(MB)
+          example: "0.0"
+          title: Snapshot Size Mb
+          type: number
+      title: VolumeSnapshotListModel
+    VolumeSnapshotListResponse:
+      example:
+        snapshot_capacity_rate: "0.0"
+        snapshots:
+        - snapshot_name: vo240812063154d4a6abf418e___snapshot-create-bm-blockstorage.2024-08-13_141932
+          snapshot_size_mb: "0.0"
+          created_dt: time
+          snapshot_id: jt5408923hjdsjfsdj10298dsfs
+        - snapshot_name: vo240812063154d4a6abf418e___snapshot-create-bm-blockstorage.2024-08-13_141932
+          snapshot_size_mb: "0.0"
+          created_dt: time
+          snapshot_id: jt5408923hjdsjfsdj10298dsfs
+        volume_id: 8bf55e738d4e44b5a21dbe133a42ecbe
+        snapshot_capacity_mb: "0.0"
+        snapshot_total_usage: "0.0"
+        is_snapshot_policy: false
+      properties:
+        is_snapshot_policy:
+          default: false
+          description: Whether to activate snapshot
+          example: false
+          title: Is Snapshot Policy
+          type: boolean
+        snapshot_capacity_mb:
+          default: 0
+          description: Snapshot capacity(MB)
+          example: "0.0"
+          title: Snapshot Capacity Mb
+          type: number
+        snapshot_capacity_rate:
+          default: 0
+          description: Snapshot capacity rate
+          example: "0.0"
+          title: Snapshot Capacity Rate
+          type: number
+        snapshot_total_usage:
+          default: 0
+          description: Snapshot total usage
+          example: "0.0"
+          title: Snapshot Total Usage
+          type: number
+        snapshots:
+          default: []
+          description: List of snapshots
+          items:
+            $ref: '#/components/schemas/VolumeSnapshotListModel'
+          type: array
+        volume_id:
+          default: ""
+          description: Volume id
+          example: 8bf55e738d4e44b5a21dbe133a42ecbe
+          title: Volume Id
+          type: string
+      title: VolumeSnapshotListResponse
+    VolumeSnapshotRateRequest:
+      example:
+        snapshot_rate: 100
+      properties:
+        snapshot_rate:
+          description: Snapshot rate
+          example: 100
+          title: Snapshot Rate
+          type: integer
+      required:
+      - snapshot_rate
+      title: VolumeSnapshotRateRequest
+    VolumeSnapshotRateResponse:
+      example:
+        snapshot_rate: 100
+        volume_id: 40d26841571e4a3cb97090e5efd39c9f
+        is_snapshot_activated: true
+      properties:
+        is_snapshot_activated:
+          description: Whether to activate snapshot
+          example: true
+          title: Is Snapshot Activated
+          type: boolean
+        snapshot_rate:
+          description: Snapshot rate
+          example: 100
+          title: Snapshot Rate
+          type: integer
+        volume_id:
+          description: Volume id
+          example: 40d26841571e4a3cb97090e5efd39c9f
+          title: Volume Id
+          type: string
+      title: VolumeSnapshotRateResponse
+    VolumeSnapshotResponse:
+      example:
+        snapshot_name: vo240812063154d4a6abf418e___snapshot-create-bm-blockstorage.2024-08-13_141932
+        account_id: b7dcf0aaac7446b3810d3435999b5951
+        volume_id: 8bf55e738d4e44b5a21dbe133a42ecbe
+        snapshot_id: jt5408923hjdsjfsdj10298dsfs
+      properties:
+        account_id:
+          default: ""
+          description: Account id
+          example: b7dcf0aaac7446b3810d3435999b5951
+          title: Account Id
+          type: string
+        snapshot_id:
+          default: ""
+          description: Snapshot id
+          example: jt5408923hjdsjfsdj10298dsfs
+          title: Snapshot Id
+          type: string
+        snapshot_name:
+          description: Snapshot name
+          example: vo240812063154d4a6abf418e___snapshot-create-bm-blockstorage.2024-08-13_141932
+          title: Snapshot Name
+          type: string
+        volume_id:
+          default: ""
+          description: Volume id
+          example: 8bf55e738d4e44b5a21dbe133a42ecbe
+          title: Volume Id
+          type: string
+      title: VolumeSnapshotResponse
+    VolumeSnapshotRestoreResponse:
+      example:
+        account_id: b7dcf0aaac7446b3810d3435999b5951
+        volume_id: 8bf55e738d4e44b5a21dbe133a42ecbe
+        snapshot_id: jt5408923hjdsjfsdj10298dsfs
+      properties:
+        account_id:
+          default: ""
+          description: Account id
+          example: b7dcf0aaac7446b3810d3435999b5951
+          title: Account Id
+          type: string
+        snapshot_id:
+          default: ""
+          description: Snapshot id
+          example: jt5408923hjdsjfsdj10298dsfs
+          title: Snapshot Id
+          type: string
+        volume_id:
+          default: ""
+          description: Volume id
+          example: 8bf55e738d4e44b5a21dbe133a42ecbe
+          title: Volume Id
+          type: string
+      title: VolumeSnapshotRestoreResponse
+    VolumeSnapshotScheduleRequest:
+      example:
+        hour: 18
+        day_of_week: ""
+      properties:
+        day_of_week:
+          allOf:
+          - $ref: '#/components/schemas/DayOfWeek'
+          description: "Day of week(If this field is excluded, the schedule frequency\
+            \ is set to DAILY.)"
+        hour:
+          description: Hour
+          example: 18
+          title: Hour
+          type: integer
+      required:
+      - hour
+      title: VolumeSnapshotScheduleRequest
+    VolumeSnapshotScheduleResponse:
+      example:
+        hour: 18
+        volume_id: a95407b5a35b4e9eb9fd63a71fe6ec28
+        day_of_week: ""
+        frequency: ""
+      properties:
+        day_of_week:
+          allOf:
+          - $ref: '#/components/schemas/DayOfWeek'
+          default: ""
+          description: Day of week
+        frequency:
+          allOf:
+          - $ref: '#/components/schemas/SnapshotFrequency'
+          description: Frequency DAILY|WEEKLY|NONE
+        hour:
+          description: Hour
+          example: 18
+          title: Hour
+          type: integer
+        volume_id:
+          description: Volume id
+          example: a95407b5a35b4e9eb9fd63a71fe6ec28
+          title: Volume Id
+          type: string
+      title: VolumeSnapshotScheduleResponse
+  securitySchemes:
+    X-Auth-Token:
+      in: header
+      name: X-Auth-Token
+      type: apiKey
+x-app-name: scp-baremetal-blockstorage
+x-package-name: scp_baremetal_blockstorage
+x-service-type: scp-baremetal-blockstorage
+x-service-versions:
+  baremetal_blockstorage_service:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-02-23
+    status: CURRENT
+x-url-prefix: ""

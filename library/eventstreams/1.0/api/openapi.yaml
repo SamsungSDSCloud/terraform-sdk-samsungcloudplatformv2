@@ -1,0 +1,3126 @@
+openapi: 3.1.0
+info:
+  description: OSSCP Scp-dbaas Project
+  title: OSSCP Scp-dbaas Project
+  version: 0.0.1.dev2187
+servers:
+- url: ""
+tags:
+- description: Dbaas Common API
+  name: dbaas-common.v1.DbaasCommonApi
+- description: Dbaas Admin API
+  name: dbaas-common.v1.DbaasAdminApi
+- description: Postgresql Master Data API
+  name: postgresql.v1.PostgresqlMasterDataApi
+- description: Postgresql Clusters API
+  name: postgresql.v1.PostgresqlClustersApi
+- description: Postgresql Clusters API
+  name: postgresql.v1.PostgresqlInstancesApi
+- description: Postgresql Parameters API
+  name: postgresql.v1.PostgresqlParametersApi
+- description: Postgresql Replicas API
+  name: postgresql.v1.PostgresqlReplicaApi
+- description: Postgresql Backups API
+  name: postgresql.v1.PostgresqlBackupApi
+- description: Postgresql Auditlog API
+  name: postgresql.v1.PostgresqlAuditlogApi
+- description: Postgresql MinorPatch API
+  name: postgresql.v1.PostgresqlMinorPatchApi
+- description: Postgresql Maintenance API
+  name: postgresql.v1.PostgresqlMaintenanceApi
+- description: Postgresql Log Export API
+  name: postgresql.v1.PostgresqlLogExportApi
+- description: Postgresql Archive API
+  name: postgresql.v1.PostgresqlArchiveApi
+- description: Postgresql Console API
+  name: postgresql.v1.PostgresqlConsoleApi
+- description: Mariadb Master Data API
+  name: mariadb.v1.MariadbMasterDataApi
+- description: Mariadb Clusters API
+  name: mariadb.v1.MariadbClustersApi
+- description: Mariadb Clusters API
+  name: mariadb.v1.MariadbInstancesApi
+- description: Mariadb Replicas API
+  name: mariadb.v1.MariadbReplicasApi
+- description: Mariadb Backups API
+  name: mariadb.v1.MariadbBackupApi
+- description: Mariadb Auditlog API
+  name: mariadb.v1.MariadbAuditlogApi
+- description: Mariadb Parameters API
+  name: mariadb.v1.MariadbParametersApi
+- description: Mariadb Maintenance API
+  name: mariadb.v1.MariadbMaintenanceApi
+- description: Mariadb MinorPatch API
+  name: mariadb.v1.MariadbMinorPatchApi
+- description: Mariadb Log Export API
+  name: mariadb.v1.MariadbLogExportApi
+- description: Mariadb Archive API
+  name: mariadb.v1.MariadbArchiveApi
+- description: Mariadb Console API
+  name: mariadb.v1.MariadbConsoleApi
+- description: CacheStore Master Data API
+  name: cachestore.v1.CacheStoreMasterDataApi
+- description: CacheStore Clusters API
+  name: cachestore.v1.CacheStoreClustersApi
+- description: CacheStore Instances API
+  name: cachestore.v1.CacheStoreInstancesApi
+- description: CacheStore Backups API
+  name: cachestore.v1.CacheStoreBackupApi
+- description: CacheStore Parameters API
+  name: cachestore.v1.CacheStoreParametersApi
+- description: CacheStore Command API
+  name: cachestore.v1.CacheStoreCommandApi
+- description: CacheStore Maintenance API
+  name: cachestore.v1.CacheStoreMaintenanceApi
+- description: Mysql Master Data API
+  name: mysql.v1.MysqlMasterDataApi
+- description: Mysql Clusters API
+  name: mysql.v1.MysqlClustersApi
+- description: Mysql Replicas API
+  name: mysql.v1.MysqlReplicaApi
+- description: Mysql Backups API
+  name: mysql.v1.MysqlBackupApi
+- description: Mysql Clusters API
+  name: mysql.v1.MysqlInstancesApi
+- description: Mysql Maintenance API
+  name: mysql.v1.MysqlMaintenanceApi
+- description: Mysql Parameters API
+  name: mysql.v1.MysqlParametersApi
+- description: Mysql MinorPatch API
+  name: mysql.v1.MysqlMinorPatchApi
+- description: Mysql Log Export API
+  name: mysql.v1.MysqlLogExportApi
+- description: Mysql Archive API
+  name: mysql.v1.MysqlArchiveApi
+- description: Mysql Console API
+  name: mysql.v1.MysqlConsoleApi
+- description: Sqlserver Master Data API
+  name: sqlserver.v1.SqlserverMasterDataApi
+- description: Sqlserver Clusters API
+  name: sqlserver.v1.SqlserverClustersApi
+- description: Sqlserver Instances API
+  name: sqlserver.v1.SqlserverInstancesApi
+- description: Sqlserver Maintenance API
+  name: sqlserver.v1.SqlserverMaintenanceApi
+- description: Sqlserver Parameters API
+  name: sqlserver.v1.SqlserverParametersApi
+- description: Sqlserver Backups API
+  name: sqlserver.v1.SqlserverBackupApi
+- description: Sqlserver Databases API
+  name: sqlserver.v1.SqlserverDatabasesApi
+- description: Sqlserver Auditlog API
+  name: sqlserver.v1.SqlserverAuditlogApi
+- description: Sqlserver MinorPatch API
+  name: sqlserver.v1.SqlserverMinorPatchApi
+- description: Sqlserver Log Export API
+  name: sqlserver.v1.SqlserverLogExportApi
+- description: Sqlserver Console API
+  name: sqlserver.v1.SqlserverConsoleApi
+- description: SearchEngine Master Data API
+  name: searchengine.v1.SearchEngineMasterDataApi
+- description: SearchEngine Clusters API
+  name: searchengine.v1.SearchEngineClustersApi
+- description: SearchEngine Backups API
+  name: searchengine.v1.SearchEngineBackupApi
+- description: SearchEngine Instances API
+  name: searchengine.v1.SearchEngineInstancesApi
+- description: SearchEngine Maintenance API
+  name: searchengine.v1.SearchEngineMaintenanceApi
+- description: EventStreams Master Data API
+  name: eventstreams.v1.EventStreamsMasterDataApi
+- description: EventStreams Clusters API
+  name: eventstreams.v1.EventStreamsClustersApi
+- description: EventStreams Instances API
+  name: eventstreams.v1.EventStreamsInstancesApi
+- description: EventStreams Maintenance API
+  name: eventstreams.v1.EventStreamsMaintenanceApi
+- description: EventStreams Parameters API
+  name: eventstreams.v1.EventStreamsParametersApi
+- description: Epas Master Data API
+  name: epas.v1.EpasMasterDataApi
+- description: EPAS Clusters API
+  name: epas.v1.EpasClustersApi
+- description: Epas Clusters API
+  name: epas.v1.EpasInstancesApi
+- description: Epas Parameters API
+  name: epas.v1.EpasParametersApi
+- description: Epas Replicas API
+  name: epas.v1.EpasReplicasApi
+- description: Epas Backups API
+  name: epas.v1.EpasBackupApi
+- description: Epas Auditlog API
+  name: epas.v1.EpasAuditlogApi
+- description: Epas MinorPatch API
+  name: epas.v1.EpasMinorPatchApi
+- description: Epas Maintenance API
+  name: epas.v1.EpasMaintenanceApi
+- description: Epas Log Export API
+  name: epas.v1.EpasLogExportApi
+- description: Epas Archive API
+  name: epas.v1.EpasArchiveApi
+- description: Epas Console API
+  name: epas.v1.EpasConsoleApi
+- description: Vertica Clusters API
+  name: vertica.v1.VerticaClustersApi
+- description: Vertica Master Data API
+  name: vertica.v1.VerticaMasterDataApi
+- description: Vertica Backups API
+  name: vertica.v1.VerticaBackupApi
+- description: Vertica Instances API
+  name: vertica.v1.VerticaInstancesApi
+- description: Vertica Maintenance API
+  name: vertica.v1.VerticaMaintenanceApi
+paths:
+  /v1/block-storage-groups/{block_storage_group_id}/resize:
+    post:
+      description: Set Block Storage Size.
+      operationId: eventstreamsSetBlockStorageSize
+      parameters:
+      - description: Block storage group ID
+        example: afc33891202643ba8ba1a5298a1affff
+        explode: false
+        in: path
+        name: block_storage_group_id
+        required: true
+        schema:
+          description: Block storage group ID
+          example: afc33891202643ba8ba1a5298a1affff
+          title: Block Storage Group Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResizeBlockStorageGroupRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - X-Auth-Token: []
+      summary: Set Block Storage Size
+      tags:
+      - eventstreams.v1.EventStreamsInstancesApi
+      x-action-id: eventstreams:SetBlockStorageSize
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: block_storage_size_set
+      x-not-before: 2025-07-01
+      x-operation-id: eventstreamsSetBlockStorageSize
+      x-resource: EventStreams
+  /v1/clusters:
+    get:
+      description: List Clusters.
+      operationId: eventstreamsListClusters
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          pattern: ^(name|service_state|created_at):(asc|desc)$
+          type: string
+        style: form
+      - description: Cluster name
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Service state
+        explode: true
+        in: query
+        name: service_state
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterPageResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Clusters
+      tags:
+      - eventstreams.v1.EventStreamsClustersApi
+      x-action-id: eventstreams:ListClusters
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: cluster_list
+      x-not-before: 2025-07-01
+      x-operation-id: eventstreamsListClusters
+      x-resource: EventStreams
+    post:
+      description: Create Cluster.
+      operationId: eventstreamsCreateCluster
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventStreamsClusterCreateRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Create Cluster
+      tags:
+      - eventstreams.v1.EventStreamsClustersApi
+      x-action-id: eventstreams:CreateCluster
+      x-api-access-level: CREATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: cluster_create
+      x-not-before: 2025-07-01
+      x-operation-id: eventstreamsCreateCluster
+      x-resource: EventStreams
+  /v1/clusters/{cluster_id}:
+    delete:
+      description: Terminate Cluster.
+      operationId: eventstreamsDeleteCluster
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Terminate Cluster
+      tags:
+      - eventstreams.v1.EventStreamsClustersApi
+      x-action-id: eventstreams:DeleteCluster
+      x-api-access-level: DELETE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: cluster_delete
+      x-not-before: 2025-07-01
+      x-operation-id: eventstreamsDeleteCluster
+      x-resource: EventStreams
+    get:
+      description: Show Cluster.
+      operationId: eventstreamsShowCluster
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventStreamsClusterDetailResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Show Cluster
+      tags:
+      - eventstreams.v1.EventStreamsClustersApi
+      x-action-id: eventstreams:ShowCluster
+      x-api-access-level: READ
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: cluster_show
+      x-not-before: 2025-07-01
+      x-operation-id: eventstreamsShowCluster
+      x-resource: EventStreams
+  /v1/clusters/{cluster_id}/add-instances:
+    post:
+      description: Add Instances.
+      operationId: eventstreamsAddInstances
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventStreamsClusterAddInstancesRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Add Instances
+      tags:
+      - eventstreams.v1.EventStreamsClustersApi
+      x-action-id: eventstreams:AddInstances
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: instance_add
+      x-not-before: 2025-07-01
+      x-operation-id: eventstreamsAddInstances
+      x-resource: EventStreams
+  /v1/clusters/{cluster_id}/maintenance:
+    delete:
+      description: Unset Maintenance.
+      operationId: eventstreamsUnsetMaintenance
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Unset Maintenance
+      tags:
+      - eventstreams.v1.EventStreamsMaintenanceApi
+      x-action-id: eventstreams:UnsetMaintenance
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: maintenance_unset
+      x-not-before: 2025-07-01
+      x-operation-id: eventstreamsUnsetMaintenance
+      x-resource: EventStreams
+    post:
+      description: Set Maintenance.
+      operationId: eventstreamsSetMaintenance
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MaintenanceRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Set Maintenance
+      tags:
+      - eventstreams.v1.EventStreamsMaintenanceApi
+      x-action-id: eventstreams:SetMaintenance
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: maintenance_set
+      x-not-before: 2025-07-01
+      x-operation-id: eventstreamsSetMaintenance
+      x-resource: EventStreams
+  /v1/clusters/{cluster_id}/parameters:
+    get:
+      description: List Parameter Values.
+      operationId: eventstreamsListParameterValues
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParametersResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Parameter Values
+      tags:
+      - eventstreams.v1.EventStreamsParametersApi
+      x-action-id: eventstreams:ListParameterValues
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: parameter_value_list
+      x-not-before: 2025-07-01
+      x-operation-id: eventstreamsListParameterValues
+      x-resource: EventStreams
+    put:
+      description: Set Parameter Values.
+      operationId: eventstreamsSetParameterValues
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParametersRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Set Parameter Values
+      tags:
+      - eventstreams.v1.EventStreamsParametersApi
+      x-action-id: eventstreams:SetParameterValues
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: parameter_value_set
+      x-not-before: 2025-07-01
+      x-operation-id: eventstreamsSetParameterValues
+      x-resource: EventStreams
+  /v1/clusters/{cluster_id}/parameters/sync:
+    post:
+      description: Synchronize Parameter Values.
+      operationId: eventstreamsSyncParameterValues
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Synchronize Parameter Values
+      tags:
+      - eventstreams.v1.EventStreamsParametersApi
+      x-action-id: eventstreams:SyncParameterValues
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: parameter_value_sync
+      x-not-before: 2025-07-01
+      x-operation-id: eventstreamsSyncParameterValues
+      x-resource: EventStreams
+  /v1/clusters/{cluster_id}/restart:
+    post:
+      description: Restart Cluster.
+      operationId: eventstreamsRestartCluster
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Restart Cluster
+      tags:
+      - eventstreams.v1.EventStreamsClustersApi
+      x-action-id: eventstreams:RestartCluster
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: cluster_restart
+      x-not-before: 2025-07-01
+      x-operation-id: eventstreamsRestartCluster
+      x-resource: EventStreams
+  /v1/clusters/{cluster_id}/security-group-rules:
+    post:
+      description: Set Security Group Rules.
+      operationId: eventstreamsSetSecurityGroupRules
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSecurityGroupRulesRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - X-Auth-Token: []
+      summary: Set Security Group Rules
+      tags:
+      - eventstreams.v1.EventStreamsInstancesApi
+      x-action-id: eventstreams:SetSecurityGroupRules
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: security_group_rule_set
+      x-not-before: 2025-07-01
+      x-operation-id: eventstreamsSetSecurityGroupRules
+      x-resource: EventStreams
+  /v1/clusters/{cluster_id}/start:
+    post:
+      description: Start Cluster.
+      operationId: eventstreamsStartCluster
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Start Cluster
+      tags:
+      - eventstreams.v1.EventStreamsClustersApi
+      x-action-id: eventstreams:StartCluster
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: cluster_start
+      x-not-before: 2025-07-01
+      x-operation-id: eventstreamsStartCluster
+      x-resource: EventStreams
+  /v1/clusters/{cluster_id}/stop:
+    post:
+      description: Stop Cluster.
+      operationId: eventstreamsStopCluster
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Stop Cluster
+      tags:
+      - eventstreams.v1.EventStreamsClustersApi
+      x-action-id: eventstreams:StopCluster
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: cluster_stop
+      x-not-before: 2025-07-01
+      x-operation-id: eventstreamsStopCluster
+      x-resource: EventStreams
+  /v1/clusters/{cluster_id}/sync-state:
+    post:
+      description: Synchronize Cluster State.
+      operationId: eventstreamsSyncClusterState
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - X-Auth-Token: []
+      summary: Synchronize Cluster State
+      tags:
+      - eventstreams.v1.EventStreamsClustersApi
+      x-action-id: eventstreams:SyncClusterState
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: cluster_state_sync
+      x-not-before: 2025-07-01
+      x-operation-id: eventstreamsSyncClusterState
+      x-resource: EventStreams
+  /v1/engine-versions:
+    get:
+      description: List Engine Versions.
+      operationId: eventstreamsListEngineVersions
+      parameters:
+      - description: DBaaS engine version ID
+        explode: true
+        in: query
+        name: id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Product image type
+        explode: true
+        in: query
+        name: product_image_type
+        required: false
+        schema:
+          $ref: '#/components/schemas/ProductImageType'
+        style: form
+      - description: EoS included
+        explode: true
+        in: query
+        name: eos_included
+        required: false
+        schema:
+          default: false
+          description: EoS included
+          title: Eos Included
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EngineListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Engine Versions
+      tags:
+      - eventstreams.v1.EventStreamsMasterDataApi
+      x-action-id: eventstreams:ListEngineVersions
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: engine_version_list
+      x-not-before: 2025-07-01
+      x-operation-id: eventstreamsListEngineVersions
+      x-resource: EventStreams
+  /v1/engine-versions/{dbaas_engine_version_id}/properties:
+    get:
+      description: List Engine Version Properties.
+      operationId: eventstreamsListEngineVersionProperties
+      parameters:
+      - description: DBaaS engine version ID
+        explode: false
+        in: path
+        name: dbaas_engine_version_id
+        required: true
+        schema:
+          description: DBaaS engine version ID
+          title: Dbaas Engine Version Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnginePropertyListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Engine Version Properties
+      tags:
+      - eventstreams.v1.EventStreamsMasterDataApi
+      x-action-id: eventstreams:ListEngineVersionProperties
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: engine_version_property_list
+      x-not-before: 2025-07-01
+      x-operation-id: eventstreamsListEngineVersionProperties
+      x-resource: EventStreams
+  /v1/instance-groups/{instance_group_id}/resize:
+    post:
+      description: Set Server Type.
+      operationId: eventstreamsSetServerType
+      parameters:
+      - description: Instance group ID
+        explode: false
+        in: path
+        name: instance_group_id
+        required: true
+        schema:
+          description: Instance group ID
+          title: Instance Group Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstanceGroupResizeRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - X-Auth-Token: []
+      summary: Set Server Type
+      tags:
+      - eventstreams.v1.EventStreamsInstancesApi
+      x-action-id: eventstreams:SetServerType
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: server_type_set
+      x-not-before: 2025-07-01
+      x-operation-id: eventstreamsSetServerType
+      x-resource: EventStreams
+  /v1/parameter-groups:
+    get:
+      description: List Parameter Groups.
+      operationId: eventstreamsListParameterGroups
+      parameters:
+      - description: Software major version
+        explode: true
+        in: query
+        name: major_version
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Product image type
+        explode: true
+        in: query
+        name: product_image_type
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterGroupListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Parameter Groups
+      tags:
+      - eventstreams.v1.EventStreamsMasterDataApi
+      x-action-id: eventstreams:ListParameterGroups
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: parameter_group_list
+      x-not-before: 2025-07-01
+      x-operation-id: eventstreamsListParameterGroups
+      x-resource: EventStreams
+  /v1/parameters:
+    get:
+      description: List Parameters.
+      operationId: eventstreamsListParameters
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Parameter group ID
+        explode: true
+        in: query
+        name: dbaas_parameter_group_id
+        required: true
+        schema:
+          description: Parameter group ID
+          title: Dbaas Parameter Group Id
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterPageResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Parameters
+      tags:
+      - eventstreams.v1.EventStreamsMasterDataApi
+      x-action-id: eventstreams:ListParameters
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: parameter_list
+      x-not-before: 2025-07-01
+      x-operation-id: eventstreamsListParameters
+      x-resource: EventStreams
+  /v1/requests/{request_id}:
+    get:
+      description: Show Request.
+      operationId: eventstreamsShowRequest
+      parameters:
+      - description: Request ID
+        explode: false
+        in: path
+        name: request_id
+        required: true
+        schema:
+          description: Request ID
+          title: Request Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestStateResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Show Request
+      tags:
+      - eventstreams.v1.EventStreamsMasterDataApi
+      x-action-id: eventstreams:ShowRequest
+      x-api-access-level: READ
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: request_show
+      x-not-before: 2025-07-01
+      x-operation-id: eventstreamsShowRequest
+      x-resource: EventStreams
+  /v1/server-types:
+    get:
+      description: List Server Types.
+      operationId: eventstreamsListServerTypes
+      parameters:
+      - description: Server type name
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Product image type
+        explode: true
+        in: query
+        name: product_image_type
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerTypeListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Server Types
+      tags:
+      - eventstreams.v1.EventStreamsMasterDataApi
+      x-action-id: eventstreams:ListServerTypes
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: engine_server_type_list
+      x-not-before: 2025-07-01
+      x-operation-id: eventstreamsListServerTypes
+      x-resource: EventStreams
+components:
+  schemas:
+    AsyncResponse:
+      example:
+        resource: ""
+        request_id: req-fd91037679d9474fbbbf3bc76877834d
+      properties:
+        request_id:
+          description: Request ID
+          example: req-fd91037679d9474fbbbf3bc76877834d
+          title: Request Id
+          type: string
+        resource:
+          allOf:
+          - $ref: '#/components/schemas/ResourceInfo'
+          description: Resource
+      required:
+      - request_id
+      - resource
+      title: AsyncResponse
+    BlockStorageGroupRequest:
+      example:
+        volume_type: ""
+        role_type: ""
+        size_gb: 424
+      properties:
+        role_type:
+          allOf:
+          - $ref: '#/components/schemas/BlockStorageGroupRoleType'
+          description: Role type
+        size_gb:
+          description: Size in GB
+          maximum: 5120
+          minimum: 16
+          multipleOf: 8
+          title: Size Gb
+          type: integer
+        volume_type:
+          allOf:
+          - $ref: '#/components/schemas/VolumeType'
+          default: SSD
+          description: Volume type
+      required:
+      - role_type
+      - size_gb
+      title: BlockStorageGroupRequest
+    BlockStorageGroupResponse:
+      example:
+        volume_type: ""
+        role_type: ""
+        name: name
+        size_gb: 6
+        id: id
+      properties:
+        id:
+          description: ID
+          title: Id
+          type: string
+        name:
+          description: Name
+          title: Name
+          type: string
+        role_type:
+          allOf:
+          - $ref: '#/components/schemas/BlockStorageGroupRoleType'
+          description: Role type
+        size_gb:
+          description: Size in GB
+          title: Size Gb
+          type: integer
+        volume_type:
+          allOf:
+          - $ref: '#/components/schemas/VolumeType'
+          description: Volume type
+      required:
+      - id
+      - name
+      - role_type
+      - size_gb
+      - volume_type
+      title: BlockStorageGroupResponse
+    BlockStorageGroupRoleType:
+      enum:
+      - OS
+      - DATA
+      - ARCHIVE
+      - TEMP
+      - BACKUP
+      title: BlockStorageGroupRoleType
+      type: string
+    ClusterPageResponse:
+      example:
+        size: 20
+        contents:
+        - service_state: ""
+          account_id: account_id
+          role_type: ORIGIN
+          ha_enabled: false
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          created_at: 2024-05-17T00:23:17Z
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          instance_count: 0
+        - service_state: ""
+          account_id: account_id
+          role_type: ORIGIN
+          ha_enabled: false
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          created_at: 2024-05-17T00:23:17Z
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          instance_count: 0
+        count: 20
+        page: 0
+        sort:
+        - sort
+        - sort
+      properties:
+        contents:
+          items:
+            $ref: '#/components/schemas/ClusterResponse'
+          nullable: true
+          type: array
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - contents
+      - count
+      - page
+      - size
+      title: ClusterPageResponse
+    ClusterResponse:
+      example:
+        service_state: ""
+        account_id: account_id
+        role_type: ORIGIN
+        ha_enabled: false
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: name
+        created_at: 2024-05-17T00:23:17Z
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        modified_at: 2024-05-17T00:23:17Z
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        instance_count: 0
+      properties:
+        account_id:
+          description: Account ID
+          title: Account Id
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        ha_enabled:
+          default: false
+          description: HA availability
+          title: Ha Enabled
+          type: boolean
+        id:
+          description: ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        instance_count:
+          default: 0
+          description: Instance Count
+          title: Instance Count
+          type: integer
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: Cluster name
+          title: Name
+          type: string
+        role_type:
+          $ref: '#/components/schemas/ClusterRoleType'
+        service_state:
+          allOf:
+          - $ref: '#/components/schemas/ServiceState'
+          description: Service state
+      required:
+      - account_id
+      - created_at
+      - created_by
+      - id
+      - modified_at
+      - modified_by
+      - name
+      - role_type
+      - service_state
+      title: ClusterResponse
+    ClusterRoleType:
+      enum:
+      - ORIGIN
+      - REPLICA
+      - RECOVERY
+      - SECONDARY
+      - MIGRATION
+      title: ClusterRoleType
+      type: string
+    DayOfWeek:
+      enum:
+      - MON
+      - TUE
+      - WED
+      - THU
+      - FRI
+      - SAT
+      - SUN
+      title: DayOfWeek
+      type: string
+    Engine:
+      example:
+        major_version: major_version
+        os_type: os_type
+        os_version: os_version
+        name: name
+        id: id
+        software_version: software_version
+        product_image_type: product_image_type
+        end_of_service: false
+      properties:
+        end_of_service:
+          default: false
+          description: End of Service
+          title: End Of Service
+          type: boolean
+        id:
+          description: ID
+          title: Id
+          type: string
+        major_version:
+          description: Software major version
+          title: Major Version
+          type: string
+        name:
+          description: DBaaS engine version name
+          title: Name
+          type: string
+        os_type:
+          description: OS type
+          title: Os Type
+          type: string
+        os_version:
+          description: OS version
+          title: Os Version
+          type: string
+        product_image_type:
+          nullable: true
+          type: string
+        software_version:
+          description: Software version
+          title: Software Version
+          type: string
+      required:
+      - id
+      - major_version
+      - name
+      - os_type
+      - os_version
+      - software_version
+      title: Engine
+    EngineListResponse:
+      example:
+        contents:
+        - major_version: major_version
+          os_type: os_type
+          os_version: os_version
+          name: name
+          id: id
+          software_version: software_version
+          product_image_type: product_image_type
+          end_of_service: false
+        - major_version: major_version
+          os_type: os_type
+          os_version: os_version
+          name: name
+          id: id
+          software_version: software_version
+          product_image_type: product_image_type
+          end_of_service: false
+      properties:
+        contents:
+          description: DBaaS engine list
+          items:
+            $ref: '#/components/schemas/Engine'
+          type: array
+      required:
+      - contents
+      title: EngineListResponse
+    EngineProperty:
+      example:
+        name: name
+        value: value
+      properties:
+        name:
+          description: DBaas engine property name
+          title: Name
+          type: string
+        value:
+          description: DBaas engine property value
+          title: Value
+          type: string
+      required:
+      - name
+      - value
+      title: EngineProperty
+    EnginePropertyListResponse:
+      example:
+        contents:
+        - name: name
+          value: value
+        - name: name
+          value: value
+      properties:
+        contents:
+          description: DBaas engine property list
+          items:
+            $ref: '#/components/schemas/EngineProperty'
+          type: array
+      required:
+      - contents
+      title: EnginePropertyListResponse
+    EventStreamsClusterAddInstancesRequest:
+      example:
+        public_ip_ids:
+        - public_ip_ids
+        - public_ip_ids
+        service_ip_addresses:
+        - service_ip_addresses
+        - service_ip_addresses
+        instance_count: 0
+      properties:
+        instance_count:
+          description: Instance Count
+          title: Instance Count
+          type: integer
+        public_ip_ids:
+          items:
+            type: string
+          nullable: true
+          type: array
+        service_ip_addresses:
+          description: User subnet IP address
+          items:
+            type: string
+          type: array
+      required:
+      - instance_count
+      - service_ip_addresses
+      title: EventStreamsClusterAddInstancesRequest
+    EventStreamsClusterCreateRequest:
+      example:
+        init_config_option: ""
+        instance_name_prefix: instance_name_prefix
+        akhq_enabled: false
+        timezone: timezone
+        instance_groups:
+        - block_storage_groups:
+          - volume_type: ""
+            role_type: ""
+            size_gb: 424
+          - volume_type: ""
+            role_type: ""
+            size_gb: 424
+          role_type: ""
+          instances:
+          - role_type: ""
+            service_ip_address: service_ip_address
+            public_ip_id: public_ip_id
+          - role_type: ""
+            service_ip_address: service_ip_address
+            public_ip_id: public_ip_id
+          server_type_name: server_type_name
+        - block_storage_groups:
+          - volume_type: ""
+            role_type: ""
+            size_gb: 424
+          - volume_type: ""
+            role_type: ""
+            size_gb: 424
+          role_type: ""
+          instances:
+          - role_type: ""
+            service_ip_address: service_ip_address
+            public_ip_id: public_ip_id
+          - role_type: ""
+            service_ip_address: service_ip_address
+            public_ip_id: public_ip_id
+          server_type_name: server_type_name
+        tags:
+        - value: value
+          key: key
+        - value: value
+          key: key
+        dbaas_engine_version_id: dbaas_engine_version_id
+        is_combined: false
+        name: name
+        nat_enabled: false
+        subnet_id: subnet_id
+        maintenance_option:
+          period_hour: period_hour
+          starting_time: starting_time
+          starting_day_of_week: ""
+        allowable_ip_addresses:
+        - allowable_ip_addresses
+        - allowable_ip_addresses
+      properties:
+        akhq_enabled:
+          default: false
+          description: AKHQ availability
+          title: Akhq Enabled
+          type: boolean
+        allowable_ip_addresses:
+          default: []
+          description: Allowed IP addresses list
+          items:
+            type: string
+          type: array
+        dbaas_engine_version_id:
+          description: DBaaS engine version ID
+          title: Dbaas Engine Version Id
+          type: string
+        init_config_option:
+          allOf:
+          - $ref: '#/components/schemas/EventStreamsInitConfigOptionRequest'
+          description: DB initial configuration option
+        instance_groups:
+          description: Instance groups list
+          items:
+            $ref: '#/components/schemas/InstanceGroupRequest'
+          type: array
+        instance_name_prefix:
+          description: Instance name prefix
+          maxLength: 13
+          minLength: 3
+          pattern: "^[a-z][a-zA-Z0-9\\-]*$"
+          title: Instance Name Prefix
+          type: string
+        is_combined:
+          default: false
+          description: HA availability
+          title: Is Combined
+          type: boolean
+        maintenance_option:
+          $ref: '#/components/schemas/MaintenanceOption'
+        name:
+          description: Cluster name
+          maxLength: 20
+          minLength: 3
+          pattern: "^[a-zA-Z]*$"
+          title: Name
+          type: string
+        nat_enabled:
+          default: false
+          description: NAT availability
+          title: Nat Enabled
+          type: boolean
+        subnet_id:
+          description: Subnet ID
+          title: Subnet Id
+          type: string
+        tags:
+          items:
+            $ref: '#/components/schemas/Tag'
+          nullable: true
+          type: array
+        timezone:
+          description: Timezone
+          title: Timezone
+          type: string
+      required:
+      - dbaas_engine_version_id
+      - init_config_option
+      - instance_groups
+      - instance_name_prefix
+      - name
+      - subnet_id
+      - timezone
+      title: EventStreamsClusterCreateRequest
+    EventStreamsClusterDetailResponse:
+      example:
+        service_state: ""
+        init_config_option: ""
+        role_type: ORIGIN
+        timezone: timezone
+        created_at: 2024-05-17T00:23:17Z
+        instance_groups:
+        - block_storage_groups:
+          - volume_type: ""
+            role_type: ""
+            name: name
+            size_gb: 6
+            id: id
+          - volume_type: ""
+            role_type: ""
+            name: name
+            size_gb: 6
+            id: id
+          role_type: ""
+          instances:
+          - service_state: ""
+            public_ip_address: public_ip_address
+            role_type: ""
+            service_ip_address: service_ip_address
+            name: name
+            public_ip_id: public_ip_id
+          - service_state: ""
+            public_ip_address: public_ip_address
+            role_type: ""
+            service_ip_address: service_ip_address
+            name: name
+            public_ip_id: public_ip_id
+          server_type_name: server_type_name
+          id: id
+        - block_storage_groups:
+          - volume_type: ""
+            role_type: ""
+            name: name
+            size_gb: 6
+            id: id
+          - volume_type: ""
+            role_type: ""
+            name: name
+            size_gb: 6
+            id: id
+          role_type: ""
+          instances:
+          - service_state: ""
+            public_ip_address: public_ip_address
+            role_type: ""
+            service_ip_address: service_ip_address
+            name: name
+            public_ip_id: public_ip_id
+          - service_state: ""
+            public_ip_address: public_ip_address
+            role_type: ""
+            service_ip_address: service_ip_address
+            name: name
+            public_ip_id: public_ip_id
+          server_type_name: server_type_name
+          id: id
+        dbaas_engine_version_name: dbaas_engine_version_name
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        dbaas_engine: dbaas_engine
+        account_id: account_id
+        product_type: ""
+        is_combined: true
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: name
+        nat_enabled: true
+        subnet_id: subnet_id
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        maintenance_option:
+          period_hour: period_hour
+          starting_time: starting_time
+          starting_day_of_week: MON
+          use_maintenance_option: false
+        software_version: software_version
+        modified_at: 2024-05-17T00:23:17Z
+        allowable_ip_addresses:
+        - allowable_ip_addresses
+        - allowable_ip_addresses
+        product_image_type: product_image_type
+        instance_count: 0
+      properties:
+        account_id:
+          description: Account ID
+          title: Account Id
+          type: string
+        allowable_ip_addresses:
+          default: []
+          description: Allowed IP addresses list
+          items:
+            type: string
+          type: array
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        dbaas_engine:
+          description: DBaaS engine
+          title: Dbaas Engine
+          type: string
+        dbaas_engine_version_name:
+          description: DBaaS engine version name
+          title: Dbaas Engine Version Name
+          type: string
+        id:
+          description: ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        init_config_option:
+          allOf:
+          - $ref: '#/components/schemas/EventStreamsInitConfigOptionDetail'
+          description: DB initial configuration option
+        instance_count:
+          default: 0
+          description: Instance Count
+          title: Instance Count
+          type: integer
+        instance_groups:
+          description: Instance groups list
+          items:
+            $ref: '#/components/schemas/InstanceGroupResponse'
+          type: array
+        is_combined:
+          nullable: true
+          type: boolean
+        maintenance_option:
+          $ref: '#/components/schemas/MaintenanceResponseOption'
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: Cluster name
+          title: Name
+          type: string
+        nat_enabled:
+          nullable: true
+          type: boolean
+        product_image_type:
+          description: Product image type
+          title: Product Image Type
+          type: string
+        product_type:
+          allOf:
+          - $ref: '#/components/schemas/ProductType'
+          description: Product type
+        role_type:
+          $ref: '#/components/schemas/ClusterRoleType'
+        service_state:
+          allOf:
+          - $ref: '#/components/schemas/ServiceState'
+          description: Service state
+        software_version:
+          description: Software version
+          title: Software Version
+          type: string
+        subnet_id:
+          description: Subnet ID
+          title: Subnet Id
+          type: string
+        timezone:
+          description: Timezone
+          title: Timezone
+          type: string
+      required:
+      - account_id
+      - created_at
+      - created_by
+      - dbaas_engine
+      - dbaas_engine_version_name
+      - id
+      - init_config_option
+      - instance_groups
+      - modified_at
+      - modified_by
+      - name
+      - product_image_type
+      - product_type
+      - role_type
+      - service_state
+      - software_version
+      - subnet_id
+      - timezone
+      title: EventStreamsClusterDetailResponse
+    EventStreamsInitConfigOptionDetail:
+      properties:
+        broker_port:
+          default: 9091
+          description: broker port
+          maximum: 65535
+          minimum: 1024
+          title: Broker Port
+          type: integer
+        zookeeper_port:
+          default: 2180
+          description: zookeeper port
+          maximum: 65535
+          minimum: 1024
+          title: Zookeeper Port
+          type: integer
+      title: EventStreamsInitConfigOptionDetail
+    EventStreamsInitConfigOptionRequest:
+      properties:
+        akhq_id:
+          maxLength: 20
+          minLength: 2
+          nullable: true
+          pattern: "^[a-z]+$"
+          type: string
+        akhq_password:
+          maxLength: 30
+          nullable: true
+          type: string
+        broker_port:
+          default: 9091
+          description: broker port
+          maximum: 65535
+          minimum: 1024
+          title: Broker Port
+          type: integer
+        broker_sasl_id:
+          description: broker sasl id
+          maxLength: 20
+          minLength: 2
+          pattern: "^[a-z]+$"
+          title: Broker Sasl Id
+          type: string
+        broker_sasl_password:
+          description: broker sasl password
+          maxLength: 30
+          title: Broker Sasl Password
+          type: string
+        zookeeper_port:
+          default: 2180
+          description: zookeeper port
+          maximum: 65535
+          minimum: 1024
+          title: Zookeeper Port
+          type: integer
+        zookeeper_sasl_id:
+          description: zookeeper sasl id
+          maxLength: 20
+          minLength: 2
+          pattern: "^[a-z]+$"
+          title: Zookeeper Sasl Id
+          type: string
+        zookeeper_sasl_password:
+          description: zookeeper sasl password
+          maxLength: 30
+          title: Zookeeper Sasl Password
+          type: string
+      required:
+      - broker_sasl_id
+      - broker_sasl_password
+      - zookeeper_sasl_id
+      - zookeeper_sasl_password
+      title: EventStreamsInitConfigOptionRequest
+    InstanceGroupRequest:
+      example:
+        block_storage_groups:
+        - volume_type: ""
+          role_type: ""
+          size_gb: 424
+        - volume_type: ""
+          role_type: ""
+          size_gb: 424
+        role_type: ""
+        instances:
+        - role_type: ""
+          service_ip_address: service_ip_address
+          public_ip_id: public_ip_id
+        - role_type: ""
+          service_ip_address: service_ip_address
+          public_ip_id: public_ip_id
+        server_type_name: server_type_name
+      properties:
+        block_storage_groups:
+          description: Block storage groups list
+          items:
+            $ref: '#/components/schemas/BlockStorageGroupRequest'
+          type: array
+        instances:
+          items:
+            $ref: '#/components/schemas/InstanceRequest'
+          nullable: true
+          type: array
+        role_type:
+          allOf:
+          - $ref: '#/components/schemas/InstanceGroupRoleType'
+          description: Role type
+        server_type_name:
+          description: Server type name
+          title: Server Type Name
+          type: string
+      required:
+      - block_storage_groups
+      - role_type
+      - server_type_name
+      title: InstanceGroupRequest
+    InstanceGroupResizeRequest:
+      example:
+        server_type_name: server_type_name
+      properties:
+        server_type_name:
+          description: Server type name
+          title: Server Type Name
+          type: string
+      required:
+      - server_type_name
+      title: InstanceGroupResizeRequest
+    InstanceGroupResponse:
+      example:
+        block_storage_groups:
+        - volume_type: ""
+          role_type: ""
+          name: name
+          size_gb: 6
+          id: id
+        - volume_type: ""
+          role_type: ""
+          name: name
+          size_gb: 6
+          id: id
+        role_type: ""
+        instances:
+        - service_state: ""
+          public_ip_address: public_ip_address
+          role_type: ""
+          service_ip_address: service_ip_address
+          name: name
+          public_ip_id: public_ip_id
+        - service_state: ""
+          public_ip_address: public_ip_address
+          role_type: ""
+          service_ip_address: service_ip_address
+          name: name
+          public_ip_id: public_ip_id
+        server_type_name: server_type_name
+        id: id
+      properties:
+        block_storage_groups:
+          description: Block storage groups list
+          items:
+            $ref: '#/components/schemas/BlockStorageGroupResponse'
+          type: array
+        id:
+          description: ID
+          title: Id
+          type: string
+        instances:
+          description: Instances list
+          items:
+            $ref: '#/components/schemas/InstanceResponse'
+          type: array
+        role_type:
+          allOf:
+          - $ref: '#/components/schemas/InstanceGroupRoleType'
+          description: Role type
+        server_type_name:
+          description: Server type name
+          title: Server Type Name
+          type: string
+      required:
+      - block_storage_groups
+      - id
+      - instances
+      - role_type
+      - server_type_name
+      title: InstanceGroupResponse
+    InstanceGroupRoleType:
+      enum:
+      - ACTIVE
+      - ACTIVE_STANDBY
+      - PRIMARY_SECONDARY
+      - MASTER
+      - MASTER_REPLICA
+      - REPLICA
+      - SENTINEL
+      - MASTER_DATA
+      - DATA
+      - KIBANA
+      - DASHBOARDS
+      - ZOOKEEPER_BROKER
+      - BROKER
+      - ZOOKEEPER
+      - AKHQ
+      - CONSOLE
+      title: InstanceGroupRoleType
+      type: string
+    InstanceRequest:
+      example:
+        role_type: ""
+        service_ip_address: service_ip_address
+        public_ip_id: public_ip_id
+      properties:
+        public_ip_id:
+          nullable: true
+          type: string
+        role_type:
+          allOf:
+          - $ref: '#/components/schemas/InstanceRoleType'
+          description: Role type
+        service_ip_address:
+          nullable: true
+          type: string
+      required:
+      - role_type
+      title: InstanceRequest
+    InstanceResponse:
+      example:
+        service_state: ""
+        public_ip_address: public_ip_address
+        role_type: ""
+        service_ip_address: service_ip_address
+        name: name
+        public_ip_id: public_ip_id
+      properties:
+        name:
+          description: Name
+          title: Name
+          type: string
+        public_ip_address:
+          nullable: true
+          type: string
+        public_ip_id:
+          nullable: true
+          type: string
+        role_type:
+          allOf:
+          - $ref: '#/components/schemas/InstanceRoleType'
+          description: Role type
+        service_ip_address:
+          nullable: true
+          type: string
+        service_state:
+          allOf:
+          - $ref: '#/components/schemas/ServiceState'
+          description: Service state
+      required:
+      - name
+      - role_type
+      - service_state
+      title: InstanceResponse
+    InstanceRoleType:
+      enum:
+      - ACTIVE
+      - STANDBY
+      - PRIMARY
+      - SECONDARY
+      - MASTER
+      - REPLICA
+      - SENTINEL
+      - MASTER_DATA
+      - DATA
+      - KIBANA
+      - DASHBOARDS
+      - ZOOKEEPER_BROKER
+      - BROKER
+      - ZOOKEEPER
+      - AKHQ
+      - CONSOLE
+      title: InstanceRoleType
+      type: string
+    MaintenanceOption:
+      example:
+        period_hour: period_hour
+        starting_time: starting_time
+        starting_day_of_week: ""
+      properties:
+        period_hour:
+          description: Period in hours
+          pattern: "^(0\\.5|[1-5]\\.5|[1-9]|1[0-9]|2[0-4])$"
+          title: Period Hour
+          type: string
+        starting_day_of_week:
+          allOf:
+          - $ref: '#/components/schemas/DayOfWeek'
+          description: Starting day of week
+        starting_time:
+          description: Starting time
+          title: Starting Time
+          type: string
+      title: MaintenanceOption
+    MaintenanceRequest:
+      example:
+        start_time: start_time
+        start_day_of_week: ""
+        term_hour: term_hour
+        start_minute: start_minute
+      properties:
+        start_day_of_week:
+          allOf:
+          - $ref: '#/components/schemas/DayOfWeek'
+          description: start_day_of_week
+        start_minute:
+          description: start_minute
+          title: Start Minute
+          type: string
+        start_time:
+          description: start_time
+          title: Start Time
+          type: string
+        term_hour:
+          description: term_hour
+          pattern: "^(0\\.5|[1-5]\\.5|[1-9]|1[0-9]|2[0-4])$"
+          title: Term Hour
+          type: string
+      required:
+      - start_day_of_week
+      - start_minute
+      - start_time
+      - term_hour
+      title: MaintenanceRequest
+    MaintenanceResponseOption:
+      example:
+        period_hour: period_hour
+        starting_time: starting_time
+        starting_day_of_week: MON
+        use_maintenance_option: false
+      properties:
+        period_hour:
+          nullable: true
+          type: string
+        starting_day_of_week:
+          $ref: '#/components/schemas/DayOfWeek'
+        starting_time:
+          nullable: true
+          type: string
+        use_maintenance_option:
+          default: false
+          description: Maintenance period usage state
+          title: Use Maintenance Option
+          type: boolean
+      title: MaintenanceResponseOption
+    ParameterDTO:
+      example:
+        applied_value: applied_value
+        allows_value: allows_value
+        data_type: data_type
+        is_modifiable: true
+        name: name
+        description: description
+        software_type: software_type
+        default_value: default_value
+        id: id
+        apply_type: apply_type
+      properties:
+        allows_value:
+          description: Parameter allows value
+          title: Allows Value
+          type: string
+        applied_value:
+          description: Parameter applied value
+          title: Applied Value
+          type: string
+        apply_type:
+          description: Parameter apply type
+          title: Apply Type
+          type: string
+        data_type:
+          description: Parameter data type
+          title: Data Type
+          type: string
+        default_value:
+          description: Parameter default value
+          title: Default Value
+          type: string
+        description:
+          nullable: true
+          type: string
+        id:
+          description: Parameter id
+          title: Id
+          type: string
+        is_modifiable:
+          description: Parameter is_modifiable
+          title: Is Modifiable
+          type: boolean
+        name:
+          description: Parameter name
+          title: Name
+          type: string
+        software_type:
+          nullable: true
+          type: string
+      required:
+      - allows_value
+      - applied_value
+      - apply_type
+      - data_type
+      - default_value
+      - description
+      - id
+      - is_modifiable
+      - name
+      - software_type
+      title: ParameterDTO
+    ParameterGroup:
+      example:
+        major_version: major_version
+        product_type: product_type
+        name: name
+        id: id
+        product_image_type: product_image_type
+      properties:
+        id:
+          description: Parameter group ID
+          title: Id
+          type: string
+        major_version:
+          description: Software major version
+          title: Major Version
+          type: string
+        name:
+          description: Parameter group name
+          title: Name
+          type: string
+        product_image_type:
+          description: Product image type
+          title: Product Image Type
+          type: string
+        product_type:
+          description: Product type
+          title: Product Type
+          type: string
+      required:
+      - id
+      - major_version
+      - name
+      - product_image_type
+      - product_type
+      title: ParameterGroup
+    ParameterGroupListResponse:
+      example:
+        contents:
+        - major_version: major_version
+          product_type: product_type
+          name: name
+          id: id
+          product_image_type: product_image_type
+        - major_version: major_version
+          product_type: product_type
+          name: name
+          id: id
+          product_image_type: product_image_type
+        sort:
+        - sort
+        - sort
+      properties:
+        contents:
+          description: Parameter group list
+          items:
+            $ref: '#/components/schemas/ParameterGroup'
+          type: array
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - contents
+      title: ParameterGroupListResponse
+    ParameterPageResponse:
+      example:
+        size: 20
+        contents:
+        - name: name
+          description: description
+          software_type: software_type
+          default_value: default_value
+          dbaas_parameter_group_id: dbaas_parameter_group_id
+          id: id
+        - name: name
+          description: description
+          software_type: software_type
+          default_value: default_value
+          dbaas_parameter_group_id: dbaas_parameter_group_id
+          id: id
+        count: 20
+        page: 0
+        sort:
+        - sort
+        - sort
+      properties:
+        contents:
+          description: Parameter list
+          items:
+            $ref: '#/components/schemas/Parameters'
+          type: array
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - contents
+      - count
+      - page
+      - size
+      title: ParameterPageResponse
+    ParameterRequest:
+      example:
+        old_value: old_value
+        id: id
+        new_value: new_value
+      properties:
+        id:
+          description: Parameter id
+          title: Id
+          type: string
+        new_value:
+          description: Parameter new value
+          title: New Value
+          type: string
+        old_value:
+          description: Parameter old value
+          title: Old Value
+          type: string
+      required:
+      - id
+      - new_value
+      - old_value
+      title: ParameterRequest
+    Parameters:
+      example:
+        name: name
+        description: description
+        software_type: software_type
+        default_value: default_value
+        dbaas_parameter_group_id: dbaas_parameter_group_id
+        id: id
+      properties:
+        dbaas_parameter_group_id:
+          description: Parameter id
+          title: Dbaas Parameter Group Id
+          type: string
+        default_value:
+          description: Parameter default value
+          title: Default Value
+          type: string
+        description:
+          description: Parameter description
+          title: Description
+          type: string
+        id:
+          description: Parameter id
+          title: Id
+          type: string
+        name:
+          description: Parameter name
+          title: Name
+          type: string
+        software_type:
+          nullable: true
+          type: string
+      required:
+      - dbaas_parameter_group_id
+      - default_value
+      - description
+      - id
+      - name
+      - software_type
+      title: Parameters
+    ParametersRequest:
+      example:
+        parameters:
+        - old_value: old_value
+          id: id
+          new_value: new_value
+        - old_value: old_value
+          id: id
+          new_value: new_value
+      properties:
+        parameters:
+          description: Parameter request list
+          items:
+            $ref: '#/components/schemas/ParameterRequest'
+          type: array
+      required:
+      - parameters
+      title: ParametersRequest
+    ParametersResponse:
+      example:
+        contents:
+        - applied_value: applied_value
+          allows_value: allows_value
+          data_type: data_type
+          is_modifiable: true
+          name: name
+          description: description
+          software_type: software_type
+          default_value: default_value
+          id: id
+          apply_type: apply_type
+        - applied_value: applied_value
+          allows_value: allows_value
+          data_type: data_type
+          is_modifiable: true
+          name: name
+          description: description
+          software_type: software_type
+          default_value: default_value
+          id: id
+          apply_type: apply_type
+        count: 0
+        modified_at: modified_at
+      properties:
+        contents:
+          description: Parameter contents
+          items:
+            $ref: '#/components/schemas/ParameterDTO'
+          type: array
+        count:
+          description: Parameter count
+          title: Count
+          type: integer
+        modified_at:
+          description: Modification time
+          title: Modified At
+          type: string
+      required:
+      - contents
+      - count
+      - modified_at
+      title: ParametersResponse
+    ProductImageType:
+      enum:
+      - PostgreSQL Community
+      - MariaDB Community
+      - MySQL Community
+      - EPAS
+      - Microsoft SQL Server Enterprise
+      - Microsoft SQL Server Standard
+      - Redis OSS Sentinel
+      - Valkey Sentinel
+      - Kafka
+      - Elasticsearch Enterprise
+      - OpenSearch
+      - Vertica Enterprise
+      - Vertica Community
+      title: ProductImageType
+      type: string
+    ProductType:
+      enum:
+      - QOS
+      - PostgreSQL Community
+      - EPAS
+      - MariaDB
+      - MySQL
+      - Redis
+      - Microsoft SQL Server
+      - Search Engine
+      - Event Streams
+      - Vertica
+      title: ProductType
+      type: string
+    RequestStateResponse:
+      example:
+        state: state
+        request_id: request_id
+      properties:
+        request_id:
+          description: Request ID
+          title: Request Id
+          type: string
+        state:
+          description: Request state
+          title: State
+          type: string
+      required:
+      - request_id
+      - state
+      title: RequestStateResponse
+    ResizeBlockStorageGroupRequest:
+      example:
+        size_gb: 16
+      properties:
+        size_gb:
+          description: Size in GB
+          example: 16
+          maximum: 5120
+          minimum: 16
+          multipleOf: 8
+          title: Size Gb
+          type: integer
+      required:
+      - size_gb
+      title: ResizeBlockStorageGroupRequest
+    ResourceInfo:
+      properties:
+        id:
+          description: request resource id
+          example: 109a585ae67b4e8482fdafc8a4a5be74
+          title: Id
+          type: string
+      required:
+      - id
+      title: ResourceInfo
+    ServerType:
+      example:
+        memory_gb: 6
+        product_type: product_type
+        purpose: purpose
+        cpu_core: 0
+        name: name
+        description: description
+        type: type
+        product_image_type: product_image_type
+      properties:
+        cpu_core:
+          description: Server type cpu core
+          title: Cpu Core
+          type: integer
+        description:
+          description: Server type description
+          title: Description
+          type: string
+        memory_gb:
+          description: Server type memory
+          title: Memory Gb
+          type: integer
+        name:
+          description: Server type name
+          title: Name
+          type: string
+        product_image_type:
+          description: Product image type
+          title: Product Image Type
+          type: string
+        product_type:
+          description: Product type
+          title: Product Type
+          type: string
+        purpose:
+          description: Server type purpose
+          title: Purpose
+          type: string
+        type:
+          description: Server type class
+          title: Type
+          type: string
+      required:
+      - cpu_core
+      - description
+      - memory_gb
+      - name
+      - product_image_type
+      - product_type
+      - purpose
+      - type
+      title: ServerType
+    ServerTypeListResponse:
+      example:
+        contents:
+        - memory_gb: 6
+          product_type: product_type
+          purpose: purpose
+          cpu_core: 0
+          name: name
+          description: description
+          type: type
+          product_image_type: product_image_type
+        - memory_gb: 6
+          product_type: product_type
+          purpose: purpose
+          cpu_core: 0
+          name: name
+          description: description
+          type: type
+          product_image_type: product_image_type
+      properties:
+        contents:
+          description: Server type list
+          items:
+            $ref: '#/components/schemas/ServerType'
+          type: array
+      required:
+      - contents
+      title: ServerTypeListResponse
+    ServiceState:
+      enum:
+      - RUNNING
+      - STOPPED
+      - UNKNOWN
+      - ERROR
+      - FAILED
+      - TERMINATED
+      - CREATING
+      - STOPPING
+      - STARTING
+      - RESTARTING
+      - EDITING
+      - SYNCHRONIZING
+      - UPGRADING
+      - TERMINATING
+      - MIGRATING
+      title: ServiceState
+      type: string
+    Tag:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          title: Key
+          type: string
+        value:
+          nullable: true
+          type: string
+      title: Tag
+    UpdateSecurityGroupRulesRequest:
+      example:
+        add_ip_addresses:
+        - add_ip_addresses
+        - add_ip_addresses
+        del_ip_addresses:
+        - del_ip_addresses
+        - del_ip_addresses
+      properties:
+        add_ip_addresses:
+          default: []
+          description: Allowed IP addresses list
+          items:
+            type: string
+          type: array
+        del_ip_addresses:
+          default: []
+          description: Allowed IP addresses list
+          items:
+            type: string
+          type: array
+      title: UpdateSecurityGroupRulesRequest
+    ValidationErrorModel:
+      example:
+        msg: msg
+        loc:
+        - loc
+        - loc
+        ctx: "{}"
+        type_: type_
+      properties:
+        ctx:
+          nullable: true
+          type: object
+        loc:
+          items:
+            type: string
+          nullable: true
+          type: array
+        msg:
+          nullable: true
+          type: string
+        type_:
+          nullable: true
+          type: string
+      title: ValidationErrorModel
+    VolumeType:
+      enum:
+      - SSD
+      - SSD_KMS
+      - HDD
+      - HDD_KMS
+      title: VolumeType
+      type: string
+  securitySchemes:
+    X-Auth-Token:
+      in: header
+      name: X-Auth-Token
+      type: apiKey
+x-app-name: scp-dbaas
+x-package-name: scp_dbaas
+x-service-type: scp-dbaas
+x-service-versions:
+  cachestore:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2025-07-01
+    status: CURRENT
+  epas:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2025-07-01
+    status: CURRENT
+  eventstreams:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2025-07-01
+    status: CURRENT
+  mariadb:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2025-07-01
+    status: CURRENT
+  mysql:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2025-07-01
+    status: CURRENT
+  postgresql:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2025-07-01
+    status: CURRENT
+  searchengine:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2025-07-01
+    status: CURRENT
+  vertica:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2025-07-01
+    status: CURRENT
+x-url-prefix: ""

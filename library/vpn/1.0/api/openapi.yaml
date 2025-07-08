@@ -1,0 +1,2193 @@
+openapi: 3.1.0
+info:
+  description: SCP Network Service
+  title: SCP Network Service
+  version: 0.0.1.dev6973
+servers:
+- url: ""
+tags:
+- description: Internal IP Pool API
+  name: vpc.v1.InternalIpPoolsApi
+- description: Internal Subnets API
+  name: vpc.v1.InternalSubnetsApi
+- description: Internal Vpc Endpoints API
+  name: vpc.v1.InternalVpcEndpointApi
+- description: Internal VPC Static Nat API
+  name: vpc.v1.InternalVpcStaticNatsApi
+- description: Internet Gateways API
+  name: vpc.v1.InternetGatewaysApi
+- description: Internal Private NAT API
+  name: vpc.v1.InternalPrivateNatsApi
+- description: Nat Gateways API
+  name: vpc.v1.NatGatewayApi
+- description: Ports API
+  name: vpc.v1.PortsApi
+- description: publicIps API
+  name: vpc.v1.PublicIpApi
+- description: Subnets API
+  name: vpc.v1.SubnetsApi
+- description: Vpc Endpoints API
+  name: vpc.v1.VpcEndpointApi
+- description: Vpcs API
+  name: vpc.v1.VpcsApi
+- description: Private NAT API
+  name: vpc.v1.PrivateNatApi
+- description: Private NAT IP API
+  name: vpc.v1.PrivateNatIpApi
+- description: VPC Peerings API
+  name: vpc.v1.VpcPeeringApi
+- description: VPC Peering Rules API
+  name: vpc.v1.VpcPeeringRuleApi
+- description: Transit Gateways API
+  name: vpc.v1.TransitGatewayApi
+- description: Transit Gateway VPC Connections API
+  name: vpc.v1.TransitGatewayVpcConnectionApi
+- description: Transit Gateway Rules API
+  name: vpc.v1.TransitGatewayRulesApi
+- description: Direct Connects API
+  name: direct-connect.v1.DirectConnectsApi
+- description: Direct Connects Rules API
+  name: direct-connect.v1.DirectConnectsRulesApi
+- description: Internal Security Groups API
+  name: security-group.v1.InternalSecurityGroupApi
+- description: Security Group Rules API
+  name: security-group.v1.SecurityGroupRuleApi
+- description: Security Groups API
+  name: security-group.v1.SecurityGroupApi
+- description: Firewall Rules API
+  name: firewall.v1.FirewallRulesApi
+- description: Firewalls API
+  name: firewall.v1.FirewallApi
+- description: VPN Gateways API
+  name: vpn.v1.VpnGatewaysApi
+- description: VPN Tunnels API
+  name: vpn.v1.VpnTunnelsApi
+- description: NetworkLoggingConfiguration API
+  name: network-logging.v1.NetworkLoggingConfigurationApi
+- description: NetworkLoggingStorage API
+  name: network-logging.v1.NetworkLoggingStorageApi
+- description: Internal Firewall Engine API
+  name: network-common.v1.InternalFirewallEngineApi
+- description: Network Natives API
+  name: network-common.v1.NetworkNativesApi
+- description: Cdn API
+  name: cdn.v1.CdnApi
+- description: Gslbs API
+  name: gslb.v1.GslbsApi
+- description: GslbResources API
+  name: gslb.v1.GslbResourcesApi
+- description: Public Domain Name API
+  name: dns.v1.PublicDomainNameApi
+- description: Hosted Zones API
+  name: dns.v1.HostedZonesApi
+- description: Private DNS API
+  name: dns.v1.PrivateDnsApi
+- description: Records API
+  name: dns.v1.RecordsApi
+paths:
+  /v1/vpn-gateways:
+    get:
+      description: Get VPN gateway list.
+      operationId: listVpnGateways
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: VPN Gateway Name
+        example: ExampleVpnGW1
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          description: VPN Gateway Name
+          example: ExampleVpnGW1
+          title: Name
+          type: string
+        style: form
+      - description: VPN Gateway IP Address
+        example: 123.0.0.1
+        explode: true
+        in: query
+        name: ip_address
+        required: false
+        schema:
+          description: VPN Gateway IP Address
+          example: 123.0.0.1
+          title: Ip Address
+          type: string
+        style: form
+      - description: VPC Id
+        example: ceb44ea5ecb34a49b16495f9a63b0718
+        explode: true
+        in: query
+        name: vpc_id
+        required: false
+        schema:
+          description: VPC Id
+          example: ceb44ea5ecb34a49b16495f9a63b0718
+          title: Vpc Id
+          type: string
+        style: form
+      - description: VPC Name
+        example: ExampleVPC1
+        explode: true
+        in: query
+        name: vpc_name
+        required: false
+        schema:
+          description: VPC Name
+          example: ExampleVPC1
+          title: Vpc Name
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VpnGatewayListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List VPN Gateways
+      tags:
+      - vpn.v1.VpnGatewaysApi
+      x-action-id: vpn:ListVpnGateways
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: vpn-gateway_list
+      x-not-before: 2026-07-01
+      x-operation-id: listVpnGateways
+      x-resource: vpn_gateway
+    post:
+      description: Create VPN gateway.
+      operationId: createVpnGateway
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VpnGatewayCreateRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VpnGatewayShowResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Create VPN Gateway
+      tags:
+      - vpn.v1.VpnGatewaysApi
+      x-action-id: vpn:CreateVpnGateway
+      x-api-access-level: CREATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: vpn-gateway_create
+      x-not-before: 2026-07-01
+      x-operation-id: createVpnGateway
+      x-resource: vpn_gateway
+  /v1/vpn-gateways/metrics/quotas:
+    get:
+      description: Show VPN gateway quota.
+      operationId: getVpnGatewayQuotas
+      parameters:
+      - description: VPC Id
+        example: ceb44ea5ecb34a49b16495f9a63b0718
+        explode: true
+        in: query
+        name: vpc_id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VpnGatewayQuotaResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Get VPN Gateway Quotas
+      tags:
+      - vpn.v1.VpnGatewaysApi
+      x-action-id: vpn:ShowVpnGatewayQuota
+      x-api-access-level: BYPASS
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope: CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2026-07-01
+      x-operation-id: getVpnGatewayQuotas
+      x-resource: vpn_gateway
+  /v1/vpn-gateways/{vpn_gateway_id}:
+    delete:
+      description: Delete VPN gateway.
+      operationId: deleteVpnGateway
+      parameters:
+      - description: VPN Gateway ID
+        example: b156740b6335468d8354eb9ef8eddf5a
+        explode: false
+        in: path
+        name: vpn_gateway_id
+        required: true
+        schema:
+          description: VPN Gateway ID
+          example: b156740b6335468d8354eb9ef8eddf5a
+          title: Vpn Gateway Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "409":
+          description: Conflict
+      security:
+      - X-Auth-Token: []
+      summary: Delete VPN Gateway
+      tags:
+      - vpn.v1.VpnGatewaysApi
+      x-action-id: vpn:DeleteVpnGateway
+      x-api-access-level: DELETE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: vpn-gateway_delete
+      x-not-before: 2026-07-01
+      x-operation-id: deleteVpnGateway
+      x-resource: vpn_gateway
+    get:
+      description: Show VPN gateway.
+      operationId: showVpnGateway
+      parameters:
+      - description: VPN Gateway ID
+        example: b156740b6335468d8354eb9ef8eddf5a
+        explode: false
+        in: path
+        name: vpn_gateway_id
+        required: true
+        schema:
+          description: VPN Gateway ID
+          example: b156740b6335468d8354eb9ef8eddf5a
+          title: Vpn Gateway Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VpnGatewayShowResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Show VPN Gateway
+      tags:
+      - vpn.v1.VpnGatewaysApi
+      x-action-id: vpn:ShowVpnGateway
+      x-api-access-level: READ
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: vpn-gateway_show
+      x-not-before: 2026-07-01
+      x-operation-id: showVpnGateway
+      x-resource: vpn_gateway
+    put:
+      description: Set VPN gateway.
+      operationId: setVpnGateway
+      parameters:
+      - description: VPN Gateway ID
+        example: b156740b6335468d8354eb9ef8eddf5a
+        explode: false
+        in: path
+        name: vpn_gateway_id
+        required: true
+        schema:
+          description: VPN Gateway ID
+          example: b156740b6335468d8354eb9ef8eddf5a
+          title: Vpn Gateway Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VpnGatewaySetRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VpnGatewayShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Set VPN Gateway
+      tags:
+      - vpn.v1.VpnGatewaysApi
+      x-action-id: vpn:SetVpnGateway
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: vpn-gateway_set
+      x-not-before: 2026-07-01
+      x-operation-id: setVpnGateway
+      x-resource: vpn_gateway
+  /v1/vpn-tunnels:
+    get:
+      description: Get VPN tunnel list.
+      operationId: listVpnTunnels
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: VPN Tunnel Name
+        example: ExampleVpnTunnel1
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          description: VPN Tunnel Name
+          example: ExampleVpnTunnel1
+          title: Name
+          type: string
+        style: form
+      - description: VPN Gateway ID
+        example: b156740b6335468d8354eb9ef8eddf5a
+        explode: true
+        in: query
+        name: vpn_gateway_id
+        required: false
+        schema:
+          description: VPN Gateway ID
+          example: b156740b6335468d8354eb9ef8eddf5a
+          title: Vpn Gateway Id
+          type: string
+        style: form
+      - description: VPN Gateway Name
+        example: ExampleVpnGW1
+        explode: true
+        in: query
+        name: vpn_gateway_name
+        required: false
+        schema:
+          description: VPN Gateway Name
+          example: ExampleVpnGW1
+          title: Vpn Gateway Name
+          type: string
+        style: form
+      - description: VPN Tunnel Peer Gateway IP Address
+        example: 123.0.0.2
+        explode: true
+        in: query
+        name: peer_gateway_ip
+        required: false
+        schema:
+          description: VPN Tunnel Peer Gateway IP Address
+          example: 123.0.0.2
+          title: Peer Gateway Ip
+          type: string
+        style: form
+      - description: VPN Tunnel IPSec Remote Subnet
+        example: 10.1.0.0/16
+        explode: true
+        in: query
+        name: remote_subnet
+        required: false
+        schema:
+          description: VPN Tunnel IPSec Remote Subnet
+          example: 10.1.0.0/16
+          title: Remote Subnet
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VpnTunnelListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List VPN Tunnels
+      tags:
+      - vpn.v1.VpnTunnelsApi
+      x-action-id: vpn:ListVpnTunnels
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: vpn-tunnel_list
+      x-not-before: 2026-07-01
+      x-operation-id: listVpnTunnels
+      x-resource: vpn_tunnel
+    post:
+      description: Create VPN tunnel.
+      operationId: createVpnTunnel
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VpnTunnelCreateRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VpnTunnelShowResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Create VPN Tunnel
+      tags:
+      - vpn.v1.VpnTunnelsApi
+      x-action-id: vpn:CreateVpnTunnel
+      x-api-access-level: CREATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: vpn-tunnel_create
+      x-not-before: 2026-07-01
+      x-operation-id: createVpnTunnel
+      x-resource: vpn_tunnel
+  /v1/vpn-tunnels/metrics/quotas:
+    get:
+      description: Show VPN tunnel quota.
+      operationId: getVpnTunnelQuotas
+      parameters:
+      - description: VPN Gateway ID
+        example: b156740b6335468d8354eb9ef8eddf5a
+        explode: true
+        in: query
+        name: vpn_gateway_id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VpnTunnelQuotaResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Get VPN Tunnel Quotas
+      tags:
+      - vpn.v1.VpnTunnelsApi
+      x-action-id: vpn:ShowVpnTunnelQuota
+      x-api-access-level: BYPASS
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope: CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2026-07-01
+      x-operation-id: getVpnTunnelQuotas
+      x-resource: vpn_tunnel
+  /v1/vpn-tunnels/vpn-tunnel-subnet-availabilities:
+    get:
+      description: Check VPN Tunnel Subnet Availabilities.
+      operationId: checkVpnTunnelSubnetAvailabilities
+      parameters:
+      - description: VPN Gateway ID
+        example: b156740b6335468d8354eb9ef8eddf5a
+        explode: true
+        in: query
+        name: vpn_gateway_id
+        required: true
+        schema:
+          description: VPN Gateway ID
+          example: b156740b6335468d8354eb9ef8eddf5a
+          title: Vpn Gateway Id
+          type: string
+        style: form
+      - description: VPN Tunnel IPSec Remote Subnet
+        example: 10.1.0.0/16
+        explode: true
+        in: query
+        name: remote_subnet
+        required: true
+        schema:
+          description: VPN Tunnel IPSec Remote Subnet
+          example: 10.1.0.0/16
+          title: Remote Subnet
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VpnTunnelSubnetAvailabilityResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Check VPN Tunnel Subnet Availabilities
+      tags:
+      - vpn.v1.VpnTunnelsApi
+      x-action-id: vpn:CheckVpnTunnelSubnetAvailability
+      x-api-access-level: CREATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2026-07-01
+      x-operation-id: checkVpnTunnelSubnetAvailabilities
+      x-resource: vpn_tunnel
+  /v1/vpn-tunnels/{vpn_tunnel_id}:
+    delete:
+      description: Delete VPN tunnel.
+      operationId: deleteVpnTunnel
+      parameters:
+      - description: VPN Tunnel ID
+        example: 2ade2919287040bc92e557fbbe6709c1
+        explode: false
+        in: path
+        name: vpn_tunnel_id
+        required: true
+        schema:
+          description: VPN Tunnel ID
+          example: 2ade2919287040bc92e557fbbe6709c1
+          title: Vpn Tunnel Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          description: Accepted
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Delete VPN Tunnel
+      tags:
+      - vpn.v1.VpnTunnelsApi
+      x-action-id: vpn:DeleteVpnTunnel
+      x-api-access-level: DELETE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: vpn-tunnel_delete
+      x-not-before: 2026-07-01
+      x-operation-id: deleteVpnTunnel
+      x-resource: vpn_tunnel
+    get:
+      description: Show VPN tunnel.
+      operationId: showVpnTunnel
+      parameters:
+      - description: VPN Tunnel ID
+        example: 2ade2919287040bc92e557fbbe6709c1
+        explode: false
+        in: path
+        name: vpn_tunnel_id
+        required: true
+        schema:
+          description: VPN Tunnel ID
+          example: 2ade2919287040bc92e557fbbe6709c1
+          title: Vpn Tunnel Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VpnTunnelShowWithStatusResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Show VPN Tunnel
+      tags:
+      - vpn.v1.VpnTunnelsApi
+      x-action-id: vpn:ShowVpnTunnel
+      x-api-access-level: READ
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: vpn-tunnel_show
+      x-not-before: 2026-07-01
+      x-operation-id: showVpnTunnel
+      x-resource: vpn_tunnel
+    put:
+      description: Set VPN tunnel.
+      operationId: setVpnTunnel
+      parameters:
+      - description: VPN Tunnel ID
+        example: 2ade2919287040bc92e557fbbe6709c1
+        explode: false
+        in: path
+        name: vpn_tunnel_id
+        required: true
+        schema:
+          description: VPN Tunnel ID
+          example: 2ade2919287040bc92e557fbbe6709c1
+          title: Vpn Tunnel Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VpnTunnelSetRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VpnTunnelShowResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Set VPN Tunnel
+      tags:
+      - vpn.v1.VpnTunnelsApi
+      x-action-id: vpn:SetVpnTunnel
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: vpn-tunnel_set
+      x-not-before: 2026-07-01
+      x-operation-id: setVpnTunnel
+      x-resource: vpn_tunnel
+components:
+  schemas:
+    Tag:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          description: tag key
+          title: Key
+          type: string
+        value:
+          description: tag value
+          title: Value
+          type: string
+      required:
+      - key
+      - value
+      title: Tag
+    ValidationErrorModel:
+      example:
+        msg: msg
+        loc:
+        - loc
+        - loc
+        ctx: "{}"
+        type_: type_
+      properties:
+        ctx:
+          nullable: true
+          type: object
+        loc:
+          items:
+            type: string
+          nullable: true
+          type: array
+        msg:
+          nullable: true
+          type: string
+        type_:
+          nullable: true
+          type: string
+      title: ValidationErrorModel
+    VpnGateway:
+      example:
+        vpc_name: ExampleVPC1
+        vpc_id: ceb44ea5ecb34a49b16495f9a63b0718
+        ip_id: fcde872f75c145a0893d656cc698f13e
+        created_at: 2024-05-17T00:23:17Z
+        description: description
+        ip_address: 123.0.0.1
+        ip_type: PUBLIC
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        account_id: 0e3dffc50eb247a1adf4f2e5c82c4f99
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: ExampleVpnGW1
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        state: ACTIVE
+        modified_at: 2024-05-17T00:23:17Z
+      properties:
+        account_id:
+          description: Account ID
+          example: 0e3dffc50eb247a1adf4f2e5c82c4f99
+          title: Account Id
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        description:
+          nullable: true
+          type: string
+        id:
+          description: ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        ip_address:
+          description: VPN Gateway IP Address
+          example: 123.0.0.1
+          title: Ip Address
+          type: string
+        ip_id:
+          description: VPN Gateway IP ID
+          example: fcde872f75c145a0893d656cc698f13e
+          title: Ip Id
+          type: string
+        ip_type:
+          description: VPN Gateway IP Type
+          example: PUBLIC
+          title: Ip Type
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: VPN Gateway Name
+          example: ExampleVpnGW1
+          title: Name
+          type: string
+        state:
+          allOf:
+          - $ref: '#/components/schemas/VpnGatewayState'
+          description: State
+          example: ACTIVE
+        vpc_id:
+          description: VPC Id
+          example: ceb44ea5ecb34a49b16495f9a63b0718
+          title: Vpc Id
+          type: string
+        vpc_name:
+          description: VPC Name
+          example: ExampleVPC1
+          title: Vpc Name
+          type: string
+      required:
+      - account_id
+      - created_at
+      - created_by
+      - id
+      - ip_address
+      - ip_id
+      - ip_type
+      - modified_at
+      - modified_by
+      - name
+      - state
+      - vpc_id
+      - vpc_name
+      title: VpnGateway
+    VpnGatewayCreateRequest:
+      example:
+        vpc_id: ceb44ea5ecb34a49b16495f9a63b0718
+        ip_id: fcde872f75c145a0893d656cc698f13e
+        name: ExampleVpnGW1
+        description: description
+        ip_address: 123.0.0.1
+        ip_type: PUBLIC
+        tags:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      properties:
+        description:
+          nullable: true
+          type: string
+        ip_address:
+          description: VPN Gateway IP Address
+          example: 123.0.0.1
+          title: Ip Address
+          type: string
+        ip_id:
+          description: VPN Gateway IP ID
+          example: fcde872f75c145a0893d656cc698f13e
+          title: Ip Id
+          type: string
+        ip_type:
+          description: VPN Gateway IP Type
+          example: PUBLIC
+          title: Ip Type
+          type: string
+        name:
+          description: VPN Gateway Name
+          example: ExampleVpnGW1
+          title: Name
+          type: string
+        tags:
+          default: []
+          description: Tag List
+          items:
+            $ref: '#/components/schemas/Tag'
+          type: array
+        vpc_id:
+          description: VPC Id
+          example: ceb44ea5ecb34a49b16495f9a63b0718
+          title: Vpc Id
+          type: string
+      required:
+      - ip_address
+      - ip_id
+      - ip_type
+      - name
+      - vpc_id
+      title: VpnGatewayCreateRequest
+    VpnGatewayListResponse:
+      example:
+        size: 20
+        count: 20
+        vpn_gateways:
+        - vpc_name: ExampleVPC1
+          vpc_id: ceb44ea5ecb34a49b16495f9a63b0718
+          ip_id: fcde872f75c145a0893d656cc698f13e
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          ip_address: 123.0.0.1
+          ip_type: PUBLIC
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          account_id: 0e3dffc50eb247a1adf4f2e5c82c4f99
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: ExampleVpnGW1
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          state: ACTIVE
+          modified_at: 2024-05-17T00:23:17Z
+        - vpc_name: ExampleVPC1
+          vpc_id: ceb44ea5ecb34a49b16495f9a63b0718
+          ip_id: fcde872f75c145a0893d656cc698f13e
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          ip_address: 123.0.0.1
+          ip_type: PUBLIC
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          account_id: 0e3dffc50eb247a1adf4f2e5c82c4f99
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: ExampleVpnGW1
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          state: ACTIVE
+          modified_at: 2024-05-17T00:23:17Z
+        page: 0
+        sort:
+        - sort
+        - sort
+      properties:
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+        vpn_gateways:
+          items:
+            $ref: '#/components/schemas/VpnGateway'
+          type: array
+      required:
+      - count
+      - page
+      - size
+      - vpn_gateways
+      title: VpnGatewayListResponse
+    VpnGatewayQuotaResponse:
+      example:
+        vpn_gateway_max_quota: 3
+        vpn_gateway_used_quota: 1
+      properties:
+        vpn_gateway_max_quota:
+          description: VPN Gateway Max Quota
+          example: 3
+          title: Vpn Gateway Max Quota
+          type: integer
+        vpn_gateway_used_quota:
+          description: VPN Gateway Used Quota
+          example: 1
+          title: Vpn Gateway Used Quota
+          type: integer
+      required:
+      - vpn_gateway_max_quota
+      - vpn_gateway_used_quota
+      title: VpnGatewayQuotaResponse
+    VpnGatewaySetRequest:
+      example:
+        description: Example Description for VPN Gateway
+      properties:
+        description:
+          description: Description
+          example: Example Description for VPN Gateway
+          title: Description
+          type: string
+      title: VpnGatewaySetRequest
+    VpnGatewayShowResponse:
+      example:
+        vpn_gateway:
+          vpc_name: ExampleVPC1
+          vpc_id: ceb44ea5ecb34a49b16495f9a63b0718
+          ip_id: fcde872f75c145a0893d656cc698f13e
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          ip_address: 123.0.0.1
+          ip_type: PUBLIC
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          account_id: 0e3dffc50eb247a1adf4f2e5c82c4f99
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: ExampleVpnGW1
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          state: ACTIVE
+          modified_at: 2024-05-17T00:23:17Z
+      properties:
+        vpn_gateway:
+          $ref: '#/components/schemas/VpnGateway'
+      required:
+      - vpn_gateway
+      title: VpnGatewayShowResponse
+    VpnGatewayState:
+      enum:
+      - CREATING
+      - ACTIVE
+      - DELETING
+      - DELETED
+      - EDITING
+      - ERROR
+      title: VpnGatewayState
+      type: string
+    VpnPerfectForwardSecrecyType:
+      enum:
+      - ENABLE
+      - DISABLE
+      title: VpnPerfectForwardSecrecyType
+      type: string
+    VpnPhase1:
+      properties:
+        dpd_retry_interval:
+          description: VPN Tunnel Dead Peer Detection(DPD) Retry Interval (sec)
+          example: 60
+          title: Dpd Retry Interval
+          type: integer
+        ike_version:
+          description: VPN Tunnel IKE Version
+          example: 2
+          title: Ike Version
+          type: integer
+        life_time:
+          description: VPN Tunnel ISAKMP Lifetime (sec)
+          example: 86400
+          title: Life Time
+          type: integer
+        peer_gateway_ip:
+          description: VPN Tunnel Peer Gateway IP Address
+          example: 123.0.0.2
+          title: Peer Gateway Ip
+          type: string
+      required:
+      - dpd_retry_interval
+      - ike_version
+      - life_time
+      - peer_gateway_ip
+      title: VpnPhase1
+    VpnPhase1CreateRequest:
+      properties:
+        dpd_retry_interval:
+          description: VPN Tunnel Dead Peer Detection(DPD) Retry Interval (sec)
+          example: 60
+          title: Dpd Retry Interval
+          type: integer
+        ike_version:
+          description: VPN Tunnel IKE Version
+          example: 2
+          title: Ike Version
+          type: integer
+        peer_gateway_ip:
+          description: VPN Tunnel Peer Gateway IP Address
+          example: 123.0.0.2
+          title: Peer Gateway Ip
+          type: string
+        phase1_diffie_hellman_groups:
+          description: VPN Tunnel ISAKMP Diffie-Hellman Group List
+          example:
+          - 30
+          - 31
+          - 32
+          items:
+            type: integer
+          type: array
+        phase1_encryptions:
+          description: VPN Tunnel ISAKMP Proposal List
+          example:
+          - des-md5
+          - chacha20poly1305-prfsha256
+          items:
+            type: string
+          type: array
+        phase1_life_time:
+          description: VPN Tunnel ISAKMP Lifetime (sec)
+          example: 86400
+          title: Phase1 Life Time
+          type: integer
+        pre_shared_key:
+          description: "VPN Tunnel ISAKMP Authentication : Pre-shared Key"
+          example: PreSharedKey1
+          title: Pre Shared Key
+          type: string
+      required:
+      - dpd_retry_interval
+      - ike_version
+      - peer_gateway_ip
+      - phase1_diffie_hellman_groups
+      - phase1_encryptions
+      - phase1_life_time
+      - pre_shared_key
+      title: VpnPhase1CreateRequest
+    VpnPhase1Detail:
+      properties:
+        diffie_hellman_groups:
+          description: VPN Tunnel ISAKMP Diffie-Hellman Group List
+          example:
+          - 30
+          - 31
+          - 32
+          items:
+            type: integer
+          type: array
+        dpd_retry_interval:
+          description: VPN Tunnel Dead Peer Detection(DPD) Retry Interval (sec)
+          example: 60
+          title: Dpd Retry Interval
+          type: integer
+        encryptions:
+          description: VPN Tunnel ISAKMP Proposal List
+          example:
+          - des-md5
+          - chacha20poly1305-prfsha256
+          items:
+            type: string
+          type: array
+        ike_version:
+          description: VPN Tunnel IKE Version
+          example: 2
+          title: Ike Version
+          type: integer
+        life_time:
+          description: VPN Tunnel ISAKMP Lifetime (sec)
+          example: 86400
+          title: Life Time
+          type: integer
+        peer_gateway_ip:
+          description: VPN Tunnel Peer Gateway IP Address
+          example: 123.0.0.2
+          title: Peer Gateway Ip
+          type: string
+      required:
+      - diffie_hellman_groups
+      - dpd_retry_interval
+      - encryptions
+      - ike_version
+      - life_time
+      - peer_gateway_ip
+      title: VpnPhase1Detail
+    VpnPhase1SetRequest:
+      example:
+        phase1_life_time: 5
+        phase1_encryptions:
+        - phase1_encryptions
+        - phase1_encryptions
+        pre_shared_key: pre_shared_key
+        phase1_diffie_hellman_groups:
+        - 1
+        - 1
+        dpd_retry_interval: 0
+        ike_version: 6
+        peer_gateway_ip: peer_gateway_ip
+      properties:
+        dpd_retry_interval:
+          nullable: true
+          type: integer
+        ike_version:
+          nullable: true
+          type: integer
+        peer_gateway_ip:
+          nullable: true
+          type: string
+        phase1_diffie_hellman_groups:
+          items:
+            type: integer
+          nullable: true
+          type: array
+        phase1_encryptions:
+          items:
+            type: string
+          nullable: true
+          type: array
+        phase1_life_time:
+          nullable: true
+          type: integer
+        pre_shared_key:
+          nullable: true
+          type: string
+      title: VpnPhase1SetRequest
+    VpnPhase2:
+      properties:
+        life_time:
+          description: VPN Tunnel IPSec Lifetime (sec)
+          example: 43200
+          title: Life Time
+          type: integer
+        perfect_forward_secrecy:
+          description: VPN Tunnel IPSec Perfect Forward Secrecy(PFS)
+          example: ENABLE
+          title: Perfect Forward Secrecy
+          type: string
+        remote_subnet:
+          description: VPN Tunnel IPSec Remote Subnet
+          example: 10.1.0.0/16
+          title: Remote Subnet
+          type: string
+      required:
+      - life_time
+      - perfect_forward_secrecy
+      - remote_subnet
+      title: VpnPhase2
+    VpnPhase2CreateRequest:
+      properties:
+        perfect_forward_secrecy:
+          allOf:
+          - $ref: '#/components/schemas/VpnPerfectForwardSecrecyType'
+          description: VPN Tunnel IPSec Perfect Forward Secrecy(PFS)
+          example: ENABLE
+        phase2_diffie_hellman_groups:
+          description: VPN Tunnel ISAKMP Diffie-Hellman Group List
+          example:
+          - 30
+          - 31
+          - 32
+          items:
+            type: integer
+          type: array
+        phase2_encryptions:
+          description: VPN Tunnel ISAKMP Proposal List
+          example:
+          - null-md5
+          - aes128gcm
+          - chacha20poly1305
+          items:
+            type: string
+          type: array
+        phase2_life_time:
+          description: VPN Tunnel IPSec Lifetime (sec)
+          example: 43200
+          title: Phase2 Life Time
+          type: integer
+        remote_subnet:
+          description: VPN Tunnel IPSec Remote Subnet
+          example: 10.1.0.0/16
+          title: Remote Subnet
+          type: string
+      required:
+      - perfect_forward_secrecy
+      - phase2_diffie_hellman_groups
+      - phase2_encryptions
+      - phase2_life_time
+      - remote_subnet
+      title: VpnPhase2CreateRequest
+    VpnPhase2Detail:
+      properties:
+        diffie_hellman_groups:
+          items:
+            type: integer
+          nullable: true
+          type: array
+        encryptions:
+          description: VPN Tunnel IPSec Proposal List
+          example:
+          - null-md5
+          - aes128gcm
+          - chacha20poly1305
+          items:
+            type: string
+          type: array
+        life_time:
+          description: VPN Tunnel IPSec Lifetime (sec)
+          example: 43200
+          title: Life Time
+          type: integer
+        perfect_forward_secrecy:
+          description: VPN Tunnel IPSec Perfect Forward Secrecy(PFS)
+          example: ENABLE
+          title: Perfect Forward Secrecy
+          type: string
+        remote_subnet:
+          description: VPN Tunnel IPSec Remote Subnet
+          example: 10.1.0.0/16
+          title: Remote Subnet
+          type: string
+      required:
+      - encryptions
+      - life_time
+      - perfect_forward_secrecy
+      - remote_subnet
+      title: VpnPhase2Detail
+    VpnPhase2SetRequest:
+      example:
+        phase2_encryptions:
+        - phase2_encryptions
+        - phase2_encryptions
+        phase2_diffie_hellman_groups:
+        - 5
+        - 5
+        phase2_life_time: 2
+        perfect_forward_secrecy: ENABLE
+        remote_subnet: remote_subnet
+      properties:
+        perfect_forward_secrecy:
+          $ref: '#/components/schemas/VpnPerfectForwardSecrecyType'
+        phase2_diffie_hellman_groups:
+          items:
+            type: integer
+          nullable: true
+          type: array
+        phase2_encryptions:
+          items:
+            type: string
+          nullable: true
+          type: array
+        phase2_life_time:
+          nullable: true
+          type: integer
+        remote_subnet:
+          nullable: true
+          type: string
+      title: VpnPhase2SetRequest
+    VpnTunnel:
+      example:
+        vpc_name: ExampleVPC1
+        vpc_id: ceb44ea5ecb34a49b16495f9a63b0718
+        created_at: 2024-05-17T00:23:17Z
+        description: description
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        phase1: ""
+        phase2: ""
+        vpn_gateway_name: ExampleVpnGW1
+        account_id: 0e3dffc50eb247a1adf4f2e5c82c4f99
+        vpn_gateway_ip_address: 123.0.0.1
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: ExampleVpnTunnel1
+        vpn_gateway_id: b156740b6335468d8354eb9ef8eddf5a
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        state: ACTIVE
+        modified_at: 2024-05-17T00:23:17Z
+      properties:
+        account_id:
+          description: Account ID
+          example: 0e3dffc50eb247a1adf4f2e5c82c4f99
+          title: Account Id
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        description:
+          nullable: true
+          type: string
+        id:
+          description: ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: VPN Tunnel Name
+          example: ExampleVpnTunnel1
+          title: Name
+          type: string
+        phase1:
+          allOf:
+          - $ref: '#/components/schemas/VpnPhase1'
+          description: VPN Tunnel Phase1
+        phase2:
+          allOf:
+          - $ref: '#/components/schemas/VpnPhase2'
+          description: VPN Tunnel Phase2
+        state:
+          allOf:
+          - $ref: '#/components/schemas/VpnTunnelState'
+          description: State
+          example: ACTIVE
+        vpc_id:
+          description: VPC Id
+          example: ceb44ea5ecb34a49b16495f9a63b0718
+          title: Vpc Id
+          type: string
+        vpc_name:
+          description: VPC Name
+          example: ExampleVPC1
+          title: Vpc Name
+          type: string
+        vpn_gateway_id:
+          description: VPN Gateway ID
+          example: b156740b6335468d8354eb9ef8eddf5a
+          title: Vpn Gateway Id
+          type: string
+        vpn_gateway_ip_address:
+          description: VPN Gateway IP Address
+          example: 123.0.0.1
+          title: Vpn Gateway Ip Address
+          type: string
+        vpn_gateway_name:
+          description: VPN Gateway Name
+          example: ExampleVpnGW1
+          title: Vpn Gateway Name
+          type: string
+      required:
+      - account_id
+      - created_at
+      - created_by
+      - description
+      - id
+      - modified_at
+      - modified_by
+      - name
+      - phase1
+      - phase2
+      - state
+      - vpc_id
+      - vpc_name
+      - vpn_gateway_id
+      - vpn_gateway_ip_address
+      - vpn_gateway_name
+      title: VpnTunnel
+    VpnTunnelCreateRequest:
+      example:
+        phase1: ""
+        phase2: ""
+        name: ExampleVpnTunnel1
+        vpn_gateway_id: b156740b6335468d8354eb9ef8eddf5a
+        description: description
+        tags:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      properties:
+        description:
+          nullable: true
+          type: string
+        name:
+          description: VPN Tunnel Name
+          example: ExampleVpnTunnel1
+          title: Name
+          type: string
+        phase1:
+          allOf:
+          - $ref: '#/components/schemas/VpnPhase1CreateRequest'
+          description: VPN Tunnel Phase1
+        phase2:
+          allOf:
+          - $ref: '#/components/schemas/VpnPhase2CreateRequest'
+          description: VPN Tunnel Phase2
+        tags:
+          default: []
+          description: Tag List
+          items:
+            $ref: '#/components/schemas/Tag'
+          type: array
+        vpn_gateway_id:
+          description: VPN Gateway ID
+          example: b156740b6335468d8354eb9ef8eddf5a
+          title: Vpn Gateway Id
+          type: string
+      required:
+      - name
+      - phase1
+      - phase2
+      - vpn_gateway_id
+      title: VpnTunnelCreateRequest
+    VpnTunnelDetail:
+      example:
+        vpc_name: ExampleVPC1
+        vpc_id: ceb44ea5ecb34a49b16495f9a63b0718
+        created_at: 2024-05-17T00:23:17Z
+        description: description
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        phase1: ""
+        phase2: ""
+        vpn_gateway_name: ExampleVpnGW1
+        account_id: 0e3dffc50eb247a1adf4f2e5c82c4f99
+        vpn_gateway_ip_address: 123.0.0.1
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: ExampleVpnTunnel1
+        vpn_gateway_id: b156740b6335468d8354eb9ef8eddf5a
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        state: ACTIVE
+        modified_at: 2024-05-17T00:23:17Z
+      properties:
+        account_id:
+          description: Account ID
+          example: 0e3dffc50eb247a1adf4f2e5c82c4f99
+          title: Account Id
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        description:
+          nullable: true
+          type: string
+        id:
+          description: ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: VPN Tunnel Name
+          example: ExampleVpnTunnel1
+          title: Name
+          type: string
+        phase1:
+          allOf:
+          - $ref: '#/components/schemas/VpnPhase1Detail'
+          description: VPN Tunnel Phase1
+        phase2:
+          allOf:
+          - $ref: '#/components/schemas/VpnPhase2Detail'
+          description: VPN Tunnel Phase2
+        state:
+          allOf:
+          - $ref: '#/components/schemas/VpnTunnelState'
+          description: State
+          example: ACTIVE
+        vpc_id:
+          description: VPC Id
+          example: ceb44ea5ecb34a49b16495f9a63b0718
+          title: Vpc Id
+          type: string
+        vpc_name:
+          description: VPC Name
+          example: ExampleVPC1
+          title: Vpc Name
+          type: string
+        vpn_gateway_id:
+          description: VPN Gateway ID
+          example: b156740b6335468d8354eb9ef8eddf5a
+          title: Vpn Gateway Id
+          type: string
+        vpn_gateway_ip_address:
+          description: VPN Gateway IP Address
+          example: 123.0.0.1
+          title: Vpn Gateway Ip Address
+          type: string
+        vpn_gateway_name:
+          description: VPN Gateway Name
+          example: ExampleVpnGW1
+          title: Vpn Gateway Name
+          type: string
+      required:
+      - account_id
+      - created_at
+      - created_by
+      - description
+      - id
+      - modified_at
+      - modified_by
+      - name
+      - phase1
+      - phase2
+      - state
+      - vpc_id
+      - vpc_name
+      - vpn_gateway_id
+      - vpn_gateway_ip_address
+      - vpn_gateway_name
+      title: VpnTunnelDetail
+    VpnTunnelDetailWithStatus:
+      example:
+        vpc_name: ExampleVPC1
+        vpc_id: ceb44ea5ecb34a49b16495f9a63b0718
+        created_at: 2024-05-17T00:23:17Z
+        description: description
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        phase1: ""
+        phase2: ""
+        vpn_gateway_name: ExampleVpnGW1
+        account_id: 0e3dffc50eb247a1adf4f2e5c82c4f99
+        vpn_gateway_ip_address: 123.0.0.1
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: ExampleVpnTunnel1
+        vpn_gateway_id: b156740b6335468d8354eb9ef8eddf5a
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        state: ACTIVE
+        modified_at: 2024-05-17T00:23:17Z
+        status: UP
+      properties:
+        account_id:
+          description: Account ID
+          example: 0e3dffc50eb247a1adf4f2e5c82c4f99
+          title: Account Id
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        description:
+          nullable: true
+          type: string
+        id:
+          description: ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: VPN Tunnel Name
+          example: ExampleVpnTunnel1
+          title: Name
+          type: string
+        phase1:
+          allOf:
+          - $ref: '#/components/schemas/VpnPhase1Detail'
+          description: VPN Tunnel Phase1
+        phase2:
+          allOf:
+          - $ref: '#/components/schemas/VpnPhase2Detail'
+          description: VPN Tunnel Phase2
+        state:
+          allOf:
+          - $ref: '#/components/schemas/VpnTunnelState'
+          description: State
+          example: ACTIVE
+        status:
+          allOf:
+          - $ref: '#/components/schemas/VpnTunnelStatus'
+          description: VPN Tunnel Status
+          example: UP
+        vpc_id:
+          description: VPC Id
+          example: ceb44ea5ecb34a49b16495f9a63b0718
+          title: Vpc Id
+          type: string
+        vpc_name:
+          description: VPC Name
+          example: ExampleVPC1
+          title: Vpc Name
+          type: string
+        vpn_gateway_id:
+          description: VPN Gateway ID
+          example: b156740b6335468d8354eb9ef8eddf5a
+          title: Vpn Gateway Id
+          type: string
+        vpn_gateway_ip_address:
+          description: VPN Gateway IP Address
+          example: 123.0.0.1
+          title: Vpn Gateway Ip Address
+          type: string
+        vpn_gateway_name:
+          description: VPN Gateway Name
+          example: ExampleVpnGW1
+          title: Vpn Gateway Name
+          type: string
+      required:
+      - account_id
+      - created_at
+      - created_by
+      - description
+      - id
+      - modified_at
+      - modified_by
+      - name
+      - phase1
+      - phase2
+      - state
+      - status
+      - vpc_id
+      - vpc_name
+      - vpn_gateway_id
+      - vpn_gateway_ip_address
+      - vpn_gateway_name
+      title: VpnTunnelDetailWithStatus
+    VpnTunnelListResponse:
+      example:
+        size: 20
+        count: 20
+        page: 0
+        sort:
+        - sort
+        - sort
+        vpn_tunnels:
+        - vpc_name: ExampleVPC1
+          vpc_id: ceb44ea5ecb34a49b16495f9a63b0718
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          phase1: ""
+          phase2: ""
+          vpn_gateway_name: ExampleVpnGW1
+          account_id: 0e3dffc50eb247a1adf4f2e5c82c4f99
+          vpn_gateway_ip_address: 123.0.0.1
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: ExampleVpnTunnel1
+          vpn_gateway_id: b156740b6335468d8354eb9ef8eddf5a
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          state: ACTIVE
+          modified_at: 2024-05-17T00:23:17Z
+        - vpc_name: ExampleVPC1
+          vpc_id: ceb44ea5ecb34a49b16495f9a63b0718
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          phase1: ""
+          phase2: ""
+          vpn_gateway_name: ExampleVpnGW1
+          account_id: 0e3dffc50eb247a1adf4f2e5c82c4f99
+          vpn_gateway_ip_address: 123.0.0.1
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: ExampleVpnTunnel1
+          vpn_gateway_id: b156740b6335468d8354eb9ef8eddf5a
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          state: ACTIVE
+          modified_at: 2024-05-17T00:23:17Z
+      properties:
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+        vpn_tunnels:
+          items:
+            $ref: '#/components/schemas/VpnTunnel'
+          type: array
+      required:
+      - count
+      - page
+      - size
+      - vpn_tunnels
+      title: VpnTunnelListResponse
+    VpnTunnelQuotaResponse:
+      example:
+        vpn_tunnel_used_quota: 2
+        vpn_tunnel_max_quota: 5
+      properties:
+        vpn_tunnel_max_quota:
+          description: VPN Tunnel Max Quota
+          example: 5
+          title: Vpn Tunnel Max Quota
+          type: integer
+        vpn_tunnel_used_quota:
+          description: VPN Tunnel Used Quota
+          example: 2
+          title: Vpn Tunnel Used Quota
+          type: integer
+      required:
+      - vpn_tunnel_max_quota
+      - vpn_tunnel_used_quota
+      title: VpnTunnelQuotaResponse
+    VpnTunnelRemoteSubnetAvailability:
+      enum:
+      - AVAILABLE
+      - DUPLICATE
+      - INVALID
+      title: VpnTunnelRemoteSubnetAvailability
+      type: string
+    VpnTunnelSetRequest:
+      example:
+        phase1:
+          phase1_life_time: 5
+          phase1_encryptions:
+          - phase1_encryptions
+          - phase1_encryptions
+          pre_shared_key: pre_shared_key
+          phase1_diffie_hellman_groups:
+          - 1
+          - 1
+          dpd_retry_interval: 0
+          ike_version: 6
+          peer_gateway_ip: peer_gateway_ip
+        phase2:
+          phase2_encryptions:
+          - phase2_encryptions
+          - phase2_encryptions
+          phase2_diffie_hellman_groups:
+          - 5
+          - 5
+          phase2_life_time: 2
+          perfect_forward_secrecy: ENABLE
+          remote_subnet: remote_subnet
+        description: description
+      properties:
+        description:
+          nullable: true
+          type: string
+        phase1:
+          $ref: '#/components/schemas/VpnPhase1SetRequest'
+        phase2:
+          $ref: '#/components/schemas/VpnPhase2SetRequest'
+      title: VpnTunnelSetRequest
+    VpnTunnelShowResponse:
+      example:
+        vpn_tunnel:
+          vpc_name: ExampleVPC1
+          vpc_id: ceb44ea5ecb34a49b16495f9a63b0718
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          phase1: ""
+          phase2: ""
+          vpn_gateway_name: ExampleVpnGW1
+          account_id: 0e3dffc50eb247a1adf4f2e5c82c4f99
+          vpn_gateway_ip_address: 123.0.0.1
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: ExampleVpnTunnel1
+          vpn_gateway_id: b156740b6335468d8354eb9ef8eddf5a
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          state: ACTIVE
+          modified_at: 2024-05-17T00:23:17Z
+      properties:
+        vpn_tunnel:
+          $ref: '#/components/schemas/VpnTunnelDetail'
+      required:
+      - vpn_tunnel
+      title: VpnTunnelShowResponse
+    VpnTunnelShowWithStatusResponse:
+      example:
+        vpn_tunnel:
+          vpc_name: ExampleVPC1
+          vpc_id: ceb44ea5ecb34a49b16495f9a63b0718
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          phase1: ""
+          phase2: ""
+          vpn_gateway_name: ExampleVpnGW1
+          account_id: 0e3dffc50eb247a1adf4f2e5c82c4f99
+          vpn_gateway_ip_address: 123.0.0.1
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: ExampleVpnTunnel1
+          vpn_gateway_id: b156740b6335468d8354eb9ef8eddf5a
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          state: ACTIVE
+          modified_at: 2024-05-17T00:23:17Z
+          status: UP
+      properties:
+        vpn_tunnel:
+          $ref: '#/components/schemas/VpnTunnelDetailWithStatus'
+      required:
+      - vpn_tunnel
+      title: VpnTunnelShowWithStatusResponse
+    VpnTunnelState:
+      enum:
+      - CREATING
+      - ACTIVE
+      - DELETING
+      - DELETED
+      - EDITING
+      - ERROR
+      title: VpnTunnelState
+      type: string
+    VpnTunnelStatus:
+      enum:
+      - UP
+      - DOWN
+      title: VpnTunnelStatus
+      type: string
+    VpnTunnelSubnetAvailability:
+      example:
+        vpn_gateway_id: b156740b6335468d8354eb9ef8eddf5a
+        remote_subnet: 10.1.0.0/16
+        availability: AVAILABLE
+      properties:
+        availability:
+          allOf:
+          - $ref: '#/components/schemas/VpnTunnelRemoteSubnetAvailability'
+          description: VPN Tunnel Remote Subnet Availability
+          example: AVAILABLE
+        remote_subnet:
+          description: VPN Tunnel IPSec Remote Subnet
+          example: 10.1.0.0/16
+          title: Remote Subnet
+          type: string
+        vpn_gateway_id:
+          description: VPN Gateway ID
+          example: b156740b6335468d8354eb9ef8eddf5a
+          title: Vpn Gateway Id
+          type: string
+      required:
+      - availability
+      - remote_subnet
+      - vpn_gateway_id
+      title: VpnTunnelSubnetAvailability
+    VpnTunnelSubnetAvailabilityResponse:
+      example:
+        vpn_tunnel_subnet_availability:
+          vpn_gateway_id: b156740b6335468d8354eb9ef8eddf5a
+          remote_subnet: 10.1.0.0/16
+          availability: AVAILABLE
+      properties:
+        vpn_tunnel_subnet_availability:
+          $ref: '#/components/schemas/VpnTunnelSubnetAvailability'
+      required:
+      - vpn_tunnel_subnet_availability
+      title: VpnTunnelSubnetAvailabilityResponse
+  securitySchemes:
+    X-Auth-Token:
+      in: header
+      name: X-Auth-Token
+      type: apiKey
+x-app-name: scp-network
+x-package-name: scp_network
+x-service-type: scp-network
+x-service-versions:
+  cdn:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  direct-connect:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  dns:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  firewall:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  gslb:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  network-common:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  network-logging:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  security-group:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  vpc:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  vpn:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+x-url-prefix: ""

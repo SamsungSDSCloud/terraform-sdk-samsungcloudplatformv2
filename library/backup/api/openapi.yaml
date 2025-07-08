@@ -1,0 +1,3843 @@
+openapi: 3.1.0
+info:
+  description: OSSCP backup Project
+  title: OSSCP backup Project
+  version: 0.0.1.dev530
+servers:
+- url: ""
+tags:
+- description: Backups API
+  name: backup.v1.BackupsApi
+- description: Backup Schedules API
+  name: backup.v1.BackupSchedulesApi
+- description: Backup Restore API
+  name: backup.v1.BackupRestoreApi
+- description: Backups Filesystem API
+  name: backup.v1.BackupsFilesystemApi
+- description: Backup Agents API
+  name: backup.v1.BackupAgentsApiK
+- description: Backups Internal API
+  name: backup.v1.BackupsInternalApi
+- description: Agent Backups Restore API
+  name: backup.v1.AgentBackupsRestoreAPI
+paths:
+  /v1/backup-agents:
+    get:
+      description: List Backup Agents.
+      operationId: listBackupAgents
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Backup Agent Name
+        example: agent_abcd12
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Server's Backup Agent IP
+        example: 11.22.33.44
+        explode: true
+        in: query
+        name: server_backup_agent_ip
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Backup Agent target server name
+        example: server-001
+        explode: true
+        in: query
+        name: server_name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupAgentListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: List Backup Agents
+      tags:
+      - backup.v1.BackupAgentsApi
+      x-action-id: backup:ListBackupAgents
+      x-api-access-level: LIST
+      x-api-created-date: "20250428"
+      x-api-modified-date: "20250428"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_agent_list
+      x-resource: BackupAgent
+    post:
+      description: Create a Backup Agent.
+      operationId: createBackupAgent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BackupAgentCreateRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Create Backup Agent
+      tags:
+      - backup.v1.BackupAgentsApi
+      x-action-id: backup:CreateBackupAgent
+      x-api-access-level: CREATE
+      x-api-created-date: "20250428"
+      x-api-modified-date: "20250428"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_agent_create
+      x-resource: BackupAgent
+  /v1/backup-agents/agent-install-file-path:
+    get:
+      description: Show Backup Agent Install File Path.
+      operationId: showInstallFilePath
+      parameters:
+      - description: OS type
+        explode: true
+        in: query
+        name: os_type
+        required: true
+        schema:
+          description: OS type
+          pattern: ^(WINDOWS|LINUX)$
+          title: Os Type
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstallFilePathResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Show Backup Agent Install File Path
+      tags:
+      - backup.v1.BackupAgentsApi
+      x-action-id: backup:ShowBackupAgentInstallFilePath
+      x-api-access-level: READ
+      x-api-created-date: "20250428"
+      x-api-modified-date: "20250428"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_agent_install_file_path_show
+      x-resource: BackupAgent
+  /v1/backup-agents/targets:
+    get:
+      description: List targets of Backup Agent.
+      operationId: listBackupAgentTargets
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: Sort
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Backup server category
+        example: BAREMETAL_SERVER
+        explode: true
+        in: query
+        name: server_category
+        required: true
+        schema:
+          description: Backup server category
+          example: BAREMETAL_SERVER
+          pattern: ^(BAREMETAL_SERVER|VIRTUAL_SERVER|GPU_SERVER)$
+          title: Server Category
+          type: string
+        style: form
+      - description: Backup server name
+        example: server-001
+        explode: true
+        in: query
+        name: server_name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupAgentTargetListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: List Targets of Backup Agent
+      tags:
+      - backup.v1.BackupAgentsApi
+      x-action-id: backup:ListBackupAgentTargets
+      x-api-access-level: LIST
+      x-api-created-date: "20250428"
+      x-api-modified-date: "20250428"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_agent_target_list
+      x-resource: BackupAgent
+  /v1/backup-agents/{backup_agent_id}:
+    delete:
+      description: Terminate the Backup Agent.
+      operationId: deleteBackupAgent
+      parameters:
+      - description: Backup Agent ID
+        example: BACKUP_AGENT-abcd
+        explode: false
+        in: path
+        name: backup_agent_id
+        required: true
+        schema:
+          description: Backup Agent ID
+          example: BACKUP_AGENT-abcd
+          title: Backup Agent Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Delete Backup Agent
+      tags:
+      - backup.v1.BackupAgentsApi
+      x-action-id: backup:DeleteBackupAgent
+      x-api-access-level: DELETE
+      x-api-created-date: "20250428"
+      x-api-modified-date: "20250428"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_agent_delete
+      x-resource: BackupAgent
+    get:
+      description: Show the detail of Backup Agent.
+      operationId: showBackupAgent
+      parameters:
+      - description: Backup Agent ID
+        example: BACKUP_AGENT-abcd
+        explode: false
+        in: path
+        name: backup_agent_id
+        required: true
+        schema:
+          description: Backup Agent ID
+          example: BACKUP_AGENT-abcd
+          title: Backup Agent Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupAgentDetailResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Show Backup Agent
+      tags:
+      - backup.v1.BackupAgentsApi
+      x-action-id: backup:ShowBackupAgent
+      x-api-access-level: READ
+      x-api-created-date: "20250428"
+      x-api-modified-date: "20250428"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_agent_show
+      x-resource: BackupAgent
+  /v1/backup-agents/{backup_agent_id}/check-connection-state:
+    get:
+      description: Check Backup master connection state.
+      operationId: checkConnectionState
+      parameters:
+      - description: Backup Agent ID
+        example: BACKUP_AGENT-abcd
+        explode: false
+        in: path
+        name: backup_agent_id
+        required: true
+        schema:
+          description: Backup Agent ID
+          example: BACKUP_AGENT-abcd
+          title: Backup Agent Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Check Backup Master Connection State
+      tags:
+      - backup.v1.BackupAgentsApi
+      x-action-id: backup:CheckBackupAgentConnectionState
+      x-api-access-level: READ
+      x-api-created-date: "20250428"
+      x-api-modified-date: "20250428"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_agent_connection_state_check
+      x-resource: BackupAgent
+  /v1/backups:
+    get:
+      description: List Backups.
+      operationId: listBackups
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Backup name
+        example: backup-001
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Backup server name
+        example: server-001
+        explode: true
+        in: query
+        name: server_name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: List Backups
+      tags:
+      - backup.v1.BackupsApi
+      x-action-id: backup:ListBackups
+      x-api-access-level: LIST
+      x-api-created-date: "20241223"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_list
+      x-resource: Backup
+    post:
+      description: Create a Backup.
+      operationId: createBackup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BackupCreateRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Create Backup
+      tags:
+      - backup.v1.BackupsApi
+      x-action-id: backup:CreateBackup
+      x-api-access-level: CREATE
+      x-api-created-date: "20241223"
+      x-api-modified-date: "20250428"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_create
+      x-resource: Backup
+  /v1/backups/backup-targets:
+    get:
+      description: List Backup targets.
+      operationId: getBackupTargetList
+      parameters:
+      - description: Backup server name
+        example: server-001
+        explode: true
+        in: query
+        name: server_name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Backup server category
+        example: VIRTUAL_SERVER | GPU_SERVER | BAREMETAL_SERVER
+        explode: true
+        in: query
+        name: server_category
+        required: true
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/ServerCategory'
+          description: Backup server category
+          example: VIRTUAL_SERVER | GPU_SERVER | BAREMETAL_SERVER
+        style: form
+      - description: Region
+        example: kr-west1
+        explode: true
+        in: query
+        name: region
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      - description: Size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupTargetListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: List Backup Targets
+      tags:
+      - backup.v1.BackupsApi
+      x-action-id: backup:ListBackupTargets
+      x-api-access-level: LIST
+      x-api-created-date: "20241223"
+      x-api-modified-date: "20250428"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_target_list
+      x-resource: Backup
+  /v1/backups/check-filesystem-duplication:
+    get:
+      description: Check filesystem path duplication.
+      operationId: checkFilesystemDuplication
+      parameters:
+      - description: Filesystem backup path
+        example: /aaa
+        explode: true
+        in: query
+        name: filesystem_path
+        required: true
+        schema:
+          description: Filesystem backup path
+          example: /aaa
+          title: Filesystem Path
+          type: string
+        style: form
+      - description: Backup server UUID
+        example: 89f5ef44-1021-4a5c-8e06-fbb289eac366
+        explode: true
+        in: query
+        name: server_uuid
+        required: true
+        schema:
+          description: Backup server UUID
+          example: 89f5ef44-1021-4a5c-8e06-fbb289eac366
+          title: Server Uuid
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckFileSystemDuplicationResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Check Filesystem Path Duplication
+      tags:
+      - backup.v1.BackupsFilesystemApi
+      x-action-id: backup:CheckDuplicationFilesystem
+      x-api-access-level: READ
+      x-api-created-date: "20250428"
+      x-api-modified-date: "20250428"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_agent_filesystem_duplication_check
+      x-resource: Backup
+  /v1/backups/check-name-duplication:
+    get:
+      description: Check for duplicate backup names.
+      operationId: checkBackupNameDuplicate
+      parameters:
+      - description: Backup name
+        example: backup-001
+        explode: true
+        in: query
+        name: backup_name
+        required: true
+        schema:
+          description: Backup name
+          example: backup-001
+          title: Backup Name
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupNameDuplicateResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Check Backup Name Duplicate
+      tags:
+      - backup.v1.BackupsApi
+      x-action-id: backup:CheckDuplicationBackupName
+      x-api-access-level: READ
+      x-api-created-date: "20241223"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_name_duplicate_check
+      x-resource: Backup
+  /v1/backups/region-relationship:
+    get:
+      description: List Backup Region Relationship.
+      operationId: ListBackupRegionRelationship
+      parameters:
+      - description: Region
+        example: kr-west1
+        explode: true
+        in: query
+        name: from_region
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Availability zone name
+        example: kr-west1
+        explode: true
+        in: query
+        name: from_availability_zone
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Region
+        example: kr-west1
+        explode: true
+        in: query
+        name: to_region
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Availability zone name
+        example: kr-west1
+        explode: true
+        in: query
+        name: to_availability_zone
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupListRegionRelationshipResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: List Backup Region Relationship
+      tags:
+      - backup.v1.BackupsApi
+      x-action-id: backup:ListBackupRegionRelationship
+      x-api-access-level: LIST
+      x-api-created-date: "20250428"
+      x-api-modified-date: "20250428"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_region_relationship_list
+      x-resource: Backup
+  /v1/backups/restore/check-name-duplication:
+    get:
+      description: Check for duplicate restore server name.
+      operationId: checkBackupRestoreServerNameDuplicate
+      parameters:
+      - description: Restore server name
+        example: restoretest1
+        explode: true
+        in: query
+        name: restore_server_name
+        required: true
+        schema:
+          description: Restore server name
+          example: restoretest1
+          title: Restore Server Name
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupRestoreServerNameDuplicateResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Check Backup Restore Server Name Duplicate
+      tags:
+      - backup.v1.BackupRestoreApi
+      x-action-id: backup:CheckDuplicationRestoreServerName
+      x-api-access-level: READ
+      x-api-created-date: "20241223"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_restore_server_name_duplicate_check
+      x-resource: Backup
+  /v1/backups/{backup_id}:
+    delete:
+      description: Terminate the Backup.
+      operationId: deleteBackup
+      parameters:
+      - description: Backup ID
+        example: 00cd2538fbf94d12b36aabbdd607e974
+        explode: false
+        in: path
+        name: backup_id
+        required: true
+        schema:
+          description: Backup ID
+          example: 00cd2538fbf94d12b36aabbdd607e974
+          title: Backup Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Delete Backup
+      tags:
+      - backup.v1.BackupsApi
+      x-action-id: backup:DeleteBackup
+      x-api-access-level: DELETE
+      x-api-created-date: "20241223"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_delete
+      x-resource: Backup
+    get:
+      description: Show the detail of Backup.
+      operationId: showBackup
+      parameters:
+      - description: Backup ID
+        example: 00cd2538fbf94d12b36aabbdd607e974
+        explode: false
+        in: path
+        name: backup_id
+        required: true
+        schema:
+          description: Backup ID
+          example: 00cd2538fbf94d12b36aabbdd607e974
+          title: Backup Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupDetailResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Show Backup
+      tags:
+      - backup.v1.BackupsApi
+      x-action-id: backup:ShowBackup
+      x-api-access-level: READ
+      x-api-created-date: "20241223"
+      x-api-modified-date: "20250428"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_show
+      x-resource: Backup
+  /v1/backups/{backup_id}/agent-backup-restore-targets:
+    get:
+      description: List Agent Backup restore target servers.
+      operationId: listAgentBackupRestoreTargetServers
+      parameters:
+      - description: Backup ID
+        example: 00cd2538fbf94d12b36aabbdd607e974
+        explode: false
+        in: path
+        name: backup_id
+        required: true
+        schema:
+          description: Backup ID
+          example: 00cd2538fbf94d12b36aabbdd607e974
+          title: Backup Id
+          type: string
+        style: simple
+      - description: Backup server name
+        example: server-001
+        explode: true
+        in: query
+        name: server_name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      - description: Size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentBackupRestoreTargetServerListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: List Agent Backup Restore Target Servers
+      tags:
+      - backup.v1.AgentBackupsRestoreAPI
+      x-action-id: backup:ListAgentBackupRestoreTargetServers
+      x-api-access-level: LIST
+      x-api-created-date: "20250428"
+      x-api-modified-date: "20250428"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: agent_backup_restore_target_server_list
+      x-resource: Backup
+  /v1/backups/{backup_id}/backup-histories:
+    get:
+      description: List Backup histories.
+      operationId: listBackupHistories
+      parameters:
+      - description: Backup ID
+        example: 00cd2538fbf94d12b36aabbdd607e974
+        explode: false
+        in: path
+        name: backup_id
+        required: true
+        schema:
+          description: Backup ID
+          example: 00cd2538fbf94d12b36aabbdd607e974
+          title: Backup Id
+          type: string
+        style: simple
+      - description: Start time
+        example: 2024-09-30T15:00:00Z
+        explode: true
+        in: query
+        name: backup_start_time
+        required: false
+        schema:
+          format: date-time
+          nullable: true
+          type: string
+        style: form
+      - description: End time
+        example: 2024-10-31T14:59:59Z
+        explode: true
+        in: query
+        name: backup_end_time
+        required: false
+        schema:
+          format: date-time
+          nullable: true
+          type: string
+        style: form
+      - description: Backup history state
+        example: SUCCESS
+        explode: true
+        in: query
+        name: backup_job_state
+        required: false
+        schema:
+          $ref: '#/components/schemas/BackupJobState'
+        style: form
+      - description: Page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 0
+          description: Page
+          example: 0
+          title: Page
+          type: integer
+        style: form
+      - description: Size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          default: 20
+          description: Size
+          example: 20
+          title: Size
+          type: integer
+        style: form
+      - description: Sort
+        example: backup_start_time:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupHistoryListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: List Backup Histories
+      tags:
+      - backup.v1.BackupSchedulesApi
+      x-action-id: backup:ListBackupHistories
+      x-api-access-level: LIST
+      x-api-created-date: "20241223"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_history_list
+      x-resource: Backup
+  /v1/backups/{backup_id}/backup-jobs/{backup_job_guid}/cancel: {}
+  /v1/backups/{backup_id}/filesystem-path:
+    put:
+      description: Set Filesystem path.
+      operationId: setFilesystemPath
+      parameters:
+      - description: Backup ID
+        example: 00cd2538fbf94d12b36aabbdd607e974
+        explode: false
+        in: path
+        name: backup_id
+        required: true
+        schema:
+          description: Backup ID
+          example: 00cd2538fbf94d12b36aabbdd607e974
+          title: Backup Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileSystemPathUpdateRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Set Filesystem Path
+      tags:
+      - backup.v1.BackupsFilesystemApi
+      x-action-id: backup:SetFilesystemBackupPath
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250428"
+      x-api-modified-date: "20250428"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: backup_agent_filesystem_path_set
+      x-resource: Backup
+  /v1/backups/{backup_id}/manual-backup:
+    post:
+      description: Perform Manual Backup immediately.
+      operationId: manualBackup
+      parameters:
+      - description: Backup ID
+        example: 00cd2538fbf94d12b36aabbdd607e974
+        explode: false
+        in: path
+        name: backup_id
+        required: true
+        schema:
+          description: Backup ID
+          example: 00cd2538fbf94d12b36aabbdd607e974
+          title: Backup Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Manual Backup
+      tags:
+      - backup.v1.BackupsApi
+      x-action-id: backup:CreateManualBackup
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241223"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_manual_backup_create
+      x-resource: Backup
+  /v1/backups/{backup_id}/restore:
+    post:
+      description: Restore the Backup.
+      operationId: restoreBackup
+      parameters:
+      - description: Backup ID
+        example: 00cd2538fbf94d12b36aabbdd607e974
+        explode: false
+        in: path
+        name: backup_id
+        required: true
+        schema:
+          description: Backup ID
+          example: 00cd2538fbf94d12b36aabbdd607e974
+          title: Backup Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BackupRestoreRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "409":
+          description: Conflict
+      security:
+      - X-Auth-Token: []
+      summary: Restore Backup
+      tags:
+      - backup.v1.BackupRestoreApi
+      x-action-id: backup:RestoreBackup
+      x-api-access-level: CREATE
+      x-api-created-date: "20241223"
+      x-api-modified-date: "20250428"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_restore
+      x-resource: Backup
+  /v1/backups/{backup_id}/restore-agent-backup:
+    post:
+      description: Restore the Backup.
+      operationId: restoreAgentBackup
+      parameters:
+      - description: Backup ID
+        example: 00cd2538fbf94d12b36aabbdd607e974
+        explode: false
+        in: path
+        name: backup_id
+        required: true
+        schema:
+          description: Backup ID
+          example: 00cd2538fbf94d12b36aabbdd607e974
+          title: Backup Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentBackupRestoreRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Restore Agent Backup
+      tags:
+      - backup.v1.AgentBackupsRestoreAPI
+      x-action-id: backup:RestoreAgentBackup
+      x-api-access-level: CREATE
+      x-api-created-date: "20250428"
+      x-api-modified-date: "20250428"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: agent_backup_restore
+      x-resource: Backup
+  /v1/backups/{backup_id}/restore-histories:
+    get:
+      description: List Backup restore histories.
+      operationId: listBackupRestoreHistories
+      parameters:
+      - description: Backup ID
+        example: 00cd2538fbf94d12b36aabbdd607e974
+        explode: false
+        in: path
+        name: backup_id
+        required: true
+        schema:
+          description: Backup ID
+          example: 00cd2538fbf94d12b36aabbdd607e974
+          title: Backup Id
+          type: string
+        style: simple
+      - description: Page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      - description: Size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      - description: Sort
+        example: backup_start_time:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Restore state
+        example: COMPLETED
+        explode: true
+        in: query
+        name: restore_state
+        required: false
+        schema:
+          $ref: '#/components/schemas/BackupRestoreState'
+        style: form
+      - description: Start time
+        example: 2024-09-30T15:00:00Z
+        explode: true
+        in: query
+        name: start_time
+        required: false
+        schema:
+          format: date-time
+          nullable: true
+          type: string
+        style: form
+      - description: End time
+        example: 2024-10-31T14:59:59Z
+        explode: true
+        in: query
+        name: end_time
+        required: false
+        schema:
+          format: date-time
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupRestoreHistoryListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: List Backup Restore Histories
+      tags:
+      - backup.v1.BackupRestoreApi
+      x-action-id: backup:ListRestoreHistories
+      x-api-access-level: LIST
+      x-api-created-date: "20241223"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_restore_history_list
+      x-resource: Backup
+  /v1/backups/{backup_id}/restore-targets:
+    delete:
+      description: Delete Backup restore target.
+      operationId: deleteBackupRestoreTarget
+      parameters:
+      - description: Backup ID
+        example: 00cd2538fbf94d12b36aabbdd607e974
+        explode: false
+        in: path
+        name: backup_id
+        required: true
+        schema:
+          description: Backup ID
+          example: 00cd2538fbf94d12b36aabbdd607e974
+          title: Backup Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BackupRestoreTargetDeleteRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Delete Backup Restore Target
+      tags:
+      - backup.v1.BackupRestoreApi
+      x-action-id: backup:DeleteRestoreTarget
+      x-api-access-level: DELETE
+      x-api-created-date: "20241223"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_restore_target_delete
+      x-resource: Backup
+    get:
+      description: List Backup restore targets.
+      operationId: listBackupRestoreTarget
+      parameters:
+      - description: Backup ID
+        example: 00cd2538fbf94d12b36aabbdd607e974
+        explode: false
+        in: path
+        name: backup_id
+        required: true
+        schema:
+          description: Backup ID
+          example: 00cd2538fbf94d12b36aabbdd607e974
+          title: Backup Id
+          type: string
+        style: simple
+      - description: Start time
+        example: 2024-09-30T15:00:00Z
+        explode: true
+        in: query
+        name: backup_start_time
+        required: false
+        schema:
+          format: date-time
+          nullable: true
+          type: string
+        style: form
+      - description: End time
+        example: 2024-10-31T14:59:59Z
+        explode: true
+        in: query
+        name: backup_end_time
+        required: false
+        schema:
+          format: date-time
+          nullable: true
+          type: string
+        style: form
+      - description: Page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 0
+          description: Page
+          example: 0
+          title: Page
+          type: integer
+        style: form
+      - description: Size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          default: 20
+          description: Size
+          example: 20
+          title: Size
+          type: integer
+        style: form
+      - description: Sort
+        example: backup_start_time:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupRestoreTargetListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: List Backup Restore Targets
+      tags:
+      - backup.v1.BackupRestoreApi
+      x-action-id: backup:ListRestoreTargets
+      x-api-access-level: LIST
+      x-api-created-date: "20241223"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_restore_target_list
+      x-resource: Backup
+  /v1/backups/{backup_id}/restore/restorable-subnets:
+    get:
+      description: List of subnets to select when restoring to a different location
+        from the original server.
+      operationId: listBackupRestoreSubnets
+      parameters:
+      - description: Backup ID
+        example: 00cd2538fbf94d12b36aabbdd607e974
+        explode: false
+        in: path
+        name: backup_id
+        required: true
+        schema:
+          description: Backup ID
+          example: 00cd2538fbf94d12b36aabbdd607e974
+          title: Backup Id
+          type: string
+        style: simple
+      - description: VPC ID
+        example: 7df8abb4912e4709b1cb237daccca7a8
+        explode: true
+        in: query
+        name: vpc_id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Subnet state
+        example: ACTIVE
+        explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupRestoreSubnetListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: List Backup Restore Subnets
+      tags:
+      - backup.v1.BackupRestoreApi
+      x-action-id: backup:ListRestoreSubnets
+      x-api-access-level: READ
+      x-api-created-date: "20250428"
+      x-api-modified-date: "20250428"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_restore_subnet_list
+      x-resource: Backup
+  /v1/backups/{backup_id}/retention-period:
+    put:
+      description: Update the retention period.
+      operationId: updateRetentionPeriod
+      parameters:
+      - description: Backup ID
+        example: 00cd2538fbf94d12b36aabbdd607e974
+        explode: false
+        in: path
+        name: backup_id
+        required: true
+        schema:
+          description: Backup ID
+          example: 00cd2538fbf94d12b36aabbdd607e974
+          title: Backup Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetentionPeriodUpdateBody'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Update Retention Period
+      tags:
+      - backup.v1.BackupsApi
+      x-action-id: backup:SetBackupRetentionPeriod
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241223"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_retention_period_set
+      x-resource: Backup
+  /v1/backups/{backup_id}/schedules:
+    get:
+      description: List Backup schedules.
+      operationId: listBackupSchedules
+      parameters:
+      - description: Backup ID
+        example: 00cd2538fbf94d12b36aabbdd607e974
+        explode: false
+        in: path
+        name: backup_id
+        required: true
+        schema:
+          description: Backup ID
+          example: 00cd2538fbf94d12b36aabbdd607e974
+          title: Backup Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupScheduleListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: List Backup Schedules
+      tags:
+      - backup.v1.BackupSchedulesApi
+      x-action-id: backup:ListBackupSchedules
+      x-api-access-level: LIST
+      x-api-created-date: "20241223"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_schedule_list
+      x-resource: Backup
+    put:
+      description: Set Backup schedule.
+      operationId: setBackupSchedules
+      parameters:
+      - description: Backup ID
+        example: 00cd2538fbf94d12b36aabbdd607e974
+        explode: false
+        in: path
+        name: backup_id
+        required: true
+        schema:
+          description: Backup ID
+          example: 00cd2538fbf94d12b36aabbdd607e974
+          title: Backup Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyBackupSchedulesRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Set Backup Schedule
+      tags:
+      - backup.v1.BackupSchedulesApi
+      x-action-id: backup:SetBackupSchedule
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241223"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_schedule_set
+      x-resource: Backup
+  /v1/internal/backups: {}
+  /v1/internal/backups/account: {}
+  /v1/internal/backups/backup-agents: {}
+  /v1/internal/backups/check-has-backup: {}
+  /v1/internal/backups/storage-type: {}
+  /v1/internal/backups/target-servers: {}
+  /v1/internal/backups/vrf-info: {}
+  /v1/internal/backups/{backup_id}/backup-restore-targets: {}
+components:
+  schemas:
+    AgentBackupRestoreRequest:
+      example:
+        restore_target_id: ca1a8e76-af49-40ea-93f8-a5989ffe138b
+        restore_server_uuid: 89f5ef44-1021-4a5c-8e06-fbb289eac366
+        filesystem_paths:
+        - destination: /data
+          source: /data
+        - destination: /data
+          source: /data
+        overwrite: true
+      properties:
+        filesystem_paths:
+          description: List of filesystem backup path
+          items:
+            $ref: '#/components/schemas/RestoreFilesystemPath'
+          type: array
+        overwrite:
+          nullable: true
+          type: boolean
+        restore_server_uuid:
+          description: Restored server ID
+          example: 89f5ef44-1021-4a5c-8e06-fbb289eac366
+          title: Restore Server Uuid
+          type: string
+        restore_target_id:
+          description: Restore target ID
+          example: ca1a8e76-af49-40ea-93f8-a5989ffe138b
+          title: Restore Target Id
+          type: string
+      required:
+      - filesystem_paths
+      - restore_server_uuid
+      - restore_target_id
+      title: AgentBackupRestoreRequest
+    AgentBackupRestoreTargetServerListResponse:
+      example:
+        contents:
+        - server_name: server-001
+          server_os_version: UBUNTU 22.04
+          server_uuid: 89f5ef44-1021-4a5c-8e06-fbb289eac366
+        - server_name: server-001
+          server_os_version: UBUNTU 22.04
+          server_uuid: 89f5ef44-1021-4a5c-8e06-fbb289eac366
+        count: 1
+      properties:
+        contents:
+          items:
+            $ref: '#/components/schemas/AgentBackupRestoreTargetServerResponse'
+          nullable: true
+          type: array
+        count:
+          description: Count
+          example: 1
+          title: Count
+          type: integer
+      required:
+      - count
+      title: AgentBackupRestoreTargetServerListResponse
+    AgentBackupRestoreTargetServerResponse:
+      example:
+        server_name: server-001
+        server_os_version: UBUNTU 22.04
+        server_uuid: 89f5ef44-1021-4a5c-8e06-fbb289eac366
+      properties:
+        server_name:
+          description: Backup server name
+          example: server-001
+          title: Server Name
+          type: string
+        server_os_version:
+          description: Server's OS Type and Version
+          example: UBUNTU 22.04
+          title: Server Os Version
+          type: string
+        server_uuid:
+          description: Backup server UUID
+          example: 89f5ef44-1021-4a5c-8e06-fbb289eac366
+          title: Server Uuid
+          type: string
+      required:
+      - server_name
+      - server_os_version
+      - server_uuid
+      title: AgentBackupRestoreTargetServerResponse
+    AsyncResponse:
+      example:
+        resource: ""
+        request_id: request_id
+      properties:
+        request_id:
+          description: Request ID
+          title: Request Id
+          type: string
+        resource:
+          allOf:
+          - $ref: '#/components/schemas/ResourceInfo'
+          description: Resource
+      required:
+      - request_id
+      - resource
+      title: AsyncResponse
+    BackupAgentCreateRequest:
+      example:
+        server_uuid: 89f5ef44-1021-4a5c-8e06-fbb289eac366
+        tags:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      properties:
+        server_uuid:
+          description: Backup Agent target server UUID
+          example: 89f5ef44-1021-4a5c-8e06-fbb289eac366
+          title: Server Uuid
+          type: string
+        tags:
+          items:
+            $ref: '#/components/schemas/Tag'
+          nullable: true
+          type: array
+      required:
+      - server_uuid
+      title: BackupAgentCreateRequest
+    BackupAgentDetailResponse:
+      example:
+        server_name: server_name
+        connection_check_time: 2000-01-23T04:56:07.000+00:00
+        server_os_type: server_os_type
+        created_at: 2024-05-17T00:23:17Z
+        connection_state: connection_state
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        backup_policy_count: 0
+        server_backup_agent_ip: server_backup_agent_ip
+        server_gateway_ip: server_gateway_ip
+        account_id: account_id
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: name
+        server_category: server_category
+        id: id
+        state: state
+        backup_master_ip: backup_master_ip
+        modified_at: 2024-05-17T00:23:17Z
+        backup_master_name: backup_master_name
+        server_uuid: server_uuid
+      properties:
+        account_id:
+          nullable: true
+          type: string
+        backup_master_ip:
+          nullable: true
+          type: string
+        backup_master_name:
+          nullable: true
+          type: string
+        backup_policy_count:
+          nullable: true
+          type: integer
+        connection_check_time:
+          format: date-time
+          nullable: true
+          type: string
+        connection_state:
+          nullable: true
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        id:
+          nullable: true
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          nullable: true
+          type: string
+        server_backup_agent_ip:
+          nullable: true
+          type: string
+        server_category:
+          nullable: true
+          type: string
+        server_gateway_ip:
+          nullable: true
+          type: string
+        server_name:
+          nullable: true
+          type: string
+        server_os_type:
+          nullable: true
+          type: string
+        server_uuid:
+          nullable: true
+          type: string
+        state:
+          nullable: true
+          type: string
+      required:
+      - account_id
+      - backup_master_ip
+      - backup_master_name
+      - backup_policy_count
+      - connection_check_time
+      - connection_state
+      - created_at
+      - created_by
+      - id
+      - modified_at
+      - modified_by
+      - name
+      - server_backup_agent_ip
+      - server_category
+      - server_gateway_ip
+      - server_name
+      - server_os_type
+      - server_uuid
+      - state
+      title: BackupAgentDetailResponse
+    BackupAgentListResponse:
+      example:
+        contents:
+        - server_name: server_name
+          account_id: account_id
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          created_at: 2024-05-17T00:23:17Z
+          id: id
+          state: state
+          connection_state: connection_state
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          backup_policy_count: 0
+          server_backup_agent_ip: server_backup_agent_ip
+        - server_name: server_name
+          account_id: account_id
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          created_at: 2024-05-17T00:23:17Z
+          id: id
+          state: state
+          connection_state: connection_state
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          backup_policy_count: 0
+          server_backup_agent_ip: server_backup_agent_ip
+        count: 6
+      properties:
+        contents:
+          items:
+            $ref: '#/components/schemas/BackupAgentResponse'
+          nullable: true
+          type: array
+        count:
+          nullable: true
+          type: integer
+      required:
+      - contents
+      title: BackupAgentListResponse
+    BackupAgentResponse:
+      example:
+        server_name: server_name
+        account_id: account_id
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: name
+        created_at: 2024-05-17T00:23:17Z
+        id: id
+        state: state
+        connection_state: connection_state
+        modified_at: 2024-05-17T00:23:17Z
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        backup_policy_count: 0
+        server_backup_agent_ip: server_backup_agent_ip
+      properties:
+        account_id:
+          nullable: true
+          type: string
+        backup_policy_count:
+          nullable: true
+          type: integer
+        connection_state:
+          nullable: true
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        id:
+          nullable: true
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          nullable: true
+          type: string
+        server_backup_agent_ip:
+          nullable: true
+          type: string
+        server_name:
+          nullable: true
+          type: string
+        state:
+          nullable: true
+          type: string
+      required:
+      - account_id
+      - backup_policy_count
+      - connection_state
+      - created_at
+      - created_by
+      - id
+      - modified_at
+      - modified_by
+      - name
+      - server_backup_agent_ip
+      - server_name
+      - state
+      title: BackupAgentResponse
+    BackupAgentTargetListResponse:
+      example:
+        contents:
+        - server_name: server-001
+          server_backup_agent_ip: 11.22.33.44
+          server_state: RUNNING
+          server_uuid: 89f5ef44-1021-4a5c-8e06-fbb289eac366
+        - server_name: server-001
+          server_backup_agent_ip: 11.22.33.44
+          server_state: RUNNING
+          server_uuid: 89f5ef44-1021-4a5c-8e06-fbb289eac366
+        count: 0
+      properties:
+        contents:
+          items:
+            $ref: '#/components/schemas/BackupAgentTargetResponse'
+          nullable: true
+          type: array
+        count:
+          nullable: true
+          type: integer
+      required:
+      - contents
+      title: BackupAgentTargetListResponse
+    BackupAgentTargetResponse:
+      example:
+        server_name: server-001
+        server_backup_agent_ip: 11.22.33.44
+        server_state: RUNNING
+        server_uuid: 89f5ef44-1021-4a5c-8e06-fbb289eac366
+      properties:
+        server_backup_agent_ip:
+          description: Server's Backup Agent IP
+          example: 11.22.33.44
+          title: Server Backup Agent Ip
+          type: string
+        server_name:
+          description: Backup Agent target server name
+          example: server-001
+          title: Server Name
+          type: string
+        server_state:
+          description: Backup server state
+          example: RUNNING
+          title: Server State
+          type: string
+        server_uuid:
+          description: Backup Agent target server UUID
+          example: 89f5ef44-1021-4a5c-8e06-fbb289eac366
+          title: Server Uuid
+          type: string
+      required:
+      - server_backup_agent_ip
+      - server_name
+      - server_state
+      - server_uuid
+      title: BackupAgentTargetResponse
+    BackupCreateRequest:
+      example:
+        policy_type: VM_IMAGE
+        server_guid: server_guid
+        encrypt_enabled: false
+        policy_category: AGENTLESS
+        schedules:
+        - start_time: 09:00:00
+          start_day: MON
+          start_week: WEEK_1
+          type: FULL
+          frequency: DAILY
+        - start_time: 09:00:00
+          start_day: MON
+          start_week: WEEK_1
+          type: FULL
+          frequency: DAILY
+        name: backup-001
+        server_category: VIRTUAL_SERVER | GPU_SERVER | BAREMETAL_SERVER
+        region: region
+        filesystem_paths:
+        - filesystem_paths
+        - filesystem_paths
+        retention_period: WEEK_2
+        server_uuid: 89f5ef44-1021-4a5c-8e06-fbb289eac366
+        tags:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      properties:
+        encrypt_enabled:
+          default: false
+          description: Whether to use Encryption
+          example: false
+          title: Encrypt Enabled
+          type: boolean
+        filesystem_paths:
+          items:
+            type: string
+          nullable: true
+          type: array
+        name:
+          description: Backup name
+          example: backup-001
+          title: Name
+          type: string
+        policy_category:
+          allOf:
+          - $ref: '#/components/schemas/BackupPolicyCategory'
+          description: Backup policy category
+          example: AGENTLESS
+        policy_type:
+          allOf:
+          - $ref: '#/components/schemas/BackupPolicyType'
+          description: Backup policy type
+          example: VM_IMAGE
+        region:
+          nullable: true
+          type: string
+        retention_period:
+          allOf:
+          - $ref: '#/components/schemas/BackupRetentionPeriod'
+          default: WEEK_2
+          description: Backup retention period
+          example: WEEK_2
+        schedules:
+          description: Schedules
+          items:
+            $ref: '#/components/schemas/BackupScheduleCreateRequest'
+          type: array
+        server_category:
+          allOf:
+          - $ref: '#/components/schemas/ServerCategory'
+          description: Backup server category
+          example: VIRTUAL_SERVER | GPU_SERVER | BAREMETAL_SERVER
+        server_guid:
+          nullable: true
+          type: string
+        server_uuid:
+          description: Backup server UUID
+          example: 89f5ef44-1021-4a5c-8e06-fbb289eac366
+          title: Server Uuid
+          type: string
+        tags:
+          items:
+            $ref: '#/components/schemas/Tag'
+          nullable: true
+          type: array
+      required:
+      - name
+      - policy_category
+      - policy_type
+      - schedules
+      - server_category
+      - server_uuid
+      title: BackupCreateRequest
+    BackupDetailResponse:
+      example:
+        server_name: server-001
+        backup_agent_id: backup_agent_id
+        role_type: ORIGINAL
+        encrypt_enabled: true
+        server_os_type: server_os_type
+        created_at: 2024-05-17T00:23:17Z
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        filesystem_paths:
+        - filesystem_paths
+        - filesystem_paths
+        retention_period: WEEK_2
+        server_region: server_region
+        policy_type: VM_IMAGE
+        policy_category: AGENTLESS
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: backup-001
+        server_category: VIRTUAL_SERVER | GPU_SERVER | BAREMETAL_SERVER
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        state: AVAILABLE
+        modified_at: 2024-05-17T00:23:17Z
+        region: region
+        server_uuid: 89f5ef44-1021-4a5c-8e06-fbb289eac366
+      properties:
+        backup_agent_id:
+          nullable: true
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        encrypt_enabled:
+          nullable: true
+          type: boolean
+        filesystem_paths:
+          items:
+            type: string
+          nullable: true
+          type: array
+        id:
+          description: ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: Backup name
+          example: backup-001
+          title: Name
+          type: string
+        policy_category:
+          description: Backup policy category
+          example: AGENTLESS
+          title: Policy Category
+          type: string
+        policy_type:
+          description: Backup policy type
+          example: VM_IMAGE
+          title: Policy Type
+          type: string
+        region:
+          nullable: true
+          type: string
+        retention_period:
+          description: Backup retention period
+          example: WEEK_2
+          title: Retention Period
+          type: string
+        role_type:
+          description: Backup role type
+          example: ORIGINAL
+          title: Role Type
+          type: string
+        server_category:
+          description: Backup server category
+          example: VIRTUAL_SERVER | GPU_SERVER | BAREMETAL_SERVER
+          title: Server Category
+          type: string
+        server_name:
+          description: Backup server name
+          example: server-001
+          title: Server Name
+          type: string
+        server_os_type:
+          nullable: true
+          type: string
+        server_region:
+          nullable: true
+          type: string
+        server_uuid:
+          description: Backup server UUID
+          example: 89f5ef44-1021-4a5c-8e06-fbb289eac366
+          title: Server Uuid
+          type: string
+        state:
+          description: Backup state
+          example: AVAILABLE
+          title: State
+          type: string
+      required:
+      - created_at
+      - created_by
+      - id
+      - modified_at
+      - modified_by
+      - name
+      - policy_category
+      - policy_type
+      - retention_period
+      - role_type
+      - server_category
+      - server_name
+      - server_region
+      - server_uuid
+      - state
+      title: BackupDetailResponse
+    BackupHistoryListResponse:
+      example:
+        contents:
+        - backup_job_state: SUCCESS
+          backup_end_time: 2000-01-23T04:56:07.000+00:00
+          backup_start_time: 2000-01-23T04:56:07.000+00:00
+          schedule_id: f5b8e22b-0d88-4698-9996-fb44217c8227
+          schedule_name: INCREMENTAL_DAILY_15:00:00-chg4By
+          backup_job_guid: backup_job_guid
+        - backup_job_state: SUCCESS
+          backup_end_time: 2000-01-23T04:56:07.000+00:00
+          backup_start_time: 2000-01-23T04:56:07.000+00:00
+          schedule_id: f5b8e22b-0d88-4698-9996-fb44217c8227
+          schedule_name: INCREMENTAL_DAILY_15:00:00-chg4By
+          backup_job_guid: backup_job_guid
+        count: 1
+      properties:
+        contents:
+          items:
+            $ref: '#/components/schemas/BackupHistoryResponse'
+          nullable: true
+          type: array
+        count:
+          description: Count
+          example: 1
+          title: Count
+          type: integer
+      required:
+      - contents
+      - count
+      title: BackupHistoryListResponse
+    BackupHistoryResponse:
+      example:
+        backup_job_state: SUCCESS
+        backup_end_time: 2000-01-23T04:56:07.000+00:00
+        backup_start_time: 2000-01-23T04:56:07.000+00:00
+        schedule_id: f5b8e22b-0d88-4698-9996-fb44217c8227
+        schedule_name: INCREMENTAL_DAILY_15:00:00-chg4By
+        backup_job_guid: backup_job_guid
+      properties:
+        backup_end_time:
+          format: date-time
+          nullable: true
+          type: string
+        backup_job_guid:
+          nullable: true
+          type: string
+        backup_job_state:
+          description: Backup history state
+          example: SUCCESS
+          title: Backup Job State
+          type: string
+        backup_start_time:
+          format: date-time
+          nullable: true
+          type: string
+        schedule_id:
+          description: Schedule ID
+          example: f5b8e22b-0d88-4698-9996-fb44217c8227
+          title: Schedule Id
+          type: string
+        schedule_name:
+          description: Schedule name
+          example: INCREMENTAL_DAILY_15:00:00-chg4By
+          title: Schedule Name
+          type: string
+      required:
+      - backup_end_time
+      - backup_job_guid
+      - backup_job_state
+      - backup_start_time
+      - schedule_id
+      - schedule_name
+      title: BackupHistoryResponse
+    BackupJobState:
+      enum:
+      - SUCCESS
+      - PARTIAL_SUCCESS
+      - FAILED
+      - INPROGRESS
+      - ALL
+      title: BackupJobState
+      type: string
+    BackupListRegionRelationshipResponse:
+      example:
+        contents:
+        - to_region: to_region
+          to_availability_zone: to_availability_zone
+          from_availability_zone: from_availability_zone
+          from_region: from_region
+        - to_region: to_region
+          to_availability_zone: to_availability_zone
+          from_availability_zone: from_availability_zone
+          from_region: from_region
+        count: 0
+      properties:
+        contents:
+          items:
+            $ref: '#/components/schemas/BackupRegionRelationshipResponse'
+          nullable: true
+          type: array
+        count:
+          nullable: true
+          type: integer
+      required:
+      - contents
+      title: BackupListRegionRelationshipResponse
+    BackupListResponse:
+      example:
+        contents:
+        - server_name: server-001
+          policy_type: VM_IMAGE
+          role_type: ORIGINAL
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: backup-001
+          created_at: 2024-05-17T00:23:17Z
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          state: AVAILABLE
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          retention_period: WEEK_2
+        - server_name: server-001
+          policy_type: VM_IMAGE
+          role_type: ORIGINAL
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: backup-001
+          created_at: 2024-05-17T00:23:17Z
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          state: AVAILABLE
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          retention_period: WEEK_2
+        count: 0
+      properties:
+        contents:
+          items:
+            $ref: '#/components/schemas/BackupResponse'
+          nullable: true
+          type: array
+        count:
+          nullable: true
+          type: integer
+      required:
+      - contents
+      title: BackupListResponse
+    BackupNameDuplicateResponse:
+      example:
+        result: true
+      properties:
+        result:
+          description: Result
+          example: true
+          title: Result
+          type: boolean
+      required:
+      - result
+      title: BackupNameDuplicateResponse
+    BackupPolicyCategory:
+      enum:
+      - AGENTLESS
+      - AGENT
+      title: BackupPolicyCategory
+      type: string
+    BackupPolicyType:
+      enum:
+      - VM_IMAGE
+      - FILESYSTEM
+      title: BackupPolicyType
+      type: string
+    BackupRegionRelationshipResponse:
+      example:
+        to_region: to_region
+        to_availability_zone: to_availability_zone
+        from_availability_zone: from_availability_zone
+        from_region: from_region
+      properties:
+        from_availability_zone:
+          nullable: true
+          type: string
+        from_region:
+          nullable: true
+          type: string
+        to_availability_zone:
+          nullable: true
+          type: string
+        to_region:
+          nullable: true
+          type: string
+      title: BackupRegionRelationshipResponse
+    BackupResponse:
+      example:
+        server_name: server-001
+        policy_type: VM_IMAGE
+        role_type: ORIGINAL
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: backup-001
+        created_at: 2024-05-17T00:23:17Z
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        state: AVAILABLE
+        modified_at: 2024-05-17T00:23:17Z
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        retention_period: WEEK_2
+      properties:
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        id:
+          description: ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: Backup name
+          example: backup-001
+          title: Name
+          type: string
+        policy_type:
+          description: Backup policy type
+          example: VM_IMAGE
+          title: Policy Type
+          type: string
+        retention_period:
+          description: Backup retention period
+          example: WEEK_2
+          title: Retention Period
+          type: string
+        role_type:
+          description: Backup role type
+          example: ORIGINAL
+          title: Role Type
+          type: string
+        server_name:
+          description: Backup server name
+          example: server-001
+          title: Server Name
+          type: string
+        state:
+          description: Backup state
+          example: AVAILABLE
+          title: State
+          type: string
+      required:
+      - created_at
+      - created_by
+      - id
+      - modified_at
+      - modified_by
+      - name
+      - policy_type
+      - retention_period
+      - role_type
+      - server_name
+      - state
+      title: BackupResponse
+    BackupRestoreHistoryListResponse:
+      example:
+        contents:
+        - backup_id: 00cd2538fbf94d12b36aabbdd607e974
+          restore_state: COMPLETED
+          restore_server_id: restore_server_id
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          created_at: 2024-05-17T00:23:17Z
+          restore_server_name: restoretest1
+          backup_start_time: 2024-10-28T05:38:48
+          restore_start_time: 2024-10-28T05:52:47
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          schedule_name: INCREMENTAL_DAILY_15:00:00-chg4By
+          restore_end_time: 2000-01-23T04:56:07.000+00:00
+        - backup_id: 00cd2538fbf94d12b36aabbdd607e974
+          restore_state: COMPLETED
+          restore_server_id: restore_server_id
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          created_at: 2024-05-17T00:23:17Z
+          restore_server_name: restoretest1
+          backup_start_time: 2024-10-28T05:38:48
+          restore_start_time: 2024-10-28T05:52:47
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          schedule_name: INCREMENTAL_DAILY_15:00:00-chg4By
+          restore_end_time: 2000-01-23T04:56:07.000+00:00
+        count: 1
+      properties:
+        contents:
+          items:
+            $ref: '#/components/schemas/BackupRestoreHistoryResponse'
+          nullable: true
+          type: array
+        count:
+          description: Count
+          example: 1
+          title: Count
+          type: integer
+      required:
+      - contents
+      - count
+      title: BackupRestoreHistoryListResponse
+    BackupRestoreHistoryResponse:
+      example:
+        backup_id: 00cd2538fbf94d12b36aabbdd607e974
+        restore_state: COMPLETED
+        restore_server_id: restore_server_id
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        created_at: 2024-05-17T00:23:17Z
+        restore_server_name: restoretest1
+        backup_start_time: 2024-10-28T05:38:48
+        restore_start_time: 2024-10-28T05:52:47
+        modified_at: 2024-05-17T00:23:17Z
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        schedule_name: INCREMENTAL_DAILY_15:00:00-chg4By
+        restore_end_time: 2000-01-23T04:56:07.000+00:00
+      properties:
+        backup_id:
+          description: Backup ID
+          example: 00cd2538fbf94d12b36aabbdd607e974
+          title: Backup Id
+          type: string
+        backup_start_time:
+          description: Backup time
+          example: 2024-10-28T05:38:48
+          format: date-time
+          title: Backup Start Time
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        restore_end_time:
+          format: date-time
+          nullable: true
+          type: string
+        restore_server_id:
+          nullable: true
+          type: string
+        restore_server_name:
+          description: Restore server name
+          example: restoretest1
+          title: Restore Server Name
+          type: string
+        restore_start_time:
+          description: Restore start time
+          example: 2024-10-28T05:52:47
+          format: date-time
+          title: Restore Start Time
+          type: string
+        restore_state:
+          allOf:
+          - $ref: '#/components/schemas/BackupRestoreState'
+          description: Restore state
+          example: COMPLETED
+        schedule_name:
+          description: Schedule name
+          example: INCREMENTAL_DAILY_15:00:00-chg4By
+          title: Schedule Name
+          type: string
+      required:
+      - backup_id
+      - backup_start_time
+      - created_at
+      - created_by
+      - modified_at
+      - modified_by
+      - restore_end_time
+      - restore_server_id
+      - restore_server_name
+      - restore_start_time
+      - restore_state
+      - schedule_name
+      title: BackupRestoreHistoryResponse
+    BackupRestoreRequest:
+      example:
+        restore_target_id: ca1a8e76-af49-40ea-93f8-a5989ffe138b
+        server_type_id: server_type_id
+        restore_server_name: restoretest1
+        networks:
+        - subnet_id: 023c57b14f11483689338d085e061492
+        - subnet_id: 023c57b14f11483689338d085e061492
+      properties:
+        networks:
+          items:
+            $ref: '#/components/schemas/Network'
+          nullable: true
+          type: array
+        restore_server_name:
+          description: Restore server name
+          example: restoretest1
+          maxLength: 63
+          minLength: 1
+          pattern: "^[a-zA-Z0-9-_ ]*$"
+          title: Restore Server Name
+          type: string
+        restore_target_id:
+          description: Restore target ID
+          example: ca1a8e76-af49-40ea-93f8-a5989ffe138b
+          title: Restore Target Id
+          type: string
+        server_type_id:
+          nullable: true
+          type: string
+      required:
+      - restore_server_name
+      - restore_target_id
+      title: BackupRestoreRequest
+    BackupRestoreServerNameDuplicateResponse:
+      example:
+        result: true
+      properties:
+        result:
+          description: Result
+          example: true
+          title: Result
+          type: boolean
+      required:
+      - result
+      title: BackupRestoreServerNameDuplicateResponse
+    BackupRestoreState:
+      enum:
+      - COMPLETED
+      - FAILED
+      - INPROGRESS
+      title: BackupRestoreState
+      type: string
+    BackupRestoreSubnetListResponse:
+      example:
+        count: 1
+        subnets:
+        - vpc_name: vpcName
+          vpc_id: 7df8abb4912e4709b1cb237daccca7a8
+          created_at: 2024-05-17T00:23:17Z
+          type: GENERAL
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          account_id: fnsd89fus0f9ds09f90dshf9dshfds09
+          gateway_ip_address: gateway_ip_address
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: subnetName
+          cidr: 192.167.1.0/24
+          id: 023c57b14f11483689338d085e061492
+          state: ACTIVE
+          modified_at: 2024-05-17T00:23:17Z
+        - vpc_name: vpcName
+          vpc_id: 7df8abb4912e4709b1cb237daccca7a8
+          created_at: 2024-05-17T00:23:17Z
+          type: GENERAL
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          account_id: fnsd89fus0f9ds09f90dshf9dshfds09
+          gateway_ip_address: gateway_ip_address
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: subnetName
+          cidr: 192.167.1.0/24
+          id: 023c57b14f11483689338d085e061492
+          state: ACTIVE
+          modified_at: 2024-05-17T00:23:17Z
+      properties:
+        count:
+          description: Count
+          example: 1
+          title: Count
+          type: integer
+        subnets:
+          items:
+            $ref: '#/components/schemas/BackupRestoreSubnetResponse'
+          nullable: true
+          type: array
+      required:
+      - count
+      title: BackupRestoreSubnetListResponse
+    BackupRestoreSubnetResponse:
+      example:
+        vpc_name: vpcName
+        vpc_id: 7df8abb4912e4709b1cb237daccca7a8
+        created_at: 2024-05-17T00:23:17Z
+        type: GENERAL
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        account_id: fnsd89fus0f9ds09f90dshf9dshfds09
+        gateway_ip_address: gateway_ip_address
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: subnetName
+        cidr: 192.167.1.0/24
+        id: 023c57b14f11483689338d085e061492
+        state: ACTIVE
+        modified_at: 2024-05-17T00:23:17Z
+      properties:
+        account_id:
+          description: Account  ID
+          example: fnsd89fus0f9ds09f90dshf9dshfds09
+          title: Account Id
+          type: string
+        cidr:
+          description: Subnet Cidr
+          example: 192.167.1.0/24
+          title: Cidr
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        gateway_ip_address:
+          nullable: true
+          type: string
+        id:
+          description: Subnet ID
+          example: 023c57b14f11483689338d085e061492
+          title: Id
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: Subnet Name
+          example: subnetName
+          title: Name
+          type: string
+        state:
+          description: Subnet state
+          example: ACTIVE
+          title: State
+          type: string
+        type:
+          description: Subnet Type
+          example: GENERAL
+          title: Type
+          type: string
+        vpc_id:
+          description: VPC ID
+          example: 7df8abb4912e4709b1cb237daccca7a8
+          title: Vpc Id
+          type: string
+        vpc_name:
+          description: VPC name
+          example: vpcName
+          title: Vpc Name
+          type: string
+      required:
+      - account_id
+      - cidr
+      - created_at
+      - created_by
+      - gateway_ip_address
+      - id
+      - modified_at
+      - modified_by
+      - name
+      - state
+      - type
+      - vpc_id
+      - vpc_name
+      title: BackupRestoreSubnetResponse
+    BackupRestoreTargetDeleteRequest:
+      example:
+        restore_target_ids:
+        - ca1a8e76-af49-40ea-93f8-a5989ffe138b
+      properties:
+        restore_target_ids:
+          description: Backup restore target ID list
+          example:
+          - ca1a8e76-af49-40ea-93f8-a5989ffe138b
+          items:
+            type: string
+          type: array
+      required:
+      - restore_target_ids
+      title: BackupRestoreTargetDeleteRequest
+    BackupRestoreTargetListResponse:
+      example:
+        contents:
+        - restore_target_id: ca1a8e76-af49-40ea-93f8-a5989ffe138b
+          is_restore_available: "true"
+          backup_start_time: 2000-01-23T04:56:07.000+00:00
+          schedule_id: f5b8e22b-0d88-4698-9996-fb44217c8227
+          schedule_name: INCREMENTAL_DAILY_15:00:00-chg4By
+          retention_period: WEEK_2
+          usage_gb: "123.4"
+        - restore_target_id: ca1a8e76-af49-40ea-93f8-a5989ffe138b
+          is_restore_available: "true"
+          backup_start_time: 2000-01-23T04:56:07.000+00:00
+          schedule_id: f5b8e22b-0d88-4698-9996-fb44217c8227
+          schedule_name: INCREMENTAL_DAILY_15:00:00-chg4By
+          retention_period: WEEK_2
+          usage_gb: "123.4"
+        count: 1
+      properties:
+        contents:
+          items:
+            $ref: '#/components/schemas/BackupRestoreTargetResponse'
+          nullable: true
+          type: array
+        count:
+          description: Count
+          example: 1
+          title: Count
+          type: integer
+      required:
+      - contents
+      - count
+      title: BackupRestoreTargetListResponse
+    BackupRestoreTargetResponse:
+      example:
+        restore_target_id: ca1a8e76-af49-40ea-93f8-a5989ffe138b
+        is_restore_available: "true"
+        backup_start_time: 2000-01-23T04:56:07.000+00:00
+        schedule_id: f5b8e22b-0d88-4698-9996-fb44217c8227
+        schedule_name: INCREMENTAL_DAILY_15:00:00-chg4By
+        retention_period: WEEK_2
+        usage_gb: "123.4"
+      properties:
+        backup_start_time:
+          format: date-time
+          nullable: true
+          type: string
+        is_restore_available:
+          description: Whether restore available
+          example: "true"
+          title: Is Restore Available
+          type: boolean
+        restore_target_id:
+          description: Restore target ID
+          example: ca1a8e76-af49-40ea-93f8-a5989ffe138b
+          title: Restore Target Id
+          type: string
+        retention_period:
+          description: Backup retention period
+          example: WEEK_2
+          title: Retention Period
+          type: string
+        schedule_id:
+          description: Schedule ID
+          example: f5b8e22b-0d88-4698-9996-fb44217c8227
+          title: Schedule Id
+          type: string
+        schedule_name:
+          description: Schedule name
+          example: INCREMENTAL_DAILY_15:00:00-chg4By
+          title: Schedule Name
+          type: string
+        usage_gb:
+          description: Backup size(GB)
+          example: "123.4"
+          title: Usage Gb
+          type: number
+      required:
+      - backup_start_time
+      - is_restore_available
+      - restore_target_id
+      - retention_period
+      - schedule_id
+      - schedule_name
+      - usage_gb
+      title: BackupRestoreTargetResponse
+    BackupRetentionPeriod:
+      enum:
+      - WEEK_2
+      - MONTH_1
+      - MONTH_3
+      - MONTH_6
+      - YEAR_1
+      title: BackupRetentionPeriod
+      type: string
+    BackupScheduleCreateRequest:
+      example:
+        start_time: 09:00:00
+        start_day: MON
+        start_week: WEEK_1
+        type: FULL
+        frequency: DAILY
+      properties:
+        frequency:
+          allOf:
+          - $ref: '#/components/schemas/BackupScheduleFrequency'
+          description: Schedule frequency type
+          example: DAILY
+        start_day:
+          $ref: '#/components/schemas/BackupScheduleDay'
+        start_time:
+          description: Backup schedule start time
+          example: 09:00:00
+          title: Start Time
+          type: string
+        start_week:
+          $ref: '#/components/schemas/BackupScheduleWeek'
+        type:
+          allOf:
+          - $ref: '#/components/schemas/BackupScheduleType'
+          description: Schedule type
+          example: FULL
+      required:
+      - frequency
+      - start_time
+      - type
+      title: BackupScheduleCreateRequest
+    BackupScheduleDay:
+      enum:
+      - MON
+      - TUE
+      - WED
+      - THU
+      - FRI
+      - SAT
+      - SUN
+      title: BackupScheduleDay
+      type: string
+    BackupScheduleFrequency:
+      enum:
+      - MONTHLY
+      - WEEKLY
+      - DAILY
+      title: BackupScheduleFrequency
+      type: string
+    BackupScheduleListResponse:
+      example:
+        contents:
+        - start_day: start_day
+          created_at: 2024-05-17T00:23:17Z
+          start_week: start_week
+          type: FULL
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          frequency: DAILY
+          backup_id: 00cd2538fbf94d12b36aabbdd607e974
+          start_time: start_time
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: INCREMENTAL_DAILY_15:00:00-chg4By
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          state: AVAILABLE
+          modified_at: 2024-05-17T00:23:17Z
+        - start_day: start_day
+          created_at: 2024-05-17T00:23:17Z
+          start_week: start_week
+          type: FULL
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          frequency: DAILY
+          backup_id: 00cd2538fbf94d12b36aabbdd607e974
+          start_time: start_time
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: INCREMENTAL_DAILY_15:00:00-chg4By
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          state: AVAILABLE
+          modified_at: 2024-05-17T00:23:17Z
+        count: 1
+      properties:
+        contents:
+          items:
+            $ref: '#/components/schemas/BackupScheduleResponse'
+          nullable: true
+          type: array
+        count:
+          description: Count
+          example: 1
+          title: Count
+          type: integer
+      required:
+      - contents
+      - count
+      title: BackupScheduleListResponse
+    BackupScheduleResponse:
+      example:
+        start_day: start_day
+        created_at: 2024-05-17T00:23:17Z
+        start_week: start_week
+        type: FULL
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        frequency: DAILY
+        backup_id: 00cd2538fbf94d12b36aabbdd607e974
+        start_time: start_time
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: INCREMENTAL_DAILY_15:00:00-chg4By
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        state: AVAILABLE
+        modified_at: 2024-05-17T00:23:17Z
+      properties:
+        backup_id:
+          description: Backup ID
+          example: 00cd2538fbf94d12b36aabbdd607e974
+          title: Backup Id
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        frequency:
+          allOf:
+          - $ref: '#/components/schemas/BackupScheduleFrequency'
+          description: Schedule frequency type
+          example: DAILY
+        id:
+          description: ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: Schedule name
+          example: INCREMENTAL_DAILY_15:00:00-chg4By
+          title: Name
+          type: string
+        start_day:
+          nullable: true
+          type: string
+        start_time:
+          nullable: true
+          type: string
+        start_week:
+          nullable: true
+          type: string
+        state:
+          description: Backup Schedule state
+          example: AVAILABLE
+          title: State
+          type: string
+        type:
+          description: Schedule type
+          example: FULL
+          title: Type
+          type: string
+      required:
+      - backup_id
+      - created_at
+      - created_by
+      - frequency
+      - id
+      - modified_at
+      - modified_by
+      - name
+      - start_day
+      - start_time
+      - start_week
+      - state
+      - type
+      title: BackupScheduleResponse
+    BackupScheduleType:
+      enum:
+      - FULL
+      - INCREMENTAL
+      title: BackupScheduleType
+      type: string
+    BackupScheduleWeek:
+      enum:
+      - WEEK_1
+      - WEEK_2
+      - WEEK_3
+      - WEEK_4
+      - WEEK_LAST
+      title: BackupScheduleWeek
+      type: string
+    BackupTargetListResponse:
+      example:
+        contents:
+        - server_name: server-001
+          server_guid: server_guid
+          server_os_version: server_os_version
+          server_uuid: 89f5ef44-1021-4a5c-8e06-fbb289eac366
+          server_type: server_type
+        - server_name: server-001
+          server_guid: server_guid
+          server_os_version: server_os_version
+          server_uuid: 89f5ef44-1021-4a5c-8e06-fbb289eac366
+          server_type: server_type
+        count: 1
+      properties:
+        contents:
+          items:
+            $ref: '#/components/schemas/BackupTargetResponse'
+          nullable: true
+          type: array
+        count:
+          description: Count
+          example: 1
+          title: Count
+          type: integer
+      required:
+      - count
+      title: BackupTargetListResponse
+    BackupTargetResponse:
+      example:
+        server_name: server-001
+        server_guid: server_guid
+        server_os_version: server_os_version
+        server_uuid: 89f5ef44-1021-4a5c-8e06-fbb289eac366
+        server_type: server_type
+      properties:
+        server_guid:
+          nullable: true
+          type: string
+        server_name:
+          description: Backup server name
+          example: server-001
+          title: Server Name
+          type: string
+        server_os_version:
+          nullable: true
+          type: string
+        server_type:
+          nullable: true
+          type: string
+        server_uuid:
+          description: Backup server UUID
+          example: 89f5ef44-1021-4a5c-8e06-fbb289eac366
+          title: Server Uuid
+          type: string
+      required:
+      - server_guid
+      - server_name
+      - server_os_version
+      - server_type
+      - server_uuid
+      title: BackupTargetResponse
+    CheckFileSystemDuplicationResponse:
+      example:
+        result: true
+      properties:
+        result:
+          description: Result
+          example: true
+          title: Result
+          type: boolean
+      required:
+      - result
+      title: CheckFileSystemDuplicationResponse
+    FileSystemPathUpdateRequest:
+      example:
+        backup_filesystem_paths:
+        - /aaa
+        - /bbb
+      properties:
+        backup_filesystem_paths:
+          $ref: '#/components/schemas/Backup_Filesystem_Paths'
+      required:
+      - backup_filesystem_paths
+      title: FileSystemPathUpdateRequest
+    InstallFilePathResponse:
+      example:
+        install_file_path: install_file_path
+      properties:
+        install_file_path:
+          description: Install file path
+          title: Install File Path
+          type: string
+      required:
+      - install_file_path
+      title: InstallFilePathResponse
+    ModifyBackupSchedulesRequest:
+      example:
+        schedules:
+        - start_time: 09:00:00
+          start_day: MON
+          start_week: WEEK_1
+          type: FULL
+          frequency: DAILY
+        - start_time: 09:00:00
+          start_day: MON
+          start_week: WEEK_1
+          type: FULL
+          frequency: DAILY
+      properties:
+        schedules:
+          description: Backup schedule list
+          items:
+            $ref: '#/components/schemas/BackupScheduleCreateRequest'
+          type: array
+      required:
+      - schedules
+      title: ModifyBackupSchedulesRequest
+    Network:
+      example:
+        subnet_id: 023c57b14f11483689338d085e061492
+      properties:
+        subnet_id:
+          description: Subnet ID
+          example: 023c57b14f11483689338d085e061492
+          title: Subnet Id
+          type: string
+      required:
+      - subnet_id
+      title: Network
+    ResourceInfo:
+      properties:
+        id:
+          description: ID
+          title: Id
+          type: string
+        links:
+          items:
+            type: object
+          nullable: true
+          type: array
+      required:
+      - id
+      title: ResourceInfo
+    RestoreFilesystemPath:
+      example:
+        destination: /data
+        source: /data
+      properties:
+        destination:
+          description: Destination filesystem path
+          example: /data
+          title: Destination
+          type: string
+        source:
+          description: Original filesystem path to be recovered
+          example: /data
+          title: Source
+          type: string
+      required:
+      - destination
+      - source
+      title: RestoreFilesystemPath
+    RetentionPeriodUpdateBody:
+      example:
+        retention_period: WEEK_2
+      properties:
+        retention_period:
+          allOf:
+          - $ref: '#/components/schemas/BackupRetentionPeriod'
+          description: Backup retention period
+          example: WEEK_2
+      required:
+      - retention_period
+      title: RetentionPeriodUpdateBody
+    ServerCategory:
+      enum:
+      - VIRTUAL_SERVER
+      - GPU_SERVER
+      - BAREMETAL_SERVER
+      title: ServerCategory
+      type: string
+    SyncResponse:
+      example:
+        resource: ""
+        request_id: request_id
+      properties:
+        request_id:
+          description: Request ID
+          title: Request Id
+          type: string
+        resource:
+          allOf:
+          - $ref: '#/components/schemas/ResourceInfo'
+          description: Resource
+      required:
+      - request_id
+      - resource
+      title: SyncResponse
+    Tag:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          title: Key
+          type: string
+        value:
+          title: Value
+          type: string
+      required:
+      - key
+      - value
+      title: Tag
+    ValidationErrorModel:
+      example:
+        msg: msg
+        loc:
+        - loc
+        - loc
+        ctx: "{}"
+        type_: type_
+      properties:
+        ctx:
+          nullable: true
+          type: object
+        loc:
+          items:
+            type: string
+          nullable: true
+          type: array
+        msg:
+          nullable: true
+          type: string
+        type_:
+          nullable: true
+          type: string
+      title: ValidationErrorModel
+    Backup_Filesystem_Paths:
+      anyOf:
+      - items:
+          type: string
+        type: array
+      - type: string
+      description: List of filesystem backup path
+      example:
+      - /aaa
+      - /bbb
+      title: Backup Filesystem Paths
+  securitySchemes:
+    X-Auth-Token:
+      in: header
+      name: X-Auth-Token
+      type: apiKey
+x-app-name: scp-backup
+x-package-name: scp_backup
+x-service-type: scp-backup
+x-url-prefix: ""

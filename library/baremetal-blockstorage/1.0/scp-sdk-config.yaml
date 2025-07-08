@@ -1,0 +1,5 @@
+packageName: baremetalblockstorage
+generatorName: go
+withGoMod: false
+structPrefix: true
+enumClassPrefix: true

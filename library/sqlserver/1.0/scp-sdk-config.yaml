@@ -1,0 +1,5 @@
+packageName: sqlserver
+generatorName: go
+withGoMod: false
+structPrefix: true
+enumClassPrefix: true

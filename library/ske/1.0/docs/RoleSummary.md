@@ -1,0 +1,156 @@
+# RoleSummary
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Age** | **string** | Age | 
+**ClusterId** | **string** | Cluster ID | 
+**CreatedAt** | **time.Time** | Created At | 
+**Name** | **string** | Role Name | 
+**NamespaceName** | **string** | Namespace Name | 
+**Uid** | **string** | Resource ID | 
+
+## Methods
+
+### NewRoleSummary
+
+`func NewRoleSummary(age string, clusterId string, createdAt time.Time, name string, namespaceName string, uid string, ) *RoleSummary`
+
+NewRoleSummary instantiates a new RoleSummary object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewRoleSummaryWithDefaults
+
+`func NewRoleSummaryWithDefaults() *RoleSummary`
+
+NewRoleSummaryWithDefaults instantiates a new RoleSummary object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetAge
+
+`func (o *RoleSummary) GetAge() string`
+
+GetAge returns the Age field if non-nil, zero value otherwise.
+
+### GetAgeOk
+
+`func (o *RoleSummary) GetAgeOk() (*string, bool)`
+
+GetAgeOk returns a tuple with the Age field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAge
+
+`func (o *RoleSummary) SetAge(v string)`
+
+SetAge sets Age field to given value.
+
+
+### GetClusterId
+
+`func (o *RoleSummary) GetClusterId() string`
+
+GetClusterId returns the ClusterId field if non-nil, zero value otherwise.
+
+### GetClusterIdOk
+
+`func (o *RoleSummary) GetClusterIdOk() (*string, bool)`
+
+GetClusterIdOk returns a tuple with the ClusterId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClusterId
+
+`func (o *RoleSummary) SetClusterId(v string)`
+
+SetClusterId sets ClusterId field to given value.
+
+
+### GetCreatedAt
+
+`func (o *RoleSummary) GetCreatedAt() time.Time`
+
+GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
+
+### GetCreatedAtOk
+
+`func (o *RoleSummary) GetCreatedAtOk() (*time.Time, bool)`
+
+GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatedAt
+
+`func (o *RoleSummary) SetCreatedAt(v time.Time)`
+
+SetCreatedAt sets CreatedAt field to given value.
+
+
+### GetName
+
+`func (o *RoleSummary) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *RoleSummary) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *RoleSummary) SetName(v string)`
+
+SetName sets Name field to given value.
+
+
+### GetNamespaceName
+
+`func (o *RoleSummary) GetNamespaceName() string`
+
+GetNamespaceName returns the NamespaceName field if non-nil, zero value otherwise.
+
+### GetNamespaceNameOk
+
+`func (o *RoleSummary) GetNamespaceNameOk() (*string, bool)`
+
+GetNamespaceNameOk returns a tuple with the NamespaceName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNamespaceName
+
+`func (o *RoleSummary) SetNamespaceName(v string)`
+
+SetNamespaceName sets NamespaceName field to given value.
+
+
+### GetUid
+
+`func (o *RoleSummary) GetUid() string`
+
+GetUid returns the Uid field if non-nil, zero value otherwise.
+
+### GetUidOk
+
+`func (o *RoleSummary) GetUidOk() (*string, bool)`
+
+GetUidOk returns a tuple with the Uid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUid
+
+`func (o *RoleSummary) SetUid(v string)`
+
+SetUid sets Uid field to given value.
+
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

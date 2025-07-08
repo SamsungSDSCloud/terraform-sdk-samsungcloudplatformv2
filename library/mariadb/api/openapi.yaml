@@ -1,0 +1,4675 @@
+openapi: 3.1.0
+info:
+  description: OSSCP Scp-dbaas Project
+  title: OSSCP Scp-dbaas Project
+  version: 0.0.1.dev1795
+servers:
+- url: https://scp-dbaas-a.kr-west1.dev2.samsungsdscloud.com
+tags:
+- description: Dbaas Common API
+  name: dbaas-common.v1.DbaasCommonApi
+- description: Dbaas Admin API
+  name: dbaas-common.v1.DbaasAdminApi
+- description: Postgresql Master Data API
+  name: postgresql.v1.PostgresqlMasterDataApi
+- description: Postgresql Clusters API
+  name: postgresql.v1.PostgresqlClustersApi
+- description: Postgresql Clusters API
+  name: postgresql.v1.PostgresqlInstancesApi
+- description: Postgresql Parameters API
+  name: postgresql.v1.PostgresqlParametersApi
+- description: Postgresql Replicas API
+  name: postgresql.v1.PostgresqlReplicaApi
+- description: Postgresql Backups API
+  name: postgresql.v1.PostgresqlBackupApi
+- description: Postgresql Auditlog API
+  name: postgresql.v1.PostgresqlAuditlogApi
+- description: Postgresql MinorPatch API
+  name: postgresql.v1.PostgresqlMinorPatchApi
+- description: Postgresql Maintenance API
+  name: postgresql.v1.PostgresqlMaintenanceApi
+- description: Postgresql Log Export API
+  name: postgresql.v1.PostgresqlLogExportApi
+- description: Postgresql Archive API
+  name: postgresql.v1.PostgresqlArchiveApi
+- description: Mariadb Master Data API
+  name: mariadb.v1.MariadbMasterDataApi
+- description: Mariadb Clusters API
+  name: mariadb.v1.MariadbClustersApi
+- description: Mariadb Clusters API
+  name: mariadb.v1.MariadbInstancesApi
+- description: Mariadb Replicas API
+  name: mariadb.v1.MariadbReplicasApi
+- description: Mariadb Backups API
+  name: mariadb.v1.MariadbBackupApi
+- description: Mariadb Auditlog API
+  name: mariadb.v1.MariadbAuditlogApi
+- description: Mariadb Parameters API
+  name: mariadb.v1.MariadbParametersApi
+- description: Mariadb Maintenance API
+  name: mariadb.v1.MariadbMaintenanceApi
+- description: Mariadb MinorPatch API
+  name: mariadb.v1.MariadbMinorPatchApi
+- description: Mariadb Log Export API
+  name: mariadb.v1.MariadbLogExportApi
+- description: Mariadb Archive API
+  name: mariadb.v1.MariadbArchiveApi
+- description: CacheStore Master Data API
+  name: cachestore.v1.CacheStoreMasterDataApi
+- description: CacheStore Clusters API
+  name: cachestore.v1.CacheStoreClustersApi
+- description: CacheStore Instances API
+  name: cachestore.v1.CacheStoreInstancesApi
+- description: CacheStore Backups API
+  name: cachestore.v1.CacheStoreBackupApi
+- description: CacheStore Parameters API
+  name: cachestore.v1.CacheStoreParametersApi
+- description: CacheStore Command API
+  name: cachestore.v1.CacheStoreCommandApi
+- description: CacheStore Maintenance API
+  name: cachestore.v1.CacheStoreMaintenanceApi
+- description: Mysql Master Data API
+  name: mysql.v1.MysqlMasterDataApi
+- description: Mysql Clusters API
+  name: mysql.v1.MysqlClustersApi
+- description: Mysql Replicas API
+  name: mysql.v1.MysqlReplicaApi
+- description: Mysql Backups API
+  name: mysql.v1.MysqlBackupApi
+- description: Mysql Clusters API
+  name: mysql.v1.MysqlInstancesApi
+- description: Mysql Maintenance API
+  name: mysql.v1.MysqlMaintenanceApi
+- description: Mysql Parameters API
+  name: mysql.v1.MysqlParametersApi
+- description: Mysql MinorPatch API
+  name: mysql.v1.MysqlMinorPatchApi
+- description: Mysql Log Export API
+  name: mysql.v1.MysqlLogExportApi
+- description: Mysql Archive API
+  name: mysql.v1.MysqlArchiveApi
+- description: Sqlserver Master Data API
+  name: sqlserver.v1.SqlserverMasterDataApi
+- description: Sqlserver Clusters API
+  name: sqlserver.v1.SqlserverClustersApi
+- description: Sqlserver Instances API
+  name: sqlserver.v1.SqlserverInstancesApi
+- description: Sqlserver Maintenance API
+  name: sqlserver.v1.SqlserverMaintenanceApi
+- description: Sqlserver Parameters API
+  name: sqlserver.v1.SqlserverParametersApi
+- description: Sqlserver Backups API
+  name: sqlserver.v1.SqlserverBackupApi
+- description: Sqlserver Databases API
+  name: sqlserver.v1.SqlserverDatabasesApi
+- description: Sqlserver Auditlog API
+  name: sqlserver.v1.SqlserverAuditlogApi
+- description: Sqlserver MinorPatch API
+  name: sqlserver.v1.SqlserverMinorPatchApi
+- description: Sqlserver Log Export API
+  name: sqlserver.v1.SqlserverLogExportApi
+- description: SearchEngine Master Data API
+  name: searchengine.v1.SearchEngineMasterDataApi
+- description: SearchEngine Clusters API
+  name: searchengine.v1.SearchEngineClustersApi
+- description: SearchEngine Backups API
+  name: searchengine.v1.SearchEngineBackupApi
+- description: SearchEngine Instances API
+  name: searchengine.v1.SearchEngineInstancesApi
+- description: SearchEngine Maintenance API
+  name: searchengine.v1.SearchEngineMaintenanceApi
+- description: EventStreams Master Data API
+  name: eventstreams.v1.EventStreamsMasterDataApi
+- description: EventStreams Clusters API
+  name: eventstreams.v1.EventStreamsClustersApi
+- description: EventStreams Instances API
+  name: eventstreams.v1.EventStreamsInstancesApi
+- description: EventStreams Maintenance API
+  name: eventstreams.v1.EventStreamsMaintenanceApi
+- description: EventStreams Parameters API
+  name: eventstreams.v1.EventStreamsParametersApi
+- description: Epas Master Data API
+  name: epas.v1.EpasMasterDataApi
+- description: EPAS Clusters API
+  name: epas.v1.EpasClustersApi
+- description: Epas Clusters API
+  name: epas.v1.EpasInstancesApi
+- description: Epas Parameters API
+  name: epas.v1.EpasParametersApi
+- description: Epas Replicas API
+  name: epas.v1.EpasReplicasApi
+- description: Epas Backups API
+  name: epas.v1.EpasBackupApi
+- description: Epas Auditlog API
+  name: epas.v1.EpasAuditlogApi
+- description: Epas MinorPatch API
+  name: epas.v1.EpasMinorPatchApi
+- description: Epas Maintenance API
+  name: epas.v1.EpasMaintenanceApi
+- description: Epas Log Export API
+  name: epas.v1.EpasLogExportApi
+- description: Epas Archive API
+  name: epas.v1.EpasArchiveApi
+- description: Vertica Clusters API
+  name: vertica.v1.VerticaClustersApi
+paths:
+  /v1/block-storage-groups/{block_storage_group_id}/resize:
+    post:
+      description: Set Block Storage Size.
+      operationId: mariadbSetBlockStorageSize
+      parameters:
+      - description: Block storage group ID
+        explode: false
+        in: path
+        name: block_storage_group_id
+        required: true
+        schema:
+          description: Block storage group ID
+          title: Block Storage Group Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResizeBlockStorageGroupRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "409":
+          description: Conflict
+        "500":
+          description: Internal Server Error
+      security:
+      - X-Auth-Token: []
+      summary: Set Block Storage Size
+      tags:
+      - mariadb.v1.MariadbInstancesApi
+      x-action-id: mariadb:SetBlockStorageSize
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: block_storage_size_set
+      x-resource: Mariadb
+  /v1/clusters:
+    get:
+      description: List Clusters.
+      operationId: mariadbListClusters
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          pattern: ^(name|service_state|created_at):(asc|desc)$
+          type: string
+        style: form
+      - description: Cluster name
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Service state
+        explode: true
+        in: query
+        name: service_state
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Database name
+        explode: true
+        in: query
+        name: database_name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RdbClusterPageResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Clusters
+      tags:
+      - mariadb.v1.MariadbClustersApi
+      x-action-id: mariadb:ListClusters
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: cluster_list
+      x-resource: Mariadb
+    post:
+      description: Create Cluster.
+      operationId: mariadbCreateCluster
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MariadbClusterCreateRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Create Cluster
+      tags:
+      - mariadb.v1.MariadbClustersApi
+      x-action-id: mariadb:CreateCluster
+      x-api-access-level: CREATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: cluster_create
+      x-resource: Mariadb
+  /v1/clusters/{cluster_id}:
+    delete:
+      description: Terminate Cluster.
+      operationId: mariadbDeleteCluster
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Terminate Cluster
+      tags:
+      - mariadb.v1.MariadbClustersApi
+      x-action-id: mariadb:DeleteCluster
+      x-api-access-level: DELETE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: cluster_delete
+      x-resource: Mariadb
+    get:
+      description: Show Cluster.
+      operationId: mariadbShowCluster
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MariadbClusterDetailResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Show Cluster
+      tags:
+      - mariadb.v1.MariadbClustersApi
+      x-action-id: mariadb:ShowCluster
+      x-api-access-level: READ
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: cluster_show
+      x-resource: Mariadb
+  /v1/clusters/{cluster_id}/archive:
+    delete:
+      description: Delete Archive Log.
+      operationId: mariadbDeleteArchiveLog
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Delete Archive Log
+      tags:
+      - mariadb.v1.MariadbArchiveApi
+      x-action-id: mariadb:DeleteArchiveLog
+      x-api-access-level: DELETE
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: archive_log_delete
+      x-resource: Mariadb
+    get:
+      description: Show Archive Config.
+      operationId: mariadbShowArchiveConfig
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArchiveConfigResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Show Archive Config
+      tags:
+      - mariadb.v1.MariadbArchiveApi
+      x-action-id: mariadb:ShowArchiveConfig
+      x-api-access-level: READ
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: archive_config_show
+      x-resource: Mariadb
+    put:
+      description: Set Archive Config.
+      operationId: mariadbSetArchiveConfig
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArchiveConfigSetRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Set Archive Config
+      tags:
+      - mariadb.v1.MariadbArchiveApi
+      x-action-id: mariadb:SetArchiveConfig
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: archive_config_set
+      x-resource: Mariadb
+  /v1/clusters/{cluster_id}/archive/sync:
+    post:
+      description: Synchronize Archive Config.
+      operationId: mariadbSyncArchiveConfig
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Synchronize Archive Config
+      tags:
+      - mariadb.v1.MariadbArchiveApi
+      x-action-id: mariadb:SyncArchiveConfig
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: archive_config_sync
+      x-resource: Mariadb
+  /v1/clusters/{cluster_id}/audit-log:
+    put:
+      description: Set Audit Log.
+      operationId: mariadbSetAuditLog
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuditLogRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Set Audit Log
+      tags:
+      - mariadb.v1.MariadbAuditlogApi
+      x-action-id: mariadb:SetAuditLog
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: audit_log_set
+      x-resource: Mariadb
+  /v1/clusters/{cluster_id}/backup-histories:
+    get:
+      description: List Backup Histories.
+      operationId: mariadbListBackupHistories
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      - description: Number of backup lists
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      - description: Backup list page
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupHistoryListApiResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Backup Histories
+      tags:
+      - mariadb.v1.MariadbBackupApi
+      x-action-id: mariadb:ListBackupHistories
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_history_list
+      x-resource: Mariadb
+    put:
+      description: Remove Backup Histories.
+      operationId: mariadbRemoveBackupHistories
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BackupHistoryNumberRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Remove Backup Histories
+      tags:
+      - mariadb.v1.MariadbBackupApi
+      x-action-id: mariadb:RemoveBackupHistories
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_history_remove
+      x-resource: Mariadb
+  /v1/clusters/{cluster_id}/backups:
+    delete:
+      description: Unset Backup.
+      operationId: mariadbUnsetBackup
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Unset Backup
+      tags:
+      - mariadb.v1.MariadbBackupApi
+      x-action-id: mariadb:UnsetBackup
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_unset
+      x-resource: Mariadb
+    post:
+      description: Set Backup.
+      operationId: mariadbSetBackup
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BackupSettingRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Set Backup
+      tags:
+      - mariadb.v1.MariadbBackupApi
+      x-action-id: mariadb:SetBackup
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: backup_set
+      x-resource: Mariadb
+  /v1/clusters/{cluster_id}/log-export-configs:
+    get:
+      description: List Log Export Configs.
+      operationId: mariadbListLogExportConfigs
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogExportConfigListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Log Export Configs
+      tags:
+      - mariadb.v1.MariadbLogExportApi
+      x-action-id: mariadb:ListLogExportConfigs
+      x-api-access-level: LIST
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: log_export_configs_list
+      x-resource: Mariadb
+    post:
+      description: Create Log Export Config.
+      operationId: mariadbCreateLogExportConfig
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogExportConfigCreateRequestDTO'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Create Log Export Config
+      tags:
+      - mariadb.v1.MariadbLogExportApi
+      x-action-id: mariadb:CreateLogExportConfig
+      x-api-access-level: CREATE
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: log_export_config_create
+      x-resource: Mariadb
+  /v1/clusters/{cluster_id}/log-export-configs/{log_export_config_id}:
+    delete:
+      description: Delete Log Export Config.
+      operationId: mariadbDeleteLogExportConfig
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      - description: Log export config id
+        explode: false
+        in: path
+        name: log_export_config_id
+        required: true
+        schema:
+          description: Log export config id
+          title: Log Export Config Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Delete Log Export Config
+      tags:
+      - mariadb.v1.MariadbLogExportApi
+      x-action-id: mariadb:DeleteLogExportConfig
+      x-api-access-level: DELETE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: log_export_config_delete
+      x-resource: Mariadb
+    get:
+      description: Show Log Export Config.
+      operationId: mariadbShowLogExportConfig
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      - description: Log export config id
+        explode: false
+        in: path
+        name: log_export_config_id
+        required: true
+        schema:
+          description: Log export config id
+          title: Log Export Config Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogExportConfigListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Show Log Export Config
+      tags:
+      - mariadb.v1.MariadbLogExportApi
+      x-action-id: mariadb:ShowLogExportConfig
+      x-api-access-level: READ
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: log_export_config_show
+      x-resource: Mariadb
+    put:
+      description: Set Log Export Config.
+      operationId: mariadbSetLogExportConfig
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      - description: Log export config id
+        explode: false
+        in: path
+        name: log_export_config_id
+        required: true
+        schema:
+          description: Log export config id
+          title: Log Export Config Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogExportConfigModifyRequestDTO'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Set Log Export Config
+      tags:
+      - mariadb.v1.MariadbLogExportApi
+      x-action-id: mariadb:SetLogExportConfig
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: log_export_config_Set
+      x-resource: Mariadb
+  /v1/clusters/{cluster_id}/log-export-configs/{log_export_config_id}/export:
+    post:
+      description: Export Log.
+      operationId: mariadbExportLog
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      - description: Log export config id
+        explode: false
+        in: path
+        name: log_export_config_id
+        required: true
+        schema:
+          description: Log export config id
+          title: Log Export Config Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogExportConfigListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Export Log
+      tags:
+      - mariadb.v1.MariadbLogExportApi
+      x-action-id: mariadb:ExportLog
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: log_export
+      x-resource: Mariadb
+  /v1/clusters/{cluster_id}/maintenance:
+    delete:
+      description: Unset Maintenance.
+      operationId: mariadbUnsetMaintenance
+      parameters:
+      - description: DB cluster id
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: DB cluster id
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Unset Maintenance
+      tags:
+      - mariadb.v1.MariadbMaintenanceApi
+      x-action-id: mariadb:UnsetMaintenance
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: maintenance_unset
+      x-resource: Mariadb
+    post:
+      description: Set Maintenance.
+      operationId: mariadbSetMaintenance
+      parameters:
+      - description: DB cluster id
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: DB cluster id
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MaintenanceRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Set Maintenance
+      tags:
+      - mariadb.v1.MariadbMaintenanceApi
+      x-action-id: mariadb:SetMaintenance
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: maintenance_set
+      x-resource: Mariadb
+  /v1/clusters/{cluster_id}/parameters:
+    get:
+      description: List Parameter Values.
+      operationId: mariadbListParameterValues
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParametersResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Parameter Values
+      tags:
+      - mariadb.v1.MariadbParametersApi
+      x-action-id: mariadb:ListParameterValues
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: parameter_value_list
+      x-resource: Mariadb
+    put:
+      description: Set Parameter Values.
+      operationId: mariadbSetParameterValues
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParametersRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Set Parameter Values
+      tags:
+      - mariadb.v1.MariadbParametersApi
+      x-action-id: mariadb:SetParameterValues
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: parameter_value_set
+      x-resource: Mariadb
+  /v1/clusters/{cluster_id}/parameters/sync:
+    post:
+      description: Synchronize Parameter Values.
+      operationId: mariadbSyncParameterValues
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Synchronize Parameter Values
+      tags:
+      - mariadb.v1.MariadbParametersApi
+      x-action-id: mariadb:SyncParameterValues
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: parameter_value_sync
+      x-resource: Mariadb
+  /v1/clusters/{cluster_id}/patch:
+    put:
+      description: Patch Minor Version.
+      operationId: mariadbPatchMinorVersion
+      parameters:
+      - description: DB cluster id
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: DB cluster id
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MinorPatchRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Patch Minor Version
+      tags:
+      - mariadb.v1.MariadbMinorPatchApi
+      x-action-id: mariadb:PatchMinorVersion
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: minor_version_patch
+      x-resource: Mariadb
+  /v1/clusters/{cluster_id}/replicas:
+    get:
+      description: List Replicas.
+      operationId: mariadbListReplicas
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplicasListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Replicas
+      tags:
+      - mariadb.v1.MariadbReplicasApi
+      x-action-id: mariadb:ListReplicas
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: replica_list
+      x-resource: Mariadb
+    post:
+      description: Create Replica.
+      operationId: mariadbCreateReplica
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReplicasCreateRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Create Replica
+      tags:
+      - mariadb.v1.MariadbReplicasApi
+      x-action-id: mariadb:CreateReplica
+      x-api-access-level: CREATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: replica_create
+      x-resource: Mariadb
+  /v1/clusters/{cluster_id}/restart:
+    post:
+      description: Restart Cluster.
+      operationId: mariadbRestartCluster
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Restart Cluster
+      tags:
+      - mariadb.v1.MariadbClustersApi
+      x-action-id: mariadb:RestartCluster
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: cluster_restart
+      x-resource: Mariadb
+  /v1/clusters/{cluster_id}/restore:
+    post:
+      description: Create Restore Cluster.
+      operationId: mariadbCreateRestore
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClusterRestoreRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Create Restore Cluster
+      tags:
+      - mariadb.v1.MariadbClustersApi
+      x-action-id: mariadb:CreateRestore
+      x-api-access-level: CREATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: restore_create
+      x-resource: Mariadb
+  /v1/clusters/{cluster_id}/security-group-rules:
+    post:
+      description: Set Security Group Rules.
+      operationId: mariadbSetSecurityGroupRules
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSecurityGroupRulesRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - X-Auth-Token: []
+      summary: Set Security Group Rules
+      tags:
+      - mariadb.v1.MariadbInstancesApi
+      x-action-id: mariadb:SetSecurityGroupRules
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: security_group_rule_set
+      x-resource: Mariadb
+  /v1/clusters/{cluster_id}/start:
+    post:
+      description: Start Cluster.
+      operationId: mariadbStartCluster
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Start Cluster
+      tags:
+      - mariadb.v1.MariadbClustersApi
+      x-action-id: mariadb:StartCluster
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: cluster_start
+      x-resource: Mariadb
+  /v1/clusters/{cluster_id}/stop:
+    post:
+      description: Stop Cluster.
+      operationId: mariadbStopCluster
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Stop Cluster
+      tags:
+      - mariadb.v1.MariadbClustersApi
+      x-action-id: mariadb:StopCluster
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: cluster_stop
+      x-resource: Mariadb
+  /v1/clusters/{cluster_id}/switchover:
+    post:
+      description: Switchover Cluster.
+      operationId: mariadbSwitchoverCluster
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Switchover Cluster
+      tags:
+      - mariadb.v1.MariadbClustersApi
+      x-action-id: mariadb:SwitchoverCluster
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: cluster_switchover
+      x-resource: Mariadb
+  /v1/clusters/{cluster_id}/sync-state:
+    post:
+      description: Synchronize Cluster State.
+      operationId: mariadbSyncClusterState
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - X-Auth-Token: []
+      summary: Synchronize Cluster State
+      tags:
+      - mariadb.v1.MariadbClustersApi
+      x-action-id: mariadb:SyncClusterState
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: cluster_state_sync
+      x-resource: Mariadb
+  /v1/clusters/{origin_cluster_id}/sync-replica-state:
+    post:
+      description: Synchronize Replica State.
+      operationId: mariadbSyncReplicaState
+      parameters:
+      - description: Origin cluster ID
+        explode: false
+        in: path
+        name: origin_cluster_id
+        required: true
+        schema:
+          description: Origin cluster ID
+          title: Origin Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Synchronize Replica State
+      tags:
+      - mariadb.v1.MariadbReplicasApi
+      x-action-id: mariadb:SyncReplicaState
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: replica_state_sync
+      x-resource: Mariadb
+  /v1/clusters/{replica_cluster_id}/reset-replica:
+    post:
+      description: Reset Replica.
+      operationId: mariadbResetReplica
+      parameters:
+      - description: Replica cluster id
+        explode: false
+        in: path
+        name: replica_cluster_id
+        required: true
+        schema:
+          description: Replica cluster id
+          title: Replica Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Reset Replica
+      tags:
+      - mariadb.v1.MariadbReplicasApi
+      x-action-id: mariadb:ResetReplica
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: replica_reset
+      x-resource: Mariadb
+  /v1/engine-versions:
+    get:
+      description: List Engine Versions.
+      operationId: mariadbListEngineVersions
+      parameters:
+      - description: DBaaS engine version ID
+        explode: true
+        in: query
+        name: id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Product image type
+        explode: true
+        in: query
+        name: product_image_type
+        required: false
+        schema:
+          $ref: '#/components/schemas/ProductImageType'
+        style: form
+      - description: EoS included
+        explode: true
+        in: query
+        name: eos_included
+        required: false
+        schema:
+          default: false
+          description: EoS included
+          title: Eos Included
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EngineListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Engine Versions
+      tags:
+      - mariadb.v1.MariadbMasterDataApi
+      x-action-id: mariadb:ListEngineVersions
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: engine_version_list
+      x-resource: Mariadb
+  /v1/engine-versions/{dbaas_engine_version_id}/properties:
+    get:
+      description: List Engine Version Properties.
+      operationId: mariadbListEngineVersionProperties
+      parameters:
+      - description: DBaaS engine version ID
+        explode: false
+        in: path
+        name: dbaas_engine_version_id
+        required: true
+        schema:
+          description: DBaaS engine version ID
+          title: Dbaas Engine Version Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnginePropertyListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Engine Version Properties
+      tags:
+      - mariadb.v1.MariadbMasterDataApi
+      x-action-id: mariadb:ListEngineVersionProperties
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: engine_version_property_list
+      x-resource: Mariadb
+  /v1/instance-groups/{instance_group_id}/block-storage-groups:
+    post:
+      description: Add Block Storages.
+      operationId: mariadbAddBlockStorages
+      parameters:
+      - description: Instance group ID
+        explode: false
+        in: path
+        name: instance_group_id
+        required: true
+        schema:
+          description: Instance group ID
+          title: Instance Group Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddBlockStoragesRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - X-Auth-Token: []
+      summary: Add Block Storages
+      tags:
+      - mariadb.v1.MariadbInstancesApi
+      x-action-id: mariadb:AddBlockStorages
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: block_storage_add
+      x-resource: Mariadb
+  /v1/instance-groups/{instance_group_id}/resize:
+    post:
+      description: Set Server Type.
+      operationId: mariadbSetServerType
+      parameters:
+      - description: Instance group ID
+        explode: false
+        in: path
+        name: instance_group_id
+        required: true
+        schema:
+          description: Instance group ID
+          title: Instance Group Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstanceGroupResizeRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - X-Auth-Token: []
+      summary: Set Server Type
+      tags:
+      - mariadb.v1.MariadbInstancesApi
+      x-action-id: mariadb:SetServerType
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: server_type_set
+      x-resource: Mariadb
+  /v1/parameter-groups:
+    get:
+      description: List Parameter Groups.
+      operationId: mariadbListParameterGroups
+      parameters:
+      - description: Software major version
+        explode: true
+        in: query
+        name: major_version
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterGroupListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Parameter Groups
+      tags:
+      - mariadb.v1.MariadbMasterDataApi
+      x-action-id: mariadb:ListParameterGroups
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: parameter_group_list
+      x-resource: Mariadb
+  /v1/parameters:
+    get:
+      description: List Parameters.
+      operationId: mariadbListParameters
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Parameter group ID
+        explode: true
+        in: query
+        name: dbaas_parameter_group_id
+        required: true
+        schema:
+          description: Parameter group ID
+          title: Dbaas Parameter Group Id
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterPageResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Parameters
+      tags:
+      - mariadb.v1.MariadbMasterDataApi
+      x-action-id: mariadb:ListParameters
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: parameter_list
+      x-resource: Mariadb
+  /v1/requests/{request_id}:
+    get:
+      description: Show Request.
+      operationId: mariadbShowRequest
+      parameters:
+      - description: Request ID
+        explode: false
+        in: path
+        name: request_id
+        required: true
+        schema:
+          description: Request ID
+          title: Request Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestStateResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Show Request
+      tags:
+      - mariadb.v1.MariadbMasterDataApi
+      x-action-id: mariadb:ShowRequest
+      x-api-access-level: READ
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: request_show
+      x-resource: Mariadb
+  /v1/server-types:
+    get:
+      description: List Server Types.
+      operationId: mariadbListServerTypes
+      parameters:
+      - description: Server type name
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerTypeListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Server Types
+      tags:
+      - mariadb.v1.MariadbMasterDataApi
+      x-action-id: mariadb:ListServerTypes
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      - CLI
+      x-cli: engine_server_type_list
+      x-resource: Mariadb
+components:
+  schemas:
+    AddBlockStoragesRequest:
+      example:
+        volume_type: ""
+        role_type: ""
+        size_gb: 424
+      properties:
+        role_type:
+          allOf:
+          - $ref: '#/components/schemas/BlockStorageGroupRoleType'
+          description: Role type
+        size_gb:
+          description: Size in GB
+          maximum: 5120
+          minimum: 16
+          multipleOf: 8
+          title: Size Gb
+          type: integer
+        volume_type:
+          allOf:
+          - $ref: '#/components/schemas/VolumeType'
+          default: SSD
+          description: Volume type
+      required:
+      - role_type
+      - size_gb
+      title: AddBlockStoragesRequest
+    ArchiveConfigResponse:
+      example:
+        archive_enabled: true
+        retention_period_day: 5
+      properties:
+        archive_enabled:
+          default: true
+          description: Archive enabled
+          title: Archive Enabled
+          type: boolean
+        retention_period_day:
+          default: 3
+          description: Backup retention period (day)
+          maximum: 35
+          minimum: 3
+          title: Retention Period Day
+          type: integer
+      title: ArchiveConfigResponse
+    ArchiveConfigSetRequest:
+      example:
+        archive_enabled: true
+        retention_period_day: 5
+      properties:
+        archive_enabled:
+          default: true
+          description: Archive enabled
+          title: Archive Enabled
+          type: boolean
+        retention_period_day:
+          default: 3
+          description: Backup retention period (day)
+          maximum: 35
+          minimum: 3
+          title: Retention Period Day
+          type: integer
+      title: ArchiveConfigSetRequest
+    AsyncResponse:
+      example:
+        resource: ""
+        request_id: request_id
+      properties:
+        request_id:
+          description: Request ID
+          title: Request Id
+          type: string
+        resource:
+          allOf:
+          - $ref: '#/components/schemas/ResourceInfo'
+          description: Resource
+      required:
+      - request_id
+      - resource
+      title: AsyncResponse
+    AuditLogRequest:
+      example:
+        use_audit_log: true
+      properties:
+        use_audit_log:
+          description: use_audit_log
+          title: Use Audit Log
+          type: boolean
+      required:
+      - use_audit_log
+      title: AuditLogRequest
+    BackupHistoryApiItem:
+      example:
+        backup_state: backup_state
+        backup_start_at: backup_start_at
+        backup_state_detail: backup_state_detail
+        backup_end_at: backup_end_at
+        backup_history_number: backup_history_number
+        backup_size_gb: 0.8008281904610115
+        software_version: software_version
+      properties:
+        backup_end_at:
+          description: Backup end time
+          title: Backup End At
+          type: string
+        backup_history_number:
+          description: Backup id
+          title: Backup History Number
+          type: string
+        backup_size_gb:
+          description: Backup amount(GB)
+          title: Backup Size Gb
+          type: number
+        backup_start_at:
+          description: Backup start time
+          title: Backup Start At
+          type: string
+        backup_state:
+          description: Backup state
+          title: Backup State
+          type: string
+        backup_state_detail:
+          nullable: true
+          type: string
+        software_version:
+          description: Software version
+          title: Software Version
+          type: string
+      required:
+      - backup_end_at
+      - backup_history_number
+      - backup_size_gb
+      - backup_start_at
+      - backup_state
+      - software_version
+      title: BackupHistoryApiItem
+    BackupHistoryListApiResponse:
+      example:
+        contents:
+        - backup_state: backup_state
+          backup_start_at: backup_start_at
+          backup_state_detail: backup_state_detail
+          backup_end_at: backup_end_at
+          backup_history_number: backup_history_number
+          backup_size_gb: 0.8008281904610115
+          software_version: software_version
+        - backup_state: backup_state
+          backup_start_at: backup_start_at
+          backup_state_detail: backup_state_detail
+          backup_end_at: backup_end_at
+          backup_history_number: backup_history_number
+          backup_size_gb: 0.8008281904610115
+          software_version: software_version
+        total_count: 6
+      properties:
+        contents:
+          description: backup list information
+          items:
+            $ref: '#/components/schemas/BackupHistoryApiItem'
+          type: array
+        total_count:
+          description: total number of backup history
+          title: Total Count
+          type: integer
+      required:
+      - contents
+      - total_count
+      title: BackupHistoryListApiResponse
+    BackupHistoryNumberRequest:
+      example:
+        backup_history_number:
+        - backup_history_number
+        - backup_history_number
+      properties:
+        backup_history_number:
+          description: Backup id
+          items:
+            type: string
+          type: array
+      required:
+      - backup_history_number
+      title: BackupHistoryNumberRequest
+    BackupSettingRequest:
+      example:
+        retention_period_day: retention_period_day
+        archive_frequency_minute: archive_frequency_minute
+        starting_time_hour: starting_time_hour
+      properties:
+        archive_frequency_minute:
+          description: Backup starting time (minute)
+          pattern: ^(5|10|30|60)$
+          title: Archive Frequency Minute
+          type: string
+        retention_period_day:
+          description: Backup retention period (day)
+          pattern: "^([7-9]|^[1-2]\\d|^3[0-5])$"
+          title: Retention Period Day
+          type: string
+        starting_time_hour:
+          description: Backup starting time (hour)
+          pattern: "^(\\d|1\\d|2[0-3])$"
+          title: Starting Time Hour
+          type: string
+      required:
+      - archive_frequency_minute
+      - retention_period_day
+      - starting_time_hour
+      title: BackupSettingRequest
+    BlockStorageGroupRequest:
+      example:
+        volume_type: ""
+        role_type: ""
+        size_gb: 424
+      properties:
+        role_type:
+          allOf:
+          - $ref: '#/components/schemas/BlockStorageGroupRoleType'
+          description: Role type
+        size_gb:
+          description: Size in GB
+          maximum: 5120
+          minimum: 16
+          multipleOf: 8
+          title: Size Gb
+          type: integer
+        volume_type:
+          allOf:
+          - $ref: '#/components/schemas/VolumeType'
+          default: SSD
+          description: Volume type
+      required:
+      - role_type
+      - size_gb
+      title: BlockStorageGroupRequest
+    BlockStorageGroupResponse:
+      example:
+        volume_type: ""
+        role_type: ""
+        name: name
+        size_gb: 1
+        id: id
+      properties:
+        id:
+          description: ID
+          title: Id
+          type: string
+        name:
+          description: Name
+          title: Name
+          type: string
+        role_type:
+          allOf:
+          - $ref: '#/components/schemas/BlockStorageGroupRoleType'
+          description: Role type
+        size_gb:
+          description: Size in GB
+          title: Size Gb
+          type: integer
+        volume_type:
+          allOf:
+          - $ref: '#/components/schemas/VolumeType'
+          description: Volume type
+      required:
+      - id
+      - name
+      - role_type
+      - size_gb
+      - volume_type
+      title: BlockStorageGroupResponse
+    BlockStorageGroupRoleType:
+      enum:
+      - OS
+      - DATA
+      - ARCHIVE
+      - TEMP
+      - BACKUP
+      title: BlockStorageGroupRoleType
+      type: string
+    ClusterRestoreRequest:
+      example:
+        block_storage_groups:
+        - volume_type: ""
+          role_type: ""
+          size_gb: 424
+        - volume_type: ""
+          role_type: ""
+          size_gb: 424
+        instance_name_prefix: instance_name_prefix
+        server_type_name: server_type_name
+        name: name
+        backup_history_number: backup_history_number
+        backup_recovery_time: 2000-01-23T04:56:07.000+00:00
+        maintenance_option:
+          period_hour: period_hour
+          starting_time: starting_time
+          starting_day_of_week: ""
+        allowable_ip_addresses:
+        - allowable_ip_addresses
+        - allowable_ip_addresses
+        tags:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      properties:
+        allowable_ip_addresses:
+          default: []
+          description: Allowed IP addresses list
+          items:
+            type: string
+          type: array
+        backup_history_number:
+          nullable: true
+          type: string
+        backup_recovery_time:
+          format: date-time
+          nullable: true
+          type: string
+        block_storage_groups:
+          items:
+            $ref: '#/components/schemas/BlockStorageGroupRequest'
+          nullable: true
+          type: array
+        instance_name_prefix:
+          description: Instance name prefix
+          maxLength: 16
+          minLength: 3
+          pattern: "^[a-z][a-zA-Z0-9\\-]*$"
+          title: Instance Name Prefix
+          type: string
+        maintenance_option:
+          $ref: '#/components/schemas/MaintenanceOption'
+        name:
+          description: Cluster name
+          maxLength: 20
+          minLength: 3
+          pattern: "^[a-zA-Z]*$"
+          title: Name
+          type: string
+        server_type_name:
+          description: Server type name
+          title: Server Type Name
+          type: string
+        tags:
+          items:
+            $ref: '#/components/schemas/Tag'
+          nullable: true
+          type: array
+      required:
+      - instance_name_prefix
+      - name
+      - server_type_name
+      title: ClusterRestoreRequest
+    ClusterRoleType:
+      enum:
+      - ORIGIN
+      - REPLICA
+      - RECOVERY
+      - SECONDARY
+      title: ClusterRoleType
+      type: string
+    DayOfWeek:
+      enum:
+      - MON
+      - TUE
+      - WED
+      - THU
+      - FRI
+      - SAT
+      - SUN
+      title: DayOfWeek
+      type: string
+    Engine:
+      example:
+        major_version: major_version
+        os_type: os_type
+        os_version: os_version
+        name: name
+        id: id
+        software_version: software_version
+        product_image_type: product_image_type
+        end_of_service: false
+      properties:
+        end_of_service:
+          default: false
+          description: End of Service
+          title: End Of Service
+          type: boolean
+        id:
+          description: ID
+          title: Id
+          type: string
+        major_version:
+          description: Software major version
+          title: Major Version
+          type: string
+        name:
+          description: DBaaS engine version name
+          title: Name
+          type: string
+        os_type:
+          description: OS type
+          title: Os Type
+          type: string
+        os_version:
+          description: OS version
+          title: Os Version
+          type: string
+        product_image_type:
+          nullable: true
+          type: string
+        software_version:
+          description: Software version
+          title: Software Version
+          type: string
+      required:
+      - id
+      - major_version
+      - name
+      - os_type
+      - os_version
+      - software_version
+      title: Engine
+    EngineListResponse:
+      example:
+        contents:
+        - major_version: major_version
+          os_type: os_type
+          os_version: os_version
+          name: name
+          id: id
+          software_version: software_version
+          product_image_type: product_image_type
+          end_of_service: false
+        - major_version: major_version
+          os_type: os_type
+          os_version: os_version
+          name: name
+          id: id
+          software_version: software_version
+          product_image_type: product_image_type
+          end_of_service: false
+      properties:
+        contents:
+          description: DBaaS engine list
+          items:
+            $ref: '#/components/schemas/Engine'
+          type: array
+      required:
+      - contents
+      title: EngineListResponse
+    EngineProperty:
+      example:
+        name: name
+        value: value
+      properties:
+        name:
+          description: DBaas engine property name
+          title: Name
+          type: string
+        value:
+          description: DBaas engine property value
+          title: Value
+          type: string
+      required:
+      - name
+      - value
+      title: EngineProperty
+    EnginePropertyListResponse:
+      example:
+        contents:
+        - name: name
+          value: value
+        - name: name
+          value: value
+      properties:
+        contents:
+          description: DBaas engine property list
+          items:
+            $ref: '#/components/schemas/EngineProperty'
+          type: array
+      required:
+      - contents
+      title: EnginePropertyListResponse
+    InstanceGroupRequest:
+      example:
+        block_storage_groups:
+        - volume_type: ""
+          role_type: ""
+          size_gb: 424
+        - volume_type: ""
+          role_type: ""
+          size_gb: 424
+        role_type: ""
+        instances:
+        - role_type: ""
+          service_ip_address: service_ip_address
+          public_ip_id: public_ip_id
+        - role_type: ""
+          service_ip_address: service_ip_address
+          public_ip_id: public_ip_id
+        server_type_name: server_type_name
+      properties:
+        block_storage_groups:
+          description: Block storage groups list
+          items:
+            $ref: '#/components/schemas/BlockStorageGroupRequest'
+          type: array
+        instances:
+          items:
+            $ref: '#/components/schemas/InstanceRequest'
+          nullable: true
+          type: array
+        role_type:
+          allOf:
+          - $ref: '#/components/schemas/InstanceGroupRoleType'
+          description: Role type
+        server_type_name:
+          description: Server type name
+          title: Server Type Name
+          type: string
+      required:
+      - block_storage_groups
+      - role_type
+      - server_type_name
+      title: InstanceGroupRequest
+    InstanceGroupResizeRequest:
+      example:
+        server_type_name: server_type_name
+      properties:
+        server_type_name:
+          description: Server type name
+          title: Server Type Name
+          type: string
+      required:
+      - server_type_name
+      title: InstanceGroupResizeRequest
+    InstanceGroupResponse:
+      example:
+        block_storage_groups:
+        - volume_type: ""
+          role_type: ""
+          name: name
+          size_gb: 1
+          id: id
+        - volume_type: ""
+          role_type: ""
+          name: name
+          size_gb: 1
+          id: id
+        role_type: ""
+        instances:
+        - service_state: ""
+          role_type: ""
+          service_ip_address: service_ip_address
+          name: name
+        - service_state: ""
+          role_type: ""
+          service_ip_address: service_ip_address
+          name: name
+        server_type_name: server_type_name
+        id: id
+      properties:
+        block_storage_groups:
+          description: Block storage groups list
+          items:
+            $ref: '#/components/schemas/BlockStorageGroupResponse'
+          type: array
+        id:
+          description: ID
+          title: Id
+          type: string
+        instances:
+          description: Instances list
+          items:
+            $ref: '#/components/schemas/InstanceResponse'
+          type: array
+        role_type:
+          allOf:
+          - $ref: '#/components/schemas/InstanceGroupRoleType'
+          description: Role type
+        server_type_name:
+          description: Server type name
+          title: Server Type Name
+          type: string
+      required:
+      - block_storage_groups
+      - id
+      - instances
+      - role_type
+      - server_type_name
+      title: InstanceGroupResponse
+    InstanceGroupRoleType:
+      enum:
+      - ACTIVE
+      - ACTIVE_STANDBY
+      - PRIMARY_SECONDARY
+      - MASTER
+      - MASTER_REPLICA
+      - REPLICA
+      - SENTINEL
+      - MASTER_DATA
+      - DATA
+      - KIBANA
+      - ZOOKEEPER_BROKER
+      - BROKER
+      - ZOOKEEPER
+      - AKHQ
+      - CONSOLE
+      title: InstanceGroupRoleType
+      type: string
+    InstanceRequest:
+      example:
+        role_type: ""
+        service_ip_address: service_ip_address
+        public_ip_id: public_ip_id
+      properties:
+        public_ip_id:
+          nullable: true
+          type: string
+        role_type:
+          allOf:
+          - $ref: '#/components/schemas/InstanceRoleType'
+          description: Role type
+        service_ip_address:
+          nullable: true
+          type: string
+      required:
+      - role_type
+      title: InstanceRequest
+    InstanceResponse:
+      example:
+        service_state: ""
+        role_type: ""
+        service_ip_address: service_ip_address
+        name: name
+      properties:
+        name:
+          description: Name
+          title: Name
+          type: string
+        role_type:
+          allOf:
+          - $ref: '#/components/schemas/InstanceRoleType'
+          description: Role type
+        service_ip_address:
+          nullable: true
+          type: string
+        service_state:
+          allOf:
+          - $ref: '#/components/schemas/ServiceState'
+          description: Service state
+      required:
+      - name
+      - role_type
+      - service_state
+      title: InstanceResponse
+    InstanceRoleType:
+      enum:
+      - ACTIVE
+      - STANDBY
+      - PRIMARY
+      - SECONDARY
+      - MASTER
+      - REPLICA
+      - SENTINEL
+      - MASTER_DATA
+      - DATA
+      - KIBANA
+      - ZOOKEEPER_BROKER
+      - BROKER
+      - ZOOKEEPER
+      - AKHQ
+      - CONSOLE
+      title: InstanceRoleType
+      type: string
+    LogExportConfigCreateRequestDTO:
+      example:
+        schedule_hour: schedule_hour
+        secret_key: secret_key
+        log_type: log_type
+        schedule_frequency_type: schedule_frequency_type
+        access_key: access_key
+        bucket_name: bucket_name
+        schedule_day_of_week: MON
+        schedule_day_of_month: schedule_day_of_month
+        delete_on_export: true
+      properties:
+        access_key:
+          nullable: true
+          type: string
+        bucket_name:
+          description: Bucket name
+          title: Bucket Name
+          type: string
+        delete_on_export:
+          nullable: true
+          type: boolean
+        log_type:
+          description: Log type
+          title: Log Type
+          type: string
+        schedule_day_of_month:
+          nullable: true
+          pattern: "^-?(?:31|[1-2][0-9]|0?[1-9])$"
+          type: string
+        schedule_day_of_week:
+          $ref: '#/components/schemas/DayOfWeek'
+        schedule_frequency_type:
+          nullable: true
+          type: string
+        schedule_hour:
+          nullable: true
+          pattern: "^(\\d|1\\d|2[0-3])$"
+          type: string
+        secret_key:
+          nullable: true
+          type: string
+      required:
+      - access_key
+      - bucket_name
+      - delete_on_export
+      - log_type
+      - schedule_day_of_month
+      - schedule_day_of_week
+      - schedule_frequency_type
+      - schedule_hour
+      - secret_key
+      title: LogExportConfigCreateRequestDTO
+    LogExportConfigDTO:
+      example:
+        schedule_hour: schedule_hour
+        log_type: log_type
+        is_registered: true
+        schedule_frequency_type: schedule_frequency_type
+        log_label: log_label
+        bucket_name: bucket_name
+        schedule_day_of_week: MON
+        id: id
+        schedule_day_of_month: schedule_day_of_month
+        delete_on_export: true
+      properties:
+        bucket_name:
+          nullable: true
+          type: string
+        delete_on_export:
+          nullable: true
+          type: boolean
+        id:
+          nullable: true
+          type: string
+        is_registered:
+          description: Log type registration state
+          title: Is Registered
+          type: boolean
+        log_label:
+          description: Log label
+          title: Log Label
+          type: string
+        log_type:
+          description: Log type
+          title: Log Type
+          type: string
+        schedule_day_of_month:
+          nullable: true
+          type: string
+        schedule_day_of_week:
+          $ref: '#/components/schemas/DayOfWeek'
+        schedule_frequency_type:
+          nullable: true
+          type: string
+        schedule_hour:
+          nullable: true
+          type: string
+      required:
+      - bucket_name
+      - delete_on_export
+      - id
+      - is_registered
+      - log_label
+      - log_type
+      - schedule_day_of_month
+      - schedule_day_of_week
+      - schedule_frequency_type
+      - schedule_hour
+      title: LogExportConfigDTO
+    LogExportConfigListResponse:
+      example:
+        contents:
+        - schedule_hour: schedule_hour
+          log_type: log_type
+          is_registered: true
+          schedule_frequency_type: schedule_frequency_type
+          log_label: log_label
+          bucket_name: bucket_name
+          schedule_day_of_week: MON
+          id: id
+          schedule_day_of_month: schedule_day_of_month
+          delete_on_export: true
+        - schedule_hour: schedule_hour
+          log_type: log_type
+          is_registered: true
+          schedule_frequency_type: schedule_frequency_type
+          log_label: log_label
+          bucket_name: bucket_name
+          schedule_day_of_week: MON
+          id: id
+          schedule_day_of_month: schedule_day_of_month
+          delete_on_export: true
+        count: 0
+      properties:
+        contents:
+          description: Log export config contents
+          items:
+            $ref: '#/components/schemas/LogExportConfigDTO'
+          type: array
+        count:
+          description: Log export config count
+          title: Count
+          type: integer
+      required:
+      - contents
+      - count
+      title: LogExportConfigListResponse
+    LogExportConfigModifyRequestDTO:
+      example:
+        schedule_hour: schedule_hour
+        secret_key: secret_key
+        schedule_frequency_type: schedule_frequency_type
+        access_key: access_key
+        schedule_day_of_week: MON
+        schedule_day_of_month: schedule_day_of_month
+        delete_on_export: true
+      properties:
+        access_key:
+          nullable: true
+          type: string
+        delete_on_export:
+          nullable: true
+          type: boolean
+        schedule_day_of_month:
+          nullable: true
+          pattern: "^-?(?:31|[1-2][0-9]|0?[1-9])$"
+          type: string
+        schedule_day_of_week:
+          $ref: '#/components/schemas/DayOfWeek'
+        schedule_frequency_type:
+          nullable: true
+          type: string
+        schedule_hour:
+          nullable: true
+          pattern: "^(\\d|1\\d|2[0-3])$"
+          type: string
+        secret_key:
+          nullable: true
+          type: string
+      required:
+      - access_key
+      - delete_on_export
+      - schedule_day_of_month
+      - schedule_day_of_week
+      - schedule_frequency_type
+      - schedule_hour
+      - secret_key
+      title: LogExportConfigModifyRequestDTO
+    MaintenanceOption:
+      example:
+        period_hour: period_hour
+        starting_time: starting_time
+        starting_day_of_week: ""
+      properties:
+        period_hour:
+          description: Period in hours
+          pattern: "^(0\\.5|[1-5]\\.5|[1-9]|1[0-9]|2[0-4])$"
+          title: Period Hour
+          type: string
+        starting_day_of_week:
+          allOf:
+          - $ref: '#/components/schemas/DayOfWeek'
+          description: Starting day of week
+        starting_time:
+          description: Starting time
+          title: Starting Time
+          type: string
+      title: MaintenanceOption
+    MaintenanceRequest:
+      example:
+        start_time: start_time
+        start_day_of_week: ""
+        term_hour: term_hour
+        start_minute: start_minute
+      properties:
+        start_day_of_week:
+          allOf:
+          - $ref: '#/components/schemas/DayOfWeek'
+          description: start_day_of_week
+        start_minute:
+          description: start_minute
+          title: Start Minute
+          type: string
+        start_time:
+          description: start_time
+          title: Start Time
+          type: string
+        term_hour:
+          description: term_hour
+          pattern: "^(0\\.5|[1-5]\\.5|[1-9]|1[0-9]|2[0-4])$"
+          title: Term Hour
+          type: string
+      required:
+      - start_day_of_week
+      - start_minute
+      - start_time
+      - term_hour
+      title: MaintenanceRequest
+    MaintenanceResponseOption:
+      example:
+        period_hour: period_hour
+        starting_time: starting_time
+        starting_day_of_week: MON
+        use_maintenance_option: false
+      properties:
+        period_hour:
+          nullable: true
+          type: string
+        starting_day_of_week:
+          $ref: '#/components/schemas/DayOfWeek'
+        starting_time:
+          nullable: true
+          type: string
+        use_maintenance_option:
+          default: false
+          description: Maintenance period usage state
+          title: Use Maintenance Option
+          type: boolean
+      title: MaintenanceResponseOption
+    MariadbBackupOption:
+      example:
+        retention_period_day: retention_period_day
+        archive_frequency_minute: archive_frequency_minute
+        starting_time_hour: starting_time_hour
+      properties:
+        archive_frequency_minute:
+          nullable: true
+          pattern: ^(5|10|30|60)$
+          type: string
+        retention_period_day:
+          description: Backup retention period (day)
+          title: Retention Period Day
+          type: string
+        starting_time_hour:
+          description: Backup starting time (hour)
+          title: Starting Time Hour
+          type: string
+      title: MariadbBackupOption
+    MariadbClusterCreateRequest:
+      example:
+        init_config_option: ""
+        instance_name_prefix: instance_name_prefix
+        origin_cluster_id: origin_cluster_id
+        virtual_ip_address: virtual_ip_address
+        timezone: timezone
+        vip_public_ip_id: vip_public_ip_id
+        instance_groups:
+        - block_storage_groups:
+          - volume_type: ""
+            role_type: ""
+            size_gb: 424
+          - volume_type: ""
+            role_type: ""
+            size_gb: 424
+          role_type: ""
+          instances:
+          - role_type: ""
+            service_ip_address: service_ip_address
+            public_ip_id: public_ip_id
+          - role_type: ""
+            service_ip_address: service_ip_address
+            public_ip_id: public_ip_id
+          server_type_name: server_type_name
+        - block_storage_groups:
+          - volume_type: ""
+            role_type: ""
+            size_gb: 424
+          - volume_type: ""
+            role_type: ""
+            size_gb: 424
+          role_type: ""
+          instances:
+          - role_type: ""
+            service_ip_address: service_ip_address
+            public_ip_id: public_ip_id
+          - role_type: ""
+            service_ip_address: service_ip_address
+            public_ip_id: public_ip_id
+          server_type_name: server_type_name
+        tags:
+        - value: value
+          key: key
+        - value: value
+          key: key
+        dbaas_engine_version_id: dbaas_engine_version_id
+        ha_enabled: false
+        name: name
+        nat_enabled: false
+        subnet_id: subnet_id
+        maintenance_option:
+          period_hour: period_hour
+          starting_time: starting_time
+          starting_day_of_week: ""
+        allowable_ip_addresses:
+        - allowable_ip_addresses
+        - allowable_ip_addresses
+      properties:
+        allowable_ip_addresses:
+          default: []
+          description: Allowed IP addresses list
+          items:
+            type: string
+          type: array
+        dbaas_engine_version_id:
+          description: DBaaS engine version ID
+          title: Dbaas Engine Version Id
+          type: string
+        ha_enabled:
+          default: false
+          description: HA availability
+          title: Ha Enabled
+          type: boolean
+        init_config_option:
+          allOf:
+          - $ref: '#/components/schemas/MariadbInitConfigOptionRequest'
+          description: DB initial configuration option
+        instance_groups:
+          description: Instance groups list
+          items:
+            $ref: '#/components/schemas/InstanceGroupRequest'
+          type: array
+        instance_name_prefix:
+          description: Instance name prefix
+          maxLength: 13
+          minLength: 3
+          pattern: "^[a-z][a-zA-Z0-9\\-]*$"
+          title: Instance Name Prefix
+          type: string
+        maintenance_option:
+          $ref: '#/components/schemas/MaintenanceOption'
+        name:
+          description: Cluster name
+          maxLength: 20
+          minLength: 3
+          pattern: "^[a-zA-Z]*$"
+          title: Name
+          type: string
+        nat_enabled:
+          default: false
+          description: NAT availability
+          title: Nat Enabled
+          type: boolean
+        origin_cluster_id:
+          nullable: true
+          type: string
+        subnet_id:
+          description: Subnet ID
+          title: Subnet Id
+          type: string
+        tags:
+          items:
+            $ref: '#/components/schemas/Tag'
+          nullable: true
+          type: array
+        timezone:
+          description: Timezone
+          title: Timezone
+          type: string
+        vip_public_ip_id:
+          nullable: true
+          type: string
+        virtual_ip_address:
+          nullable: true
+          type: string
+      required:
+      - dbaas_engine_version_id
+      - init_config_option
+      - instance_groups
+      - instance_name_prefix
+      - name
+      - subnet_id
+      - timezone
+      title: MariadbClusterCreateRequest
+    MariadbClusterDetailResponse:
+      example:
+        service_state: ""
+        init_config_option:
+          audit_enabled: false
+          backup_option:
+            retention_period_day: retention_period_day
+            archive_frequency_minute: archive_frequency_minute
+            starting_time_hour: starting_time_hour
+          database_name: database_name
+          database_port: 6190
+          database_character_set: database_character_set
+          database_user_name: database_user_name
+        origin_cluster_id: origin_cluster_id
+        role_type: ORIGIN
+        virtual_ip_address: virtual_ip_address
+        replicas:
+        - replicas
+        - replicas
+        timezone: timezone
+        created_at: 2024-05-17T00:23:17Z
+        instance_groups:
+        - block_storage_groups:
+          - volume_type: ""
+            role_type: ""
+            name: name
+            size_gb: 1
+            id: id
+          - volume_type: ""
+            role_type: ""
+            name: name
+            size_gb: 1
+            id: id
+          role_type: ""
+          instances:
+          - service_state: ""
+            role_type: ""
+            service_ip_address: service_ip_address
+            name: name
+          - service_state: ""
+            role_type: ""
+            service_ip_address: service_ip_address
+            name: name
+          server_type_name: server_type_name
+          id: id
+        - block_storage_groups:
+          - volume_type: ""
+            role_type: ""
+            name: name
+            size_gb: 1
+            id: id
+          - volume_type: ""
+            role_type: ""
+            name: name
+            size_gb: 1
+            id: id
+          role_type: ""
+          instances:
+          - service_state: ""
+            role_type: ""
+            service_ip_address: service_ip_address
+            name: name
+          - service_state: ""
+            role_type: ""
+            service_ip_address: service_ip_address
+            name: name
+          server_type_name: server_type_name
+          id: id
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        dbaas_engine: dbaas_engine
+        account_id: account_id
+        product_type: ""
+        ha_enabled: false
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: name
+        subnet_id: subnet_id
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        maintenance_option:
+          period_hour: period_hour
+          starting_time: starting_time
+          starting_day_of_week: MON
+          use_maintenance_option: false
+        software_version: software_version
+        modified_at: 2024-05-17T00:23:17Z
+        allowable_ip_addresses:
+        - allowable_ip_addresses
+        - allowable_ip_addresses
+        instance_count: 6
+      properties:
+        account_id:
+          description: Account ID
+          title: Account Id
+          type: string
+        allowable_ip_addresses:
+          default: []
+          description: Allowed IP addresses list
+          items:
+            type: string
+          type: array
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        dbaas_engine:
+          description: DBaaS engine
+          title: Dbaas Engine
+          type: string
+        ha_enabled:
+          default: false
+          description: HA availability
+          title: Ha Enabled
+          type: boolean
+        id:
+          description: ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        init_config_option:
+          $ref: '#/components/schemas/MariadbInitConfigOptionDetail'
+        instance_count:
+          default: 0
+          description: Instance Count
+          title: Instance Count
+          type: integer
+        instance_groups:
+          description: Instance groups list
+          items:
+            $ref: '#/components/schemas/InstanceGroupResponse'
+          type: array
+        maintenance_option:
+          $ref: '#/components/schemas/MaintenanceResponseOption'
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: Cluster name
+          title: Name
+          type: string
+        origin_cluster_id:
+          nullable: true
+          type: string
+        product_type:
+          allOf:
+          - $ref: '#/components/schemas/ProductType'
+          description: Product type
+        replicas:
+          items:
+            type: string
+          nullable: true
+          type: array
+        role_type:
+          $ref: '#/components/schemas/ClusterRoleType'
+        service_state:
+          allOf:
+          - $ref: '#/components/schemas/ServiceState'
+          description: Service state
+        software_version:
+          description: Software version
+          title: Software Version
+          type: string
+        subnet_id:
+          description: Subnet ID
+          title: Subnet Id
+          type: string
+        timezone:
+          description: Timezone
+          title: Timezone
+          type: string
+        virtual_ip_address:
+          nullable: true
+          type: string
+      required:
+      - account_id
+      - created_at
+      - created_by
+      - dbaas_engine
+      - id
+      - init_config_option
+      - instance_groups
+      - modified_at
+      - modified_by
+      - name
+      - product_type
+      - role_type
+      - service_state
+      - software_version
+      - subnet_id
+      - timezone
+      title: MariadbClusterDetailResponse
+    MariadbInitConfigOptionDetail:
+      example:
+        audit_enabled: false
+        backup_option:
+          retention_period_day: retention_period_day
+          archive_frequency_minute: archive_frequency_minute
+          starting_time_hour: starting_time_hour
+        database_name: database_name
+        database_port: 6190
+        database_character_set: database_character_set
+        database_user_name: database_user_name
+      properties:
+        audit_enabled:
+          default: false
+          description: Audit usage state
+          title: Audit Enabled
+          type: boolean
+        backup_option:
+          $ref: '#/components/schemas/MariadbBackupOption'
+        database_character_set:
+          nullable: true
+          type: string
+        database_name:
+          description: Database name
+          title: Database Name
+          type: string
+        database_port:
+          maximum: 65535
+          minimum: 1024
+          nullable: true
+          type: integer
+        database_user_name:
+          description: Database user name
+          title: Database User Name
+          type: string
+      required:
+      - database_name
+      - database_user_name
+      title: MariadbInitConfigOptionDetail
+    MariadbInitConfigOptionRequest:
+      properties:
+        audit_enabled:
+          default: false
+          description: Audit usage state
+          title: Audit Enabled
+          type: boolean
+        backup_option:
+          $ref: '#/components/schemas/MariadbBackupOption'
+        database_character_set:
+          nullable: true
+          type: string
+        database_name:
+          description: Database name
+          maxLength: 20
+          minLength: 3
+          pattern: "^[a-zA-Z][a-zA-Z0-9]*$"
+          title: Database Name
+          type: string
+        database_port:
+          maximum: 65535
+          minimum: 1024
+          nullable: true
+          type: integer
+        database_user_name:
+          description: Database user name
+          maxLength: 20
+          minLength: 2
+          pattern: "^[a-z]*$"
+          title: Database User Name
+          type: string
+        database_user_password:
+          description: Database user password
+          maxLength: 30
+          minLength: 8
+          title: Database User Password
+          type: string
+      required:
+      - database_name
+      - database_user_name
+      - database_user_password
+      title: MariadbInitConfigOptionRequest
+    MinorPatchRequest:
+      example:
+        software_version: software_version
+        backup_before_upgrade: true
+      properties:
+        backup_before_upgrade:
+          description: backup_before_upgrade
+          title: Backup Before Upgrade
+          type: boolean
+        software_version:
+          description: software_version
+          title: Software Version
+          type: string
+      required:
+      - backup_before_upgrade
+      - software_version
+      title: MinorPatchRequest
+    ParameterDTO:
+      example:
+        applied_value: applied_value
+        allows_value: allows_value
+        data_type: data_type
+        is_modifiable: true
+        name: name
+        description: description
+        software_type: software_type
+        default_value: default_value
+        id: id
+        apply_type: apply_type
+      properties:
+        allows_value:
+          description: Parameter allows value
+          title: Allows Value
+          type: string
+        applied_value:
+          description: Parameter applied value
+          title: Applied Value
+          type: string
+        apply_type:
+          description: Parameter apply type
+          title: Apply Type
+          type: string
+        data_type:
+          description: Parameter data type
+          title: Data Type
+          type: string
+        default_value:
+          description: Parameter default value
+          title: Default Value
+          type: string
+        description:
+          nullable: true
+          type: string
+        id:
+          description: Parameter id
+          title: Id
+          type: string
+        is_modifiable:
+          description: Parameter is_modifiable
+          title: Is Modifiable
+          type: boolean
+        name:
+          description: Parameter name
+          title: Name
+          type: string
+        software_type:
+          nullable: true
+          type: string
+      required:
+      - allows_value
+      - applied_value
+      - apply_type
+      - data_type
+      - default_value
+      - description
+      - id
+      - is_modifiable
+      - name
+      - software_type
+      title: ParameterDTO
+    ParameterGroup:
+      example:
+        major_version: major_version
+        product_type: product_type
+        name: name
+        id: id
+      properties:
+        id:
+          description: Parameter group ID
+          title: Id
+          type: string
+        major_version:
+          description: Software major version
+          title: Major Version
+          type: string
+        name:
+          description: Parameter group name
+          title: Name
+          type: string
+        product_type:
+          description: Product type
+          title: Product Type
+          type: string
+      required:
+      - id
+      - major_version
+      - name
+      - product_type
+      title: ParameterGroup
+    ParameterGroupListResponse:
+      example:
+        contents:
+        - major_version: major_version
+          product_type: product_type
+          name: name
+          id: id
+        - major_version: major_version
+          product_type: product_type
+          name: name
+          id: id
+        sort:
+        - sort
+        - sort
+      properties:
+        contents:
+          description: Parameter group list
+          items:
+            $ref: '#/components/schemas/ParameterGroup'
+          type: array
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - contents
+      title: ParameterGroupListResponse
+    ParameterPageResponse:
+      example:
+        size: 20
+        contents:
+        - name: name
+          description: description
+          software_type: software_type
+          default_value: default_value
+          dbaas_parameter_group_id: dbaas_parameter_group_id
+          id: id
+        - name: name
+          description: description
+          software_type: software_type
+          default_value: default_value
+          dbaas_parameter_group_id: dbaas_parameter_group_id
+          id: id
+        count: 20
+        page: 0
+        sort:
+        - sort
+        - sort
+      properties:
+        contents:
+          description: Parameter list
+          items:
+            $ref: '#/components/schemas/Parameters'
+          type: array
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - contents
+      - count
+      - page
+      - size
+      title: ParameterPageResponse
+    ParameterRequest:
+      example:
+        old_value: old_value
+        id: id
+        new_value: new_value
+      properties:
+        id:
+          description: Parameter id
+          title: Id
+          type: string
+        new_value:
+          description: Parameter new value
+          title: New Value
+          type: string
+        old_value:
+          description: Parameter old value
+          title: Old Value
+          type: string
+      required:
+      - id
+      - new_value
+      - old_value
+      title: ParameterRequest
+    Parameters:
+      example:
+        name: name
+        description: description
+        software_type: software_type
+        default_value: default_value
+        dbaas_parameter_group_id: dbaas_parameter_group_id
+        id: id
+      properties:
+        dbaas_parameter_group_id:
+          description: Parameter id
+          title: Dbaas Parameter Group Id
+          type: string
+        default_value:
+          description: Parameter default value
+          title: Default Value
+          type: string
+        description:
+          description: Parameter description
+          title: Description
+          type: string
+        id:
+          description: Parameter id
+          title: Id
+          type: string
+        name:
+          description: Parameter name
+          title: Name
+          type: string
+        software_type:
+          nullable: true
+          type: string
+      required:
+      - dbaas_parameter_group_id
+      - default_value
+      - description
+      - id
+      - name
+      - software_type
+      title: Parameters
+    ParametersRequest:
+      example:
+        parameters:
+        - old_value: old_value
+          id: id
+          new_value: new_value
+        - old_value: old_value
+          id: id
+          new_value: new_value
+      properties:
+        parameters:
+          description: Parameter request list
+          items:
+            $ref: '#/components/schemas/ParameterRequest'
+          type: array
+      required:
+      - parameters
+      title: ParametersRequest
+    ParametersResponse:
+      example:
+        contents:
+        - applied_value: applied_value
+          allows_value: allows_value
+          data_type: data_type
+          is_modifiable: true
+          name: name
+          description: description
+          software_type: software_type
+          default_value: default_value
+          id: id
+          apply_type: apply_type
+        - applied_value: applied_value
+          allows_value: allows_value
+          data_type: data_type
+          is_modifiable: true
+          name: name
+          description: description
+          software_type: software_type
+          default_value: default_value
+          id: id
+          apply_type: apply_type
+        count: 0
+        modified_at: modified_at
+      properties:
+        contents:
+          description: Parameter contents
+          items:
+            $ref: '#/components/schemas/ParameterDTO'
+          type: array
+        count:
+          description: Parameter count
+          title: Count
+          type: integer
+        modified_at:
+          description: Modification time
+          title: Modified At
+          type: string
+      required:
+      - contents
+      - count
+      - modified_at
+      title: ParametersResponse
+    ProductImageType:
+      enum:
+      - PostgreSQL Community
+      - MariaDB
+      - MySQL
+      - EPAS
+      - Microsoft SQL Server Enterprise
+      - Microsoft SQL Server Standard
+      - Redis
+      - Apache Kafka
+      - Elasticsearch Enterprise
+      - Vertica Enterprise
+      - Vertica Community
+      title: ProductImageType
+      type: string
+    ProductType:
+      enum:
+      - PostgreSQL Community
+      - EPAS
+      - MariaDB
+      - MySQL
+      - Redis
+      - Microsoft SQL Server
+      - Search Engine
+      - Event Streams
+      - Vertica
+      title: ProductType
+      type: string
+    RdbClusterPageResponse:
+      example:
+        size: 20
+        contents:
+        - service_state: ""
+          account_id: account_id
+          database_name: database_name
+          role_type: ORIGIN
+          ha_enabled: false
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          created_at: 2024-05-17T00:23:17Z
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          instance_count: 0
+        - service_state: ""
+          account_id: account_id
+          database_name: database_name
+          role_type: ORIGIN
+          ha_enabled: false
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          created_at: 2024-05-17T00:23:17Z
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          instance_count: 0
+        count: 20
+        page: 0
+        sort:
+        - sort
+        - sort
+      properties:
+        contents:
+          items:
+            $ref: '#/components/schemas/RdbClusterResponse'
+          nullable: true
+          type: array
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - contents
+      - count
+      - page
+      - size
+      title: RdbClusterPageResponse
+    RdbClusterResponse:
+      example:
+        service_state: ""
+        account_id: account_id
+        database_name: database_name
+        role_type: ORIGIN
+        ha_enabled: false
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: name
+        created_at: 2024-05-17T00:23:17Z
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        modified_at: 2024-05-17T00:23:17Z
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        instance_count: 0
+      properties:
+        account_id:
+          description: Account ID
+          title: Account Id
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        database_name:
+          nullable: true
+          type: string
+        ha_enabled:
+          default: false
+          description: HA availability
+          title: Ha Enabled
+          type: boolean
+        id:
+          description: ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        instance_count:
+          default: 0
+          description: Instance Count
+          title: Instance Count
+          type: integer
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: Cluster name
+          title: Name
+          type: string
+        role_type:
+          $ref: '#/components/schemas/ClusterRoleType'
+        service_state:
+          allOf:
+          - $ref: '#/components/schemas/ServiceState'
+          description: Service state
+      required:
+      - account_id
+      - created_at
+      - created_by
+      - database_name
+      - id
+      - modified_at
+      - modified_by
+      - name
+      - role_type
+      - service_state
+      title: RdbClusterResponse
+    ReplicaItem:
+      example:
+        replica_state_detail: replica_state_detail
+        name: name
+        replica_state: replica_state
+        synced_at: synced_at
+      properties:
+        name:
+          description: Server name
+          title: Name
+          type: string
+        replica_state:
+          nullable: true
+          type: string
+        replica_state_detail:
+          nullable: true
+          type: string
+        synced_at:
+          nullable: true
+          type: string
+      required:
+      - name
+      - replica_state
+      - replica_state_detail
+      - synced_at
+      title: ReplicaItem
+    Replicas:
+      example:
+        name: name
+        instance_groups:
+        - block_storage_groups:
+          - volume_type: ""
+            role_type: ""
+            size_gb: 424
+          - volume_type: ""
+            role_type: ""
+            size_gb: 424
+          role_type: ""
+          instances:
+          - role_type: ""
+            service_ip_address: service_ip_address
+            public_ip_id: public_ip_id
+          - role_type: ""
+            service_ip_address: service_ip_address
+            public_ip_id: public_ip_id
+          server_type_name: server_type_name
+        - block_storage_groups:
+          - volume_type: ""
+            role_type: ""
+            size_gb: 424
+          - volume_type: ""
+            role_type: ""
+            size_gb: 424
+          role_type: ""
+          instances:
+          - role_type: ""
+            service_ip_address: service_ip_address
+            public_ip_id: public_ip_id
+          - role_type: ""
+            service_ip_address: service_ip_address
+            public_ip_id: public_ip_id
+          server_type_name: server_type_name
+      properties:
+        instance_groups:
+          description: Instance groups list
+          items:
+            $ref: '#/components/schemas/InstanceGroupRequest'
+          type: array
+        name:
+          description: Replica Name
+          maxLength: 19
+          minLength: 3
+          pattern: "^[a-z][a-z0-9\\-]*[a-z0-9]$"
+          title: Name
+          type: string
+      required:
+      - instance_groups
+      - name
+      title: Replicas
+    ReplicasCreateRequest:
+      example:
+        replicas:
+        - name: name
+          instance_groups:
+          - block_storage_groups:
+            - volume_type: ""
+              role_type: ""
+              size_gb: 424
+            - volume_type: ""
+              role_type: ""
+              size_gb: 424
+            role_type: ""
+            instances:
+            - role_type: ""
+              service_ip_address: service_ip_address
+              public_ip_id: public_ip_id
+            - role_type: ""
+              service_ip_address: service_ip_address
+              public_ip_id: public_ip_id
+            server_type_name: server_type_name
+          - block_storage_groups:
+            - volume_type: ""
+              role_type: ""
+              size_gb: 424
+            - volume_type: ""
+              role_type: ""
+              size_gb: 424
+            role_type: ""
+            instances:
+            - role_type: ""
+              service_ip_address: service_ip_address
+              public_ip_id: public_ip_id
+            - role_type: ""
+              service_ip_address: service_ip_address
+              public_ip_id: public_ip_id
+            server_type_name: server_type_name
+        - name: name
+          instance_groups:
+          - block_storage_groups:
+            - volume_type: ""
+              role_type: ""
+              size_gb: 424
+            - volume_type: ""
+              role_type: ""
+              size_gb: 424
+            role_type: ""
+            instances:
+            - role_type: ""
+              service_ip_address: service_ip_address
+              public_ip_id: public_ip_id
+            - role_type: ""
+              service_ip_address: service_ip_address
+              public_ip_id: public_ip_id
+            server_type_name: server_type_name
+          - block_storage_groups:
+            - volume_type: ""
+              role_type: ""
+              size_gb: 424
+            - volume_type: ""
+              role_type: ""
+              size_gb: 424
+            role_type: ""
+            instances:
+            - role_type: ""
+              service_ip_address: service_ip_address
+              public_ip_id: public_ip_id
+            - role_type: ""
+              service_ip_address: service_ip_address
+              public_ip_id: public_ip_id
+            server_type_name: server_type_name
+        replica_count: 0
+        maintenance_option:
+          period_hour: period_hour
+          starting_time: starting_time
+          starting_day_of_week: ""
+        allowable_ip_addresses:
+        - allowable_ip_addresses
+        - allowable_ip_addresses
+        tags:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      properties:
+        allowable_ip_addresses:
+          default: []
+          description: Allowed IP addresses list
+          items:
+            type: string
+          type: array
+        maintenance_option:
+          $ref: '#/components/schemas/MaintenanceOption'
+        replica_count:
+          description: Replica count
+          title: Replica Count
+          type: integer
+        replicas:
+          description: Replicas list
+          items:
+            $ref: '#/components/schemas/Replicas'
+          type: array
+        tags:
+          items:
+            $ref: '#/components/schemas/Tag'
+          nullable: true
+          type: array
+      required:
+      - replica_count
+      - replicas
+      title: ReplicasCreateRequest
+    ReplicasListResponse:
+      example:
+        contents:
+        - replica_state_detail: replica_state_detail
+          name: name
+          replica_state: replica_state
+          synced_at: synced_at
+        - replica_state_detail: replica_state_detail
+          name: name
+          replica_state: replica_state
+          synced_at: synced_at
+        count: 0
+      properties:
+        contents:
+          description: Replicas list
+          items:
+            $ref: '#/components/schemas/ReplicaItem'
+          type: array
+        count:
+          description: Replica count
+          title: Count
+          type: integer
+      required:
+      - contents
+      - count
+      title: ReplicasListResponse
+    RequestStateResponse:
+      example:
+        state: state
+        request_id: request_id
+      properties:
+        request_id:
+          description: Request ID
+          title: Request Id
+          type: string
+        state:
+          description: Request state
+          title: State
+          type: string
+      required:
+      - request_id
+      - state
+      title: RequestStateResponse
+    ResizeBlockStorageGroupRequest:
+      example:
+        size_gb: 424
+      properties:
+        size_gb:
+          description: Size in GB
+          maximum: 5120
+          minimum: 16
+          multipleOf: 8
+          title: Size Gb
+          type: integer
+      required:
+      - size_gb
+      title: ResizeBlockStorageGroupRequest
+    ResourceInfo:
+      properties:
+        id:
+          description: request resource id
+          title: Id
+          type: string
+      required:
+      - id
+      title: ResourceInfo
+    ServerType:
+      example:
+        memory_gb: 6
+        product_type: product_type
+        purpose: purpose
+        cpu_core: 0
+        name: name
+        description: description
+        type: type
+      properties:
+        cpu_core:
+          description: Server type cpu core
+          title: Cpu Core
+          type: integer
+        description:
+          description: Server type description
+          title: Description
+          type: string
+        memory_gb:
+          description: Server type memory
+          title: Memory Gb
+          type: integer
+        name:
+          description: Server type name
+          title: Name
+          type: string
+        product_type:
+          description: Product type
+          title: Product Type
+          type: string
+        purpose:
+          description: Server type purpose
+          title: Purpose
+          type: string
+        type:
+          description: Server type class
+          title: Type
+          type: string
+      required:
+      - cpu_core
+      - description
+      - memory_gb
+      - name
+      - product_type
+      - purpose
+      - type
+      title: ServerType
+    ServerTypeListResponse:
+      example:
+        contents:
+        - memory_gb: 6
+          product_type: product_type
+          purpose: purpose
+          cpu_core: 0
+          name: name
+          description: description
+          type: type
+        - memory_gb: 6
+          product_type: product_type
+          purpose: purpose
+          cpu_core: 0
+          name: name
+          description: description
+          type: type
+      properties:
+        contents:
+          description: Server type list
+          items:
+            $ref: '#/components/schemas/ServerType'
+          type: array
+      required:
+      - contents
+      title: ServerTypeListResponse
+    ServiceState:
+      enum:
+      - RUNNING
+      - STOPPED
+      - UNKNOWN
+      - ERROR
+      - FAILED
+      - TERMINATED
+      - CREATING
+      - STOPPING
+      - STARTING
+      - RESTARTING
+      - EDITING
+      - SYNCHRONIZING
+      - UPGRADING
+      - TERMINATING
+      title: ServiceState
+      type: string
+    Tag:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          title: Key
+          type: string
+        value:
+          nullable: true
+          type: string
+      title: Tag
+    UpdateSecurityGroupRulesRequest:
+      example:
+        add_ip_addresses:
+        - add_ip_addresses
+        - add_ip_addresses
+        del_ip_addresses:
+        - del_ip_addresses
+        - del_ip_addresses
+      properties:
+        add_ip_addresses:
+          default: []
+          description: Allowed IP addresses list
+          items:
+            type: string
+          type: array
+        del_ip_addresses:
+          default: []
+          description: Allowed IP addresses list
+          items:
+            type: string
+          type: array
+      title: UpdateSecurityGroupRulesRequest
+    ValidationErrorModel:
+      example:
+        msg: msg
+        loc:
+        - loc
+        - loc
+        ctx: "{}"
+        type_: type_
+      properties:
+        ctx:
+          nullable: true
+          type: object
+        loc:
+          items:
+            type: string
+          nullable: true
+          type: array
+        msg:
+          nullable: true
+          type: string
+        type_:
+          nullable: true
+          type: string
+      title: ValidationErrorModel
+    VolumeType:
+      enum:
+      - SSD
+      - SSD_KMS
+      - SSD_TMP
+      - HDD
+      - HDD_KMS
+      title: VolumeType
+      type: string
+  securitySchemes:
+    X-Auth-Token:
+      in: header
+      name: X-Auth-Token
+      type: apiKey
+x-app-name: scp-dbaas
+x-package-name: scp_dbaas
+x-service-type: scp-dbaas
+x-url-prefix: ""

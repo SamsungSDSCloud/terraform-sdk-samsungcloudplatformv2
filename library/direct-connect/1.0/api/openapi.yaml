@@ -1,0 +1,1283 @@
+openapi: 3.1.0
+info:
+  description: SCP Network Service
+  title: SCP Network Service
+  version: 0.0.1.dev6775
+servers:
+- url: ""
+tags:
+- description: Internal IP Pool API
+  name: vpc.v1.InternalIpPoolsApi
+- description: Internal Subnets API
+  name: vpc.v1.InternalSubnetsApi
+- description: Internal Vpc Endpoints API
+  name: vpc.v1.InternalVpcEndpointApi
+- description: Internal VPC Static Nat API
+  name: vpc.v1.InternalVpcStaticNatsApi
+- description: Internet Gateways API
+  name: vpc.v1.InternetGatewaysApi
+- description: Internal Private NAT API
+  name: vpc.v1.InternalPrivateNatsApi
+- description: Nat Gateways API
+  name: vpc.v1.NatGatewayApi
+- description: Ports API
+  name: vpc.v1.PortsApi
+- description: publicIps API
+  name: vpc.v1.PublicIpApi
+- description: Subnets API
+  name: vpc.v1.SubnetsApi
+- description: Vpc Endpoints API
+  name: vpc.v1.VpcEndpointApi
+- description: Vpcs API
+  name: vpc.v1.VpcsApi
+- description: Private NAT API
+  name: vpc.v1.PrivateNatApi
+- description: Private NAT IP API
+  name: vpc.v1.PrivateNatIpApi
+- description: VPC Peerings API
+  name: vpc.v1.VpcPeeringApi
+- description: VPC Peering Rules API
+  name: vpc.v1.VpcPeeringRuleApi
+- description: Transit Gateways API
+  name: vpc.v1.TransitGatewayApi
+- description: Transit Gateway VPC Connections API
+  name: vpc.v1.TransitGatewayVpcConnectionApi
+- description: Transit Gateway Rules API
+  name: vpc.v1.TransitGatewayRulesApi
+- description: Direct Connects API
+  name: direct-connect.v1.DirectConnectsApi
+- description: Direct Connects Rules API
+  name: direct-connect.v1.DirectConnectsRulesApi
+- description: Internal Security Groups API
+  name: security-group.v1.InternalSecurityGroupApi
+- description: Security Group Rules API
+  name: security-group.v1.SecurityGroupRuleApi
+- description: Security Groups API
+  name: security-group.v1.SecurityGroupApi
+- description: Firewall Rules API
+  name: firewall.v1.FirewallRulesApi
+- description: Firewalls API
+  name: firewall.v1.FirewallApi
+- description: VPN Gateways API
+  name: vpn.v1.VpnGatewaysApi
+- description: VPN Tunnels API
+  name: vpn.v1.VpnTunnelsApi
+- description: NetworkLoggingConfiguration API
+  name: network-logging.v1.NetworkLoggingConfigurationApi
+- description: NetworkLoggingStorage API
+  name: network-logging.v1.NetworkLoggingStorageApi
+- description: Internal Firewall Engine API
+  name: network-common.v1.InternalFirewallEngineApi
+- description: Network Natives API
+  name: network-common.v1.NetworkNativesApi
+- description: Sample Vpc API
+  name: network-common.v1.SampleVpcsApi
+- description: Cdn API
+  name: cdn.v1.CdnApi
+- description: Gslbs API
+  name: gslb.v1.GslbsApi
+- description: GslbResources API
+  name: gslb.v1.GslbResourcesApi
+- description: Public Domain Name API
+  name: dns.v1.PublicDomainNameApi
+- description: Hosted Zones API
+  name: dns.v1.HostedZonesApi
+- description: Private DNS API
+  name: dns.v1.PrivateDnsApi
+- description: Records API
+  name: dns.v1.RecordsApi
+paths:
+  /v1/direct-connects:
+    get:
+      description: Get direct connect list.
+      operationId: listDirectConnects
+      parameters:
+      - description: with count
+        example: "true"
+        explode: true
+        in: query
+        name: with_count
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: limit
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      - description: marker
+        example: 607e0938521643b5b4b266f343fae693
+        explode: true
+        in: query
+        name: marker
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Direct Connect ID
+        explode: true
+        in: query
+        name: id
+        required: false
+        schema:
+          default: ""
+          description: Direct Connect ID
+          title: Id
+          type: string
+        style: form
+      - description: Direct Connect Name
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          default: ""
+          description: Direct Connect Name
+          title: Name
+          type: string
+        style: form
+      - description: State
+        explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/DirectConnectState'
+          default: ""
+          description: State
+        style: form
+      - description: VPC Id
+        explode: true
+        in: query
+        name: vpc_id
+        required: false
+        schema:
+          default: ""
+          description: VPC Id
+          title: Vpc Id
+          type: string
+        style: form
+      - description: VPC Name
+        explode: true
+        in: query
+        name: vpc_name
+        required: false
+        schema:
+          default: ""
+          description: VPC Name
+          title: Vpc Name
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Direct Connects
+      tags:
+      - direct-connect.v1.DirectConnectsApi
+      x-action-id: direct-connect:ListDirectconnects
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: direct-connect_list
+      x-not-before: 2026-07-01
+      x-operation-id: listDirectConnects
+      x-resource: direct_connect
+    post:
+      description: Create direct connect.
+      operationId: createDirectConnect
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DirectConnectCreateRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectShowResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Create Direct Connect
+      tags:
+      - direct-connect.v1.DirectConnectsApi
+      x-action-id: direct-connect:CreateDirectconnect
+      x-api-access-level: CREATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250701"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: direct-connect_create
+      x-not-before: 2026-07-01
+      x-operation-id: createDirectConnect
+      x-resource: direct_connect
+  /v1/direct-connects/{direct_connect_id}:
+    delete:
+      description: Delete direct connect.
+      operationId: deleteDirectConnect
+      parameters:
+      - description: Direct Connect ID
+        explode: false
+        in: path
+        name: direct_connect_id
+        required: true
+        schema:
+          description: Direct Connect ID
+          title: Direct Connect Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "409":
+          description: Conflict
+      security:
+      - X-Auth-Token: []
+      summary: Delete Direct Connect
+      tags:
+      - direct-connect.v1.DirectConnectsApi
+      x-action-id: direct-connect:DeleteDirectconnect
+      x-api-access-level: DELETE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250701"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: direct-connect_delete
+      x-not-before: 2026-07-01
+      x-operation-id: deleteDirectConnect
+      x-resource: direct_connect
+    get:
+      description: Show direct connect.
+      operationId: showDirectConnect
+      parameters:
+      - description: Direct Connect ID
+        explode: false
+        in: path
+        name: direct_connect_id
+        required: true
+        schema:
+          description: Direct Connect ID
+          title: Direct Connect Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectShowResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Show Direct Connect
+      tags:
+      - direct-connect.v1.DirectConnectsApi
+      x-action-id: direct-connect:ShowDirectconnect
+      x-api-access-level: READ
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: direct-connect_show
+      x-not-before: 2026-07-01
+      x-operation-id: showDirectConnect
+      x-resource: direct_connect
+    put:
+      description: Set direct connect.
+      operationId: setDirectConnect
+      parameters:
+      - description: Direct Connect ID
+        explode: false
+        in: path
+        name: direct_connect_id
+        required: true
+        schema:
+          description: Direct Connect ID
+          title: Direct Connect Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DirectConnectSetRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Set Direct Connect
+      tags:
+      - direct-connect.v1.DirectConnectsApi
+      x-action-id: direct-connect:SetDirectconnect
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: direct-connect_set
+      x-not-before: 2026-07-01
+      x-operation-id: setDirectConnect
+      x-resource: direct_connect
+  /v1/direct-connects/{direct_connect_id}/routing-rules:
+    get:
+      description: Get routing rule list.
+      operationId: listRoutingRules
+      parameters:
+      - description: Direct Connect ID
+        explode: false
+        in: path
+        name: direct_connect_id
+        required: true
+        schema:
+          description: Direct Connect ID
+          title: Direct Connect Id
+          type: string
+        style: simple
+      - description: with count
+        example: "true"
+        explode: true
+        in: query
+        name: with_count
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: limit
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      - description: marker
+        example: 607e0938521643b5b4b266f343fae693
+        explode: true
+        in: query
+        name: marker
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Routing Rule ID
+        explode: true
+        in: query
+        name: id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Destination Type
+        explode: true
+        in: query
+        name: destination_type
+        required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/DirectConnectRoutingRuleDestinationType'
+          description: Destination Type
+        style: form
+      - description: Destination CIDR
+        explode: true
+        in: query
+        name: destination_cidr
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: State
+        explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/RoutingRuleState'
+          description: State
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoutingRuleListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Routing Rules
+      tags:
+      - direct-connect.v1.DirectConnectsRulesApi
+      x-action-id: direct-connect:ListDirectconnectRoutingrules
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: routing-rule_list
+      x-not-before: 2026-07-01
+      x-operation-id: listRoutingRules
+      x-resource: direct_connect
+    post:
+      description: Create a routing rule.
+      operationId: createRoutingRule
+      parameters:
+      - description: Direct Connect ID
+        explode: false
+        in: path
+        name: direct_connect_id
+        required: true
+        schema:
+          description: Direct Connect ID
+          title: Direct Connect Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoutingRuleCreateRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoutingRuleShowResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Create Routing Rule
+      tags:
+      - direct-connect.v1.DirectConnectsRulesApi
+      x-action-id: direct-connect:AddDirectconnectRoutingrule
+      x-api-access-level: CREATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: routing-rule_create
+      x-not-before: 2026-07-01
+      x-operation-id: createRoutingRule
+      x-resource: direct_connect
+  /v1/direct-connects/{direct_connect_id}/routing-rules/destination-cidr-availabilities:
+    get:
+      description: check destination cidr availabilities
+      operationId: checkDestinationCidrAvailabilities
+      parameters:
+      - description: Direct Connect ID
+        explode: false
+        in: path
+        name: direct_connect_id
+        required: true
+        schema:
+          description: Direct Connect ID
+          title: Direct Connect Id
+          type: string
+        style: simple
+      - description: Destination Type
+        explode: true
+        in: query
+        name: destination_type
+        required: true
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/DirectConnectRoutingRuleDestinationType'
+          description: Destination Type
+        style: form
+      - description: Destination CIDR
+        explode: true
+        in: query
+        name: destination_cidr
+        required: true
+        schema:
+          description: Destination CIDR
+          title: Destination Cidr
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoutingRuleCidrAvailabilityResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: CheckDestinationCidrAvailabilities
+      tags:
+      - direct-connect.v1.DirectConnectsRulesApi
+      x-action-id: direct-connect:ShowDirectconnectRoutingruleCidrAvailability
+      x-api-access-level: READ
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2026-07-01
+      x-operation-id: checkDestinationCidrAvailabilities
+  /v1/direct-connects/{direct_connect_id}/routing-rules/{routing_rule_id}:
+    delete:
+      description: Delete a routing rule.
+      operationId: deleteRoutingRule
+      parameters:
+      - description: Direct Connect ID
+        explode: false
+        in: path
+        name: direct_connect_id
+        required: true
+        schema:
+          description: Direct Connect ID
+          title: Direct Connect Id
+          type: string
+        style: simple
+      - description: Routing Rule ID
+        explode: false
+        in: path
+        name: routing_rule_id
+        required: true
+        schema:
+          description: Routing Rule ID
+          title: Routing Rule Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Delete Routing Rule
+      tags:
+      - direct-connect.v1.DirectConnectsRulesApi
+      x-action-id: direct-connect:RemoveDirectconnectRoutingrule
+      x-api-access-level: DELETE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: routing-rule_delete
+      x-not-before: 2026-07-01
+      x-operation-id: deleteRoutingRule
+      x-resource: direct_connect
+components:
+  schemas:
+    DirectConnect:
+      example:
+        vpc_name: vpc_name
+        firewall_id: firewall_id
+        bandwidth: 6
+        vpc_id: vpc_id
+        created_at: 2024-05-17T00:23:17Z
+        description: description
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        account_id: account_id
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: name
+        id: id
+        state: ""
+        modified_at: 2024-05-17T00:23:17Z
+      properties:
+        account_id:
+          description: Account ID
+          title: Account Id
+          type: string
+        bandwidth:
+          description: Port Bandwidth
+          title: Bandwidth
+          type: integer
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        description:
+          nullable: true
+          type: string
+        firewall_id:
+          nullable: true
+          type: string
+        id:
+          description: Direct Connect ID
+          title: Id
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: Direct Connect Name
+          maxLength: 20
+          minLength: 3
+          pattern: "^[a-zA-Z0-9]*$"
+          title: Name
+          type: string
+        state:
+          allOf:
+          - $ref: '#/components/schemas/DirectConnectState'
+          description: State
+        vpc_id:
+          description: VPC Id
+          title: Vpc Id
+          type: string
+        vpc_name:
+          description: VPC Name
+          title: Vpc Name
+          type: string
+      required:
+      - account_id
+      - bandwidth
+      - created_at
+      - created_by
+      - id
+      - modified_at
+      - modified_by
+      - name
+      - state
+      - vpc_id
+      - vpc_name
+      title: DirectConnect
+    DirectConnectCreateRequest:
+      example:
+        bandwidth: 0
+        firewall_enabled: false
+        vpc_id: vpc_id
+        firewall_loggable: false
+        name: name
+        description: ""
+        tags:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      properties:
+        bandwidth:
+          description: Port Bandwidth
+          title: Bandwidth
+          type: integer
+        description:
+          default: ""
+          description: Direct Connect Description
+          maxLength: 50
+          title: Description
+          type: string
+        firewall_enabled:
+          default: false
+          description: Firewall Use
+          title: Firewall Enabled
+          type: boolean
+        firewall_loggable:
+          default: false
+          description: Firewall Loggable
+          title: Firewall Loggable
+          type: boolean
+        name:
+          description: Direct Connect Name
+          maxLength: 20
+          minLength: 3
+          pattern: "^[a-zA-Z0-9]*$"
+          title: Name
+          type: string
+        tags:
+          default: []
+          description: Tag List
+          items:
+            $ref: '#/components/schemas/Tag'
+          type: array
+        vpc_id:
+          description: VPC Id
+          title: Vpc Id
+          type: string
+      required:
+      - bandwidth
+      - name
+      - vpc_id
+      title: DirectConnectCreateRequest
+    DirectConnectListResponse:
+      example:
+        count: 0
+        links:
+        - ""
+        - ""
+        direct_connects:
+        - vpc_name: vpc_name
+          firewall_id: firewall_id
+          bandwidth: 6
+          vpc_id: vpc_id
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          account_id: account_id
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          id: id
+          state: ""
+          modified_at: 2024-05-17T00:23:17Z
+        - vpc_name: vpc_name
+          firewall_id: firewall_id
+          bandwidth: 6
+          vpc_id: vpc_id
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          account_id: account_id
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          id: id
+          state: ""
+          modified_at: 2024-05-17T00:23:17Z
+      properties:
+        count:
+          nullable: true
+          type: integer
+        direct_connects:
+          items:
+            $ref: '#/components/schemas/DirectConnect'
+          type: array
+        links:
+          items: {}
+          nullable: true
+          type: array
+      required:
+      - direct_connects
+      title: DirectConnectListResponse
+    DirectConnectRoutingRuleDestinationType:
+      enum:
+      - VPC
+      - ON_PREMISE
+      title: DirectConnectRoutingRuleDestinationType
+      type: string
+    DirectConnectSetRequest:
+      example:
+        description: description
+      properties:
+        description:
+          description: Direct Connect Description
+          maxLength: 50
+          title: Description
+          type: string
+      required:
+      - description
+      title: DirectConnectSetRequest
+    DirectConnectShowResponse:
+      example:
+        direct_connect:
+          vpc_name: vpc_name
+          firewall_id: firewall_id
+          bandwidth: 6
+          vpc_id: vpc_id
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          account_id: account_id
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          id: id
+          state: ""
+          modified_at: 2024-05-17T00:23:17Z
+      properties:
+        direct_connect:
+          $ref: '#/components/schemas/DirectConnect'
+      required:
+      - direct_connect
+      title: DirectConnectShowResponse
+    DirectConnectState:
+      enum:
+      - CREATING
+      - ACTIVE
+      - EDITING
+      - DELETING
+      - DELETED
+      - ERROR
+      title: DirectConnectState
+      type: string
+    RoutingRule:
+      example:
+        destination_resource_name: destination_resource_name
+        owner_id: owner_id
+        created_at: 2024-05-17T00:23:17Z
+        description: description
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        destination_type: ""
+        account_id: account_id
+        destination_cidr: destination_cidr
+        destination_resource_id: destination_resource_id
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        id: id
+        state: ""
+        modified_at: 2024-05-17T00:23:17Z
+        owner_type: ""
+      properties:
+        account_id:
+          description: Account ID
+          title: Account Id
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        description:
+          description: Description
+          title: Description
+          type: string
+        destination_cidr:
+          description: Destination CIDR
+          title: Destination Cidr
+          type: string
+        destination_resource_id:
+          nullable: true
+          type: string
+        destination_resource_name:
+          nullable: true
+          type: string
+        destination_type:
+          allOf:
+          - $ref: '#/components/schemas/RoutingRuleDestinationType'
+          description: Destination Type
+        id:
+          description: Routing Rule ID
+          title: Id
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        owner_id:
+          description: Routing Rule Owner ID
+          title: Owner Id
+          type: string
+        owner_type:
+          allOf:
+          - $ref: '#/components/schemas/RoutingRuleOwnerType'
+          description: Routing Rule Owner Type
+        state:
+          allOf:
+          - $ref: '#/components/schemas/RoutingRuleState'
+          description: State
+      required:
+      - account_id
+      - created_at
+      - created_by
+      - description
+      - destination_cidr
+      - destination_resource_id
+      - destination_type
+      - id
+      - modified_at
+      - modified_by
+      - owner_id
+      - owner_type
+      - state
+      title: RoutingRule
+    RoutingRuleCidrAvailabilityDetail:
+      example:
+        destination_type: ""
+        destination_cidr: destination_cidr
+        available: true
+      properties:
+        available:
+          description: Availability of destination CIDR
+          title: Available
+          type: boolean
+        destination_cidr:
+          description: Destination CIDR
+          title: Destination Cidr
+          type: string
+        destination_type:
+          allOf:
+          - $ref: '#/components/schemas/DirectConnectRoutingRuleDestinationType'
+          description: Destination Type
+      required:
+      - available
+      - destination_cidr
+      - destination_type
+      title: RoutingRuleCidrAvailabilityDetail
+    RoutingRuleCidrAvailabilityResponse:
+      example:
+        destination_cidr_availabilities:
+          destination_type: ""
+          destination_cidr: destination_cidr
+          available: true
+      properties:
+        destination_cidr_availabilities:
+          $ref: '#/components/schemas/RoutingRuleCidrAvailabilityDetail'
+      required:
+      - destination_cidr_availabilities
+      title: RoutingRuleCidrAvailabilityResponse
+    RoutingRuleCreateRequest:
+      example:
+        destination_type: ""
+        destination_cidr: destination_cidr
+        destination_resource_id: destination_resource_id
+        description: ""
+      properties:
+        description:
+          default: ""
+          description: Description
+          maxLength: 50
+          title: Description
+          type: string
+        destination_cidr:
+          description: Destination CIDR
+          title: Destination Cidr
+          type: string
+        destination_resource_id:
+          nullable: true
+          type: string
+        destination_type:
+          allOf:
+          - $ref: '#/components/schemas/DirectConnectRoutingRuleDestinationType'
+          description: Destination Type
+      required:
+      - destination_cidr
+      - destination_type
+      title: RoutingRuleCreateRequest
+    RoutingRuleDestinationType:
+      enum:
+      - VPC
+      - ON_PREMISE
+      - INTERNET
+      - TGW
+      title: RoutingRuleDestinationType
+      type: string
+    RoutingRuleListResponse:
+      example:
+        routing_rules:
+        - destination_resource_name: destination_resource_name
+          owner_id: owner_id
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          destination_type: ""
+          account_id: account_id
+          destination_cidr: destination_cidr
+          destination_resource_id: destination_resource_id
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          id: id
+          state: ""
+          modified_at: 2024-05-17T00:23:17Z
+          owner_type: ""
+        - destination_resource_name: destination_resource_name
+          owner_id: owner_id
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          destination_type: ""
+          account_id: account_id
+          destination_cidr: destination_cidr
+          destination_resource_id: destination_resource_id
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          id: id
+          state: ""
+          modified_at: 2024-05-17T00:23:17Z
+          owner_type: ""
+        count: 0
+        links:
+        - ""
+        - ""
+      properties:
+        count:
+          nullable: true
+          type: integer
+        links:
+          items: {}
+          nullable: true
+          type: array
+        routing_rules:
+          items:
+            $ref: '#/components/schemas/RoutingRule'
+          type: array
+      required:
+      - routing_rules
+      title: RoutingRuleListResponse
+    RoutingRuleOwnerType:
+      enum:
+      - INTERNET_GATEWAY
+      - GROUP_GATEWAY
+      - DIRECT_CONNECT
+      - SUBNET
+      - PRIVATE_NAT
+      - TRANSIT_GATEWAY
+      - VPC_PEERING
+      - SECURE_INTERNET_GATEWAY
+      title: RoutingRuleOwnerType
+      type: string
+    RoutingRuleShowResponse:
+      example:
+        routing_rule:
+          destination_resource_name: destination_resource_name
+          owner_id: owner_id
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          destination_type: ""
+          account_id: account_id
+          destination_cidr: destination_cidr
+          destination_resource_id: destination_resource_id
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          id: id
+          state: ""
+          modified_at: 2024-05-17T00:23:17Z
+          owner_type: ""
+      properties:
+        routing_rule:
+          $ref: '#/components/schemas/RoutingRule'
+      required:
+      - routing_rule
+      title: RoutingRuleShowResponse
+    RoutingRuleState:
+      enum:
+      - CREATING
+      - ACTIVE
+      - DELETING
+      - DELETED
+      - ERROR
+      title: RoutingRuleState
+      type: string
+    Tag:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          description: tag key
+          title: Key
+          type: string
+        value:
+          description: tag value
+          title: Value
+          type: string
+      required:
+      - key
+      - value
+      title: Tag
+    ValidationErrorModel:
+      example:
+        msg: msg
+        loc:
+        - loc
+        - loc
+        ctx: "{}"
+        type_: type_
+      properties:
+        ctx:
+          nullable: true
+          type: object
+        loc:
+          items:
+            type: string
+          nullable: true
+          type: array
+        msg:
+          nullable: true
+          type: string
+        type_:
+          nullable: true
+          type: string
+      title: ValidationErrorModel
+  securitySchemes:
+    X-Auth-Token:
+      in: header
+      name: X-Auth-Token
+      type: apiKey
+x-app-name: scp-network
+x-package-name: scp_network
+x-service-type: scp-network
+x-service-versions:
+  cdn:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  direct-connect:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  dns:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  firewall:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  gslb:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  network-common:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  network-logging:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  security-group:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  vpc:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  vpn:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+x-url-prefix: ""

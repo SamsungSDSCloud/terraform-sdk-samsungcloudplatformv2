@@ -1,0 +1,5 @@
+packageName: loggingaudit
+generatorName: go
+withGoMod: false
+structPrefix: true
+enumClassPrefix: true

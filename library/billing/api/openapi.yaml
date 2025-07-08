@@ -1,0 +1,1443 @@
+openapi: 3.1.0
+info:
+  description: OSSCP Billing
+  title: OSSCP Billing
+  version: 1.2.0.0rc5.dev38
+servers:
+- url: http://localhost:8080
+tags:
+- description: Cost API
+  name: costexplorer.v1.CostApi
+- description: Usages API
+  name: costexplorer.v1.UsagesApi
+- description: Bills API
+  name: costexplorer.v1.BillsApi
+- description: CCBS Products API
+  name: billingsystem.v1.ccbs-productAPI
+- description: Ledgers API
+  name: billingsystem.v1.LedgersApi
+- description: Price API
+  name: pricing.v1.PriceApi
+- description: Payments API
+  name: costexplorer.v1.PaymentApi
+- description: Planned Compute API
+  name: billingplan.v1.PlannedComputeApi
+- description: CCBSTransfer API
+  name: billingsystem.v1.CCBSTransferAPI
+- description: CCBSMetricAPI API
+  name: billingsystem.v1.CCBSMetricAPI
+- description: Credit API
+  name: billingplan.v1.CreditApi
+- description: Payment Contracts API
+  name: payment.v1.PaymentContractsApi
+- description: Billing Corporations API
+  name: payment.v1.BillingCorporationsApi
+- description: Companies API
+  name: payment.v1.CompaniesApi
+- description: Business Categories API
+  name: payment.v1.BusinessCategoriesApi
+- description: Payment Contract Internal Requests API
+  name: payment.v1.PaymentContractInternalRequestsApi
+- description: Template Files API
+  name: payment.v1.TemplateFilesApi
+paths:
+  /v1/credits: {}
+  /v1/credits/attachments/{attachment_id}: {}
+  /v1/credits/categories: {}
+  /v1/credits/check-bill-state: {}
+  /v1/credits/check-paid-state: {}
+  /v1/credits/console-credits: {}
+  /v1/credits/internal/create_next_apply: {}
+  /v1/credits/internal/notification: {}
+  /v1/credits/internal/send-to-ccbs: {}
+  /v1/credits/target-resources: {}
+  /v1/credits/types: {}
+  /v1/credits/{credit_id}: {}
+  /v1/credits/{credit_id}/applies/{apply_code}: {}
+  /v1/credits/{credit_id}/apply: {}
+  /v1/credits/{credit_id}/extend: {}
+  /v1/planned-computes:
+    get:
+      description: Get planned compute list.
+      operationId: listPlannedComputes
+      parameters:
+      - description: LIMIT
+        example: 10
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          description: LIMIT
+          example: 10
+          minimum: 1
+          title: Limit
+          type: integer
+        style: form
+      - description: Page
+        example: 1
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          description: Page
+          example: 1
+          minimum: 1
+          title: Page
+          type: integer
+        style: form
+      - description: Start date (YYYY-MM-dd)
+        example: 2024-08-01
+        explode: true
+        in: query
+        name: start_date
+        required: false
+        schema:
+          description: Start date (YYYY-MM-dd)
+          example: 2024-08-01
+          title: Start Date
+          type: string
+        style: form
+      - description: End date (YYYY-MM-dd)
+        example: 2024-08-01
+        explode: true
+        in: query
+        name: end_date
+        required: false
+        schema:
+          description: End date (YYYY-MM-dd)
+          example: 2024-08-01
+          title: End Date
+          type: string
+        style: form
+      - description: Server Type
+        example: s1v1m2
+        explode: true
+        in: query
+        name: server_type
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Contract Id
+        example: C002612775
+        explode: true
+        in: query
+        name: contract_id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Contract Type
+        example: "01"
+        explode: true
+        in: query
+        name: contract_type
+        required: false
+        schema:
+          description: Contract Type
+          example: "01"
+          items:
+            nullable: true
+            type: string
+          type: array
+        style: form
+      - description: Next Contract Type
+        example: "01"
+        explode: true
+        in: query
+        name: next_contract_type
+        required: false
+        schema:
+          description: Next Contract Type
+          example: "01"
+          items:
+            nullable: true
+            type: string
+          type: array
+        style: form
+      - description: Service Id
+        example: VIRTUAL_SERVER
+        explode: true
+        in: query
+        name: service_id
+        required: false
+        schema:
+          description: Service Id
+          example: VIRTUAL_SERVER
+          items:
+            nullable: true
+            type: string
+          type: array
+        style: form
+      - description: OS Type
+        example: OPEN_SOURCE
+        explode: true
+        in: query
+        name: os_type
+        required: false
+        schema:
+          description: OS Type
+          example: OPEN_SOURCE
+          items:
+            nullable: true
+            type: string
+          type: array
+        style: form
+      - description: Planned Compute State
+        example: ACTIVE
+        explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          description: Planned Compute State
+          example: ACTIVE
+          items:
+            nullable: true
+            type: string
+          type: array
+        style: form
+      - description: Created by
+        example: kim
+        explode: true
+        in: query
+        name: created_by
+        required: false
+        schema:
+          description: Created by
+          example: kim
+          title: Created By
+          type: string
+        style: form
+      - description: Modified by
+        example: kim
+        explode: true
+        in: query
+        name: modified_by
+        required: false
+        schema:
+          description: Modified by
+          example: kim
+          title: Modified By
+          type: string
+        style: form
+      - description: Sort
+        example: asc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlannedComputeListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - keystone-auth-token: []
+      - project-id: []
+      - user-id: []
+      - X-Auth-Token: []
+      summary: ListPlannedComputes
+      tags:
+      - billingplan.v1.PlannedComputeApi
+      x-action-id: billingplan:planned-compute:list
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+    post:
+      description: Create request planned compute.
+      operationId: createPlannedComputes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlannedComputeCreateRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlannedComputeResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - keystone-auth-token: []
+      - project-id: []
+      - user-id: []
+      - X-Auth-Token: []
+      summary: Create Request Planned Computes
+      tags:
+      - billingplan.v1.PlannedComputeApi
+      x-action-id: billingplan:planned-compute:create
+      x-api-access-level: CREATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+  /v1/planned-computes/bulk: {}
+  /v1/planned-computes/cancellation-fee:
+    post:
+      description: Get Contract Termination Info
+      operationId: showCancellationFee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancellationFeeRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancellationFeeResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - keystone-auth-token: []
+      - project-id: []
+      - user-id: []
+      - X-Auth-Token: []
+      summary: GetTerminationInfo
+      tags:
+      - billingplan.v1.PlannedComputeApi
+      x-action-id: billingplan:planned-compute:cancellation-fee:show
+      x-api-access-level: READ
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+  /v1/planned-computes/check: {}
+  /v1/planned-computes/contract-types:
+    get:
+      description: Get Contract Type List.
+      operationId: listContractTypes
+      parameters:
+      - description: Service Id
+        example: VIRTUAL_SERVER
+        explode: true
+        in: query
+        name: service_id
+        required: false
+        schema:
+          description: Service Id
+          example: VIRTUAL_SERVER
+          title: Service Id
+          type: string
+        style: form
+      - description: Server Type
+        example: s1v1m2
+        explode: true
+        in: query
+        name: server_type
+        required: false
+        schema:
+          description: Server Type
+          example: s1v1m2
+          title: Server Type
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractTypeListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - keystone-auth-token: []
+      - project-id: []
+      - user-id: []
+      - X-Auth-Token: []
+      summary: List Contract Type
+      tags:
+      - billingplan.v1.PlannedComputeApi
+      x-action-id: billingplan:planned-compute:contract-type:list
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+  /v1/planned-computes/coverages: {}
+  /v1/planned-computes/instances:
+    get:
+      description: Get Planned Compute Covered Resource List.
+      operationId: listPlannedComputeInstances
+      parameters:
+      - description: Start date (YYYY-MM-dd)
+        example: 2024-08-01
+        explode: true
+        in: query
+        name: start_date
+        required: false
+        schema:
+          description: Start date (YYYY-MM-dd)
+          example: 2024-08-01
+          title: Start Date
+          type: string
+        style: form
+      - description: End date (YYYY-MM-dd)
+        example: 2024-08-01
+        explode: true
+        in: query
+        name: end_date
+        required: false
+        schema:
+          description: End date (YYYY-MM-dd)
+          example: 2024-08-01
+          title: End Date
+          type: string
+        style: form
+      - description: Service Id
+        example: VIRTUAL_SERVER
+        explode: true
+        in: query
+        name: service_id
+        required: false
+        schema:
+          description: Service Id
+          example: VIRTUAL_SERVER
+          title: Service Id
+          type: string
+        style: form
+      - description: OS Type
+        example: OPEN_SOURCE
+        explode: true
+        in: query
+        name: os_type
+        required: false
+        schema:
+          description: OS Type
+          example: OPEN_SOURCE
+          title: Os Type
+          type: string
+        style: form
+      - description: Server Type
+        example: s1v1m2
+        explode: true
+        in: query
+        name: server_type
+        required: false
+        schema:
+          description: Server Type
+          example: s1v1m2
+          title: Server Type
+          type: string
+        style: form
+      - description: Sort
+        example: asc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlannedComputeResourceListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - keystone-auth-token: []
+      - project-id: []
+      - user-id: []
+      - X-Auth-Token: []
+      summary: List Planned Compute Covered Resource
+      tags:
+      - billingplan.v1.PlannedComputeApi
+      x-action-id: billingplan:planned-compute:instance:list
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+  /v1/planned-computes/instances/download: {}
+  /v1/planned-computes/instances/initial-contract-date: {}
+  /v1/planned-computes/os-types:
+    get:
+      description: Get Os System List.
+      operationId: listOsTypes
+      parameters:
+      - description: Service Id
+        example: VIRTUAL_SERVER
+        explode: true
+        in: query
+        name: service_id
+        required: false
+        schema:
+          description: Service Id
+          example: VIRTUAL_SERVER
+          title: Service Id
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OSTypeListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - keystone-auth-token: []
+      - project-id: []
+      - user-id: []
+      - X-Auth-Token: []
+      summary: List OS System
+      tags:
+      - billingplan.v1.PlannedComputeApi
+      x-action-id: billingplan:planned-compute:os-type:list
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+  /v1/planned-computes/server-types:
+    get:
+      description: Get Server Type List
+      operationId: listPlannedComputeServerTypes
+      parameters:
+      - description: Service Id
+        example: VIRTUAL_SERVER
+        explode: true
+        in: query
+        name: service_id
+        required: false
+        schema:
+          description: Service Id
+          example: VIRTUAL_SERVER
+          title: Service Id
+          type: string
+        style: form
+      - description: Server Type
+        example: s1v1m2
+        explode: true
+        in: query
+        name: current_server_type
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerTypeListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - keystone-auth-token: []
+      - project-id: []
+      - user-id: []
+      - X-Auth-Token: []
+      summary: ListServerType
+      tags:
+      - billingplan.v1.PlannedComputeApi
+      x-action-id: billingplan:planned-compute:instance:server-type:list
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+  /v1/planned-computes/service-types:
+    get:
+      description: Get Service Type List
+      operationId: listPlannedComputeServiceTypes
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - keystone-auth-token: []
+      - project-id: []
+      - user-id: []
+      - X-Auth-Token: []
+      summary: ListServiceType
+      tags:
+      - billingplan.v1.PlannedComputeApi
+      x-action-id: billingplan:planned-compute:instance:service-type:list
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+  /v1/planned-computes/{planned_compute_id}:
+    get:
+      description: Get planned compute.
+      operationId: showPlannedCompute
+      parameters:
+      - description: Planned Compute Id
+        example: 5f3688a192094ddeb0c94166a3e88935
+        explode: false
+        in: path
+        name: planned_compute_id
+        required: true
+        schema:
+          description: Planned Compute Id
+          example: 5f3688a192094ddeb0c94166a3e88935
+          title: Planned Compute Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlannedComputeResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - keystone-auth-token: []
+      - project-id: []
+      - user-id: []
+      - X-Auth-Token: []
+      summary: Get Planned Compute
+      tags:
+      - billingplan.v1.PlannedComputeApi
+      x-action-id: billingplan:planned-compute:show
+      x-api-access-level: READ
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+    put:
+      description: Change action request planned compute.
+      operationId: updatePlannedCompute
+      parameters:
+      - description: Planned Compute Id
+        example: 5f3688a192094ddeb0c94166a3e88935
+        explode: false
+        in: path
+        name: planned_compute_id
+        required: true
+        schema:
+          description: Planned Compute Id
+          example: 5f3688a192094ddeb0c94166a3e88935
+          title: Planned Compute Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlannedComputeChangeRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlannedComputeResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - keystone-auth-token: []
+      - project-id: []
+      - user-id: []
+      - X-Auth-Token: []
+      summary: Change Request Planned Compute
+      tags:
+      - billingplan.v1.PlannedComputeApi
+      x-action-id: billingplan:planned-compute:set
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+components:
+  schemas:
+    Amount:
+      example:
+        krw: "0"
+        usd: "0"
+      properties:
+        krw:
+          default: "0"
+          description: KRW amount
+          title: Krw
+          type: string
+        usd:
+          default: "0"
+          description: USD amount
+          title: Usd
+          type: string
+      title: Amount
+    CancellationFeeRequest:
+      example:
+        region: region
+        planned_compute_id: 5f3688a192094ddeb0c94166a3e88935
+      properties:
+        planned_compute_id:
+          description: Planned Compute Id
+          example: 5f3688a192094ddeb0c94166a3e88935
+          items:
+            type: string
+          type: array
+        region:
+          nullable: true
+          type: string
+      title: CancellationFeeRequest
+    CancellationFeeResponse:
+      example:
+        cancellation_fee: ""
+        same_day_cancel: "False"
+        bill_year_month: 2024-08
+      properties:
+        bill_year_month:
+          description: Bill year Month
+          example: 2024-08
+          title: Bill Year Month
+          type: string
+        cancellation_fee:
+          allOf:
+          - $ref: '#/components/schemas/Amount'
+          description: 해지 수수료
+        same_day_cancel:
+          default: false
+          description: Same day Cancel or not
+          example: "False"
+          title: Same Day Cancel
+          type: boolean
+      title: CancellationFeeResponse
+    ContractTypeDTO:
+      example:
+        code: code
+        display_name: display_name
+      properties:
+        code:
+          nullable: true
+          type: string
+        display_name:
+          nullable: true
+          type: string
+      title: ContractTypeDTO
+    ContractTypeListResponse:
+      example:
+        contract_types:
+        - code: code
+          display_name: display_name
+        - code: code
+          display_name: display_name
+        extension_types:
+        - code: code
+          display_name: display_name
+        - code: code
+          display_name: display_name
+      properties:
+        contract_types:
+          items:
+            $ref: '#/components/schemas/ContractTypeDTO'
+          type: array
+        extension_types:
+          items:
+            $ref: '#/components/schemas/ContractTypeDTO'
+          type: array
+      required:
+      - contract_types
+      - extension_types
+      title: ContractTypeListResponse
+    OSTypeDTO:
+      example:
+        os_type_id: os_type_id
+        os_type_value: os_type_value
+        display_name: display_name
+      properties:
+        display_name:
+          nullable: true
+          type: string
+        os_type_id:
+          nullable: true
+          type: string
+        os_type_value:
+          nullable: true
+          type: string
+      title: OSTypeDTO
+    OSTypeListResponse:
+      example:
+        os_types:
+        - os_type_id: os_type_id
+          os_type_value: os_type_value
+          display_name: display_name
+        - os_type_id: os_type_id
+          os_type_value: os_type_value
+          display_name: display_name
+      properties:
+        os_types:
+          items:
+            $ref: '#/components/schemas/OSTypeDTO'
+          type: array
+      required:
+      - os_types
+      title: OSTypeListResponse
+    PlannedComputeChangeActionEnum:
+      enum:
+      - EXTEND_APPLY
+      - EXTEND_CHANGE
+      - EXTEND_CANCEL
+      - SERVER_TYPE_CHANGE
+      - CONTRACT_CANCEL
+      title: PlannedComputeChangeActionEnum
+      type: string
+    PlannedComputeChangeRequest:
+      example:
+        contract_type: "01"
+        action: EXTEND_CHANGE
+        server_type: server_type
+      properties:
+        action:
+          allOf:
+          - $ref: '#/components/schemas/PlannedComputeChangeActionEnum'
+          description: Planned Compute change request action type
+          example: EXTEND_CHANGE
+        contract_type:
+          $ref: '#/components/schemas/PlannedComputeContractEnum'
+        server_type:
+          nullable: true
+          type: string
+      title: PlannedComputeChangeRequest
+    PlannedComputeContractEnum:
+      enum:
+      - "01"
+      - "03"
+      - "05"
+      title: PlannedComputeContractEnum
+      type: string
+    PlannedComputeCreateRequest:
+      example:
+        contract_type: "01"
+        account_id: 228cb9e4a7934f84853594c7f26f7a21
+        service_name: Virtual Server
+        os_type: OPEN_SOURCE
+        service_id: VIRTUAL_SERVER
+        tag:
+        - value: value1
+          key: key1
+        - value: value1
+          key: key1
+        server_type: s1v1m2
+      properties:
+        account_id:
+          description: Account Id
+          example: 228cb9e4a7934f84853594c7f26f7a21
+          title: Account Id
+          type: string
+        contract_type:
+          allOf:
+          - $ref: '#/components/schemas/PlannedComputeContractEnum'
+          description: Contract Type
+          example: "01"
+        os_type:
+          allOf:
+          - $ref: '#/components/schemas/PlannedComputeOSTypeEnum'
+          description: OS Type
+          example: OPEN_SOURCE
+        server_type:
+          description: Server Type
+          example: s1v1m2
+          title: Server Type
+          type: string
+        service_id:
+          description: Service Id
+          example: VIRTUAL_SERVER
+          title: Service Id
+          type: string
+        service_name:
+          description: Service Name
+          example: Virtual Server
+          title: Service Name
+          type: string
+        tag:
+          description: Tag Form
+          items:
+            $ref: '#/components/schemas/TagDTO'
+          type: array
+      required:
+      - account_id
+      - server_type
+      - service_id
+      title: PlannedComputeCreateRequest
+    PlannedComputeDTO:
+      example:
+        end_date: 2024-08-01
+        contract_id: contract_id
+        created_at: 2024-08-01 00:00:00
+        next_end_date: next_end_date
+        first_contract_start_at: 2024-08-01
+        server_type_description: "{}"
+        service_id: VIRTUAL_SERVER
+        id: id
+        state: ACTIVE
+        modified_at: 2024-08-01 00:00:00
+        start_date: 2024-08-01
+        service_name: Virtual Server
+        resource_type: instance
+        created_by: created_by
+        srn: srn:e::26affb52e16944038a0cd2cc26060e1c:kr1-west1::compute:instance/INSTANCE-UPOg3Z6ZqyiMM0QyC3sI2m
+        contract_type: 1-year
+        account_id: 228cb9e4a7934f84853594c7f26f7a21
+        next_start_date: next_start_date
+        delete_yn: delete_yn
+        os_type: OPEN_SOURCE
+        modified_by: modified_by
+        next_contract_type: next_contract_type
+        os_name: Open Source
+        region: kr-west1
+        resource_name: resource_name
+        server_type: s1v1m2
+      properties:
+        account_id:
+          description: Account Id
+          example: 228cb9e4a7934f84853594c7f26f7a21
+          title: Account Id
+          type: string
+        contract_id:
+          nullable: true
+          type: string
+        contract_type:
+          default: "01"
+          description: Contract Type
+          example: 1-year
+          title: Contract Type
+          type: string
+        created_at:
+          description: Created date
+          example: 2024-08-01 00:00:00
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          nullable: true
+          type: string
+        delete_yn:
+          nullable: true
+          type: string
+        end_date:
+          description: End date (YYYY-MM-dd)
+          example: 2024-08-01
+          title: End Date
+          type: string
+        first_contract_start_at:
+          description: Start date (YYYY-MM-dd)
+          example: 2024-08-01
+          title: First Contract Start At
+          type: string
+        id:
+          nullable: true
+          type: string
+        modified_at:
+          description: Modified date
+          example: 2024-08-01 00:00:00
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          nullable: true
+          type: string
+        next_contract_type:
+          nullable: true
+          type: string
+        next_end_date:
+          nullable: true
+          type: string
+        next_start_date:
+          nullable: true
+          type: string
+        os_name:
+          description: OS Name
+          example: Open Source
+          title: Os Name
+          type: string
+        os_type:
+          description: OS Type
+          example: OPEN_SOURCE
+          title: Os Type
+          type: string
+        region:
+          description: Region
+          example: kr-west1
+          title: Region
+          type: string
+        resource_name:
+          nullable: true
+          type: string
+        resource_type:
+          description: Resource Type
+          example: instance
+          title: Resource Type
+          type: string
+        server_type:
+          description: Server Type
+          example: s1v1m2
+          title: Server Type
+          type: string
+        server_type_description:
+          description: Server Type Description
+          title: Server Type Description
+          type: object
+        service_id:
+          description: Service Id
+          example: VIRTUAL_SERVER
+          title: Service Id
+          type: string
+        service_name:
+          description: Service Name
+          example: Virtual Server
+          title: Service Name
+          type: string
+        srn:
+          description: SRN
+          example: srn:e::26affb52e16944038a0cd2cc26060e1c:kr1-west1::compute:instance/INSTANCE-UPOg3Z6ZqyiMM0QyC3sI2m
+          title: Srn
+          type: string
+        start_date:
+          description: Start date (YYYY-MM-dd)
+          example: 2024-08-01
+          title: Start Date
+          type: string
+        state:
+          default: ACTIVE
+          description: Planned Compute State
+          example: ACTIVE
+          title: State
+          type: string
+      title: PlannedComputeDTO
+    PlannedComputeListResponse:
+      example:
+        planned_computes:
+        - end_date: 2024-08-01
+          contract_id: contract_id
+          created_at: 2024-08-01 00:00:00
+          next_end_date: next_end_date
+          first_contract_start_at: 2024-08-01
+          server_type_description: "{}"
+          service_id: VIRTUAL_SERVER
+          id: id
+          state: ACTIVE
+          modified_at: 2024-08-01 00:00:00
+          start_date: 2024-08-01
+          service_name: Virtual Server
+          resource_type: instance
+          created_by: created_by
+          srn: srn:e::26affb52e16944038a0cd2cc26060e1c:kr1-west1::compute:instance/INSTANCE-UPOg3Z6ZqyiMM0QyC3sI2m
+          contract_type: 1-year
+          account_id: 228cb9e4a7934f84853594c7f26f7a21
+          next_start_date: next_start_date
+          delete_yn: delete_yn
+          os_type: OPEN_SOURCE
+          modified_by: modified_by
+          next_contract_type: next_contract_type
+          os_name: Open Source
+          region: kr-west1
+          resource_name: resource_name
+          server_type: s1v1m2
+        - end_date: 2024-08-01
+          contract_id: contract_id
+          created_at: 2024-08-01 00:00:00
+          next_end_date: next_end_date
+          first_contract_start_at: 2024-08-01
+          server_type_description: "{}"
+          service_id: VIRTUAL_SERVER
+          id: id
+          state: ACTIVE
+          modified_at: 2024-08-01 00:00:00
+          start_date: 2024-08-01
+          service_name: Virtual Server
+          resource_type: instance
+          created_by: created_by
+          srn: srn:e::26affb52e16944038a0cd2cc26060e1c:kr1-west1::compute:instance/INSTANCE-UPOg3Z6ZqyiMM0QyC3sI2m
+          contract_type: 1-year
+          account_id: 228cb9e4a7934f84853594c7f26f7a21
+          next_start_date: next_start_date
+          delete_yn: delete_yn
+          os_type: OPEN_SOURCE
+          modified_by: modified_by
+          next_contract_type: next_contract_type
+          os_name: Open Source
+          region: kr-west1
+          resource_name: resource_name
+          server_type: s1v1m2
+        total_count: "0"
+        total_pages: "0"
+        current_page: "0"
+      properties:
+        current_page:
+          default: 0
+          description: Current Page
+          example: "0"
+          title: Current Page
+          type: integer
+        planned_computes:
+          items:
+            $ref: '#/components/schemas/PlannedComputeDTO'
+          type: array
+        total_count:
+          default: 0
+          description: Total Count
+          example: "0"
+          title: Total Count
+          type: integer
+        total_pages:
+          default: 0
+          description: Total Pages
+          example: "0"
+          title: Total Pages
+          type: integer
+      required:
+      - planned_computes
+      title: PlannedComputeListResponse
+    PlannedComputeOSTypeEnum:
+      enum:
+      - OPEN_SOURCE
+      - RHEL
+      - WINDOWS
+      title: PlannedComputeOSTypeEnum
+      type: string
+    PlannedComputeResourceListResponse:
+      example:
+        server_type_description: "{}"
+        amount: ""
+        order_count: "0"
+        os: OPEN_SOURCE
+        service: ""
+        coverages:
+        - non_applied_amount:
+            krw: "0"
+            usd: "0"
+          request_at: request_at
+          used_time: 0
+          used_amount:
+            krw: "0"
+            usd: "0"
+          resource_name: resource_name
+          unit_price:
+            krw: "0"
+            usd: "0"
+        - non_applied_amount:
+            krw: "0"
+            usd: "0"
+          request_at: request_at
+          used_time: 0
+          used_amount:
+            krw: "0"
+            usd: "0"
+          resource_name: resource_name
+          unit_price:
+            krw: "0"
+            usd: "0"
+        server_type: s1v1m2
+      properties:
+        amount:
+          allOf:
+          - $ref: '#/components/schemas/ResourceGroupTotalAmountDTO'
+          description: Resource Group Amount
+        coverages:
+          items:
+            $ref: '#/components/schemas/ResourceUsedAmountDTO'
+          type: array
+        order_count:
+          description: Order Count
+          example: "0"
+          title: Order Count
+          type: integer
+        os:
+          allOf:
+          - $ref: '#/components/schemas/OSTypeDTO'
+          description: OS Type
+          example: OPEN_SOURCE
+        server_type:
+          description: Server Type
+          example: s1v1m2
+          title: Server Type
+          type: string
+        server_type_description:
+          description: Server Type Description
+          title: Server Type Description
+          type: object
+        service:
+          allOf:
+          - $ref: '#/components/schemas/ProductResponse'
+          description: Product Type Name
+      required:
+      - coverages
+      title: PlannedComputeResourceListResponse
+    PlannedComputeResponse:
+      example:
+        planned_compute:
+          end_date: 2024-08-01
+          contract_id: contract_id
+          created_at: 2024-08-01 00:00:00
+          next_end_date: next_end_date
+          first_contract_start_at: 2024-08-01
+          server_type_description: "{}"
+          service_id: VIRTUAL_SERVER
+          id: id
+          state: ACTIVE
+          modified_at: 2024-08-01 00:00:00
+          start_date: 2024-08-01
+          service_name: Virtual Server
+          resource_type: instance
+          created_by: created_by
+          srn: srn:e::26affb52e16944038a0cd2cc26060e1c:kr1-west1::compute:instance/INSTANCE-UPOg3Z6ZqyiMM0QyC3sI2m
+          contract_type: 1-year
+          account_id: 228cb9e4a7934f84853594c7f26f7a21
+          next_start_date: next_start_date
+          delete_yn: delete_yn
+          os_type: OPEN_SOURCE
+          modified_by: modified_by
+          next_contract_type: next_contract_type
+          os_name: Open Source
+          region: kr-west1
+          resource_name: resource_name
+          server_type: s1v1m2
+      properties:
+        planned_compute:
+          $ref: '#/components/schemas/PlannedComputeDTO'
+      required:
+      - planned_compute
+      title: PlannedComputeResponse
+    ProductListResponse:
+      example:
+        services:
+        - service_id: service_id
+          display_name: display_name
+        - service_id: service_id
+          display_name: display_name
+      properties:
+        services:
+          items:
+            $ref: '#/components/schemas/ProductResponse'
+          type: array
+      required:
+      - services
+      title: ProductListResponse
+    ProductResponse:
+      example:
+        service_id: service_id
+        display_name: display_name
+      properties:
+        display_name:
+          nullable: true
+          type: string
+        service_id:
+          nullable: true
+          type: string
+      title: ProductResponse
+    ResourceGroupTotalAmountDTO:
+      properties:
+        no_contract_used:
+          $ref: '#/components/schemas/Amount'
+        non_applied:
+          $ref: '#/components/schemas/Amount'
+        total:
+          $ref: '#/components/schemas/Amount'
+        used:
+          $ref: '#/components/schemas/Amount'
+      title: ResourceGroupTotalAmountDTO
+    ResourceUsedAmountDTO:
+      example:
+        non_applied_amount:
+          krw: "0"
+          usd: "0"
+        request_at: request_at
+        used_time: 0
+        used_amount:
+          krw: "0"
+          usd: "0"
+        resource_name: resource_name
+        unit_price:
+          krw: "0"
+          usd: "0"
+      properties:
+        non_applied_amount:
+          $ref: '#/components/schemas/Amount'
+        request_at:
+          nullable: true
+          type: string
+        resource_name:
+          nullable: true
+          type: string
+        unit_price:
+          $ref: '#/components/schemas/Amount'
+        used_amount:
+          $ref: '#/components/schemas/Amount'
+        used_time:
+          nullable: true
+          type: integer
+      title: ResourceUsedAmountDTO
+    ServerTypeDTO:
+      example:
+        core: core
+        server_type_description: server_type_description
+        scale_up_yn: "Y"
+        memory_gb: memory_gb
+        gpu_name: gpu_name
+        instance_type: instance_type
+        server_type: server_type
+      properties:
+        core:
+          nullable: true
+          type: string
+        gpu_name:
+          nullable: true
+          type: string
+        instance_type:
+          nullable: true
+          type: string
+        memory_gb:
+          nullable: true
+          type: string
+        scale_up_yn:
+          default: true
+          description: Scale up or not
+          example: "Y"
+          title: Scale Up Yn
+          type: boolean
+        server_type:
+          nullable: true
+          type: string
+        server_type_description:
+          nullable: true
+          type: string
+      title: ServerTypeDTO
+    ServerTypeListResponse:
+      example:
+        server_types:
+        - core: core
+          server_type_description: server_type_description
+          scale_up_yn: "Y"
+          memory_gb: memory_gb
+          gpu_name: gpu_name
+          instance_type: instance_type
+          server_type: server_type
+        - core: core
+          server_type_description: server_type_description
+          scale_up_yn: "Y"
+          memory_gb: memory_gb
+          gpu_name: gpu_name
+          instance_type: instance_type
+          server_type: server_type
+      properties:
+        server_types:
+          items:
+            $ref: '#/components/schemas/ServerTypeDTO'
+          type: array
+      required:
+      - server_types
+      title: ServerTypeListResponse
+    TagDTO:
+      example:
+        value: value1
+        key: key1
+      properties:
+        key:
+          description: Tag Key
+          example: key1
+          title: Key
+          type: string
+        value:
+          description: Tag Value
+          example: value1
+          title: Value
+          type: string
+      title: TagDTO
+  securitySchemes:
+    keystone-auth-token:
+      in: header
+      name: X-Auth-Token
+      type: apiKey
+    project-id:
+      in: header
+      name: X-Project-Id
+      type: apiKey
+    user-id:
+      in: header
+      name: X-User-Id
+      type: apiKey
+x-app-name: scp-billing
+x-package-name: scp-billing
+x-service-type: scp-billing
+x-url-prefix: ""

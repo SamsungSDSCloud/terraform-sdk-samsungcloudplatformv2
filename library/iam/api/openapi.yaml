@@ -1,0 +1,4099 @@
+openapi: 3.1.0
+info:
+  description: SCP IAM Service
+  title: SCP IAM Service
+  version: 0.0.1.dev1432
+servers:
+- url: https://iam.kr-west1.dev2.samsungsdscloud.com
+tags:
+- description: Access Keys API
+  name: iam.v1.AccessKeysApi
+- description: Accounts API
+  name: iam.v1.AccountsApi
+- description: AccountDrafts API
+  name: iam.v1.AccountDraftsApi
+- description: action-definitions API
+  name: iam.v1.ActionDefinitionsApi
+- description: Authenticate OTP API
+  name: iam.v1.AuthenticateOTPApi
+- description: authorize API
+  name: iam.v1.AuthorizeApi
+- description: Billing Corporations API
+  name: iam.v1.BillingCorporationsApi
+- description: Business Categories API
+  name: iam.v1.BusinessCategoriesApi
+- description: CheckWeakPasswords API
+  name: iam.v1.CheckWeakPasswordsApi
+- description: CheckWellKnownPasswords API
+  name: iam.v1.CheckWellKnownPasswordsApi
+- description: Companies API
+  name: iam.v1.CompaniesApi
+- description: Create OTP API
+  name: iam.v1.CreateOTPApi
+- description: Endpoints API
+  name: iam.v1.EndpointsApi
+- description: Groups API
+  name: iam.v1.GroupsApi
+- description: Nations API
+  name: iam.v1.NationsApi
+- description: Permission API
+  name: iam.v1.PermissionApi
+- description: Polices API
+  name: iam.v1.PoliciesApi
+- description: PrivateInfoForms API
+  name: iam.v1.PrivateInfoFormsApi
+- description: Projects API
+  name: iam.v1.ProjectsApi
+- description: Roles API
+  name: iam.v1.RolesApi
+- description: Storage Keys API
+  name: iam.v1.StorageKeysApi
+- description: Terms API
+  name: iam.v1.TermsApi
+- description: Timezones API
+  name: iam.v1.TimezonesApi
+- description: Users API
+  name: iam.v1.UsersApi
+- description: Validate OTP API
+  name: iam.v1.ValidateOTPApi
+- description: WithdrawalCodes API
+  name: iam.v1.WithdrawalCodesApi
+- description: Administrators API
+  name: iam.v1.AdministratorsApi
+- description: Managers API
+  name: iam.v1.ManagersApi
+- description: Services API
+  name: iam.v1.ServicesApi
+- description: Batches API
+  name: iam.v1.BatchesApi
+- description: Keycloak Users API
+  name: iam.v1.KeycloakUsersApi
+- description: Payment Contracts API
+  name: iam.v1.PaymentContractsApi
+- description: Captcha API
+  name: iam.v1.CaptchaApi
+- description: Securities API
+  name: iam.v1.SecuritiesApi
+paths:
+  /v1/access-keys:
+    get:
+      description: List access keys
+      operationId: accessKeyList
+      parameters:
+      - description: with count
+        example: "true"
+        explode: true
+        in: query
+        name: with_count
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: limit
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      - description: marker
+        example: 607e0938521643b5b4b266f343fae693
+        explode: true
+        in: query
+        name: marker
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Project ID
+        explode: true
+        in: query
+        name: account_id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Access key type
+        explode: true
+        in: query
+        name: access_key_type
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Parent access key ID
+        explode: true
+        in: query
+        name: parent_access_key_id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAccessKeyResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: List access keys
+      tags:
+      - iam.v1.AccessKeysApi
+      x-action-id: iam:ListAccessKey
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: access-key_list
+      x-resource: AccessKey
+    post:
+      description: Create an access key
+      operationId: accessKeyCreate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessKeyCreateRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessKeyResponse'
+          description: Created
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Create an access key
+      tags:
+      - iam.v1.AccessKeysApi
+      x-action-id: iam:CreateAccessKey
+      x-api-access-level: CREATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: access-key_create
+      x-resource: AccessKey
+  /v1/access-keys/bulk: {}
+  /v1/access-keys/extension: {}
+  /v1/access-keys/refresh:
+    post:
+      description: Refresh access key token
+      operationId: accessKeyRefresh
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshAccessKeyRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessKeyResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Refresh access key token
+      tags:
+      - iam.v1.AccessKeysApi
+      x-action-id: iam:Refresh
+      x-api-access-level: READ
+      x-api-created-date: "20241231"
+      x-api-modified-date: "20241231"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: access-key_refresh
+      x-resource: AccessKey
+  /v1/access-keys/send-otp:
+    post:
+      description: Send Temporary Access Key OTP
+      operationId: accessKeySendTemporaryOtp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessKeyOtpRequest'
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Send Temporary Access Key OTP
+      tags:
+      - iam.v1.AccessKeysApi
+      x-action-id: iam:SendTemporaryOtpAccessKey
+      x-api-access-level: CREATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: access-key_send_otp
+      x-resource: AccessKey
+  /v1/access-keys/{access_key_id}:
+    delete:
+      description: Remove the access key
+      operationId: accessKeyDelete
+      parameters:
+      - description: Access key ID
+        explode: false
+        in: path
+        name: access_key_id
+        required: true
+        schema:
+          description: Access key ID
+          title: Access Key Id
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Remove the access key
+      tags:
+      - iam.v1.AccessKeysApi
+      x-action-id: iam:DeleteAccessKey
+      x-api-access-level: DELETE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-resource: AccessKey
+    get:
+      description: Get an access key
+      operationId: accessKeyShow
+      parameters:
+      - description: Access key ID
+        explode: false
+        in: path
+        name: access_key_id
+        required: true
+        schema:
+          description: Access key ID
+          title: Access Key Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessKeyResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Get an access key
+      tags:
+      - iam.v1.AccessKeysApi
+      x-action-id: iam:ShowAccessKey
+      x-api-access-level: READ
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: access-key_show
+      x-resource: AccessKey
+  /v1/accounts: {}
+  /v1/accounts/check-duplicated-alias: {}
+  /v1/accounts/count-members: {}
+  /v1/accounts/drafts: {}
+  /v1/accounts/drafts/{account_draft_id}: {}
+  /v1/accounts/{account_id}: {}
+  /v1/accounts/{account_id}/dashboards/widgets: {}
+  /v1/accounts/{account_id}/extension: {}
+  /v1/accounts/{account_id}/groups: {}
+  /v1/accounts/{account_id}/groups/{group_id}: {}
+  /v1/accounts/{account_id}/members/bulk: {}
+  /v1/accounts/{account_id}/users: {}
+  /v1/accounts/{account_id}/users/bulk: {}
+  /v1/accounts/{account_id}/users/{user_id}: {}
+  /v1/accounts/{account_id}/users/{user_id}/file: {}
+  /v1/accounts/{account_id}/users/{user_id}/groups: {}
+  /v1/accounts/{account_id}/users/{user_id}/password: {}
+  /v1/action-definitions: {}
+  /v1/action-definitions/service-types: {}
+  /v1/action-definitions/sync: {}
+  /v1/action-definitions/{action_definition_id}: {}
+  /v1/administrators: {}
+  /v1/administrators/bulk: {}
+  /v1/administrators/{user_id}: {}
+  /v1/administrators/{user_id}/access-control: {}
+  /v1/administrators/{user_id}/history: {}
+  /v1/administrators/{user_id}/login: {}
+  /v1/administrators/{user_id}/logout: {}
+  /v1/administrators/{user_id}/password: {}
+  /v1/administrators/{user_id}/phone-number: {}
+  /v1/administrators/{user_id}/terms: {}
+  /v1/administrators/{user_id}/terms/{term_version_id}: {}
+  /v1/administrators/{user_id}/validate-password: {}
+  /v1/administrators/{user_id}/validate-password-rule: {}
+  /v1/authenticate-otp-session: {}
+  /v1/authorize: {}
+  /v1/authorize/bulk: {}
+  /v1/authorize/test: {}
+  /v1/batches/otp-session/clear: {}
+  /v1/batches/user-password-sessions/clear: {}
+  /v1/batches/users/clear: {}
+  /v1/batches/users/migration: {}
+  /v1/billing-corporations: {}
+  /v1/billing-corporations/{billing_corporation_code}: {}
+  /v1/business-categories: {}
+  /v1/business-categories/{business_category_id}: {}
+  /v1/business-categories/{business_category_id}/account-managers: {}
+  /v1/business-categories/{business_category_id}/account-managers/bulk: {}
+  /v1/business-categories/{business_category_id}/account-managers/{user_id}: {}
+  /v1/captcha: {}
+  /v1/captcha/sound: {}
+  /v1/check-weak-passwords: {}
+  /v1/check-well-known-passwords: {}
+  /v1/companies:
+    get:
+      description: Get list of companies registered in MDG
+      operationId: listCompanies
+      parameters:
+      - description: with count
+        example: "true"
+        explode: true
+        in: query
+        name: with_count
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: limit
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      - description: marker
+        example: 607e0938521643b5b4b266f343fae693
+        explode: true
+        in: query
+        name: marker
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: 사업자 등록 번호
+        explode: true
+        in: query
+        name: registration_number
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: 회사이름
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: ID
+        explode: true
+        in: query
+        name: id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: IDs
+        explode: true
+        in: query
+        name: ids
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCompanyResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Get list of companies registered in MDG
+      tags:
+      - iam.v1.CompaniesApi
+      x-action-id: scp-iam:company:list
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: company_list
+      x-resource: Company
+  /v1/create-otp-session: {}
+  /v1/endpoints:
+    get:
+      description: Get endpoint list
+      operationId: listEndpoints
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEndpointsResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Get endpoint list
+      tags:
+      - iam.v1.EndpointsApi
+      x-action-id: iam:ListEndpoints
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      x-resource: Endpoint
+  /v1/groups:
+    get:
+      description: List Groups
+      operationId: listGroup
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Group 이름
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Group Types
+        explode: true
+        in: query
+        name: types
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Group IDs
+        explode: true
+        in: query
+        name: ids
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Group Member 존재 여부
+        explode: true
+        in: query
+        name: has_member
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Group Role 존재 여부
+        explode: true
+        in: query
+        name: has_role
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Group 완결 여부
+        explode: true
+        in: query
+        name: is_completed
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: "Group 생성자 성, 이름"
+        explode: true
+        in: query
+        name: creator_name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Group 생성자 Email
+        explode: true
+        in: query
+        name: creator_email
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: "Group 수정자 성, 이름"
+        explode: true
+        in: query
+        name: modifier_name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Group 수정자 Email
+        explode: true
+        in: query
+        name: modifier_email
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: 제외할 사용자 ID
+        explode: true
+        in: query
+        name: exclude_user_id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: 제외할 정책 ID
+        explode: true
+        in: query
+        name: exclude_policy_id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupPageResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: List Groups
+      tags:
+      - iam.v1.GroupsApi
+      x-action-id: iam:ListGroup
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: group_list
+      x-resource: Group
+    post:
+      description: Create a group
+      operationId: createGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupCreateRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Create a group
+      tags:
+      - iam.v1.GroupsApi
+      x-action-id: iam:CreateGroup
+      x-api-access-level: CREATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: group_create
+      x-resource: Group
+  /v1/groups/bulk: {}
+  /v1/groups/{group_id}:
+    delete:
+      description: Remove the Group
+      operationId: deleteGroup
+      parameters:
+      - description: Group ID
+        example: a946662dc4314dac93da413a32457459
+        explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          description: Group ID
+          example: a946662dc4314dac93da413a32457459
+          title: Group Id
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Remove the Group
+      tags:
+      - iam.v1.GroupsApi
+      x-action-id: iam:DeleteGroup
+      x-api-access-level: DELETE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: group_delete
+      x-resource: Group
+    get:
+      description: Get a Group
+      operationId: showGroup
+      parameters:
+      - description: Group ID
+        example: a946662dc4314dac93da413a32457459
+        explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          description: Group ID
+          example: a946662dc4314dac93da413a32457459
+          title: Group Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Get a Group
+      tags:
+      - iam.v1.GroupsApi
+      x-action-id: iam:ShowGroup
+      x-api-access-level: READ
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: group_show
+      x-resource: Group
+    put:
+      description: Modify a Group
+      operationId: setGroup
+      parameters:
+      - description: Group ID
+        example: a946662dc4314dac93da413a32457459
+        explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          description: Group ID
+          example: a946662dc4314dac93da413a32457459
+          title: Group Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupSetRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Modify a Group
+      tags:
+      - iam.v1.GroupsApi
+      x-action-id: iam:SetGroup
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: group_set
+      x-resource: Group
+  /v1/groups/{group_id}/members:
+    get:
+      description: Group Member list
+      operationId: listGroupMember
+      parameters:
+      - description: Group ID
+        example: a946662dc4314dac93da413a32457459
+        explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          description: Group ID
+          example: a946662dc4314dac93da413a32457459
+          title: Group Id
+          type: string
+        style: simple
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: "Group Member 성, 이름"
+        explode: true
+        in: query
+        name: user_name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Group Member Email
+        explode: true
+        in: query
+        name: user_email
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: "Group Member 생성자 성, 이름"
+        explode: true
+        in: query
+        name: creator_name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Group Member 생성자 Email
+        explode: true
+        in: query
+        name: creator_email
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupMemberPageResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Group Member list
+      tags:
+      - iam.v1.GroupsApi
+      x-action-id: iam:ListGroupMember
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: group_user_list
+      x-resource: Group
+    post:
+      description: Add a user to a group
+      operationId: addGroupMember
+      parameters:
+      - description: Group ID
+        example: a946662dc4314dac93da413a32457459
+        explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          description: Group ID
+          example: a946662dc4314dac93da413a32457459
+          title: Group Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupMemberCreateRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupMemberShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Add a user to a group
+      tags:
+      - iam.v1.GroupsApi
+      x-action-id: iam:AddGroupMember
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: group_user_add
+      x-resource: Group
+  /v1/groups/{group_id}/members/bulk: {}
+  /v1/groups/{group_id}/members/{user_id}:
+    delete:
+      description: Remove a User from a Group
+      operationId: removeGroupMember
+      parameters:
+      - description: Group ID
+        example: a946662dc4314dac93da413a32457459
+        explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          description: Group ID
+          example: a946662dc4314dac93da413a32457459
+          title: Group Id
+          type: string
+        style: simple
+      - description: User ID
+        example: a946662dc4314dac93da413a32457459
+        explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          description: User ID
+          example: a946662dc4314dac93da413a32457459
+          title: User Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupMemberDeleteRequest'
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Remove a User from a Group
+      tags:
+      - iam.v1.GroupsApi
+      x-action-id: iam:RemoveGroupMember
+      x-api-access-level: DELETE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: group_user_remove
+      x-resource: Group
+  /v1/groups/{group_id}/policy-bindings:
+    get:
+      description: Show group policy
+      operationId: listGroupPolicyBinding
+      parameters:
+      - description: Group ID
+        example: a946662dc4314dac93da413a32457459
+        explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          description: Group ID
+          example: a946662dc4314dac93da413a32457459
+          title: Group Id
+          type: string
+        style: simple
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Policy Id
+        example: 37f2e31ff86b415698d7e8eeafab445d
+        explode: true
+        in: query
+        name: policy_id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Policy Name
+        example: ViewerAccess
+        explode: true
+        in: query
+        name: policy_name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Policy Type List
+        example:
+        - SYSTEM_MANAGED
+        - USER_DEFINED
+        explode: true
+        in: query
+        name: policy_type
+        required: false
+        schema:
+          $ref: '#/components/schemas/Policy_Type'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupPolicyPageResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Show group policy
+      tags:
+      - iam.v1.GroupsApi
+      x-action-id: iam:ListGroupPolicyBinding
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: group_policy_show
+      x-resource: Group
+    post:
+      description: Assign policies to the group
+      operationId: addGroupPolicyBinding
+      parameters:
+      - description: Group ID
+        example: a946662dc4314dac93da413a32457459
+        explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          description: Group ID
+          example: a946662dc4314dac93da413a32457459
+          title: Group Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupPolicyBindingRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupPolicyResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Assign policies to the group
+      tags:
+      - iam.v1.GroupsApi
+      x-action-id: iam:AddGroupPolicyBinding
+      x-api-access-level: PERMISSION
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: group_policy_create
+      x-resource: Policy
+  /v1/groups/{group_id}/policy-bindings/{policy_id}:
+    delete:
+      description: Remove policy assignment from group
+      operationId: removeGroupPolicyBinding
+      parameters:
+      - description: Group ID
+        example: a946662dc4314dac93da413a32457459
+        explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          description: Group ID
+          example: a946662dc4314dac93da413a32457459
+          title: Group Id
+          type: string
+        style: simple
+      - description: Policy ID
+        example: a946662dc4314dac93da413a32457459
+        explode: false
+        in: path
+        name: policy_id
+        required: true
+        schema:
+          description: Policy ID
+          example: a946662dc4314dac93da413a32457459
+          title: Policy Id
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Remove policy assignment from group
+      tags:
+      - iam.v1.GroupsApi
+      x-action-id: iam:RemoveGroupPolicyBinding
+      x-api-access-level: PERMISSION
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: group_policy_delete
+      x-resource: Policy
+  /v1/groups/{group_id}/role-bindings: {}
+  /v1/groups/{group_id}/role-bindings/bulk: {}
+  /v1/groups/{group_id}/role-bindings/{role_id}: {}
+  /v1/keycloak-users: {}
+  /v1/keycloak-users/accounts: {}
+  /v1/keycloak-users/{keycloak_id}: {}
+  /v1/managers: {}
+  /v1/managers/bulk: {}
+  /v1/managers/{user_id}: {}
+  /v1/managers/{user_id}/access-control: {}
+  /v1/managers/{user_id}/history: {}
+  /v1/managers/{user_id}/login: {}
+  /v1/managers/{user_id}/logout: {}
+  /v1/managers/{user_id}/password: {}
+  /v1/managers/{user_id}/phone-number: {}
+  /v1/managers/{user_id}/terms: {}
+  /v1/managers/{user_id}/terms/{term_version_id}: {}
+  /v1/managers/{user_id}/validate-password: {}
+  /v1/managers/{user_id}/validate-password-rule: {}
+  /v1/nations: {}
+  /v1/payment-contracts:
+    get:
+      description: List Payment contracts
+      operationId: paymentContractList
+      parameters:
+      - description: with count
+        example: "true"
+        explode: true
+        in: query
+        name: with_count
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: limit
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      - description: marker
+        example: 607e0938521643b5b4b266f343fae693
+        explode: true
+        in: query
+        name: marker
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Account ID
+        explode: true
+        in: query
+        name: id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Account 이름
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: 회사 업무 구분 ID 목록
+        explode: true
+        in: query
+        name: business_category_ids
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: 시작 생성 일시
+        explode: true
+        in: query
+        name: start_created_at
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: 끝 생성 일시
+        explode: true
+        in: query
+        name: end_created_at
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Project의 Account 포함 여부
+        explode: true
+        in: query
+        name: include_account_of_project
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: "Account 생성자 성, 이름"
+        explode: true
+        in: query
+        name: creator_name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Account 생성자 Email
+        explode: true
+        in: query
+        name: creator_email
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Account 생성자 회사 이름
+        explode: true
+        in: query
+        name: creator_company_name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: "Account 수정자 성, 이름"
+        explode: true
+        in: query
+        name: modifier_name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Account 수정자 Email
+        explode: true
+        in: query
+        name: modifier_email
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Account 수정자 회사 이름
+        explode: true
+        in: query
+        name: modifier_company_name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: 요청 범위
+        explode: true
+        in: query
+        name: request_scope
+        required: false
+        schema:
+          $ref: '#/components/schemas/AccountRequestScopeEnum'
+        style: form
+      - description: Account Manager ID
+        explode: true
+        in: query
+        name: account_manager_id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Account User ID
+        explode: true
+        in: query
+        name: account_user_id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentContractListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: List Payment contracts
+      tags:
+      - iam.v1.PaymentContractsApi
+      x-action-id: scp-billing:payment-contract:list
+      x-api-access-level: LIST
+      x-api-created-date: "20241204"
+      x-api-modified-date: "20241204"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      x-cli: payment_contract_list
+      x-resource: PaymentContract
+  /v1/payment-contracts/{payment_contract_id}:
+    get:
+      description: Show Payment contract
+      operationId: paymentContractShow
+      parameters:
+      - description: Payment contract ID
+        explode: false
+        in: path
+        name: payment_contract_id
+        required: true
+        schema:
+          description: Payment contract ID
+          title: Payment Contract Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentContractShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Show Payment contract
+      tags:
+      - iam.v1.PaymentContractsApi
+      x-action-id: scp-billing:payment-contract:show
+      x-api-access-level: READ
+      x-api-created-date: "20241204"
+      x-api-modified-date: "20241204"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      x-cli: payment_contract_show
+      x-resource: PaymentContract
+  /v1/payment-contracts/{payment_contract_id}/files: {}
+  /v1/payment-contracts/{payment_contract_id}/files/bulk: {}
+  /v1/payment-contracts/{payment_contract_id}/files/{file_id}/send-email: {}
+  /v1/permission/actions: {}
+  /v1/permission/check: {}
+  /v1/policies: {}
+  /v1/policies/bulk: {}
+  /v1/policies/compose: {}
+  /v1/policies/decompose: {}
+  /v1/policies/summary: {}
+  /v1/policies/validate: {}
+  /v1/policies/{policy_id}: {}
+  /v1/policies/{policy_id}/bindings: {}
+  /v1/policies/{policy_id}/versions/{version_id}: {}
+  /v1/private_info_forms: {}
+  /v1/projects/{project_id}/company: {}
+  /v1/roles: {}
+  /v1/securities/my-ip-address: {}
+  /v1/securities/validate-ip: {}
+  /v1/services: {}
+  /v1/storage-keys: {}
+  /v1/storage-keys/bulk: {}
+  /v1/storage-keys/check-duplicated-access-key: {}
+  /v1/storage-keys/{storage_key_id}: {}
+  /v1/terms: {}
+  /v1/timezones: {}
+  /v1/users: {}
+  /v1/users/bulk: {}
+  /v1/users/srn: {}
+  /v1/users/{user_id}:
+    get:
+      description: Get user information
+      operationId: showUser
+      parameters:
+      - description: 사용자 ID
+        explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          description: 사용자 ID
+          title: User Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetailResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Get user information
+      tags:
+      - iam.v1.UsersApi
+      x-action-id: iam:ShowUser
+      x-api-access-level: READ
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20241001"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: user_show
+      x-resource: User
+  /v1/users/{user_id}/access-control: {}
+  /v1/users/{user_id}/authenticate-email: {}
+  /v1/users/{user_id}/email: {}
+  /v1/users/{user_id}/groups: {}
+  /v1/users/{user_id}/login: {}
+  /v1/users/{user_id}/logout: {}
+  /v1/users/{user_id}/password: {}
+  /v1/users/{user_id}/phone-number: {}
+  /v1/users/{user_id}/policy-bindings: {}
+  /v1/users/{user_id}/policy-bindings/{policy_id}: {}
+  /v1/users/{user_id}/resend-authentication-email: {}
+  /v1/users/{user_id}/terms: {}
+  /v1/users/{user_id}/terms/{term_version_id}: {}
+  /v1/users/{user_id}/validate-password: {}
+  /v1/users/{user_id}/validate-password-rule: {}
+  /v1/validate-otp-session: {}
+  /v1/withdrawal-codes: {}
+components:
+  schemas:
+    AccessKey:
+      example:
+        secret_key: secret_key
+        account_id: account_id
+        parent_access_key_id: parent_access_key_id
+        access_key: access_key
+        expiration_timestamp: 2000-01-23T04:56:07.000+00:00
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        created_at: 2024-05-17T00:23:17Z
+        description: description
+        id: id
+        modified_at: 2024-05-17T00:23:17Z
+        access_key_type: ""
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+      properties:
+        access_key:
+          description: Access Key
+          title: Access Key
+          type: string
+        access_key_type:
+          allOf:
+          - $ref: '#/components/schemas/AccessKeyTypeEnum'
+          description: Access key type
+        account_id:
+          description: Project ID
+          title: Account Id
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        description:
+          nullable: true
+          type: string
+        expiration_timestamp:
+          description: Access key expiration timestamp
+          format: date-time
+          title: Expiration Timestamp
+          type: string
+        id:
+          description: ID
+          title: Id
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        parent_access_key_id:
+          nullable: true
+          type: string
+        secret_key:
+          description: Secret Key
+          title: Secret Key
+          type: string
+      required:
+      - access_key
+      - access_key_type
+      - account_id
+      - created_at
+      - created_by
+      - expiration_timestamp
+      - id
+      - modified_at
+      - modified_by
+      - parent_access_key_id
+      - secret_key
+      title: AccessKey
+    AccessKeyCreateRequest:
+      example:
+        duration: duration
+        account_id: account_id
+        parent_access_key_id: parent_access_key_id
+        description: description
+        access_key_type: ""
+        passcode: passcode
+      properties:
+        access_key_type:
+          allOf:
+          - $ref: '#/components/schemas/AccessKeyTypeEnum'
+          description: Access key type
+        account_id:
+          description: Project ID
+          title: Account Id
+          type: string
+        description:
+          nullable: true
+          type: string
+        duration:
+          nullable: true
+          type: string
+        parent_access_key_id:
+          nullable: true
+          type: string
+        passcode:
+          nullable: true
+          type: string
+      required:
+      - access_key_type
+      title: AccessKeyCreateRequest
+    AccessKeyOtpRequest:
+      example:
+        method: ""
+        locale: ""
+      properties:
+        locale:
+          allOf:
+          - $ref: '#/components/schemas/LocaleEnum'
+          description: Locale
+        method:
+          allOf:
+          - $ref: '#/components/schemas/OtpMethodEnum'
+          description: OTP method (EMAIL or PHONE
+      title: AccessKeyOtpRequest
+    AccessKeyResponse:
+      example:
+        access_key:
+          secret_key: secret_key
+          account_id: account_id
+          parent_access_key_id: parent_access_key_id
+          access_key: access_key
+          expiration_timestamp: 2000-01-23T04:56:07.000+00:00
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          id: id
+          modified_at: 2024-05-17T00:23:17Z
+          access_key_type: ""
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+      properties:
+        access_key:
+          $ref: '#/components/schemas/AccessKey'
+      required:
+      - access_key
+      title: AccessKeyResponse
+    AccessKeyTypeEnum:
+      enum:
+      - PERMANENT
+      - TEMPORARY
+      title: AccessKeyTypeEnum
+      type: string
+    AccountContract:
+      properties:
+        account_id:
+          description: Account ID
+          title: Account Id
+          type: string
+        billing_corporation_code:
+          description: 과금 법인 Code
+          title: Billing Corporation Code
+          type: string
+        billing_corporation_name:
+          nullable: true
+          type: string
+        bo_code:
+          nullable: true
+          type: string
+        created_at:
+          description: 생성 일시
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: 생성자
+          title: Created By
+          type: string
+        creator_email:
+          description: 생성자 Email
+          title: Creator Email
+          type: string
+        creator_name:
+          description: "생성자 성, 이름"
+          title: Creator Name
+          type: string
+        currency_code:
+          allOf:
+          - $ref: '#/components/schemas/CurrencyCodeEnum'
+          description: 화폐 Code
+        customer_code:
+          description: 고객사 Code
+          title: Customer Code
+          type: string
+        id:
+          description: ID
+          title: Id
+          type: string
+        modified_at:
+          description: 수정 일시
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: 수정자
+          title: Modified By
+          type: string
+        modifier_email:
+          description: 수정자 Email
+          title: Modifier Email
+          type: string
+        modifier_name:
+          description: "수정자 성, 이름"
+          title: Modifier Name
+          type: string
+        payment_account_id:
+          description: 납부자 Account ID
+          title: Payment Account Id
+          type: string
+        project_code:
+          nullable: true
+          type: string
+        wbses:
+          description: Account 계약 WBS 정보
+          items:
+            $ref: '#/components/schemas/AccountContractWbs'
+          type: array
+      required:
+      - account_id
+      - billing_corporation_code
+      - billing_corporation_name
+      - created_at
+      - created_by
+      - creator_email
+      - creator_name
+      - currency_code
+      - customer_code
+      - id
+      - modified_at
+      - modified_by
+      - modifier_email
+      - modifier_name
+      - payment_account_id
+      - wbses
+      title: AccountContract
+    AccountContractWbs:
+      properties:
+        account_contract_id:
+          description: Account 계약 ID
+          title: Account Contract Id
+          type: string
+        created_at:
+          description: 생성 일시
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: 생성자
+          title: Created By
+          type: string
+        creator_email:
+          description: 생성자 Email
+          title: Creator Email
+          type: string
+        creator_name:
+          description: "생성자 성, 이름"
+          title: Creator Name
+          type: string
+        wbs_code:
+          description: WBS Code
+          title: Wbs Code
+          type: string
+      required:
+      - account_contract_id
+      - created_at
+      - created_by
+      - creator_email
+      - creator_name
+      - wbs_code
+      title: AccountContractWbs
+    AccountRequestScopeEnum:
+      enum:
+      - ADMIN
+      - ACCOUNT_MANAGER
+      - ACCOUNT_USER
+      title: AccountRequestScopeEnum
+      type: string
+    CompanyResponse:
+      example:
+        registration_number: registration_number
+        business_partner_id: business_partner_id
+        representative_name: representative_name
+        street_name: street_name
+        zip_code: zip_code
+        country_code: country_code
+        city_name: city_name
+        country_tel_no: country_tel_no
+        tel_no: tel_no
+        business_type: business_type
+        country_name: country_name
+        name: name
+        en_name: en_name
+        id: id
+        fax_no: fax_no
+      properties:
+        business_partner_id:
+          description: 비즈니스 파트너 ID
+          title: Business Partner Id
+          type: string
+        business_type:
+          description: 비즈니스 유형
+          title: Business Type
+          type: string
+        city_name:
+          description: 도시 이름
+          title: City Name
+          type: string
+        country_code:
+          description: 국가 코드
+          title: Country Code
+          type: string
+        country_name:
+          description: 국가 이름
+          title: Country Name
+          type: string
+        country_tel_no:
+          description: 국가 전화번호
+          title: Country Tel No
+          type: string
+        en_name:
+          description: 회사이름 영문
+          title: En Name
+          type: string
+        fax_no:
+          description: 회사 팩스번호
+          title: Fax No
+          type: string
+        id:
+          description: ID
+          title: Id
+          type: string
+        name:
+          description: 회사이름
+          title: Name
+          type: string
+        registration_number:
+          description: 사업자등록번호
+          title: Registration Number
+          type: string
+        representative_name:
+          description: 회사대표 이름
+          title: Representative Name
+          type: string
+        street_name:
+          description: 도로 이름
+          title: Street Name
+          type: string
+        tel_no:
+          description: 회사 전화번호
+          title: Tel No
+          type: string
+        zip_code:
+          description: 우편번호
+          title: Zip Code
+          type: string
+      required:
+      - business_partner_id
+      - business_type
+      - city_name
+      - country_code
+      - country_name
+      - country_tel_no
+      - en_name
+      - fax_no
+      - id
+      - name
+      - registration_number
+      - representative_name
+      - street_name
+      - tel_no
+      - zip_code
+      title: CompanyResponse
+    CurrencyCodeEnum:
+      enum:
+      - KRW
+      - USD
+      title: CurrencyCodeEnum
+      type: string
+    EndpointsResponse:
+      example:
+        service_type: service_type
+        service_name: service_name
+        region: region
+        url: url
+      properties:
+        region:
+          description: Region
+          title: Region
+          type: string
+        service_name:
+          description: Service name
+          title: Service Name
+          type: string
+        service_type:
+          description: Service type
+          title: Service Type
+          type: string
+        url:
+          description: URL
+          title: Url
+          type: string
+      required:
+      - region
+      - service_name
+      - service_type
+      - url
+      title: EndpointsResponse
+    Group:
+      example:
+        modifier_name: modifier_name
+        roles:
+        - modifier_name: modifier_name
+          modifier_email: modifier_email
+          creator_email: creator_email
+          modified_by: modified_by
+          name: name
+          created_at: 2000-01-23T04:56:07.000+00:00
+          description: description
+          creator_name: creator_name
+          id: id
+          modified_at: 2000-01-23T04:56:07.000+00:00
+          type: ""
+          created_by: created_by
+        - modifier_name: modifier_name
+          modifier_email: modifier_email
+          creator_email: creator_email
+          modified_by: modified_by
+          name: name
+          created_at: 2000-01-23T04:56:07.000+00:00
+          description: description
+          creator_name: creator_name
+          id: id
+          modified_at: 2000-01-23T04:56:07.000+00:00
+          type: ""
+          created_by: created_by
+        policies:
+        - modifier_name: modifier_name
+          resource_type: resource_type
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          policy_name: policy_name
+          default_version_id: default_version_id
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          srn: srn
+          policy_versions:
+          - policy_id: policy_id
+            policy_version_name: policy_version_name
+            modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            created_at: 2024-05-17T00:23:17Z
+            id: id
+            modified_at: 2024-05-17T00:23:17Z
+            created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            policy_document: ""
+          - policy_id: policy_id
+            policy_version_name: policy_version_name
+            modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            created_at: 2024-05-17T00:23:17Z
+            id: id
+            modified_at: 2024-05-17T00:23:17Z
+            created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            policy_document: ""
+          tags:
+          - "{}"
+          - "{}"
+          policy_type: ""
+          service_type: service_type
+          account_id: account_id
+          modifier_email: modifier_email
+          creator_email: creator_email
+          policy_category: ""
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          creator_name: creator_name
+          id: id
+          state: ""
+          modified_at: 2024-05-17T00:23:17Z
+        - modifier_name: modifier_name
+          resource_type: resource_type
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          policy_name: policy_name
+          default_version_id: default_version_id
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          srn: srn
+          policy_versions:
+          - policy_id: policy_id
+            policy_version_name: policy_version_name
+            modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            created_at: 2024-05-17T00:23:17Z
+            id: id
+            modified_at: 2024-05-17T00:23:17Z
+            created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            policy_document: ""
+          - policy_id: policy_id
+            policy_version_name: policy_version_name
+            modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            created_at: 2024-05-17T00:23:17Z
+            id: id
+            modified_at: 2024-05-17T00:23:17Z
+            created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            policy_document: ""
+          tags:
+          - "{}"
+          - "{}"
+          policy_type: ""
+          service_type: service_type
+          account_id: account_id
+          modifier_email: modifier_email
+          creator_email: creator_email
+          policy_category: ""
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          creator_name: creator_name
+          id: id
+          state: ""
+          modified_at: 2024-05-17T00:23:17Z
+        created_at: 2000-01-23T04:56:07.000+00:00
+        description: description
+        type: DEFAULT
+        created_by: created_by
+        srn: srn
+        tags:
+        - "{}"
+        - "{}"
+        modifier_email: modifier_email
+        creator_email: creator_email
+        modified_by: modified_by
+        name: Test Group
+        creator_name: creator_name
+        id: id
+        modified_at: 2000-01-23T04:56:07.000+00:00
+      properties:
+        created_at:
+          description: 생성 일시
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: 생성자
+          title: Created By
+          type: string
+        creator_email:
+          description: 생성자 Email
+          title: Creator Email
+          type: string
+        creator_name:
+          description: "생성자 성, 이름"
+          title: Creator Name
+          type: string
+        description:
+          maxLength: 1000
+          nullable: true
+          type: string
+        id:
+          description: ID
+          title: Id
+          type: string
+        modified_at:
+          description: 수정 일시
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: 수정자
+          title: Modified By
+          type: string
+        modifier_email:
+          description: 수정자 Email
+          title: Modifier Email
+          type: string
+        modifier_name:
+          description: "수정자 성, 이름"
+          title: Modifier Name
+          type: string
+        name:
+          description: Group 이름
+          example: Test Group
+          maxLength: 24
+          minLength: 3
+          pattern: "^[a-zA-Z0-9\\-.,_+=@ㄱ-ㅎㅏ-ㅣ가-힣\\s]*$"
+          title: Name
+          type: string
+        policies:
+          items:
+            $ref: '#/components/schemas/Policy'
+          nullable: true
+          type: array
+        roles:
+          items:
+            $ref: '#/components/schemas/Role'
+          nullable: true
+          type: array
+        srn:
+          nullable: true
+          type: string
+        tags:
+          items:
+            type: object
+          nullable: true
+          type: array
+        type:
+          description: Group Type
+          example: DEFAULT
+          title: Type
+          type: string
+      required:
+      - created_at
+      - created_by
+      - creator_email
+      - creator_name
+      - description
+      - id
+      - modified_at
+      - modified_by
+      - modifier_email
+      - modifier_name
+      - name
+      - policies
+      - roles
+      - type
+      title: Group
+    GroupCreateRequest:
+      example:
+        name: Test Group
+        description: description
+        tags:
+        - key: tags
+        - key: tags
+      properties:
+        description:
+          maxLength: 1000
+          nullable: true
+          type: string
+        name:
+          description: Group 이름
+          example: Test Group
+          maxLength: 24
+          minLength: 3
+          pattern: "^[a-zA-Z0-9\\-.,_+=@ㄱ-ㅎㅏ-ㅣ가-힣\\s]*$"
+          title: Name
+          type: string
+        tags:
+          items:
+            additionalProperties:
+              type: string
+          nullable: true
+          type: array
+      required:
+      - description
+      - name
+      title: GroupCreateRequest
+    GroupMember:
+      example:
+        user_email: test@test.com
+        user_last_login_at: 2000-01-23T04:56:07.000+00:00
+        user_id: a946662dc4314dac93da413a32457459
+        creator_created_at: 2000-01-23T04:56:07.000+00:00
+        creator_email: creator_email
+        user_created_at: 2000-01-23T04:56:07.000+00:00
+        user_name: test1
+        group_names: "['group_name1', 'group_name2']"
+        created_at: 2000-01-23T04:56:07.000+00:00
+        creator_name: creator_name
+        created_by: created_by
+        creator_last_login_at: 2000-01-23T04:56:07.000+00:00
+      properties:
+        created_at:
+          description: 생성 일시
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: 생성자
+          title: Created By
+          type: string
+        creator_created_at:
+          description: 생성 일시
+          format: date-time
+          title: Creator Created At
+          type: string
+        creator_email:
+          description: 생성자 Email
+          title: Creator Email
+          type: string
+        creator_last_login_at:
+          format: date-time
+          nullable: true
+          type: string
+        creator_name:
+          description: "생성자 성, 이름"
+          title: Creator Name
+          type: string
+        group_names:
+          default: []
+          description: Group names
+          example: "['group_name1', 'group_name2']"
+          items:
+            type: string
+          type: array
+        user_created_at:
+          description: 생성 일시
+          format: date-time
+          title: User Created At
+          type: string
+        user_email:
+          description: User Email
+          example: test@test.com
+          title: User Email
+          type: string
+        user_id:
+          description: User ID
+          example: a946662dc4314dac93da413a32457459
+          title: User Id
+          type: string
+        user_last_login_at:
+          format: date-time
+          nullable: true
+          type: string
+        user_name:
+          description: "User 성, 이름"
+          example: test1
+          title: User Name
+          type: string
+      required:
+      - created_at
+      - created_by
+      - creator_email
+      - creator_name
+      - user_email
+      - user_id
+      - user_name
+      title: GroupMember
+    GroupMemberCreateRequest:
+      example:
+        user_id: user_id
+      properties:
+        user_id:
+          description: Group Member User ID
+          title: User Id
+          type: string
+      required:
+      - user_id
+      title: GroupMemberCreateRequest
+    GroupMemberDeleteRequest:
+      example:
+        ignore_validate_project_user: false
+      properties:
+        ignore_validate_project_user:
+          default: false
+          description: Project User가 최소 1개 Group에 속해야 하는 규칙 무시
+          title: Ignore Validate Project User
+          type: boolean
+      title: GroupMemberDeleteRequest
+    GroupMemberPageResponse:
+      example:
+        size: 20
+        group_members:
+        - user_email: test@test.com
+          user_last_login_at: 2000-01-23T04:56:07.000+00:00
+          user_id: a946662dc4314dac93da413a32457459
+          creator_created_at: 2000-01-23T04:56:07.000+00:00
+          creator_email: creator_email
+          user_created_at: 2000-01-23T04:56:07.000+00:00
+          user_name: test1
+          group_names: "['group_name1', 'group_name2']"
+          created_at: 2000-01-23T04:56:07.000+00:00
+          creator_name: creator_name
+          created_by: created_by
+          creator_last_login_at: 2000-01-23T04:56:07.000+00:00
+        - user_email: test@test.com
+          user_last_login_at: 2000-01-23T04:56:07.000+00:00
+          user_id: a946662dc4314dac93da413a32457459
+          creator_created_at: 2000-01-23T04:56:07.000+00:00
+          creator_email: creator_email
+          user_created_at: 2000-01-23T04:56:07.000+00:00
+          user_name: test1
+          group_names: "['group_name1', 'group_name2']"
+          created_at: 2000-01-23T04:56:07.000+00:00
+          creator_name: creator_name
+          created_by: created_by
+          creator_last_login_at: 2000-01-23T04:56:07.000+00:00
+        count: 20
+        page: 0
+        sort:
+        - sort
+        - sort
+      properties:
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        group_members:
+          items:
+            $ref: '#/components/schemas/GroupMember'
+          type: array
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - count
+      - group_members
+      - page
+      - size
+      title: GroupMemberPageResponse
+    GroupMemberShowResponse:
+      example:
+        group_member:
+          user_email: test@test.com
+          user_last_login_at: 2000-01-23T04:56:07.000+00:00
+          user_id: a946662dc4314dac93da413a32457459
+          creator_created_at: 2000-01-23T04:56:07.000+00:00
+          creator_email: creator_email
+          user_created_at: 2000-01-23T04:56:07.000+00:00
+          user_name: test1
+          group_names: "['group_name1', 'group_name2']"
+          created_at: 2000-01-23T04:56:07.000+00:00
+          creator_name: creator_name
+          created_by: created_by
+          creator_last_login_at: 2000-01-23T04:56:07.000+00:00
+      properties:
+        group_member:
+          $ref: '#/components/schemas/GroupMember'
+      required:
+      - group_member
+      title: GroupMemberShowResponse
+    GroupPageResponse:
+      example:
+        size: 20
+        count: 20
+        groups:
+        - modifier_name: modifier_name
+          roles:
+          - modifier_name: modifier_name
+            modifier_email: modifier_email
+            creator_email: creator_email
+            modified_by: modified_by
+            name: name
+            created_at: 2000-01-23T04:56:07.000+00:00
+            description: description
+            creator_name: creator_name
+            id: id
+            modified_at: 2000-01-23T04:56:07.000+00:00
+            type: ""
+            created_by: created_by
+          - modifier_name: modifier_name
+            modifier_email: modifier_email
+            creator_email: creator_email
+            modified_by: modified_by
+            name: name
+            created_at: 2000-01-23T04:56:07.000+00:00
+            description: description
+            creator_name: creator_name
+            id: id
+            modified_at: 2000-01-23T04:56:07.000+00:00
+            type: ""
+            created_by: created_by
+          policies:
+          - modifier_name: modifier_name
+            resource_type: resource_type
+            created_at: 2024-05-17T00:23:17Z
+            description: description
+            policy_name: policy_name
+            default_version_id: default_version_id
+            created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            srn: srn
+            policy_versions:
+            - policy_id: policy_id
+              policy_version_name: policy_version_name
+              modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+              created_at: 2024-05-17T00:23:17Z
+              id: id
+              modified_at: 2024-05-17T00:23:17Z
+              created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+              policy_document: ""
+            - policy_id: policy_id
+              policy_version_name: policy_version_name
+              modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+              created_at: 2024-05-17T00:23:17Z
+              id: id
+              modified_at: 2024-05-17T00:23:17Z
+              created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+              policy_document: ""
+            tags:
+            - "{}"
+            - "{}"
+            policy_type: ""
+            service_type: service_type
+            account_id: account_id
+            modifier_email: modifier_email
+            creator_email: creator_email
+            policy_category: ""
+            modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            creator_name: creator_name
+            id: id
+            state: ""
+            modified_at: 2024-05-17T00:23:17Z
+          - modifier_name: modifier_name
+            resource_type: resource_type
+            created_at: 2024-05-17T00:23:17Z
+            description: description
+            policy_name: policy_name
+            default_version_id: default_version_id
+            created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            srn: srn
+            policy_versions:
+            - policy_id: policy_id
+              policy_version_name: policy_version_name
+              modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+              created_at: 2024-05-17T00:23:17Z
+              id: id
+              modified_at: 2024-05-17T00:23:17Z
+              created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+              policy_document: ""
+            - policy_id: policy_id
+              policy_version_name: policy_version_name
+              modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+              created_at: 2024-05-17T00:23:17Z
+              id: id
+              modified_at: 2024-05-17T00:23:17Z
+              created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+              policy_document: ""
+            tags:
+            - "{}"
+            - "{}"
+            policy_type: ""
+            service_type: service_type
+            account_id: account_id
+            modifier_email: modifier_email
+            creator_email: creator_email
+            policy_category: ""
+            modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            creator_name: creator_name
+            id: id
+            state: ""
+            modified_at: 2024-05-17T00:23:17Z
+          created_at: 2000-01-23T04:56:07.000+00:00
+          description: description
+          type: DEFAULT
+          created_by: created_by
+          srn: srn
+          tags:
+          - "{}"
+          - "{}"
+          modifier_email: modifier_email
+          creator_email: creator_email
+          modified_by: modified_by
+          name: Test Group
+          creator_name: creator_name
+          id: id
+          modified_at: 2000-01-23T04:56:07.000+00:00
+        - modifier_name: modifier_name
+          roles:
+          - modifier_name: modifier_name
+            modifier_email: modifier_email
+            creator_email: creator_email
+            modified_by: modified_by
+            name: name
+            created_at: 2000-01-23T04:56:07.000+00:00
+            description: description
+            creator_name: creator_name
+            id: id
+            modified_at: 2000-01-23T04:56:07.000+00:00
+            type: ""
+            created_by: created_by
+          - modifier_name: modifier_name
+            modifier_email: modifier_email
+            creator_email: creator_email
+            modified_by: modified_by
+            name: name
+            created_at: 2000-01-23T04:56:07.000+00:00
+            description: description
+            creator_name: creator_name
+            id: id
+            modified_at: 2000-01-23T04:56:07.000+00:00
+            type: ""
+            created_by: created_by
+          policies:
+          - modifier_name: modifier_name
+            resource_type: resource_type
+            created_at: 2024-05-17T00:23:17Z
+            description: description
+            policy_name: policy_name
+            default_version_id: default_version_id
+            created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            srn: srn
+            policy_versions:
+            - policy_id: policy_id
+              policy_version_name: policy_version_name
+              modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+              created_at: 2024-05-17T00:23:17Z
+              id: id
+              modified_at: 2024-05-17T00:23:17Z
+              created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+              policy_document: ""
+            - policy_id: policy_id
+              policy_version_name: policy_version_name
+              modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+              created_at: 2024-05-17T00:23:17Z
+              id: id
+              modified_at: 2024-05-17T00:23:17Z
+              created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+              policy_document: ""
+            tags:
+            - "{}"
+            - "{}"
+            policy_type: ""
+            service_type: service_type
+            account_id: account_id
+            modifier_email: modifier_email
+            creator_email: creator_email
+            policy_category: ""
+            modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            creator_name: creator_name
+            id: id
+            state: ""
+            modified_at: 2024-05-17T00:23:17Z
+          - modifier_name: modifier_name
+            resource_type: resource_type
+            created_at: 2024-05-17T00:23:17Z
+            description: description
+            policy_name: policy_name
+            default_version_id: default_version_id
+            created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            srn: srn
+            policy_versions:
+            - policy_id: policy_id
+              policy_version_name: policy_version_name
+              modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+              created_at: 2024-05-17T00:23:17Z
+              id: id
+              modified_at: 2024-05-17T00:23:17Z
+              created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+              policy_document: ""
+            - policy_id: policy_id
+              policy_version_name: policy_version_name
+              modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+              created_at: 2024-05-17T00:23:17Z
+              id: id
+              modified_at: 2024-05-17T00:23:17Z
+              created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+              policy_document: ""
+            tags:
+            - "{}"
+            - "{}"
+            policy_type: ""
+            service_type: service_type
+            account_id: account_id
+            modifier_email: modifier_email
+            creator_email: creator_email
+            policy_category: ""
+            modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            creator_name: creator_name
+            id: id
+            state: ""
+            modified_at: 2024-05-17T00:23:17Z
+          created_at: 2000-01-23T04:56:07.000+00:00
+          description: description
+          type: DEFAULT
+          created_by: created_by
+          srn: srn
+          tags:
+          - "{}"
+          - "{}"
+          modifier_email: modifier_email
+          creator_email: creator_email
+          modified_by: modified_by
+          name: Test Group
+          creator_name: creator_name
+          id: id
+          modified_at: 2000-01-23T04:56:07.000+00:00
+        page: 0
+        sort:
+        - sort
+        - sort
+      properties:
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        groups:
+          items:
+            $ref: '#/components/schemas/Group'
+          type: array
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - count
+      - groups
+      - page
+      - size
+      title: GroupPageResponse
+    GroupPolicyBindingRequest:
+      example:
+        policy_ids:
+        - 37f2e31ff86b415698d7e8eeafab445d
+      properties:
+        policy_ids:
+          description: Policy ID List
+          example:
+          - 37f2e31ff86b415698d7e8eeafab445d
+          items:
+            type: string
+          type: array
+      required:
+      - policy_ids
+      title: GroupPolicyBindingRequest
+    GroupPolicyPageResponse:
+      example:
+        size: 20
+        count: 20
+        policies:
+        - modifier_name: modifier_name
+          resource_type: resource_type
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          policy_name: policy_name
+          default_version_id: default_version_id
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          srn: srn
+          policy_versions:
+          - policy_id: policy_id
+            policy_version_name: policy_version_name
+            modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            created_at: 2024-05-17T00:23:17Z
+            id: id
+            modified_at: 2024-05-17T00:23:17Z
+            created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            policy_document: ""
+          - policy_id: policy_id
+            policy_version_name: policy_version_name
+            modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            created_at: 2024-05-17T00:23:17Z
+            id: id
+            modified_at: 2024-05-17T00:23:17Z
+            created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            policy_document: ""
+          tags:
+          - "{}"
+          - "{}"
+          policy_type: ""
+          service_type: service_type
+          account_id: account_id
+          modifier_email: modifier_email
+          creator_email: creator_email
+          policy_category: ""
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          creator_name: creator_name
+          id: id
+          state: ""
+          modified_at: 2024-05-17T00:23:17Z
+        - modifier_name: modifier_name
+          resource_type: resource_type
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          policy_name: policy_name
+          default_version_id: default_version_id
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          srn: srn
+          policy_versions:
+          - policy_id: policy_id
+            policy_version_name: policy_version_name
+            modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            created_at: 2024-05-17T00:23:17Z
+            id: id
+            modified_at: 2024-05-17T00:23:17Z
+            created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            policy_document: ""
+          - policy_id: policy_id
+            policy_version_name: policy_version_name
+            modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            created_at: 2024-05-17T00:23:17Z
+            id: id
+            modified_at: 2024-05-17T00:23:17Z
+            created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            policy_document: ""
+          tags:
+          - "{}"
+          - "{}"
+          policy_type: ""
+          service_type: service_type
+          account_id: account_id
+          modifier_email: modifier_email
+          creator_email: creator_email
+          policy_category: ""
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          creator_name: creator_name
+          id: id
+          state: ""
+          modified_at: 2024-05-17T00:23:17Z
+        page: 0
+        sort:
+        - sort
+        - sort
+      properties:
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        policies:
+          items:
+            $ref: '#/components/schemas/Policy'
+          type: array
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - count
+      - page
+      - policies
+      - size
+      title: GroupPolicyPageResponse
+    GroupPolicyResponse:
+      example:
+        policies:
+        - modifier_name: modifier_name
+          resource_type: resource_type
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          policy_name: policy_name
+          default_version_id: default_version_id
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          srn: srn
+          policy_versions:
+          - policy_id: policy_id
+            policy_version_name: policy_version_name
+            modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            created_at: 2024-05-17T00:23:17Z
+            id: id
+            modified_at: 2024-05-17T00:23:17Z
+            created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            policy_document: ""
+          - policy_id: policy_id
+            policy_version_name: policy_version_name
+            modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            created_at: 2024-05-17T00:23:17Z
+            id: id
+            modified_at: 2024-05-17T00:23:17Z
+            created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            policy_document: ""
+          tags:
+          - "{}"
+          - "{}"
+          policy_type: ""
+          service_type: service_type
+          account_id: account_id
+          modifier_email: modifier_email
+          creator_email: creator_email
+          policy_category: ""
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          creator_name: creator_name
+          id: id
+          state: ""
+          modified_at: 2024-05-17T00:23:17Z
+        - modifier_name: modifier_name
+          resource_type: resource_type
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          policy_name: policy_name
+          default_version_id: default_version_id
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          srn: srn
+          policy_versions:
+          - policy_id: policy_id
+            policy_version_name: policy_version_name
+            modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            created_at: 2024-05-17T00:23:17Z
+            id: id
+            modified_at: 2024-05-17T00:23:17Z
+            created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            policy_document: ""
+          - policy_id: policy_id
+            policy_version_name: policy_version_name
+            modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            created_at: 2024-05-17T00:23:17Z
+            id: id
+            modified_at: 2024-05-17T00:23:17Z
+            created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            policy_document: ""
+          tags:
+          - "{}"
+          - "{}"
+          policy_type: ""
+          service_type: service_type
+          account_id: account_id
+          modifier_email: modifier_email
+          creator_email: creator_email
+          policy_category: ""
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          creator_name: creator_name
+          id: id
+          state: ""
+          modified_at: 2024-05-17T00:23:17Z
+      properties:
+        policies:
+          items:
+            $ref: '#/components/schemas/Policy'
+          type: array
+      required:
+      - policies
+      title: GroupPolicyResponse
+    GroupSetRequest:
+      example:
+        name: name
+        description: description
+      properties:
+        description:
+          maxLength: 1000
+          nullable: true
+          type: string
+        name:
+          description: Group 이름
+          maxLength: 24
+          minLength: 3
+          pattern: "^[a-zA-Z0-9\\-.,_+=@ㄱ-ㅎㅏ-ㅣ가-힣\\s]*$"
+          title: Name
+          type: string
+      required:
+      - description
+      - name
+      title: GroupSetRequest
+    GroupShowResponse:
+      example:
+        group:
+          modifier_name: modifier_name
+          roles:
+          - modifier_name: modifier_name
+            modifier_email: modifier_email
+            creator_email: creator_email
+            modified_by: modified_by
+            name: name
+            created_at: 2000-01-23T04:56:07.000+00:00
+            description: description
+            creator_name: creator_name
+            id: id
+            modified_at: 2000-01-23T04:56:07.000+00:00
+            type: ""
+            created_by: created_by
+          - modifier_name: modifier_name
+            modifier_email: modifier_email
+            creator_email: creator_email
+            modified_by: modified_by
+            name: name
+            created_at: 2000-01-23T04:56:07.000+00:00
+            description: description
+            creator_name: creator_name
+            id: id
+            modified_at: 2000-01-23T04:56:07.000+00:00
+            type: ""
+            created_by: created_by
+          policies:
+          - modifier_name: modifier_name
+            resource_type: resource_type
+            created_at: 2024-05-17T00:23:17Z
+            description: description
+            policy_name: policy_name
+            default_version_id: default_version_id
+            created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            srn: srn
+            policy_versions:
+            - policy_id: policy_id
+              policy_version_name: policy_version_name
+              modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+              created_at: 2024-05-17T00:23:17Z
+              id: id
+              modified_at: 2024-05-17T00:23:17Z
+              created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+              policy_document: ""
+            - policy_id: policy_id
+              policy_version_name: policy_version_name
+              modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+              created_at: 2024-05-17T00:23:17Z
+              id: id
+              modified_at: 2024-05-17T00:23:17Z
+              created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+              policy_document: ""
+            tags:
+            - "{}"
+            - "{}"
+            policy_type: ""
+            service_type: service_type
+            account_id: account_id
+            modifier_email: modifier_email
+            creator_email: creator_email
+            policy_category: ""
+            modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            creator_name: creator_name
+            id: id
+            state: ""
+            modified_at: 2024-05-17T00:23:17Z
+          - modifier_name: modifier_name
+            resource_type: resource_type
+            created_at: 2024-05-17T00:23:17Z
+            description: description
+            policy_name: policy_name
+            default_version_id: default_version_id
+            created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            srn: srn
+            policy_versions:
+            - policy_id: policy_id
+              policy_version_name: policy_version_name
+              modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+              created_at: 2024-05-17T00:23:17Z
+              id: id
+              modified_at: 2024-05-17T00:23:17Z
+              created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+              policy_document: ""
+            - policy_id: policy_id
+              policy_version_name: policy_version_name
+              modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+              created_at: 2024-05-17T00:23:17Z
+              id: id
+              modified_at: 2024-05-17T00:23:17Z
+              created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+              policy_document: ""
+            tags:
+            - "{}"
+            - "{}"
+            policy_type: ""
+            service_type: service_type
+            account_id: account_id
+            modifier_email: modifier_email
+            creator_email: creator_email
+            policy_category: ""
+            modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+            creator_name: creator_name
+            id: id
+            state: ""
+            modified_at: 2024-05-17T00:23:17Z
+          created_at: 2000-01-23T04:56:07.000+00:00
+          description: description
+          type: DEFAULT
+          created_by: created_by
+          srn: srn
+          tags:
+          - "{}"
+          - "{}"
+          modifier_email: modifier_email
+          creator_email: creator_email
+          modified_by: modified_by
+          name: Test Group
+          creator_name: creator_name
+          id: id
+          modified_at: 2000-01-23T04:56:07.000+00:00
+      properties:
+        group:
+          $ref: '#/components/schemas/Group'
+      required:
+      - group
+      title: GroupShowResponse
+    ListAccessKeyResponse:
+      example:
+        count: 0
+        links:
+        - ""
+        - ""
+        access_keys:
+        - secret_key: secret_key
+          account_id: account_id
+          parent_access_key_id: parent_access_key_id
+          access_key: access_key
+          expiration_timestamp: 2000-01-23T04:56:07.000+00:00
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          id: id
+          modified_at: 2024-05-17T00:23:17Z
+          access_key_type: ""
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        - secret_key: secret_key
+          account_id: account_id
+          parent_access_key_id: parent_access_key_id
+          access_key: access_key
+          expiration_timestamp: 2000-01-23T04:56:07.000+00:00
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          id: id
+          modified_at: 2024-05-17T00:23:17Z
+          access_key_type: ""
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+      properties:
+        access_keys:
+          items:
+            $ref: '#/components/schemas/AccessKey'
+          type: array
+        count:
+          nullable: true
+          type: integer
+        links:
+          items: {}
+          nullable: true
+          type: array
+      required:
+      - access_keys
+      title: ListAccessKeyResponse
+    ListCompanyResponse:
+      example:
+        companies:
+        - registration_number: registration_number
+          business_partner_id: business_partner_id
+          representative_name: representative_name
+          street_name: street_name
+          zip_code: zip_code
+          country_code: country_code
+          city_name: city_name
+          country_tel_no: country_tel_no
+          tel_no: tel_no
+          business_type: business_type
+          country_name: country_name
+          name: name
+          en_name: en_name
+          id: id
+          fax_no: fax_no
+        - registration_number: registration_number
+          business_partner_id: business_partner_id
+          representative_name: representative_name
+          street_name: street_name
+          zip_code: zip_code
+          country_code: country_code
+          city_name: city_name
+          country_tel_no: country_tel_no
+          tel_no: tel_no
+          business_type: business_type
+          country_name: country_name
+          name: name
+          en_name: en_name
+          id: id
+          fax_no: fax_no
+        count: 0
+        links:
+        - ""
+        - ""
+      properties:
+        companies:
+          items:
+            $ref: '#/components/schemas/CompanyResponse'
+          type: array
+        count:
+          nullable: true
+          type: integer
+        links:
+          items: {}
+          nullable: true
+          type: array
+      required:
+      - companies
+      title: ListCompanyResponse
+    ListEndpointsResponse:
+      example:
+        endpoints:
+        - service_type: service_type
+          service_name: service_name
+          region: region
+          url: url
+        - service_type: service_type
+          service_name: service_name
+          region: region
+          url: url
+      properties:
+        endpoints:
+          items:
+            $ref: '#/components/schemas/EndpointsResponse'
+          type: array
+      required:
+      - endpoints
+      title: ListEndpointsResponse
+    LocaleEnum:
+      enum:
+      - ko_KR
+      - en_US
+      title: LocaleEnum
+      type: string
+    ManagedServiceTypeEnum:
+      enum:
+      - NONE
+      - SDS
+      - PARTNER
+      title: ManagedServiceTypeEnum
+      type: string
+    OtpMethodEnum:
+      enum:
+      - PHONE
+      - EMAIL
+      title: OtpMethodEnum
+      type: string
+    PaymentContract:
+      example:
+        modifier_name: modifier_name
+        company_id: company_id
+        business_category_id: business_category_id
+        partner_company_code: partner_company_code
+        contract: ""
+        created_at: 2000-01-23T04:56:07.000+00:00
+        description: description
+        business_group_code: business_group_code
+        created_by: created_by
+        modifier_email: modifier_email
+        creator_email: creator_email
+        company_name: company_name
+        modified_by: modified_by
+        name: name
+        managed_service_type: ""
+        business_category_name: business_category_name
+        creator_name: creator_name
+        id: id
+        modified_at: 2000-01-23T04:56:07.000+00:00
+        has_project_yn: ""
+      properties:
+        business_category_id:
+          description: 회사 업무 구분 ID
+          title: Business Category Id
+          type: string
+        business_category_name:
+          nullable: true
+          type: string
+        business_group_code:
+          nullable: true
+          type: string
+        company_id:
+          description: Company ID
+          title: Company Id
+          type: string
+        company_name:
+          description: Company 이름
+          title: Company Name
+          type: string
+        contract:
+          allOf:
+          - $ref: '#/components/schemas/AccountContract'
+          description: Account 계약 정보
+        created_at:
+          description: 생성 일시
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: 생성자
+          title: Created By
+          type: string
+        creator_email:
+          description: 생성자 Email
+          title: Creator Email
+          type: string
+        creator_name:
+          description: "생성자 성, 이름"
+          title: Creator Name
+          type: string
+        description:
+          nullable: true
+          type: string
+        has_project_yn:
+          allOf:
+          - $ref: '#/components/schemas/YnEnum'
+          description: Project 생성 여부
+        id:
+          description: ID
+          title: Id
+          type: string
+        managed_service_type:
+          allOf:
+          - $ref: '#/components/schemas/ManagedServiceTypeEnum'
+          description: Service Type
+        modified_at:
+          description: 수정 일시
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: 수정자
+          title: Modified By
+          type: string
+        modifier_email:
+          description: 수정자 Email
+          title: Modifier Email
+          type: string
+        modifier_name:
+          description: "수정자 성, 이름"
+          title: Modifier Name
+          type: string
+        name:
+          description: Account 이름
+          title: Name
+          type: string
+        partner_company_code:
+          nullable: true
+          type: string
+      required:
+      - business_category_id
+      - business_category_name
+      - business_group_code
+      - company_id
+      - company_name
+      - contract
+      - created_at
+      - created_by
+      - creator_email
+      - creator_name
+      - description
+      - has_project_yn
+      - id
+      - managed_service_type
+      - modified_at
+      - modified_by
+      - modifier_email
+      - modifier_name
+      - name
+      - partner_company_code
+      title: PaymentContract
+    PaymentContractListResponse:
+      example:
+        payment_contracts:
+        - modifier_name: modifier_name
+          company_id: company_id
+          business_category_id: business_category_id
+          partner_company_code: partner_company_code
+          contract: ""
+          created_at: 2000-01-23T04:56:07.000+00:00
+          description: description
+          business_group_code: business_group_code
+          created_by: created_by
+          modifier_email: modifier_email
+          creator_email: creator_email
+          company_name: company_name
+          modified_by: modified_by
+          name: name
+          managed_service_type: ""
+          business_category_name: business_category_name
+          creator_name: creator_name
+          id: id
+          modified_at: 2000-01-23T04:56:07.000+00:00
+          has_project_yn: ""
+        - modifier_name: modifier_name
+          company_id: company_id
+          business_category_id: business_category_id
+          partner_company_code: partner_company_code
+          contract: ""
+          created_at: 2000-01-23T04:56:07.000+00:00
+          description: description
+          business_group_code: business_group_code
+          created_by: created_by
+          modifier_email: modifier_email
+          creator_email: creator_email
+          company_name: company_name
+          modified_by: modified_by
+          name: name
+          managed_service_type: ""
+          business_category_name: business_category_name
+          creator_name: creator_name
+          id: id
+          modified_at: 2000-01-23T04:56:07.000+00:00
+          has_project_yn: ""
+        count: 0
+        links:
+        - ""
+        - ""
+      properties:
+        count:
+          nullable: true
+          type: integer
+        links:
+          items: {}
+          nullable: true
+          type: array
+        payment_contracts:
+          items:
+            $ref: '#/components/schemas/PaymentContract'
+          type: array
+      required:
+      - payment_contracts
+      title: PaymentContractListResponse
+    PaymentContractShowResponse:
+      example:
+        payment_contract:
+          modifier_name: modifier_name
+          company_id: company_id
+          business_category_id: business_category_id
+          partner_company_code: partner_company_code
+          contract: ""
+          created_at: 2000-01-23T04:56:07.000+00:00
+          description: description
+          business_group_code: business_group_code
+          created_by: created_by
+          modifier_email: modifier_email
+          creator_email: creator_email
+          company_name: company_name
+          modified_by: modified_by
+          name: name
+          managed_service_type: ""
+          business_category_name: business_category_name
+          creator_name: creator_name
+          id: id
+          modified_at: 2000-01-23T04:56:07.000+00:00
+          has_project_yn: ""
+      properties:
+        payment_contract:
+          $ref: '#/components/schemas/PaymentContract'
+      required:
+      - payment_contract
+      title: PaymentContractShowResponse
+    Policy:
+      example:
+        modifier_name: modifier_name
+        resource_type: resource_type
+        created_at: 2024-05-17T00:23:17Z
+        description: description
+        policy_name: policy_name
+        default_version_id: default_version_id
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        srn: srn
+        policy_versions:
+        - policy_id: policy_id
+          policy_version_name: policy_version_name
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          created_at: 2024-05-17T00:23:17Z
+          id: id
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          policy_document: ""
+        - policy_id: policy_id
+          policy_version_name: policy_version_name
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          created_at: 2024-05-17T00:23:17Z
+          id: id
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          policy_document: ""
+        tags:
+        - "{}"
+        - "{}"
+        policy_type: ""
+        service_type: service_type
+        account_id: account_id
+        modifier_email: modifier_email
+        creator_email: creator_email
+        policy_category: ""
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        creator_name: creator_name
+        id: id
+        state: ""
+        modified_at: 2024-05-17T00:23:17Z
+      properties:
+        account_id:
+          nullable: true
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        creator_email:
+          nullable: true
+          type: string
+        creator_name:
+          nullable: true
+          type: string
+        default_version_id:
+          description: Policy Default Version Id
+          title: Default Version Id
+          type: string
+        description:
+          maxLength: 1000
+          nullable: true
+          type: string
+        id:
+          description: Policy ID
+          title: Id
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        modifier_email:
+          nullable: true
+          type: string
+        modifier_name:
+          nullable: true
+          type: string
+        policy_category:
+          allOf:
+          - $ref: '#/components/schemas/PolicyCategoryEnum'
+          description: Policy Category
+        policy_name:
+          description: Policy Name
+          maxLength: 128
+          minLength: 3
+          pattern: "^[a-zA-Z0-9\\-.,_+=@ㄱ-ㅎㅏ-ㅣ가-힣\\s]*$"
+          title: Policy Name
+          type: string
+        policy_type:
+          allOf:
+          - $ref: '#/components/schemas/PolicyTypeEnum'
+          description: Policy Type
+        policy_versions:
+          description: Policy Versions
+          items:
+            $ref: '#/components/schemas/PolicyVersion'
+          type: array
+        resource_type:
+          nullable: true
+          type: string
+        service_type:
+          nullable: true
+          type: string
+        srn:
+          description: 삼성 리소스 자원명
+          title: Srn
+          type: string
+        state:
+          allOf:
+          - $ref: '#/components/schemas/PolicyStateEnum'
+          default: ACTIVE
+          description: Policy State
+        tags:
+          items:
+            type: object
+          nullable: true
+          type: array
+      required:
+      - account_id
+      - created_at
+      - created_by
+      - modified_at
+      - modified_by
+      - srn
+      title: Policy
+    PolicyCategoryEnum:
+      enum:
+      - IDENTITY_BASED
+      - RESOURCE_BASED
+      title: PolicyCategoryEnum
+      type: string
+    PolicyDocument:
+      properties:
+        Statement:
+          description: Statement
+          items:
+            $ref: '#/components/schemas/Statement'
+          type: array
+        Version:
+          description: Policy Version
+          title: Version
+          type: string
+      required:
+      - Statement
+      - Version
+      title: PolicyDocument
+    PolicyStateEnum:
+      enum:
+      - ACTIVE
+      - INACTIVE
+      - DELETED
+      title: PolicyStateEnum
+      type: string
+    PolicyTypeEnum:
+      enum:
+      - SYSTEM_MANAGED
+      - USER_DEFINED
+      title: PolicyTypeEnum
+      type: string
+    PolicyVersion:
+      example:
+        policy_id: policy_id
+        policy_version_name: policy_version_name
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        created_at: 2024-05-17T00:23:17Z
+        id: id
+        modified_at: 2024-05-17T00:23:17Z
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        policy_document: ""
+      properties:
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        id:
+          description: Policy Version Id
+          title: Id
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        policy_document:
+          allOf:
+          - $ref: '#/components/schemas/PolicyDocument'
+          description: Policy Document
+        policy_id:
+          description: Policy ID
+          title: Policy Id
+          type: string
+        policy_version_name:
+          description: Policy Version Name
+          title: Policy Version Name
+          type: string
+      required:
+      - created_at
+      - created_by
+      - modified_at
+      - modified_by
+      - policy_document
+      title: PolicyVersion
+    RefreshAccessKeyRequest:
+      example:
+        access_key: access_key
+      properties:
+        access_key:
+          nullable: true
+          type: string
+      title: RefreshAccessKeyRequest
+    Role:
+      example:
+        modifier_name: modifier_name
+        modifier_email: modifier_email
+        creator_email: creator_email
+        modified_by: modified_by
+        name: name
+        created_at: 2000-01-23T04:56:07.000+00:00
+        description: description
+        creator_name: creator_name
+        id: id
+        modified_at: 2000-01-23T04:56:07.000+00:00
+        type: ""
+        created_by: created_by
+      properties:
+        created_at:
+          description: 생성 일시
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: 생성자
+          title: Created By
+          type: string
+        creator_email:
+          description: 생성자 Email
+          title: Creator Email
+          type: string
+        creator_name:
+          description: "생성자 성, 이름"
+          title: Creator Name
+          type: string
+        description:
+          nullable: true
+          type: string
+        id:
+          description: ID
+          title: Id
+          type: string
+        modified_at:
+          description: 수정 일시
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: 수정자
+          title: Modified By
+          type: string
+        modifier_email:
+          description: 수정자 Email
+          title: Modifier Email
+          type: string
+        modifier_name:
+          description: "수정자 성, 이름"
+          title: Modifier Name
+          type: string
+        name:
+          description: Role 이름
+          title: Name
+          type: string
+        type:
+          allOf:
+          - $ref: '#/components/schemas/RoleTypeEnum'
+          description: Role Type
+      required:
+      - created_at
+      - created_by
+      - creator_email
+      - creator_name
+      - description
+      - id
+      - modified_at
+      - modified_by
+      - modifier_email
+      - modifier_name
+      - name
+      - type
+      title: Role
+    RoleTypeEnum:
+      enum:
+      - DEFAULT
+      - USER_DEFINED
+      title: RoleTypeEnum
+      type: string
+    Statement:
+      properties:
+        Action:
+          items:
+            type: string
+          nullable: true
+          type: array
+        Condition:
+          additionalProperties:
+            additionalProperties:
+              items: {}
+          nullable: true
+        Effect:
+          description: Effect
+          enum:
+          - Allow
+          - Deny
+          title: Effect
+          type: string
+        NotAction:
+          items:
+            type: string
+          nullable: true
+          type: array
+        Principal:
+          $ref: '#/components/schemas/Principal'
+        Resource:
+          description: Resource
+          items:
+            type: string
+          type: array
+        Sid:
+          default: statement1
+          description: Statement Id
+          title: Sid
+          type: string
+      required:
+      - Effect
+      title: Statement
+    UserDetailResponse:
+      example:
+        utc_offset: utc_offset
+        last_login_at: 2000-01-23T04:56:07.000+00:00
+        timezone: timezone
+        user_name: user_name
+        created_at: 2024-05-17T00:23:17Z
+        description: description
+        type: type
+        dst_offset: dst_offset
+        allowed_ip_addresses: allowed_ip_addresses
+        account_name: account_name
+        email_authenticated: true
+        nation_id: nation_id
+        id: id
+        last_password_update_at: 2000-01-23T04:56:07.000+00:00
+        modified_at: 2024-05-17T00:23:17Z
+        first_name: first_name
+        email: email
+        login_id: login_id
+        access_control: true
+        last_name: last_name
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        phone_authenticated: true
+        tz_id: tz_id
+        account_id: account_id
+        company_name: company_name
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        phone_number: phone_number
+        password_reuse_count: 0
+      properties:
+        access_control:
+          description: 접근 제어 설정 유무
+          title: Access Control
+          type: boolean
+        account_id:
+          nullable: true
+          type: string
+        account_name:
+          nullable: true
+          type: string
+        allowed_ip_addresses:
+          description: 접근 허용 IP
+          title: Allowed Ip Addresses
+          type: string
+        company_name:
+          nullable: true
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        description:
+          nullable: true
+          type: string
+        dst_offset:
+          nullable: true
+          type: string
+        email:
+          description: 사용자 Email
+          title: Email
+          type: string
+        email_authenticated:
+          description: email 인증 여부
+          title: Email Authenticated
+          type: boolean
+        first_name:
+          nullable: true
+          type: string
+        id:
+          description: ID
+          title: Id
+          type: string
+        last_login_at:
+          format: date-time
+          nullable: true
+          type: string
+        last_name:
+          nullable: true
+          type: string
+        last_password_update_at:
+          format: date-time
+          nullable: true
+          type: string
+        login_id:
+          description: Login ID
+          title: Login Id
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        nation_id:
+          description: 국가 ID
+          title: Nation Id
+          type: string
+        password_reuse_count:
+          description: 비밀 번호 재사용 가능 횟수
+          title: Password Reuse Count
+          type: integer
+        phone_authenticated:
+          description: 휴대폰 인증 여부
+          title: Phone Authenticated
+          type: boolean
+        phone_number:
+          description: 사용자 휴대 전화 번호
+          title: Phone Number
+          type: string
+        timezone:
+          nullable: true
+          type: string
+        type:
+          description: Type
+          title: Type
+          type: string
+        tz_id:
+          nullable: true
+          type: string
+        user_name:
+          nullable: true
+          type: string
+        utc_offset:
+          nullable: true
+          type: string
+      required:
+      - access_control
+      - allowed_ip_addresses
+      - created_at
+      - created_by
+      - email
+      - email_authenticated
+      - id
+      - login_id
+      - modified_at
+      - modified_by
+      - nation_id
+      - password_reuse_count
+      - phone_authenticated
+      - phone_number
+      - type
+      title: UserDetailResponse
+    YnEnum:
+      enum:
+      - "N"
+      - "Y"
+      title: YnEnum
+      type: string
+    Policy_Type:
+      anyOf:
+      - nullable: true
+        type: string
+      - items:
+          type: string
+        type: array
+      description: Policy Type List
+      example:
+      - SYSTEM_MANAGED
+      - USER_DEFINED
+      nullable: true
+      title: Policy Type
+    Principal:
+      anyOf:
+      - type: string
+      - additionalProperties:
+          items:
+            type: string
+      description: Principal
+      nullable: true
+      title: Principal
+  securitySchemes:
+    X-Auth-Token:
+      in: header
+      name: X-Auth-Token
+      type: apiKey
+x-app-name: scp-iam
+x-package-name: scp_iam
+x-service-type: scp-iam
+x-url-prefix: ""

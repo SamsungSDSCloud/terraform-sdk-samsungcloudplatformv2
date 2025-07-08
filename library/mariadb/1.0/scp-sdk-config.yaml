@@ -1,0 +1,5 @@
+packageName: mariadb
+generatorName: go
+withGoMod: false
+structPrefix: true
+enumClassPrefix: true

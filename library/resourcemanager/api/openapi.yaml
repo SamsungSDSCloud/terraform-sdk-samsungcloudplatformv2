@@ -1,0 +1,2485 @@
+openapi: 3.1.0
+info:
+  description: SCP Resource manager project
+  title: SCP Resource manager project
+  version: 0.0.1.dev646
+servers:
+- url: https://resourcemanager.kr-west1.dev2.samsungsdscloud.com
+tags:
+- description: ResourceDefinitions API
+  name: resourcemanager.v1.ResourceDefinitionsAPIs
+- description: ResourceInstances API
+  name: resourcemanager.v1.ResourceInstancesAPIs
+- description: ResourceTypes API
+  name: resourcemanager.v1.ResourceTypeAPIs
+- description: Tags API
+  name: resourcemanager.v1.TagsAPIs
+- description: Resources API
+  name: resourcemanager.v1.ResourcesAPIs
+- description: Product API
+  name: resourcemanager.v1.ProductAPIs
+- description: ResourceGroups API
+  name: resourcemanager.v1.ResourceGroupsAPIs
+paths:
+  /v1/products/counts: {}
+  /v1/resource-definitions: {}
+  /v1/resource-definitions/synchronize: {}
+  /v1/resource-definitions/{resource_definition_id}: {}
+  /v1/resource-groups:
+    delete:
+      description: delete a specific resource_groups
+      operationId: deleteResourceGroups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResourceGroupsDeleteRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: DeleteResourceGroups
+      tags:
+      - resourcemanager.v1.ResourceGroupsAPIs
+      x-action-id: scp-resourcemanager:resource-group:delete-bulk
+      x-api-access-level: DELETE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "[OPENAPI, CLI, CONSOLE]"
+      x-cli: resource_group_delete_bulk
+      x-resource: ResourceGroup
+    get:
+      description: get resource_groups list
+      operationId: listResourceGroups
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: 리소스 그룹 ID
+        explode: true
+        in: query
+        name: id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: 리소스 그룹명
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceGroupPageResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ListResourceGroups
+      tags:
+      - resourcemanager.v1.ResourceGroupsAPIs
+      x-action-id: scp-resourcemanager:resource-group:list
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "[OPENAPI, CLI, CONSOLE]"
+      x-cli: resource_group_list
+      x-resource: ResourceGroup
+    post:
+      description: create a resource_group
+      operationId: createResourceGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResourceGroupCreateRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceGroupCreateResponse'
+          description: Created
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: CreateResourceGroup
+      tags:
+      - resourcemanager.v1.ResourceGroupsAPIs
+      x-action-id: scp-resourcemanager:resource-group:create
+      x-api-access-level: CREATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "[OPENAPI, CLI, CONSOLE]"
+      x-cli: resource_group_create
+      x-resource: ResourceGroup
+  /v1/resource-groups/resources:
+    post:
+      description: show a specific resource_group_resources
+      operationId: showResourceGroupResources
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResourceSearchRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourcePageResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ShowResourceGroupResources
+      tags:
+      - resourcemanager.v1.ResourceGroupsAPIs
+      x-action-id: scp-resourcemanager:resource:list
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "[OPENAPI, CLI, CONSOLE]"
+      x-cli: resource_group_resource_list
+      x-resource: ResourceGroupResources
+  /v1/resource-groups/{resource_group_id}:
+    delete:
+      description: delete a specific resource_group
+      operationId: deleteResourceGroup
+      parameters:
+      - description: 리소스 그룹 ID
+        explode: false
+        in: path
+        name: resource_group_id
+        required: true
+        schema:
+          description: 리소스 그룹 ID
+          title: Resource Group Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: OK
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: DeleteResourceGroup
+      tags:
+      - resourcemanager.v1.ResourceGroupsAPIs
+      x-action-id: scp-resourcemanager:resource-group:delete
+      x-api-access-level: DELETE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "[OPENAPI, CLI, CONSOLE]"
+      x-cli: resource_group_delete
+      x-resource: ResourceGroup
+    get:
+      description: show a specific resource_group
+      operationId: showResourceGroup
+      parameters:
+      - description: 리소스 그룹 ID
+        explode: false
+        in: path
+        name: resource_group_id
+        required: true
+        schema:
+          description: 리소스 그룹 ID
+          title: Resource Group Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceGroupShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ShowResourceGroup
+      tags:
+      - resourcemanager.v1.ResourceGroupsAPIs
+      x-action-id: scp-resourcemanager:resource-group:show
+      x-api-access-level: READ
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "[OPENAPI, CLI, CONSOLE]"
+      x-cli: resource_group_show
+      x-resource: ResourceGroup
+    put:
+      description: set resource_group
+      operationId: setResourceGroup
+      parameters:
+      - description: 리소스 그룹 ID
+        explode: false
+        in: path
+        name: resource_group_id
+        required: true
+        schema:
+          description: 리소스 그룹 ID
+          title: Resource Group Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResourceGroupCreateRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceGroupCreateResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: SetResourceGroup
+      tags:
+      - resourcemanager.v1.ResourceGroupsAPIs
+      x-action-id: scp-resourcemanager:resource-group:update
+      x-api-access-level: READ
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "[OPENAPI, CLI, CONSOLE]"
+      x-cli: resource_group_update
+      x-resource: ResourceGroup
+  /v1/resource-groups/{resource_group_id}/resources:
+    get:
+      description: show a specific resource_group_resources
+      operationId: showResourceGroupResourcesByGroupId
+      parameters:
+      - description: 리소스 그룹 ID
+        explode: false
+        in: path
+        name: resource_group_id
+        required: true
+        schema:
+          description: 리소스 그룹 ID
+          title: Resource Group Id
+          type: string
+        style: simple
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourcePageResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ShowResourceGroupResources
+      tags:
+      - resourcemanager.v1.ResourceGroupsAPIs
+      x-action-id: scp-resourcemanager:resource:list
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "[OPENAPI, CLI, CONSOLE]"
+      x-cli: resource_group_resource_list
+      x-resource: ResourceGroupResources
+  /v1/resource-instances: {}
+  /v1/resource-types: {}
+  /v1/resources: {}
+  /v1/resources/{region}/{service_type}/{resource_type}/{resource_identifier}:
+    get:
+      description: get a specific resource
+      operationId: showResourceByComponents
+      parameters:
+      - description: 리전
+        explode: false
+        in: path
+        name: region
+        required: true
+        schema:
+          description: 리전
+          title: Region
+          type: string
+        style: simple
+      - description: 서비스 유형
+        explode: false
+        in: path
+        name: service_type
+        required: true
+        schema:
+          description: 서비스 유형
+          title: Service Type
+          type: string
+        style: simple
+      - description: 자원 유형
+        explode: false
+        in: path
+        name: resource_type
+        required: true
+        schema:
+          description: 자원 유형
+          title: Resource Type
+          type: string
+        style: simple
+      - description: 자원 ID
+        explode: false
+        in: path
+        name: resource_identifier
+        required: true
+        schema:
+          description: 자원 ID
+          title: Resource Identifier
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ShowResourceByComponents
+      tags:
+      - resourcemanager.v1.ResourcesAPIs
+      x-action-id: scp-resourcemanager:resource:show
+      x-api-access-level: READ
+      x-api-created-date: "20240724"
+      x-api-modified-date: "20240724"
+      x-api-scope: "[OPENAPI, CLI, CONSOLE]"
+      x-cli: resource_show_by_components
+      x-resource: Resource
+  /v1/resources/{srn}:
+    get:
+      description: get a specific resource
+      operationId: showResource
+      parameters:
+      - description: SRN
+        explode: false
+        in: path
+        name: srn
+        required: true
+        schema:
+          description: SRN
+          title: Srn
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ShowResource
+      tags:
+      - resourcemanager.v1.ResourcesAPIs
+      x-action-id: scp-resourcemanager:resource:show
+      x-api-access-level: READ
+      x-api-created-date: "20240724"
+      x-api-modified-date: "20240724"
+      x-api-scope: "[OPENAPI, CLI, CONSOLE]"
+      x-cli: resource_show
+      x-resource: Resource
+  /v1/tags:
+    delete:
+      description: delete tags
+      operationId: deleteTags
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagDeleteRequest'
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: DeleteTags
+      tags:
+      - resourcemanager.v1.TagsAPIs
+      x-action-id: scp-resourcemanager:tag:delete-bulk
+      x-api-access-level: DELETE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "[OPENAPI, CLI, CONSOLE]"
+      x-cli: tag_delete
+      x-resource: Tag
+    get:
+      description: get tag list
+      operationId: listTags
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: 어카운트 ID
+        explode: true
+        in: query
+        name: account_id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: 태그 key
+        explode: true
+        in: query
+        name: key
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: 태그 value
+        explode: true
+        in: query
+        name: value
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: 자원 ID
+        explode: true
+        in: query
+        name: resource_identifier
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: 자원 유형
+        explode: true
+        in: query
+        name: resource_type
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: 서비스 유형
+        explode: true
+        in: query
+        name: service_type
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: SCP 운영 단위
+        explode: true
+        in: query
+        name: offering
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: 리전
+        explode: true
+        in: query
+        name: region
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ListTags
+      tags:
+      - resourcemanager.v1.TagsAPIs
+      x-action-id: scp-resourcemanager:tag:list
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "[OPENAPI, CLI, CONSOLE]"
+      x-cli: tag_list
+      x-resource: Tag
+  /v1/tags/bulk:
+    put:
+      description: update tags
+      operationId: updateTags
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagsSetRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagBaseResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: UpdateTags
+      tags:
+      - resourcemanager.v1.TagsAPIs
+      x-action-id: scp-resourcemanager:tag:set-bulk
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "[OPENAPI, CLI, CONSOLE]"
+      x-cli: tag_set
+      x-resource: Tag
+  /v1/tags/keys:
+    get:
+      description: get tag key list
+      operationId: listTagKeys
+      parameters:
+      - description: 태그 key
+        explode: true
+        in: query
+        name: key
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagKeyResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ListTagKeys
+      tags:
+      - resourcemanager.v1.TagsAPIs
+      x-action-id: scp-resourcemanager:tag:key:list
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "[OPENAPI, CLI, CONSOLE]"
+      x-cli: tag_key_list
+      x-resource: Tag
+  /v1/tags/list: {}
+  /v1/tags/values:
+    get:
+      description: get tag value list
+      operationId: listTagValues
+      parameters:
+      - description: 태그 key
+        explode: true
+        in: query
+        name: key
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: 태그 value
+        explode: true
+        in: query
+        name: value
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagValueResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ListTagValues
+      tags:
+      - resourcemanager.v1.TagsAPIs
+      x-action-id: scp-resourcemanager:tag:value:list
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "[OPENAPI, CLI, CONSOLE]"
+      x-cli: tag_value_list
+      x-resource: Tag
+  /v1/tags/{region}/{service_type}/{resource_type}/{resource_identifier}:
+    delete:
+      description: delete components tags
+      operationId: deleteComponentsTags
+      parameters:
+      - description: 리전
+        explode: false
+        in: path
+        name: region
+        required: true
+        schema:
+          description: 리전
+          title: Region
+          type: string
+        style: simple
+      - description: 서비스 유형
+        explode: false
+        in: path
+        name: service_type
+        required: true
+        schema:
+          description: 서비스 유형
+          title: Service Type
+          type: string
+        style: simple
+      - description: 자원 유형
+        explode: false
+        in: path
+        name: resource_type
+        required: true
+        schema:
+          description: 자원 유형
+          title: Resource Type
+          type: string
+        style: simple
+      - description: 자원 ID
+        explode: false
+        in: path
+        name: resource_identifier
+        required: true
+        schema:
+          description: 자원 ID
+          title: Resource Identifier
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: DeleteComponentsTags
+      tags:
+      - resourcemanager.v1.TagsAPIs
+      x-action-id: scp-resourcemanager:resource-tag:delete-bulk
+      x-api-access-level: DELETE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "[OPENAPI, CLI, CONSOLE]"
+      x-cli: components_tag_delete
+      x-resource: Tag
+    get:
+      description: get components tags
+      operationId: listComponentsTags
+      parameters:
+      - description: 리전
+        explode: false
+        in: path
+        name: region
+        required: true
+        schema:
+          description: 리전
+          title: Region
+          type: string
+        style: simple
+      - description: 서비스 유형
+        explode: false
+        in: path
+        name: service_type
+        required: true
+        schema:
+          description: 서비스 유형
+          title: Service Type
+          type: string
+        style: simple
+      - description: 자원 유형
+        explode: false
+        in: path
+        name: resource_type
+        required: true
+        schema:
+          description: 자원 유형
+          title: Resource Type
+          type: string
+        style: simple
+      - description: 자원 ID
+        explode: false
+        in: path
+        name: resource_identifier
+        required: true
+        schema:
+          description: 자원 ID
+          title: Resource Identifier
+          type: string
+        style: simple
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagShowListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ListComponentsTags
+      tags:
+      - resourcemanager.v1.TagsAPIs
+      x-action-id: scp-resourcemanager:resource-tag:list
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "[OPENAPI, CLI, CONSOLE]"
+      x-cli: components_tag_list
+      x-resource: Tag
+  /v1/tags/{region}/{service_type}/{resource_type}/{resource_identifier}/bulk:
+    put:
+      description: update components tags
+      operationId: updateComponentsTags
+      parameters:
+      - description: 리전
+        explode: false
+        in: path
+        name: region
+        required: true
+        schema:
+          description: 리전
+          title: Region
+          type: string
+        style: simple
+      - description: 서비스 유형
+        explode: false
+        in: path
+        name: service_type
+        required: true
+        schema:
+          description: 서비스 유형
+          title: Service Type
+          type: string
+        style: simple
+      - description: 자원 유형
+        explode: false
+        in: path
+        name: resource_type
+        required: true
+        schema:
+          description: 자원 유형
+          title: Resource Type
+          type: string
+        style: simple
+      - description: 자원 ID
+        explode: false
+        in: path
+        name: resource_identifier
+        required: true
+        schema:
+          description: 자원 ID
+          title: Resource Identifier
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagSetRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagBaseResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: UpdateComponentsTags
+      tags:
+      - resourcemanager.v1.TagsAPIs
+      x-action-id: scp-resourcemanager:resource-tag:set-bulk
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "[OPENAPI, CLI, CONSOLE]"
+      x-cli: components_tag_set
+      x-resource: Tag
+  /v1/tags/{region}/{service_type}/{resource_type}/{resource_identifier}/{key}:
+    delete:
+      description: delete a specific components tag
+      operationId: deleteComponentsTag
+      parameters:
+      - description: 리전
+        explode: false
+        in: path
+        name: region
+        required: true
+        schema:
+          description: 리전
+          title: Region
+          type: string
+        style: simple
+      - description: 서비스 유형
+        explode: false
+        in: path
+        name: service_type
+        required: true
+        schema:
+          description: 서비스 유형
+          title: Service Type
+          type: string
+        style: simple
+      - description: 자원 유형
+        explode: false
+        in: path
+        name: resource_type
+        required: true
+        schema:
+          description: 자원 유형
+          title: Resource Type
+          type: string
+        style: simple
+      - description: 자원 ID
+        explode: false
+        in: path
+        name: resource_identifier
+        required: true
+        schema:
+          description: 자원 ID
+          title: Resource Identifier
+          type: string
+        style: simple
+      - description: 태그 key
+        explode: false
+        in: path
+        name: key
+        required: true
+        schema:
+          description: 태그 key
+          title: Key
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: DeleteComponentsTag
+      tags:
+      - resourcemanager.v1.TagsAPIs
+      x-action-id: scp-resourcemanager:tag:delete
+      x-api-access-level: DELETE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "[OPENAPI, CLI, CONSOLE]"
+      x-cli: components_tag_key_delete
+      x-resource: Tag
+    get:
+      description: get a specific components tag
+      operationId: showComponentsTag
+      parameters:
+      - description: 리전
+        explode: false
+        in: path
+        name: region
+        required: true
+        schema:
+          description: 리전
+          title: Region
+          type: string
+        style: simple
+      - description: 서비스 유형
+        explode: false
+        in: path
+        name: service_type
+        required: true
+        schema:
+          description: 서비스 유형
+          title: Service Type
+          type: string
+        style: simple
+      - description: 자원 유형
+        explode: false
+        in: path
+        name: resource_type
+        required: true
+        schema:
+          description: 자원 유형
+          title: Resource Type
+          type: string
+        style: simple
+      - description: 자원 ID
+        explode: false
+        in: path
+        name: resource_identifier
+        required: true
+        schema:
+          description: 자원 ID
+          title: Resource Identifier
+          type: string
+        style: simple
+      - description: 태그 key
+        explode: false
+        in: path
+        name: key
+        required: true
+        schema:
+          description: 태그 key
+          title: Key
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ShowComponentsTag
+      tags:
+      - resourcemanager.v1.TagsAPIs
+      x-action-id: scp-resourcemanager:tag:show
+      x-api-access-level: READ
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "[OPENAPI, CLI, CONSOLE]"
+      x-cli: components_tag_show
+      x-resource: Tag
+    put:
+      description: update components tag value
+      operationId: updateComponentsTagValue
+      parameters:
+      - description: 리전
+        explode: false
+        in: path
+        name: region
+        required: true
+        schema:
+          description: 리전
+          title: Region
+          type: string
+        style: simple
+      - description: 서비스 유형
+        explode: false
+        in: path
+        name: service_type
+        required: true
+        schema:
+          description: 서비스 유형
+          title: Service Type
+          type: string
+        style: simple
+      - description: 자원 유형
+        explode: false
+        in: path
+        name: resource_type
+        required: true
+        schema:
+          description: 자원 유형
+          title: Resource Type
+          type: string
+        style: simple
+      - description: 자원 ID
+        explode: false
+        in: path
+        name: resource_identifier
+        required: true
+        schema:
+          description: 자원 ID
+          title: Resource Identifier
+          type: string
+        style: simple
+      - description: 태그 key
+        explode: false
+        in: path
+        name: key
+        required: true
+        schema:
+          description: 태그 key
+          title: Key
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagValue'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagBaseResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: UpdateComponentsTagValue
+      tags:
+      - resourcemanager.v1.TagsAPIs
+      x-action-id: scp-resourcemanager:tag:set
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "[OPENAPI, CLI, CONSOLE]"
+      x-cli: components_tag_value_set
+      x-resource: Tag
+  /v1/tags/{srn}:
+    delete:
+      description: delete resource tags
+      operationId: deleteResourceTags
+      parameters:
+      - description: SRN
+        explode: false
+        in: path
+        name: srn
+        required: true
+        schema:
+          description: SRN
+          title: Srn
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: DeleteResourceTags
+      tags:
+      - resourcemanager.v1.TagsAPIs
+      x-action-id: scp-resourcemanager:resource-tag:delete-bulk
+      x-api-access-level: DELETE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "[OPENAPI, CLI, CONSOLE]"
+      x-cli: resource_tag_delete
+      x-resource: Tag
+    get:
+      description: get resource tags
+      operationId: listResourceTags
+      parameters:
+      - description: SRN
+        explode: false
+        in: path
+        name: srn
+        required: true
+        schema:
+          description: SRN
+          title: Srn
+          type: string
+        style: simple
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagShowListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ListResourceTags
+      tags:
+      - resourcemanager.v1.TagsAPIs
+      x-action-id: scp-resourcemanager:resource-tag:list
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "[OPENAPI, CLI, CONSOLE]"
+      x-cli: resource_tag_list
+      x-resource: Tag
+  /v1/tags/{srn}/bulk:
+    put:
+      description: update resource tags
+      operationId: updateResourceTags
+      parameters:
+      - description: SRN
+        explode: false
+        in: path
+        name: srn
+        required: true
+        schema:
+          description: SRN
+          title: Srn
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagSetRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagBaseResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: UpdateResourceTags
+      tags:
+      - resourcemanager.v1.TagsAPIs
+      x-action-id: scp-resourcemanager:resource-tag:set-bulk
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "[OPENAPI, CLI, CONSOLE]"
+      x-cli: resource_tag_set
+      x-resource: Tag
+  /v1/tags/{srn}/{key}:
+    delete:
+      description: delete a specific resource tag
+      operationId: deleteResourceTag
+      parameters:
+      - description: SRN
+        explode: false
+        in: path
+        name: srn
+        required: true
+        schema:
+          description: SRN
+          title: Srn
+          type: string
+        style: simple
+      - description: 태그 key
+        explode: false
+        in: path
+        name: key
+        required: true
+        schema:
+          description: 태그 key
+          title: Key
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: DeleteResourceTag
+      tags:
+      - resourcemanager.v1.TagsAPIs
+      x-action-id: scp-resourcemanager:tag:delete
+      x-api-access-level: DELETE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "[OPENAPI, CLI, CONSOLE]"
+      x-cli: resource_tag_key_delete
+      x-resource: Tag
+    get:
+      description: get a specific resource tag
+      operationId: showResourceTag
+      parameters:
+      - description: SRN
+        explode: false
+        in: path
+        name: srn
+        required: true
+        schema:
+          description: SRN
+          title: Srn
+          type: string
+        style: simple
+      - description: 태그 key
+        explode: false
+        in: path
+        name: key
+        required: true
+        schema:
+          description: 태그 key
+          title: Key
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ShowResourceTag
+      tags:
+      - resourcemanager.v1.TagsAPIs
+      x-action-id: scp-resourcemanager:tag:show
+      x-api-access-level: READ
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "[OPENAPI, CLI, CONSOLE]"
+      x-cli: resource_tag_show
+      x-resource: Tag
+    put:
+      description: update resource tag value
+      operationId: updateResourceTagValue
+      parameters:
+      - description: SRN
+        explode: false
+        in: path
+        name: srn
+        required: true
+        schema:
+          description: SRN
+          title: Srn
+          type: string
+        style: simple
+      - description: 태그 key
+        explode: false
+        in: path
+        name: key
+        required: true
+        schema:
+          description: 태그 key
+          title: Key
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagValue'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagBaseResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: UpdateResourceTagValue
+      tags:
+      - resourcemanager.v1.TagsAPIs
+      x-action-id: scp-resourcemanager:tag:set
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope: "[OPENAPI, CLI, CONSOLE]"
+      x-cli: resource_tag_value_set
+      x-resource: Tag
+components:
+  schemas:
+    CreateResourceGroup:
+      example:
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: name
+        created_at: 2024-05-17T00:23:17Z
+        description: description
+        id: id
+        modified_at: 2024-05-17T00:23:17Z
+        region: region
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        srn: srn
+        resource_types:
+        - resource_types
+        - resource_types
+        tags:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      properties:
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        description:
+          nullable: true
+          type: string
+        id:
+          description: 리소스 그룹 ID
+          title: Id
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          nullable: true
+          type: string
+        region:
+          nullable: true
+          type: string
+        resource_types:
+          items:
+            type: string
+          nullable: true
+          type: array
+        srn:
+          description: SRN
+          title: Srn
+          type: string
+        tags:
+          items:
+            $ref: '#/components/schemas/Tag'
+          nullable: true
+          type: array
+      required:
+      - created_at
+      - created_by
+      - description
+      - id
+      - modified_at
+      - modified_by
+      - name
+      - region
+      - srn
+      title: CreateResourceGroup
+    Resource:
+      example:
+        resource_type: resource_type
+        created_at: 2000-01-23T04:56:07.000+00:00
+        created_by: created_by
+        product_name: product_name
+        srn: srn
+        tags:
+        - "{}"
+        - "{}"
+        account_id: account_id
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        resource_type_display_name: resource_type_display_name
+        id: id
+        state: state
+        modified_at: 2024-05-17T00:23:17Z
+        region: region
+        resource_name: resource_name
+      properties:
+        account_id:
+          nullable: true
+          type: string
+        created_at:
+          format: date-time
+          nullable: true
+          type: string
+        created_by:
+          nullable: true
+          type: string
+        id:
+          description: ID
+          title: Id
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        product_name:
+          nullable: true
+          type: string
+        region:
+          nullable: true
+          type: string
+        resource_name:
+          nullable: true
+          type: string
+        resource_type:
+          nullable: true
+          type: string
+        resource_type_display_name:
+          nullable: true
+          type: string
+        srn:
+          nullable: true
+          type: string
+        state:
+          nullable: true
+          type: string
+        tags:
+          items:
+            type: object
+          nullable: true
+          type: array
+      required:
+      - account_id
+      - created_at
+      - created_by
+      - id
+      - modified_at
+      - modified_by
+      - product_name
+      - region
+      - resource_name
+      - resource_type
+      - resource_type_display_name
+      - srn
+      - state
+      - tags
+      title: Resource
+    ResourceGroup:
+      example:
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: name
+        created_at: 2024-05-17T00:23:17Z
+        description: description
+        id: id
+        modified_at: 2024-05-17T00:23:17Z
+        region: region
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        resource_types:
+        - resource_types
+        - resource_types
+        tags:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      properties:
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        description:
+          nullable: true
+          type: string
+        id:
+          description: 리소스 그룹 ID
+          title: Id
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          nullable: true
+          type: string
+        region:
+          nullable: true
+          type: string
+        resource_types:
+          items:
+            type: string
+          nullable: true
+          type: array
+        tags:
+          items:
+            $ref: '#/components/schemas/Tag'
+          nullable: true
+          type: array
+      required:
+      - created_at
+      - created_by
+      - description
+      - id
+      - modified_at
+      - modified_by
+      - name
+      - region
+      title: ResourceGroup
+    ResourceGroupCreateRequest:
+      example:
+        name: name
+        description: description
+        resource_types:
+        - resource_types
+        - resource_types
+        tags:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      properties:
+        description:
+          nullable: true
+          type: string
+        name:
+          description: 리소스 그룹명
+          maxLength: 64
+          minLength: 3
+          pattern: "^[가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9+=,.\\@_-]+$"
+          title: Name
+          type: string
+        resource_types:
+          items:
+            type: string
+          nullable: true
+          type: array
+        tags:
+          items:
+            $ref: '#/components/schemas/Tag'
+          nullable: true
+          type: array
+      required:
+      - description
+      - name
+      title: ResourceGroupCreateRequest
+    ResourceGroupCreateResponse:
+      example:
+        resource_group:
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          id: id
+          modified_at: 2024-05-17T00:23:17Z
+          region: region
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          srn: srn
+          resource_types:
+          - resource_types
+          - resource_types
+          tags:
+          - value: value
+            key: key
+          - value: value
+            key: key
+      properties:
+        resource_group:
+          $ref: '#/components/schemas/CreateResourceGroup'
+      required:
+      - resource_group
+      title: ResourceGroupCreateResponse
+    ResourceGroupPageResponse:
+      example:
+        size: 20
+        count: 20
+        page: 0
+        resource_groups:
+        - modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          id: id
+          modified_at: 2024-05-17T00:23:17Z
+          region: region
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          resource_types:
+          - resource_types
+          - resource_types
+          tags:
+          - value: value
+            key: key
+          - value: value
+            key: key
+        - modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          id: id
+          modified_at: 2024-05-17T00:23:17Z
+          region: region
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          resource_types:
+          - resource_types
+          - resource_types
+          tags:
+          - value: value
+            key: key
+          - value: value
+            key: key
+        sort:
+        - sort
+        - sort
+      properties:
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        resource_groups:
+          items:
+            $ref: '#/components/schemas/ResourceGroup'
+          type: array
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - count
+      - page
+      - resource_groups
+      - size
+      title: ResourceGroupPageResponse
+    ResourceGroupShowResponse:
+      example:
+        resource_group:
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          id: id
+          modified_at: 2024-05-17T00:23:17Z
+          region: region
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          srn: srn
+          resource_types:
+          - resource_types
+          - resource_types
+          tags:
+          - value: value
+            key: key
+          - value: value
+            key: key
+      properties:
+        resource_group:
+          $ref: '#/components/schemas/CreateResourceGroup'
+      required:
+      - resource_group
+      title: ResourceGroupShowResponse
+    ResourceGroupsDeleteRequest:
+      example:
+        ids:
+        - ids
+        - ids
+      properties:
+        ids:
+          items:
+            type: string
+          nullable: true
+          type: array
+      title: ResourceGroupsDeleteRequest
+    ResourcePageResponse:
+      example:
+        size: 20
+        count: 20
+        resources:
+        - resource_type: resource_type
+          created_at: 2000-01-23T04:56:07.000+00:00
+          created_by: created_by
+          product_name: product_name
+          srn: srn
+          tags:
+          - "{}"
+          - "{}"
+          account_id: account_id
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          resource_type_display_name: resource_type_display_name
+          id: id
+          state: state
+          modified_at: 2024-05-17T00:23:17Z
+          region: region
+          resource_name: resource_name
+        - resource_type: resource_type
+          created_at: 2000-01-23T04:56:07.000+00:00
+          created_by: created_by
+          product_name: product_name
+          srn: srn
+          tags:
+          - "{}"
+          - "{}"
+          account_id: account_id
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          resource_type_display_name: resource_type_display_name
+          id: id
+          state: state
+          modified_at: 2024-05-17T00:23:17Z
+          region: region
+          resource_name: resource_name
+        page: 0
+        sort:
+        - sort
+        - sort
+      properties:
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        resources:
+          items:
+            $ref: '#/components/schemas/Resource'
+          type: array
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - count
+      - page
+      - resources
+      - size
+      title: ResourcePageResponse
+    ResourceSearchRequest:
+      example:
+        resource_type: resource_type
+        tags: tags
+      properties:
+        resource_type:
+          nullable: true
+          type: string
+        tags:
+          nullable: true
+          type: string
+      required:
+      - tags
+      title: ResourceSearchRequest
+    ResourceShowResponse:
+      example:
+        resource:
+          resource_type: resource_type
+          created_at: 2000-01-23T04:56:07.000+00:00
+          created_by: created_by
+          product_name: product_name
+          srn: srn
+          tags:
+          - "{}"
+          - "{}"
+          account_id: account_id
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          resource_type_display_name: resource_type_display_name
+          id: id
+          state: state
+          modified_at: 2024-05-17T00:23:17Z
+          region: region
+          resource_name: resource_name
+      properties:
+        resource:
+          $ref: '#/components/schemas/Resource'
+      required:
+      - resource
+      title: ResourceShowResponse
+    SrnKeyValue:
+      example:
+        value: value
+        key: key
+        srn: srn
+      properties:
+        key:
+          description: 태그 key
+          maxLength: 128
+          minLength: 1
+          pattern: "^[a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ \\+\\-\\=\\.\\_:/@]*$"
+          title: Key
+          type: string
+        srn:
+          description: SRN
+          title: Srn
+          type: string
+        value:
+          description: 태그 value
+          maxLength: 256
+          minLength: 0
+          pattern: "^[a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ \\+\\-\\=\\.\\_:/@]*$"
+          title: Value
+          type: string
+      required:
+      - key
+      - srn
+      - value
+      title: SrnKeyValue
+    SrnTag:
+      example:
+        tag:
+          value: value
+          key: key
+        srn: srn
+      properties:
+        srn:
+          description: SRN
+          title: Srn
+          type: string
+        tag:
+          $ref: '#/components/schemas/Tag'
+      required:
+      - srn
+      - tag
+      title: SrnTag
+    SrnTagList:
+      example:
+        srn: srn
+        tags:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      properties:
+        srn:
+          description: SRN
+          title: Srn
+          type: string
+        tags:
+          items:
+            $ref: '#/components/schemas/Tag'
+          type: array
+      required:
+      - srn
+      - tags
+      title: SrnTagList
+    Tag:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          description: 태그 key
+          title: Key
+          type: string
+        value:
+          nullable: true
+          type: string
+      required:
+      - key
+      - value
+      title: Tag
+    TagBaseResponse:
+      example:
+        content:
+          key:
+          - value: value
+            key: key
+          - value: value
+            key: key
+      properties:
+        content:
+          additionalProperties:
+            items:
+              $ref: '#/components/schemas/Tag'
+          title: Content
+      required:
+      - content
+      title: TagBaseResponse
+    TagDeleteRequest:
+      example:
+        tags:
+          key:
+          - tags
+          - tags
+      properties:
+        tags:
+          additionalProperties:
+            items:
+              type: string
+          title: Tags
+      required:
+      - tags
+      title: TagDeleteRequest
+    TagKeyResponse:
+      example:
+        keys:
+        - keys
+        - keys
+        count: 0
+      properties:
+        count:
+          title: Count
+          type: integer
+        keys:
+          items:
+            type: string
+          type: array
+      required:
+      - count
+      - keys
+      title: TagKeyResponse
+    TagListResponse:
+      example:
+        size: 20
+        count: 20
+        page: 0
+        sort:
+        - sort
+        - sort
+        content:
+        - value: value
+          key: key
+          srn: srn
+        - value: value
+          key: key
+          srn: srn
+      properties:
+        content:
+          items:
+            $ref: '#/components/schemas/SrnKeyValue'
+          type: array
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - content
+      - count
+      - page
+      - size
+      title: TagListResponse
+    TagSetRequest:
+      example:
+        tags:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      properties:
+        tags:
+          items:
+            $ref: '#/components/schemas/Tag'
+          type: array
+      required:
+      - tags
+      title: TagSetRequest
+    TagShowListResponse:
+      example:
+        size: 20
+        count: 20
+        page: 0
+        sort:
+        - sort
+        - sort
+        content:
+          srn: srn
+          tags:
+          - value: value
+            key: key
+          - value: value
+            key: key
+      properties:
+        content:
+          $ref: '#/components/schemas/SrnTagList'
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - content
+      - count
+      - page
+      - size
+      title: TagShowListResponse
+    TagShowResponse:
+      example:
+        content:
+          tag:
+            value: value
+            key: key
+          srn: srn
+      properties:
+        content:
+          $ref: '#/components/schemas/SrnTag'
+      required:
+      - content
+      title: TagShowResponse
+    TagValue:
+      example:
+        value: value
+      properties:
+        value:
+          description: SRN
+          title: Value
+          type: string
+      required:
+      - value
+      title: TagValue
+    TagValueResponse:
+      example:
+        values:
+        - values
+        - values
+        count: 0
+      properties:
+        count:
+          title: Count
+          type: integer
+        values:
+          items:
+            type: string
+          type: array
+      required:
+      - count
+      - values
+      title: TagValueResponse
+    TagsSetRequest:
+      example:
+        tags:
+          key:
+          - value: value
+            key: key
+          - value: value
+            key: key
+      properties:
+        tags:
+          additionalProperties:
+            items:
+              $ref: '#/components/schemas/Tag'
+          title: Tags
+      required:
+      - tags
+      title: TagsSetRequest
+    ValidationErrorModel:
+      example:
+        msg: msg
+        loc:
+        - loc
+        - loc
+        ctx: "{}"
+        type_: type_
+      properties:
+        ctx:
+          nullable: true
+          type: object
+        loc:
+          items:
+            type: string
+          nullable: true
+          type: array
+        msg:
+          nullable: true
+          type: string
+        type_:
+          nullable: true
+          type: string
+      title: ValidationErrorModel
+  securitySchemes:
+    X-Auth-Token:
+      in: header
+      name: X-Auth-Token
+      type: apiKey
+x-app-name: scp-resourcemanager
+x-package-name: scp_resourcemanager
+x-service-type: scp-resourcemanager
+x-url-prefix: ""

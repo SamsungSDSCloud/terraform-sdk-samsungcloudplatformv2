@@ -1,0 +1,51 @@
+# VpnTunnelShowWithStatusResponse
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**VpnTunnel** | [**VpnTunnelDetailWithStatus**](VpnTunnelDetailWithStatus.md) |  | 
+
+## Methods
+
+### NewVpnTunnelShowWithStatusResponse
+
+`func NewVpnTunnelShowWithStatusResponse(vpnTunnel VpnTunnelDetailWithStatus, ) *VpnTunnelShowWithStatusResponse`
+
+NewVpnTunnelShowWithStatusResponse instantiates a new VpnTunnelShowWithStatusResponse object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewVpnTunnelShowWithStatusResponseWithDefaults
+
+`func NewVpnTunnelShowWithStatusResponseWithDefaults() *VpnTunnelShowWithStatusResponse`
+
+NewVpnTunnelShowWithStatusResponseWithDefaults instantiates a new VpnTunnelShowWithStatusResponse object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetVpnTunnel
+
+`func (o *VpnTunnelShowWithStatusResponse) GetVpnTunnel() VpnTunnelDetailWithStatus`
+
+GetVpnTunnel returns the VpnTunnel field if non-nil, zero value otherwise.
+
+### GetVpnTunnelOk
+
+`func (o *VpnTunnelShowWithStatusResponse) GetVpnTunnelOk() (*VpnTunnelDetailWithStatus, bool)`
+
+GetVpnTunnelOk returns a tuple with the VpnTunnel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVpnTunnel
+
+`func (o *VpnTunnelShowWithStatusResponse) SetVpnTunnel(v VpnTunnelDetailWithStatus)`
+
+SetVpnTunnel sets VpnTunnel field to given value.
+
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

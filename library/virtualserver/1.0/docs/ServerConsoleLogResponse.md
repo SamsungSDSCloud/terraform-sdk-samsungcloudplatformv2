@@ -1,0 +1,66 @@
+# ServerConsoleLogResponse
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Output** | Pointer to **NullableString** |  | [optional] 
+
+## Methods
+
+### NewServerConsoleLogResponse
+
+`func NewServerConsoleLogResponse() *ServerConsoleLogResponse`
+
+NewServerConsoleLogResponse instantiates a new ServerConsoleLogResponse object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewServerConsoleLogResponseWithDefaults
+
+`func NewServerConsoleLogResponseWithDefaults() *ServerConsoleLogResponse`
+
+NewServerConsoleLogResponseWithDefaults instantiates a new ServerConsoleLogResponse object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetOutput
+
+`func (o *ServerConsoleLogResponse) GetOutput() string`
+
+GetOutput returns the Output field if non-nil, zero value otherwise.
+
+### GetOutputOk
+
+`func (o *ServerConsoleLogResponse) GetOutputOk() (*string, bool)`
+
+GetOutputOk returns a tuple with the Output field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOutput
+
+`func (o *ServerConsoleLogResponse) SetOutput(v string)`
+
+SetOutput sets Output field to given value.
+
+### HasOutput
+
+`func (o *ServerConsoleLogResponse) HasOutput() bool`
+
+HasOutput returns a boolean if a field has been set.
+
+### SetOutputNil
+
+`func (o *ServerConsoleLogResponse) SetOutputNil(b bool)`
+
+ SetOutputNil sets the value for Output to be an explicit nil
+
+### UnsetOutput
+`func (o *ServerConsoleLogResponse) UnsetOutput()`
+
+UnsetOutput ensures that no value is present for Output, not even an explicit nil
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

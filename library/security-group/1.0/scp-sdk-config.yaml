@@ -1,0 +1,5 @@
+packageName: securitygroup
+generatorName: go
+withGoMod: false
+structPrefix: true
+enumClassPrefix: true

@@ -1,0 +1,5 @@
+packageName: gslb
+generatorName: go
+withGoMod: false
+structPrefix: true
+enumClassPrefix: true

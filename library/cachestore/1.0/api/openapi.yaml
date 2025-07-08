@@ -1,0 +1,3781 @@
+openapi: 3.1.0
+info:
+  description: OSSCP Scp-dbaas Project
+  title: OSSCP Scp-dbaas Project
+  version: 0.0.1.dev2150
+servers:
+- url: ""
+tags:
+- description: Dbaas Common API
+  name: dbaas-common.v1.DbaasCommonApi
+- description: Dbaas Admin API
+  name: dbaas-common.v1.DbaasAdminApi
+- description: Postgresql Master Data API
+  name: postgresql.v1.PostgresqlMasterDataApi
+- description: Postgresql Clusters API
+  name: postgresql.v1.PostgresqlClustersApi
+- description: Postgresql Clusters API
+  name: postgresql.v1.PostgresqlInstancesApi
+- description: Postgresql Parameters API
+  name: postgresql.v1.PostgresqlParametersApi
+- description: Postgresql Replicas API
+  name: postgresql.v1.PostgresqlReplicaApi
+- description: Postgresql Backups API
+  name: postgresql.v1.PostgresqlBackupApi
+- description: Postgresql Auditlog API
+  name: postgresql.v1.PostgresqlAuditlogApi
+- description: Postgresql MinorPatch API
+  name: postgresql.v1.PostgresqlMinorPatchApi
+- description: Postgresql Maintenance API
+  name: postgresql.v1.PostgresqlMaintenanceApi
+- description: Postgresql Log Export API
+  name: postgresql.v1.PostgresqlLogExportApi
+- description: Postgresql Archive API
+  name: postgresql.v1.PostgresqlArchiveApi
+- description: Postgresql Console API
+  name: postgresql.v1.PostgresqlConsoleApi
+- description: Mariadb Master Data API
+  name: mariadb.v1.MariadbMasterDataApi
+- description: Mariadb Clusters API
+  name: mariadb.v1.MariadbClustersApi
+- description: Mariadb Clusters API
+  name: mariadb.v1.MariadbInstancesApi
+- description: Mariadb Replicas API
+  name: mariadb.v1.MariadbReplicasApi
+- description: Mariadb Backups API
+  name: mariadb.v1.MariadbBackupApi
+- description: Mariadb Auditlog API
+  name: mariadb.v1.MariadbAuditlogApi
+- description: Mariadb Parameters API
+  name: mariadb.v1.MariadbParametersApi
+- description: Mariadb Maintenance API
+  name: mariadb.v1.MariadbMaintenanceApi
+- description: Mariadb MinorPatch API
+  name: mariadb.v1.MariadbMinorPatchApi
+- description: Mariadb Log Export API
+  name: mariadb.v1.MariadbLogExportApi
+- description: Mariadb Archive API
+  name: mariadb.v1.MariadbArchiveApi
+- description: Mariadb Console API
+  name: mariadb.v1.MariadbConsoleApi
+- description: CacheStore Master Data API
+  name: cachestore.v1.CacheStoreMasterDataApi
+- description: CacheStore Clusters API
+  name: cachestore.v1.CacheStoreClustersApi
+- description: CacheStore Instances API
+  name: cachestore.v1.CacheStoreInstancesApi
+- description: CacheStore Backups API
+  name: cachestore.v1.CacheStoreBackupApi
+- description: CacheStore Parameters API
+  name: cachestore.v1.CacheStoreParametersApi
+- description: CacheStore Command API
+  name: cachestore.v1.CacheStoreCommandApi
+- description: CacheStore Maintenance API
+  name: cachestore.v1.CacheStoreMaintenanceApi
+- description: Mysql Master Data API
+  name: mysql.v1.MysqlMasterDataApi
+- description: Mysql Clusters API
+  name: mysql.v1.MysqlClustersApi
+- description: Mysql Replicas API
+  name: mysql.v1.MysqlReplicaApi
+- description: Mysql Backups API
+  name: mysql.v1.MysqlBackupApi
+- description: Mysql Clusters API
+  name: mysql.v1.MysqlInstancesApi
+- description: Mysql Maintenance API
+  name: mysql.v1.MysqlMaintenanceApi
+- description: Mysql Parameters API
+  name: mysql.v1.MysqlParametersApi
+- description: Mysql MinorPatch API
+  name: mysql.v1.MysqlMinorPatchApi
+- description: Mysql Log Export API
+  name: mysql.v1.MysqlLogExportApi
+- description: Mysql Archive API
+  name: mysql.v1.MysqlArchiveApi
+- description: Mysql Console API
+  name: mysql.v1.MysqlConsoleApi
+- description: Sqlserver Master Data API
+  name: sqlserver.v1.SqlserverMasterDataApi
+- description: Sqlserver Clusters API
+  name: sqlserver.v1.SqlserverClustersApi
+- description: Sqlserver Instances API
+  name: sqlserver.v1.SqlserverInstancesApi
+- description: Sqlserver Maintenance API
+  name: sqlserver.v1.SqlserverMaintenanceApi
+- description: Sqlserver Parameters API
+  name: sqlserver.v1.SqlserverParametersApi
+- description: Sqlserver Backups API
+  name: sqlserver.v1.SqlserverBackupApi
+- description: Sqlserver Databases API
+  name: sqlserver.v1.SqlserverDatabasesApi
+- description: Sqlserver Auditlog API
+  name: sqlserver.v1.SqlserverAuditlogApi
+- description: Sqlserver MinorPatch API
+  name: sqlserver.v1.SqlserverMinorPatchApi
+- description: Sqlserver Log Export API
+  name: sqlserver.v1.SqlserverLogExportApi
+- description: Sqlserver Console API
+  name: sqlserver.v1.SqlserverConsoleApi
+- description: SearchEngine Master Data API
+  name: searchengine.v1.SearchEngineMasterDataApi
+- description: SearchEngine Clusters API
+  name: searchengine.v1.SearchEngineClustersApi
+- description: SearchEngine Backups API
+  name: searchengine.v1.SearchEngineBackupApi
+- description: SearchEngine Instances API
+  name: searchengine.v1.SearchEngineInstancesApi
+- description: SearchEngine Maintenance API
+  name: searchengine.v1.SearchEngineMaintenanceApi
+- description: EventStreams Master Data API
+  name: eventstreams.v1.EventStreamsMasterDataApi
+- description: EventStreams Clusters API
+  name: eventstreams.v1.EventStreamsClustersApi
+- description: EventStreams Instances API
+  name: eventstreams.v1.EventStreamsInstancesApi
+- description: EventStreams Maintenance API
+  name: eventstreams.v1.EventStreamsMaintenanceApi
+- description: EventStreams Parameters API
+  name: eventstreams.v1.EventStreamsParametersApi
+- description: Epas Master Data API
+  name: epas.v1.EpasMasterDataApi
+- description: EPAS Clusters API
+  name: epas.v1.EpasClustersApi
+- description: Epas Clusters API
+  name: epas.v1.EpasInstancesApi
+- description: Epas Parameters API
+  name: epas.v1.EpasParametersApi
+- description: Epas Replicas API
+  name: epas.v1.EpasReplicasApi
+- description: Epas Backups API
+  name: epas.v1.EpasBackupApi
+- description: Epas Auditlog API
+  name: epas.v1.EpasAuditlogApi
+- description: Epas MinorPatch API
+  name: epas.v1.EpasMinorPatchApi
+- description: Epas Maintenance API
+  name: epas.v1.EpasMaintenanceApi
+- description: Epas Log Export API
+  name: epas.v1.EpasLogExportApi
+- description: Epas Archive API
+  name: epas.v1.EpasArchiveApi
+- description: Epas Console API
+  name: epas.v1.EpasConsoleApi
+- description: Vertica Clusters API
+  name: vertica.v1.VerticaClustersApi
+- description: Vertica Master Data API
+  name: vertica.v1.VerticaMasterDataApi
+- description: Vertica Backups API
+  name: vertica.v1.VerticaBackupApi
+- description: Vertica Instances API
+  name: vertica.v1.VerticaInstancesApi
+- description: Vertica Maintenance API
+  name: vertica.v1.VerticaMaintenanceApi
+paths:
+  /v1/block-storage-groups/{block_storage_group_id}/resize:
+    post:
+      description: Set Block Storage Size.
+      operationId: cachestoreSetBlockStorageSize
+      parameters:
+      - description: Block storage group ID
+        explode: false
+        in: path
+        name: block_storage_group_id
+        required: true
+        schema:
+          description: Block storage group ID
+          title: Block Storage Group Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResizeBlockStorageGroupRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - X-Auth-Token: []
+      summary: Set Block Storage Size
+      tags:
+      - cachestore.v1.CacheStoreInstancesApi
+      x-action-id: cachestore:SetBlockStorageSize
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250701"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreSetBlockStorageSize
+      x-resource: CacheStore
+  /v1/clusters:
+    get:
+      description: List Clusters.
+      operationId: cachestoreListClusters
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          pattern: ^(name|service_state|created_at):(asc|desc)$
+          type: string
+        style: form
+      - description: Cluster name
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Service state
+        explode: true
+        in: query
+        name: service_state
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterPageResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Clusters
+      tags:
+      - cachestore.v1.CacheStoreClustersApi
+      x-action-id: cachestore:ListClusters
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreListClusters
+      x-resource: CacheStore
+    post:
+      description: Create Cluster.
+      operationId: cachestoreCreateCluster
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RedisClusterCreateRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Create Cluster
+      tags:
+      - cachestore.v1.CacheStoreClustersApi
+      x-action-id: cachestore:CreateCluster
+      x-api-access-level: CREATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreCreateCluster
+      x-resource: CacheStore
+  /v1/clusters/{cluster_id}:
+    delete:
+      description: Terminate Cluster.
+      operationId: cachestoreDeleteCluster
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Terminate Cluster
+      tags:
+      - cachestore.v1.CacheStoreClustersApi
+      x-action-id: cachestore:DeleteCluster
+      x-api-access-level: DELETE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreDeleteCluster
+      x-resource: CacheStore
+    get:
+      description: Show Cluster.
+      operationId: cachestoreShowCluster
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RedisClusterDetailResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Show Cluster
+      tags:
+      - cachestore.v1.CacheStoreClustersApi
+      x-action-id: cachestore:ShowCluster
+      x-api-access-level: READ
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreShowCluster
+      x-resource: CacheStore
+  /v1/clusters/{cluster_id}/backup-histories:
+    get:
+      description: List Backup Histories.
+      operationId: cachestoreListBackupHistories
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      - description: Number of backup lists
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      - description: Backup list page
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupHistoryListApiResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Backup Histories
+      tags:
+      - cachestore.v1.CacheStoreBackupApi
+      x-action-id: cachestore:ListBackupHistories
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreListBackupHistories
+      x-resource: CacheStore
+    put:
+      description: Remove Backup Histories.
+      operationId: cachestoreRemoveBackupHistories
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BackupHistoryNumberRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Remove Backup Histories
+      tags:
+      - cachestore.v1.CacheStoreBackupApi
+      x-action-id: cachestore:RemoveBackupHistories
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreRemoveBackupHistories
+      x-resource: CacheStore
+  /v1/clusters/{cluster_id}/backups:
+    delete:
+      description: Unset Backup.
+      operationId: cachestoreUnsetBackup
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Unset Backup
+      tags:
+      - cachestore.v1.CacheStoreBackupApi
+      x-action-id: cachestore:UnsetBackup
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreUnsetBackup
+      x-resource: CacheStore
+    post:
+      description: Set Backup.
+      operationId: cachestoreSetBackup
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BackupSettingExcludingArchiveRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Set Backup
+      tags:
+      - cachestore.v1.CacheStoreBackupApi
+      x-action-id: cachestore:SetBackup
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreSetBackup
+      x-resource: CacheStore
+  /v1/clusters/{cluster_id}/commands:
+    get:
+      description: List Commands.
+      operationId: cachestoreListCommands
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Commands
+      tags:
+      - cachestore.v1.CacheStoreCommandApi
+      x-action-id: cachestore:ListCommands
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreListCommands
+      x-resource: CacheStore
+    put:
+      description: Update Commands.
+      operationId: cachestoreSetCommands
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyCommandRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Update Commands
+      tags:
+      - cachestore.v1.CacheStoreCommandApi
+      x-action-id: cachestore:SetCommands
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreSetCommands
+      x-resource: CacheStore
+  /v1/clusters/{cluster_id}/commands/sync:
+    post:
+      description: Synchronize Commands.
+      operationId: cachestoreSyncCommands
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Synchronize Commands
+      tags:
+      - cachestore.v1.CacheStoreCommandApi
+      x-action-id: cachestore:SyncCommands
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreSyncCommands
+      x-resource: CacheStore
+  /v1/clusters/{cluster_id}/maintenance:
+    delete:
+      description: Unset Maintenance.
+      operationId: cachestoreUnsetMaintenance
+      parameters:
+      - description: DB cluster id
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: DB cluster id
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Unset Maintenance
+      tags:
+      - cachestore.v1.CacheStoreMaintenanceApi
+      x-action-id: cachestore:UnsetMaintenance
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreUnsetMaintenance
+      x-resource: CacheStore
+    post:
+      description: Set Maintenance.
+      operationId: cachestoreSetMaintenance
+      parameters:
+      - description: DB cluster id
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: DB cluster id
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MaintenanceRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Set Maintenance
+      tags:
+      - cachestore.v1.CacheStoreMaintenanceApi
+      x-action-id: cachestore:SetMaintenance
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreSetMaintenance
+      x-resource: CacheStore
+  /v1/clusters/{cluster_id}/parameters:
+    get:
+      description: List Parameter Values.
+      operationId: cachestoreListParameterValues
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParametersResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Parameter Values
+      tags:
+      - cachestore.v1.CacheStoreParametersApi
+      x-action-id: cachestore:ListParameterValues
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreListParameterValues
+      x-resource: CacheStore
+    put:
+      description: Set Parameter Values.
+      operationId: cachestoreSetParameterValues
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParametersRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Set Parameter Values
+      tags:
+      - cachestore.v1.CacheStoreParametersApi
+      x-action-id: cachestore:SetParameterValues
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreSetParameterValues
+      x-resource: CacheStore
+  /v1/clusters/{cluster_id}/parameters/sync:
+    post:
+      description: Synchronize Parameter Values.
+      operationId: cachestoreSyncParameterValues
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Synchronize Parameter Values
+      tags:
+      - cachestore.v1.CacheStoreParametersApi
+      x-action-id: cachestore:SyncParameterValues
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreSyncParameterValues
+      x-resource: CacheStore
+  /v1/clusters/{cluster_id}/restart:
+    post:
+      description: Restart Cluster.
+      operationId: cachestoreRestartCluster
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Restart Cluster
+      tags:
+      - cachestore.v1.CacheStoreClustersApi
+      x-action-id: cachestore:RestartCluster
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreRestartCluster
+      x-resource: CacheStore
+  /v1/clusters/{cluster_id}/restore:
+    post:
+      description: Create Restore Cluster.
+      operationId: cachestoreCreateRestore
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClusterRestoreRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Create Restore Cluster
+      tags:
+      - cachestore.v1.CacheStoreClustersApi
+      x-action-id: cachestore:CreateRestore
+      x-api-access-level: CREATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreCreateRestore
+      x-resource: CacheStore
+  /v1/clusters/{cluster_id}/security-group-rules:
+    post:
+      description: Set Security Group Rules.
+      operationId: cachestoreSetSecurityGroupRules
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSecurityGroupRulesRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - X-Auth-Token: []
+      summary: Set Security Group Rules
+      tags:
+      - cachestore.v1.CacheStoreInstancesApi
+      x-action-id: cachestore:SetSecurityGroupRules
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreSetSecurityGroupRules
+      x-resource: CacheStore
+  /v1/clusters/{cluster_id}/start:
+    post:
+      description: Start Cluster.
+      operationId: cachestoreStartCluster
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Start Cluster
+      tags:
+      - cachestore.v1.CacheStoreClustersApi
+      x-action-id: cachestore:StartCluster
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreStartCluster
+      x-resource: CacheStore
+  /v1/clusters/{cluster_id}/stop:
+    post:
+      description: Stop Cluster.
+      operationId: cachestoreStopCluster
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Stop Cluster
+      tags:
+      - cachestore.v1.CacheStoreClustersApi
+      x-action-id: cachestore:StopCluster
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreStopCluster
+      x-resource: CacheStore
+  /v1/clusters/{cluster_id}/switchover:
+    post:
+      description: Switchover Cluster.
+      operationId: cachestoreSwitchoverCluster
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RedisSwitchOverTargetRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Switchover Cluster
+      tags:
+      - cachestore.v1.CacheStoreClustersApi
+      x-action-id: cachestore:SwitchoverCluster
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreSwitchoverCluster
+      x-resource: CacheStore
+  /v1/clusters/{cluster_id}/sync-state:
+    post:
+      description: Synchronize Cluster State.
+      operationId: cachestoreSyncClusterState
+      parameters:
+      - description: Cluster ID
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - X-Auth-Token: []
+      summary: Synchronize Cluster State
+      tags:
+      - cachestore.v1.CacheStoreClustersApi
+      x-action-id: cachestore:SyncClusterState
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreSyncClusterState
+      x-resource: CacheStore
+  /v1/engine-versions:
+    get:
+      description: List Engine Versions.
+      operationId: cachestoreListEngineVersions
+      parameters:
+      - description: DBaaS engine version ID
+        explode: true
+        in: query
+        name: id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Product image type
+        explode: true
+        in: query
+        name: product_image_type
+        required: false
+        schema:
+          $ref: '#/components/schemas/ProductImageType'
+        style: form
+      - description: EoS included
+        explode: true
+        in: query
+        name: eos_included
+        required: false
+        schema:
+          default: false
+          description: EoS included
+          title: Eos Included
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EngineListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Engine Versions
+      tags:
+      - cachestore.v1.CacheStoreMasterDataApi
+      x-action-id: cachestore:ListEngineVersions
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreListEngineVersions
+      x-resource: CacheStore
+  /v1/engine-versions/{dbaas_engine_version_id}/properties:
+    get:
+      description: List Engine Version Properties.
+      operationId: cachestoreListEngineVersionProperties
+      parameters:
+      - description: DBaaS engine version ID
+        explode: false
+        in: path
+        name: dbaas_engine_version_id
+        required: true
+        schema:
+          description: DBaaS engine version ID
+          title: Dbaas Engine Version Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnginePropertyListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Engine Version Properties
+      tags:
+      - cachestore.v1.CacheStoreMasterDataApi
+      x-action-id: cachestore:ListEngineVersionProperties
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreListEngineVersionProperties
+      x-resource: CacheStore
+  /v1/instance-groups/{instance_group_id}/resize:
+    post:
+      description: Set Server Type.
+      operationId: cachestoreSetServerType
+      parameters:
+      - description: Instance group ID
+        explode: false
+        in: path
+        name: instance_group_id
+        required: true
+        schema:
+          description: Instance group ID
+          title: Instance Group Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstanceGroupResizeRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - X-Auth-Token: []
+      summary: Set Server Type
+      tags:
+      - cachestore.v1.CacheStoreInstancesApi
+      x-action-id: cachestore:SetServerType
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreSetServerType
+      x-resource: CacheStore
+  /v1/parameter-groups:
+    get:
+      description: List Parameter Groups.
+      operationId: cachestoreListParameterGroups
+      parameters:
+      - description: Software major version
+        explode: true
+        in: query
+        name: major_version
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Product image type
+        explode: true
+        in: query
+        name: product_image_type
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterGroupListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Parameter Groups
+      tags:
+      - cachestore.v1.CacheStoreMasterDataApi
+      x-action-id: cachestore:ListParameterGroups
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreListParameterGroups
+      x-resource: CacheStore
+  /v1/parameters:
+    get:
+      description: List Parameters.
+      operationId: cachestoreListParameters
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Parameter group ID
+        explode: true
+        in: query
+        name: dbaas_parameter_group_id
+        required: true
+        schema:
+          description: Parameter group ID
+          title: Dbaas Parameter Group Id
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterPageResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Parameters
+      tags:
+      - cachestore.v1.CacheStoreMasterDataApi
+      x-action-id: cachestore:ListParameters
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreListParameters
+      x-resource: CacheStore
+  /v1/requests/{request_id}:
+    get:
+      description: Show Request.
+      operationId: cachestoreShowRequest
+      parameters:
+      - description: Request ID
+        explode: false
+        in: path
+        name: request_id
+        required: true
+        schema:
+          description: Request ID
+          title: Request Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestStateResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Show Request
+      tags:
+      - cachestore.v1.CacheStoreMasterDataApi
+      x-action-id: cachestore:ShowRequest
+      x-api-access-level: READ
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreShowRequest
+      x-resource: CacheStore
+  /v1/server-types:
+    get:
+      description: List Server Types.
+      operationId: cachestoreListServerTypes
+      parameters:
+      - description: Server type name
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Product image type
+        explode: true
+        in: query
+        name: product_image_type
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerTypeListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Server Types
+      tags:
+      - cachestore.v1.CacheStoreMasterDataApi
+      x-action-id: cachestore:ListServerTypes
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250701"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2025-07-01
+      x-operation-id: cachestoreListServerTypes
+      x-resource: CacheStore
+components:
+  schemas:
+    AsyncResponse:
+      example:
+        resource: ""
+        request_id: request_id
+      properties:
+        request_id:
+          description: Request ID
+          title: Request Id
+          type: string
+        resource:
+          allOf:
+          - $ref: '#/components/schemas/ResourceInfo'
+          description: Resource
+      required:
+      - request_id
+      - resource
+      title: AsyncResponse
+    BackupHistoryApiItem:
+      example:
+        backup_state: backup_state
+        backup_start_at: backup_start_at
+        backup_state_detail: backup_state_detail
+        backup_end_at: backup_end_at
+        backup_history_number: backup_history_number
+        backup_size_gb: 0.8008281904610115
+        software_version: software_version
+      properties:
+        backup_end_at:
+          description: Backup end time
+          title: Backup End At
+          type: string
+        backup_history_number:
+          description: Backup id
+          title: Backup History Number
+          type: string
+        backup_size_gb:
+          description: Backup amount(GB)
+          title: Backup Size Gb
+          type: number
+        backup_start_at:
+          description: Backup start time
+          title: Backup Start At
+          type: string
+        backup_state:
+          description: Backup state
+          title: Backup State
+          type: string
+        backup_state_detail:
+          nullable: true
+          type: string
+        software_version:
+          description: Software version
+          title: Software Version
+          type: string
+      required:
+      - backup_end_at
+      - backup_history_number
+      - backup_size_gb
+      - backup_start_at
+      - backup_state
+      - software_version
+      title: BackupHistoryApiItem
+    BackupHistoryListApiResponse:
+      example:
+        contents:
+        - backup_state: backup_state
+          backup_start_at: backup_start_at
+          backup_state_detail: backup_state_detail
+          backup_end_at: backup_end_at
+          backup_history_number: backup_history_number
+          backup_size_gb: 0.8008281904610115
+          software_version: software_version
+        - backup_state: backup_state
+          backup_start_at: backup_start_at
+          backup_state_detail: backup_state_detail
+          backup_end_at: backup_end_at
+          backup_history_number: backup_history_number
+          backup_size_gb: 0.8008281904610115
+          software_version: software_version
+        total_count: 6
+      properties:
+        contents:
+          description: backup list information
+          items:
+            $ref: '#/components/schemas/BackupHistoryApiItem'
+          type: array
+        total_count:
+          description: total number of backup history
+          title: Total Count
+          type: integer
+      required:
+      - contents
+      - total_count
+      title: BackupHistoryListApiResponse
+    BackupHistoryNumberRequest:
+      example:
+        backup_history_number:
+        - backup_history_number
+        - backup_history_number
+      properties:
+        backup_history_number:
+          description: Backup id
+          items:
+            type: string
+          type: array
+      required:
+      - backup_history_number
+      title: BackupHistoryNumberRequest
+    BackupOption:
+      example:
+        retention_period_day: retention_period_day
+        starting_time_hour: starting_time_hour
+      properties:
+        retention_period_day:
+          nullable: true
+          type: string
+        starting_time_hour:
+          nullable: true
+          type: string
+      title: BackupOption
+    BackupSettingExcludingArchiveRequest:
+      example:
+        retention_period_day: retention_period_day
+        starting_time_hour: starting_time_hour
+      properties:
+        retention_period_day:
+          description: Backup retention period (day)
+          pattern: "^([7-9]|^[1-2]\\d|^3[0-5])$"
+          title: Retention Period Day
+          type: string
+        starting_time_hour:
+          description: Backup starting time (hour)
+          pattern: "^(\\d|1\\d|2[0-3])$"
+          title: Starting Time Hour
+          type: string
+      required:
+      - retention_period_day
+      - starting_time_hour
+      title: BackupSettingExcludingArchiveRequest
+    BlockStorageGroupRequest:
+      example:
+        volume_type: ""
+        role_type: ""
+        size_gb: 424
+      properties:
+        role_type:
+          allOf:
+          - $ref: '#/components/schemas/BlockStorageGroupRoleType'
+          description: Role type
+        size_gb:
+          description: Size in GB
+          maximum: 5120
+          minimum: 16
+          multipleOf: 8
+          title: Size Gb
+          type: integer
+        volume_type:
+          allOf:
+          - $ref: '#/components/schemas/VolumeType'
+          default: SSD
+          description: Volume type
+      required:
+      - role_type
+      - size_gb
+      title: BlockStorageGroupRequest
+    BlockStorageGroupResponse:
+      example:
+        volume_type: ""
+        role_type: ""
+        name: name
+        size_gb: 5
+        id: id
+      properties:
+        id:
+          description: ID
+          title: Id
+          type: string
+        name:
+          description: Name
+          title: Name
+          type: string
+        role_type:
+          allOf:
+          - $ref: '#/components/schemas/BlockStorageGroupRoleType'
+          description: Role type
+        size_gb:
+          description: Size in GB
+          title: Size Gb
+          type: integer
+        volume_type:
+          allOf:
+          - $ref: '#/components/schemas/VolumeType'
+          description: Volume type
+      required:
+      - id
+      - name
+      - role_type
+      - size_gb
+      - volume_type
+      title: BlockStorageGroupResponse
+    BlockStorageGroupRoleType:
+      enum:
+      - OS
+      - DATA
+      - ARCHIVE
+      - TEMP
+      - BACKUP
+      title: BlockStorageGroupRoleType
+      type: string
+    ClusterPageResponse:
+      example:
+        size: 20
+        contents:
+        - service_state: ""
+          account_id: account_id
+          role_type: ORIGIN
+          ha_enabled: false
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          created_at: 2024-05-17T00:23:17Z
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          instance_count: 0
+        - service_state: ""
+          account_id: account_id
+          role_type: ORIGIN
+          ha_enabled: false
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          created_at: 2024-05-17T00:23:17Z
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          modified_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          instance_count: 0
+        count: 20
+        page: 0
+        sort:
+        - sort
+        - sort
+      properties:
+        contents:
+          items:
+            $ref: '#/components/schemas/ClusterResponse'
+          nullable: true
+          type: array
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - contents
+      - count
+      - page
+      - size
+      title: ClusterPageResponse
+    ClusterResponse:
+      example:
+        service_state: ""
+        account_id: account_id
+        role_type: ORIGIN
+        ha_enabled: false
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: name
+        created_at: 2024-05-17T00:23:17Z
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        modified_at: 2024-05-17T00:23:17Z
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        instance_count: 0
+      properties:
+        account_id:
+          description: Account ID
+          title: Account Id
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        ha_enabled:
+          default: false
+          description: HA availability
+          title: Ha Enabled
+          type: boolean
+        id:
+          description: ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        instance_count:
+          default: 0
+          description: Instance Count
+          title: Instance Count
+          type: integer
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: Cluster name
+          title: Name
+          type: string
+        role_type:
+          $ref: '#/components/schemas/ClusterRoleType'
+        service_state:
+          allOf:
+          - $ref: '#/components/schemas/ServiceState'
+          description: Service state
+      required:
+      - account_id
+      - created_at
+      - created_by
+      - id
+      - modified_at
+      - modified_by
+      - name
+      - role_type
+      - service_state
+      title: ClusterResponse
+    ClusterRestoreRequest:
+      example:
+        block_storage_groups:
+        - volume_type: ""
+          role_type: ""
+          size_gb: 424
+        - volume_type: ""
+          role_type: ""
+          size_gb: 424
+        instance_name_prefix: instance_name_prefix
+        server_type_name: server_type_name
+        name: name
+        backup_history_number: backup_history_number
+        backup_recovery_time: 2000-01-23T04:56:07.000+00:00
+        maintenance_option:
+          period_hour: period_hour
+          starting_time: starting_time
+          starting_day_of_week: ""
+        allowable_ip_addresses:
+        - allowable_ip_addresses
+        - allowable_ip_addresses
+        tags:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      properties:
+        allowable_ip_addresses:
+          default: []
+          description: Allowed IP addresses list
+          items:
+            type: string
+          type: array
+        backup_history_number:
+          nullable: true
+          type: string
+        backup_recovery_time:
+          format: date-time
+          nullable: true
+          type: string
+        block_storage_groups:
+          items:
+            $ref: '#/components/schemas/BlockStorageGroupRequest'
+          nullable: true
+          type: array
+        instance_name_prefix:
+          description: Instance name prefix
+          maxLength: 16
+          minLength: 3
+          pattern: "^[a-z][a-zA-Z0-9\\-]*$"
+          title: Instance Name Prefix
+          type: string
+        maintenance_option:
+          $ref: '#/components/schemas/MaintenanceOption'
+        name:
+          description: Cluster name
+          maxLength: 20
+          minLength: 3
+          pattern: "^[a-zA-Z]*$"
+          title: Name
+          type: string
+        server_type_name:
+          description: Server type name
+          title: Server Type Name
+          type: string
+        tags:
+          items:
+            $ref: '#/components/schemas/Tag'
+          nullable: true
+          type: array
+      required:
+      - instance_name_prefix
+      - name
+      - server_type_name
+      title: ClusterRestoreRequest
+    ClusterRoleType:
+      enum:
+      - ORIGIN
+      - REPLICA
+      - RECOVERY
+      - SECONDARY
+      - MIGRATION
+      title: ClusterRoleType
+      type: string
+    CommandItem:
+      example:
+        applied_value: applied_value
+        name: name
+        description: description
+        id: id
+        modifiable: true
+      properties:
+        applied_value:
+          nullable: true
+          type: string
+        description:
+          nullable: true
+          type: string
+        id:
+          title: Id
+          type: string
+        modifiable:
+          title: Modifiable
+          type: boolean
+        name:
+          title: Name
+          type: string
+      required:
+      - id
+      - modifiable
+      - name
+      title: CommandItem
+    CommandListResponse:
+      example:
+        contents:
+        - applied_value: applied_value
+          name: name
+          description: description
+          id: id
+          modifiable: true
+        - applied_value: applied_value
+          name: name
+          description: description
+          id: id
+          modifiable: true
+        last_updated_at: last_updated_at
+        total_count: 0
+      properties:
+        contents:
+          description: Command list information
+          items:
+            $ref: '#/components/schemas/CommandItem'
+          type: array
+        last_updated_at:
+          description: Modification time
+          title: Last Updated At
+          type: string
+        total_count:
+          description: Total number of commands
+          title: Total Count
+          type: integer
+      required:
+      - contents
+      - last_updated_at
+      - total_count
+      title: CommandListResponse
+    DayOfWeek:
+      enum:
+      - MON
+      - TUE
+      - WED
+      - THU
+      - FRI
+      - SAT
+      - SUN
+      title: DayOfWeek
+      type: string
+    Engine:
+      example:
+        major_version: major_version
+        os_type: os_type
+        os_version: os_version
+        name: name
+        id: id
+        software_version: software_version
+        product_image_type: product_image_type
+        end_of_service: false
+      properties:
+        end_of_service:
+          default: false
+          description: End of Service
+          title: End Of Service
+          type: boolean
+        id:
+          description: ID
+          title: Id
+          type: string
+        major_version:
+          description: Software major version
+          title: Major Version
+          type: string
+        name:
+          description: DBaaS engine version name
+          title: Name
+          type: string
+        os_type:
+          description: OS type
+          title: Os Type
+          type: string
+        os_version:
+          description: OS version
+          title: Os Version
+          type: string
+        product_image_type:
+          nullable: true
+          type: string
+        software_version:
+          description: Software version
+          title: Software Version
+          type: string
+      required:
+      - id
+      - major_version
+      - name
+      - os_type
+      - os_version
+      - software_version
+      title: Engine
+    EngineListResponse:
+      example:
+        contents:
+        - major_version: major_version
+          os_type: os_type
+          os_version: os_version
+          name: name
+          id: id
+          software_version: software_version
+          product_image_type: product_image_type
+          end_of_service: false
+        - major_version: major_version
+          os_type: os_type
+          os_version: os_version
+          name: name
+          id: id
+          software_version: software_version
+          product_image_type: product_image_type
+          end_of_service: false
+      properties:
+        contents:
+          description: DBaaS engine list
+          items:
+            $ref: '#/components/schemas/Engine'
+          type: array
+      required:
+      - contents
+      title: EngineListResponse
+    EngineProperty:
+      example:
+        name: name
+        value: value
+      properties:
+        name:
+          description: DBaas engine property name
+          title: Name
+          type: string
+        value:
+          description: DBaas engine property value
+          title: Value
+          type: string
+      required:
+      - name
+      - value
+      title: EngineProperty
+    EnginePropertyListResponse:
+      example:
+        contents:
+        - name: name
+          value: value
+        - name: name
+          value: value
+      properties:
+        contents:
+          description: DBaas engine property list
+          items:
+            $ref: '#/components/schemas/EngineProperty'
+          type: array
+      required:
+      - contents
+      title: EnginePropertyListResponse
+    InstanceGroupResizeRequest:
+      example:
+        server_type_name: server_type_name
+      properties:
+        server_type_name:
+          description: Server type name
+          title: Server Type Name
+          type: string
+      required:
+      - server_type_name
+      title: InstanceGroupResizeRequest
+    InstanceGroupRoleType:
+      enum:
+      - ACTIVE
+      - ACTIVE_STANDBY
+      - PRIMARY_SECONDARY
+      - MASTER
+      - MASTER_REPLICA
+      - REPLICA
+      - SENTINEL
+      - MASTER_DATA
+      - DATA
+      - KIBANA
+      - DASHBOARDS
+      - ZOOKEEPER_BROKER
+      - BROKER
+      - ZOOKEEPER
+      - AKHQ
+      - CONSOLE
+      title: InstanceGroupRoleType
+      type: string
+    InstanceRequest:
+      example:
+        role_type: ""
+        service_ip_address: service_ip_address
+        public_ip_id: public_ip_id
+      properties:
+        public_ip_id:
+          nullable: true
+          type: string
+        role_type:
+          allOf:
+          - $ref: '#/components/schemas/InstanceRoleType'
+          description: Role type
+        service_ip_address:
+          nullable: true
+          type: string
+      required:
+      - role_type
+      title: InstanceRequest
+    InstanceRoleType:
+      enum:
+      - ACTIVE
+      - STANDBY
+      - PRIMARY
+      - SECONDARY
+      - MASTER
+      - REPLICA
+      - SENTINEL
+      - MASTER_DATA
+      - DATA
+      - KIBANA
+      - DASHBOARDS
+      - ZOOKEEPER_BROKER
+      - BROKER
+      - ZOOKEEPER
+      - AKHQ
+      - CONSOLE
+      title: InstanceRoleType
+      type: string
+    MaintenanceOption:
+      example:
+        period_hour: period_hour
+        starting_time: starting_time
+        starting_day_of_week: ""
+      properties:
+        period_hour:
+          description: Period in hours
+          pattern: "^(0\\.5|[1-5]\\.5|[1-9]|1[0-9]|2[0-4])$"
+          title: Period Hour
+          type: string
+        starting_day_of_week:
+          allOf:
+          - $ref: '#/components/schemas/DayOfWeek'
+          description: Starting day of week
+        starting_time:
+          description: Starting time
+          title: Starting Time
+          type: string
+      title: MaintenanceOption
+    MaintenanceRequest:
+      example:
+        start_time: start_time
+        start_day_of_week: ""
+        term_hour: term_hour
+        start_minute: start_minute
+      properties:
+        start_day_of_week:
+          allOf:
+          - $ref: '#/components/schemas/DayOfWeek'
+          description: start_day_of_week
+        start_minute:
+          description: start_minute
+          title: Start Minute
+          type: string
+        start_time:
+          description: start_time
+          title: Start Time
+          type: string
+        term_hour:
+          description: term_hour
+          pattern: "^(0\\.5|[1-5]\\.5|[1-9]|1[0-9]|2[0-4])$"
+          title: Term Hour
+          type: string
+      required:
+      - start_day_of_week
+      - start_minute
+      - start_time
+      - term_hour
+      title: MaintenanceRequest
+    MaintenanceResponseOption:
+      example:
+        period_hour: period_hour
+        starting_time: starting_time
+        starting_day_of_week: MON
+        use_maintenance_option: false
+      properties:
+        period_hour:
+          nullable: true
+          type: string
+        starting_day_of_week:
+          $ref: '#/components/schemas/DayOfWeek'
+        starting_time:
+          nullable: true
+          type: string
+        use_maintenance_option:
+          default: false
+          description: Maintenance period usage state
+          title: Use Maintenance Option
+          type: boolean
+      title: MaintenanceResponseOption
+    ModifyCommandItem:
+      example:
+        name: name
+        id: id
+        new_value: new_value
+      properties:
+        id:
+          title: Id
+          type: string
+        name:
+          title: Name
+          type: string
+        new_value:
+          description: Command modification value
+          maxLength: 20
+          minLength: 3
+          title: New Value
+          type: string
+      required:
+      - id
+      - name
+      - new_value
+      title: ModifyCommandItem
+    ModifyCommandRequest:
+      example:
+        commands:
+        - name: name
+          id: id
+          new_value: new_value
+        - name: name
+          id: id
+          new_value: new_value
+      properties:
+        commands:
+          description: Apply command information
+          items:
+            $ref: '#/components/schemas/ModifyCommandItem'
+          type: array
+      required:
+      - commands
+      title: ModifyCommandRequest
+    ParameterDTO:
+      example:
+        applied_value: applied_value
+        allows_value: allows_value
+        data_type: data_type
+        is_modifiable: true
+        name: name
+        description: description
+        software_type: software_type
+        default_value: default_value
+        id: id
+        apply_type: apply_type
+      properties:
+        allows_value:
+          description: Parameter allows value
+          title: Allows Value
+          type: string
+        applied_value:
+          description: Parameter applied value
+          title: Applied Value
+          type: string
+        apply_type:
+          description: Parameter apply type
+          title: Apply Type
+          type: string
+        data_type:
+          description: Parameter data type
+          title: Data Type
+          type: string
+        default_value:
+          description: Parameter default value
+          title: Default Value
+          type: string
+        description:
+          nullable: true
+          type: string
+        id:
+          description: Parameter id
+          title: Id
+          type: string
+        is_modifiable:
+          description: Parameter is_modifiable
+          title: Is Modifiable
+          type: boolean
+        name:
+          description: Parameter name
+          title: Name
+          type: string
+        software_type:
+          nullable: true
+          type: string
+      required:
+      - allows_value
+      - applied_value
+      - apply_type
+      - data_type
+      - default_value
+      - description
+      - id
+      - is_modifiable
+      - name
+      - software_type
+      title: ParameterDTO
+    ParameterGroup:
+      example:
+        major_version: major_version
+        product_type: product_type
+        name: name
+        id: id
+        product_image_type: product_image_type
+      properties:
+        id:
+          description: Parameter group ID
+          title: Id
+          type: string
+        major_version:
+          description: Software major version
+          title: Major Version
+          type: string
+        name:
+          description: Parameter group name
+          title: Name
+          type: string
+        product_image_type:
+          description: Product image type
+          title: Product Image Type
+          type: string
+        product_type:
+          description: Product type
+          title: Product Type
+          type: string
+      required:
+      - id
+      - major_version
+      - name
+      - product_image_type
+      - product_type
+      title: ParameterGroup
+    ParameterGroupListResponse:
+      example:
+        contents:
+        - major_version: major_version
+          product_type: product_type
+          name: name
+          id: id
+          product_image_type: product_image_type
+        - major_version: major_version
+          product_type: product_type
+          name: name
+          id: id
+          product_image_type: product_image_type
+        sort:
+        - sort
+        - sort
+      properties:
+        contents:
+          description: Parameter group list
+          items:
+            $ref: '#/components/schemas/ParameterGroup'
+          type: array
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - contents
+      title: ParameterGroupListResponse
+    ParameterPageResponse:
+      example:
+        size: 20
+        contents:
+        - name: name
+          description: description
+          software_type: software_type
+          default_value: default_value
+          dbaas_parameter_group_id: dbaas_parameter_group_id
+          id: id
+        - name: name
+          description: description
+          software_type: software_type
+          default_value: default_value
+          dbaas_parameter_group_id: dbaas_parameter_group_id
+          id: id
+        count: 20
+        page: 0
+        sort:
+        - sort
+        - sort
+      properties:
+        contents:
+          description: Parameter list
+          items:
+            $ref: '#/components/schemas/Parameters'
+          type: array
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - contents
+      - count
+      - page
+      - size
+      title: ParameterPageResponse
+    ParameterRequest:
+      example:
+        old_value: old_value
+        id: id
+        new_value: new_value
+      properties:
+        id:
+          description: Parameter id
+          title: Id
+          type: string
+        new_value:
+          description: Parameter new value
+          title: New Value
+          type: string
+        old_value:
+          description: Parameter old value
+          title: Old Value
+          type: string
+      required:
+      - id
+      - new_value
+      - old_value
+      title: ParameterRequest
+    Parameters:
+      example:
+        name: name
+        description: description
+        software_type: software_type
+        default_value: default_value
+        dbaas_parameter_group_id: dbaas_parameter_group_id
+        id: id
+      properties:
+        dbaas_parameter_group_id:
+          description: Parameter id
+          title: Dbaas Parameter Group Id
+          type: string
+        default_value:
+          description: Parameter default value
+          title: Default Value
+          type: string
+        description:
+          description: Parameter description
+          title: Description
+          type: string
+        id:
+          description: Parameter id
+          title: Id
+          type: string
+        name:
+          description: Parameter name
+          title: Name
+          type: string
+        software_type:
+          nullable: true
+          type: string
+      required:
+      - dbaas_parameter_group_id
+      - default_value
+      - description
+      - id
+      - name
+      - software_type
+      title: Parameters
+    ParametersRequest:
+      example:
+        parameters:
+        - old_value: old_value
+          id: id
+          new_value: new_value
+        - old_value: old_value
+          id: id
+          new_value: new_value
+      properties:
+        parameters:
+          description: Parameter request list
+          items:
+            $ref: '#/components/schemas/ParameterRequest'
+          type: array
+      required:
+      - parameters
+      title: ParametersRequest
+    ParametersResponse:
+      example:
+        contents:
+        - applied_value: applied_value
+          allows_value: allows_value
+          data_type: data_type
+          is_modifiable: true
+          name: name
+          description: description
+          software_type: software_type
+          default_value: default_value
+          id: id
+          apply_type: apply_type
+        - applied_value: applied_value
+          allows_value: allows_value
+          data_type: data_type
+          is_modifiable: true
+          name: name
+          description: description
+          software_type: software_type
+          default_value: default_value
+          id: id
+          apply_type: apply_type
+        count: 0
+        modified_at: modified_at
+      properties:
+        contents:
+          description: Parameter contents
+          items:
+            $ref: '#/components/schemas/ParameterDTO'
+          type: array
+        count:
+          description: Parameter count
+          title: Count
+          type: integer
+        modified_at:
+          description: Modification time
+          title: Modified At
+          type: string
+      required:
+      - contents
+      - count
+      - modified_at
+      title: ParametersResponse
+    ProductImageType:
+      enum:
+      - PostgreSQL Community
+      - MariaDB Community
+      - MySQL Community
+      - EPAS
+      - Microsoft SQL Server Enterprise
+      - Microsoft SQL Server Standard
+      - Redis OSS Sentinel
+      - Valkey Sentinel
+      - Kafka
+      - Elasticsearch Enterprise
+      - OpenSearch
+      - Vertica Enterprise
+      - Vertica Community
+      title: ProductImageType
+      type: string
+    ProductType:
+      enum:
+      - PostgreSQL Community
+      - EPAS
+      - MariaDB
+      - MySQL
+      - Redis
+      - Microsoft SQL Server
+      - Search Engine
+      - Event Streams
+      - Vertica
+      title: ProductType
+      type: string
+    RedisBlockStorageGroupRequest:
+      example:
+        volume_type: ""
+        role_type: ""
+        size_gb: 798
+      properties:
+        role_type:
+          allOf:
+          - $ref: '#/components/schemas/BlockStorageGroupRoleType'
+          description: Role type
+        size_gb:
+          description: Size in GB
+          maximum: 5120
+          minimum: 56
+          multipleOf: 8
+          title: Size Gb
+          type: integer
+        volume_type:
+          allOf:
+          - $ref: '#/components/schemas/VolumeType'
+          default: SSD
+          description: Volume type
+      required:
+      - role_type
+      - size_gb
+      title: RedisBlockStorageGroupRequest
+    RedisClusterCreateRequest:
+      example:
+        init_config_option:
+          backup_option:
+            retention_period_day: retention_period_day
+            starting_time_hour: starting_time_hour
+          database_user_password: database_user_password
+          database_port: 6190
+          sentinel_port: 39907
+        instance_name_prefix: instance_name_prefix
+        timezone: timezone
+        instance_groups:
+        - block_storage_groups:
+          - volume_type: ""
+            role_type: ""
+            size_gb: 798
+          - volume_type: ""
+            role_type: ""
+            size_gb: 798
+          role_type: ""
+          instances:
+          - role_type: ""
+            service_ip_address: service_ip_address
+            public_ip_id: public_ip_id
+          - role_type: ""
+            service_ip_address: service_ip_address
+            public_ip_id: public_ip_id
+          server_type_name: server_type_name
+        - block_storage_groups:
+          - volume_type: ""
+            role_type: ""
+            size_gb: 798
+          - volume_type: ""
+            role_type: ""
+            size_gb: 798
+          role_type: ""
+          instances:
+          - role_type: ""
+            service_ip_address: service_ip_address
+            public_ip_id: public_ip_id
+          - role_type: ""
+            service_ip_address: service_ip_address
+            public_ip_id: public_ip_id
+          server_type_name: server_type_name
+        tags:
+        - value: value
+          key: key
+        - value: value
+          key: key
+        dbaas_engine_version_id: dbaas_engine_version_id
+        replica_count: 1
+        ha_enabled: false
+        name: name
+        nat_enabled: false
+        subnet_id: subnet_id
+        maintenance_option:
+          period_hour: period_hour
+          starting_time: starting_time
+          starting_day_of_week: ""
+        allowable_ip_addresses:
+        - allowable_ip_addresses
+        - allowable_ip_addresses
+      properties:
+        allowable_ip_addresses:
+          default: []
+          description: Allowed IP addresses list
+          items:
+            type: string
+          type: array
+        dbaas_engine_version_id:
+          description: DBaaS engine version ID
+          title: Dbaas Engine Version Id
+          type: string
+        ha_enabled:
+          default: false
+          description: HA availability
+          title: Ha Enabled
+          type: boolean
+        init_config_option:
+          $ref: '#/components/schemas/RedisInitConfigOption'
+        instance_groups:
+          items:
+            $ref: '#/components/schemas/RedisInstanceGroupRequest'
+          type: array
+        instance_name_prefix:
+          description: Instance name prefix
+          maxLength: 13
+          minLength: 3
+          pattern: "^[a-z][a-zA-Z0-9\\-]*$"
+          title: Instance Name Prefix
+          type: string
+        maintenance_option:
+          $ref: '#/components/schemas/MaintenanceOption'
+        name:
+          description: Cluster name
+          maxLength: 20
+          minLength: 3
+          pattern: "^[a-zA-Z]*$"
+          title: Name
+          type: string
+        nat_enabled:
+          default: false
+          description: NAT availability
+          title: Nat Enabled
+          type: boolean
+        replica_count:
+          maximum: 2
+          minimum: 0
+          nullable: true
+          type: integer
+        subnet_id:
+          description: Subnet ID
+          title: Subnet Id
+          type: string
+        tags:
+          items:
+            $ref: '#/components/schemas/Tag'
+          nullable: true
+          type: array
+        timezone:
+          description: Timezone
+          title: Timezone
+          type: string
+      required:
+      - dbaas_engine_version_id
+      - init_config_option
+      - instance_groups
+      - instance_name_prefix
+      - name
+      - subnet_id
+      - timezone
+      title: RedisClusterCreateRequest
+    RedisClusterDetailResponse:
+      example:
+        service_state: ""
+        init_config_option:
+          backup_option:
+            retention_period_day: retention_period_day
+            starting_time_hour: starting_time_hour
+          database_port: 0
+          sentinel_port: 6
+        role_type: ORIGIN
+        timezone: timezone
+        created_at: 2024-05-17T00:23:17Z
+        instance_groups:
+        - block_storage_groups:
+          - volume_type: ""
+            role_type: ""
+            name: name
+            size_gb: 5
+            id: id
+          - volume_type: ""
+            role_type: ""
+            name: name
+            size_gb: 5
+            id: id
+          role_type: ""
+          instances:
+          - service_state: ""
+            public_ip_address: public_ip_address
+            role_type: ""
+            service_ip_address: service_ip_address
+            name: name
+            public_ip_id: public_ip_id
+            floating_ip_id: floating_ip_id
+          - service_state: ""
+            public_ip_address: public_ip_address
+            role_type: ""
+            service_ip_address: service_ip_address
+            name: name
+            public_ip_id: public_ip_id
+            floating_ip_id: floating_ip_id
+          server_type_name: server_type_name
+          id: id
+        - block_storage_groups:
+          - volume_type: ""
+            role_type: ""
+            name: name
+            size_gb: 5
+            id: id
+          - volume_type: ""
+            role_type: ""
+            name: name
+            size_gb: 5
+            id: id
+          role_type: ""
+          instances:
+          - service_state: ""
+            public_ip_address: public_ip_address
+            role_type: ""
+            service_ip_address: service_ip_address
+            name: name
+            public_ip_id: public_ip_id
+            floating_ip_id: floating_ip_id
+          - service_state: ""
+            public_ip_address: public_ip_address
+            role_type: ""
+            service_ip_address: service_ip_address
+            name: name
+            public_ip_id: public_ip_id
+            floating_ip_id: floating_ip_id
+          server_type_name: server_type_name
+          id: id
+        dbaas_engine_version_name: dbaas_engine_version_name
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        dbaas_engine: dbaas_engine
+        account_id: account_id
+        product_type: ""
+        ha_enabled: false
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: name
+        nat_enabled: false
+        subnet_id: subnet_id
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        maintenance_option:
+          period_hour: period_hour
+          starting_time: starting_time
+          starting_day_of_week: MON
+          use_maintenance_option: false
+        software_version: software_version
+        modified_at: 2024-05-17T00:23:17Z
+        allowable_ip_addresses:
+        - allowable_ip_addresses
+        - allowable_ip_addresses
+        product_image_type: product_image_type
+        instance_count: 1
+      properties:
+        account_id:
+          description: Account ID
+          title: Account Id
+          type: string
+        allowable_ip_addresses:
+          default: []
+          description: Allowed IP addresses list
+          items:
+            type: string
+          type: array
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        dbaas_engine:
+          description: DBaaS engine
+          title: Dbaas Engine
+          type: string
+        dbaas_engine_version_name:
+          description: DBaaS engine version name
+          title: Dbaas Engine Version Name
+          type: string
+        ha_enabled:
+          default: false
+          description: HA availability
+          title: Ha Enabled
+          type: boolean
+        id:
+          description: ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        init_config_option:
+          $ref: '#/components/schemas/RedisInitConfigOptionResponse'
+        instance_count:
+          default: 0
+          description: Instance Count
+          title: Instance Count
+          type: integer
+        instance_groups:
+          items:
+            $ref: '#/components/schemas/RedisInstanceGroupResponse'
+          type: array
+        maintenance_option:
+          $ref: '#/components/schemas/MaintenanceResponseOption'
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: Cluster name
+          title: Name
+          type: string
+        nat_enabled:
+          default: false
+          description: NAT availability
+          title: Nat Enabled
+          type: boolean
+        product_image_type:
+          description: Product image type
+          title: Product Image Type
+          type: string
+        product_type:
+          allOf:
+          - $ref: '#/components/schemas/ProductType'
+          description: Product type
+        role_type:
+          $ref: '#/components/schemas/ClusterRoleType'
+        service_state:
+          allOf:
+          - $ref: '#/components/schemas/ServiceState'
+          description: Service state
+        software_version:
+          description: Software version
+          title: Software Version
+          type: string
+        subnet_id:
+          description: Subnet ID
+          title: Subnet Id
+          type: string
+        timezone:
+          description: Timezone
+          title: Timezone
+          type: string
+      required:
+      - account_id
+      - created_at
+      - created_by
+      - dbaas_engine
+      - dbaas_engine_version_name
+      - id
+      - init_config_option
+      - instance_groups
+      - modified_at
+      - modified_by
+      - name
+      - product_image_type
+      - product_type
+      - role_type
+      - service_state
+      - software_version
+      - subnet_id
+      - timezone
+      title: RedisClusterDetailResponse
+    RedisInitConfigOption:
+      example:
+        backup_option:
+          retention_period_day: retention_period_day
+          starting_time_hour: starting_time_hour
+        database_user_password: database_user_password
+        database_port: 6190
+        sentinel_port: 39907
+      properties:
+        backup_option:
+          $ref: '#/components/schemas/BackupOption'
+        database_port:
+          maximum: 65535
+          minimum: 1024
+          nullable: true
+          type: integer
+        database_user_password:
+          maxLength: 30
+          minLength: 8
+          nullable: true
+          type: string
+        sentinel_port:
+          maximum: 65535
+          minimum: 1024
+          nullable: true
+          type: integer
+      required:
+      - database_user_password
+      title: RedisInitConfigOption
+    RedisInitConfigOptionResponse:
+      example:
+        backup_option:
+          retention_period_day: retention_period_day
+          starting_time_hour: starting_time_hour
+        database_port: 0
+        sentinel_port: 6
+      properties:
+        backup_option:
+          $ref: '#/components/schemas/BackupOption'
+        database_port:
+          nullable: true
+          type: integer
+        sentinel_port:
+          nullable: true
+          type: integer
+      title: RedisInitConfigOptionResponse
+    RedisInstanceGroupRequest:
+      example:
+        block_storage_groups:
+        - volume_type: ""
+          role_type: ""
+          size_gb: 798
+        - volume_type: ""
+          role_type: ""
+          size_gb: 798
+        role_type: ""
+        instances:
+        - role_type: ""
+          service_ip_address: service_ip_address
+          public_ip_id: public_ip_id
+        - role_type: ""
+          service_ip_address: service_ip_address
+          public_ip_id: public_ip_id
+        server_type_name: server_type_name
+      properties:
+        block_storage_groups:
+          description: Block storage groups list
+          items:
+            $ref: '#/components/schemas/RedisBlockStorageGroupRequest'
+          type: array
+        instances:
+          items:
+            $ref: '#/components/schemas/InstanceRequest'
+          nullable: true
+          type: array
+        role_type:
+          allOf:
+          - $ref: '#/components/schemas/InstanceGroupRoleType'
+          description: Role type
+        server_type_name:
+          description: Server type name
+          title: Server Type Name
+          type: string
+      required:
+      - block_storage_groups
+      - instances
+      - role_type
+      - server_type_name
+      title: RedisInstanceGroupRequest
+    RedisInstanceGroupResponse:
+      example:
+        block_storage_groups:
+        - volume_type: ""
+          role_type: ""
+          name: name
+          size_gb: 5
+          id: id
+        - volume_type: ""
+          role_type: ""
+          name: name
+          size_gb: 5
+          id: id
+        role_type: ""
+        instances:
+        - service_state: ""
+          public_ip_address: public_ip_address
+          role_type: ""
+          service_ip_address: service_ip_address
+          name: name
+          public_ip_id: public_ip_id
+          floating_ip_id: floating_ip_id
+        - service_state: ""
+          public_ip_address: public_ip_address
+          role_type: ""
+          service_ip_address: service_ip_address
+          name: name
+          public_ip_id: public_ip_id
+          floating_ip_id: floating_ip_id
+        server_type_name: server_type_name
+        id: id
+      properties:
+        block_storage_groups:
+          description: Block storage groups list
+          items:
+            $ref: '#/components/schemas/BlockStorageGroupResponse'
+          type: array
+        id:
+          description: ID
+          title: Id
+          type: string
+        instances:
+          items:
+            $ref: '#/components/schemas/RedisInstanceResponse'
+          nullable: true
+          type: array
+        role_type:
+          allOf:
+          - $ref: '#/components/schemas/InstanceGroupRoleType'
+          description: Role type
+        server_type_name:
+          description: Server type name
+          title: Server Type Name
+          type: string
+      required:
+      - block_storage_groups
+      - id
+      - instances
+      - role_type
+      - server_type_name
+      title: RedisInstanceGroupResponse
+    RedisInstanceResponse:
+      example:
+        service_state: ""
+        public_ip_address: public_ip_address
+        role_type: ""
+        service_ip_address: service_ip_address
+        name: name
+        public_ip_id: public_ip_id
+        floating_ip_id: floating_ip_id
+      properties:
+        floating_ip_id:
+          nullable: true
+          type: string
+        name:
+          description: Name
+          title: Name
+          type: string
+        public_ip_address:
+          nullable: true
+          type: string
+        public_ip_id:
+          nullable: true
+          type: string
+        role_type:
+          allOf:
+          - $ref: '#/components/schemas/InstanceRoleType'
+          description: Role type
+        service_ip_address:
+          nullable: true
+          type: string
+        service_state:
+          allOf:
+          - $ref: '#/components/schemas/ServiceState'
+          description: Service state
+      required:
+      - name
+      - role_type
+      - service_state
+      title: RedisInstanceResponse
+    RedisSwitchOverTargetRequest:
+      example:
+        switch_host_name: switch_host_name
+      properties:
+        switch_host_name:
+          description: Switch over target
+          title: Switch Host Name
+          type: string
+      required:
+      - switch_host_name
+      title: RedisSwitchOverTargetRequest
+    RequestStateResponse:
+      example:
+        state: state
+        request_id: request_id
+      properties:
+        request_id:
+          description: Request ID
+          title: Request Id
+          type: string
+        state:
+          description: Request state
+          title: State
+          type: string
+      required:
+      - request_id
+      - state
+      title: RequestStateResponse
+    ResizeBlockStorageGroupRequest:
+      example:
+        size_gb: 424
+      properties:
+        size_gb:
+          description: Size in GB
+          maximum: 5120
+          minimum: 16
+          multipleOf: 8
+          title: Size Gb
+          type: integer
+      required:
+      - size_gb
+      title: ResizeBlockStorageGroupRequest
+    ResourceInfo:
+      properties:
+        id:
+          description: request resource id
+          title: Id
+          type: string
+      required:
+      - id
+      title: ResourceInfo
+    ServerType:
+      example:
+        memory_gb: 6
+        product_type: product_type
+        purpose: purpose
+        cpu_core: 0
+        name: name
+        description: description
+        type: type
+        product_image_type: product_image_type
+      properties:
+        cpu_core:
+          description: Server type cpu core
+          title: Cpu Core
+          type: integer
+        description:
+          description: Server type description
+          title: Description
+          type: string
+        memory_gb:
+          description: Server type memory
+          title: Memory Gb
+          type: integer
+        name:
+          description: Server type name
+          title: Name
+          type: string
+        product_image_type:
+          description: Product image type
+          title: Product Image Type
+          type: string
+        product_type:
+          description: Product type
+          title: Product Type
+          type: string
+        purpose:
+          description: Server type purpose
+          title: Purpose
+          type: string
+        type:
+          description: Server type class
+          title: Type
+          type: string
+      required:
+      - cpu_core
+      - description
+      - memory_gb
+      - name
+      - product_image_type
+      - product_type
+      - purpose
+      - type
+      title: ServerType
+    ServerTypeListResponse:
+      example:
+        contents:
+        - memory_gb: 6
+          product_type: product_type
+          purpose: purpose
+          cpu_core: 0
+          name: name
+          description: description
+          type: type
+          product_image_type: product_image_type
+        - memory_gb: 6
+          product_type: product_type
+          purpose: purpose
+          cpu_core: 0
+          name: name
+          description: description
+          type: type
+          product_image_type: product_image_type
+      properties:
+        contents:
+          description: Server type list
+          items:
+            $ref: '#/components/schemas/ServerType'
+          type: array
+      required:
+      - contents
+      title: ServerTypeListResponse
+    ServiceState:
+      enum:
+      - RUNNING
+      - STOPPED
+      - UNKNOWN
+      - ERROR
+      - FAILED
+      - TERMINATED
+      - CREATING
+      - STOPPING
+      - STARTING
+      - RESTARTING
+      - EDITING
+      - SYNCHRONIZING
+      - UPGRADING
+      - TERMINATING
+      - MIGRATING
+      title: ServiceState
+      type: string
+    Tag:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          title: Key
+          type: string
+        value:
+          nullable: true
+          type: string
+      title: Tag
+    UpdateSecurityGroupRulesRequest:
+      example:
+        add_ip_addresses:
+        - add_ip_addresses
+        - add_ip_addresses
+        del_ip_addresses:
+        - del_ip_addresses
+        - del_ip_addresses
+      properties:
+        add_ip_addresses:
+          default: []
+          description: Allowed IP addresses list
+          items:
+            type: string
+          type: array
+        del_ip_addresses:
+          default: []
+          description: Allowed IP addresses list
+          items:
+            type: string
+          type: array
+      title: UpdateSecurityGroupRulesRequest
+    ValidationErrorModel:
+      example:
+        msg: msg
+        loc:
+        - loc
+        - loc
+        ctx: "{}"
+        type_: type_
+      properties:
+        ctx:
+          nullable: true
+          type: object
+        loc:
+          items:
+            type: string
+          nullable: true
+          type: array
+        msg:
+          nullable: true
+          type: string
+        type_:
+          nullable: true
+          type: string
+      title: ValidationErrorModel
+    VolumeType:
+      enum:
+      - SSD
+      - SSD_KMS
+      - HDD
+      - HDD_KMS
+      title: VolumeType
+      type: string
+  securitySchemes:
+    X-Auth-Token:
+      in: header
+      name: X-Auth-Token
+      type: apiKey
+x-app-name: scp-dbaas
+x-package-name: scp_dbaas
+x-service-type: scp-dbaas
+x-service-versions:
+  cachestore:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2025-07-01
+    status: CURRENT
+  epas:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2025-07-01
+    status: CURRENT
+  eventstreams:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2025-07-01
+    status: CURRENT
+  mariadb:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2025-07-01
+    status: CURRENT
+  mysql:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2025-07-01
+    status: CURRENT
+  postgresql:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2025-07-01
+    status: CURRENT
+  searchengine:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2025-07-01
+    status: CURRENT
+  vertica:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2025-07-01
+    status: CURRENT
+x-url-prefix: ""

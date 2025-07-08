@@ -1,0 +1,5 @@
+packageName: quota
+generatorName: go
+withGoMod: false
+structPrefix: true
+enumClassPrefix: true

@@ -1,0 +1,1568 @@
+openapi: 3.1.0
+info:
+  description: OSSCP Logging Audit Service
+  title: OSSCP Logging Audit Service
+  version: 1.2.2.dev64
+servers:
+- url: ""
+tags:
+- description: Logs API
+  name: loggingaudit.v1.LogsApi
+- description: Trails API
+  name: loggingaudit.v1.TrailsApi
+- description: Configurations API
+  name: loggingaudit.v1.ConfigurationsAPIs
+paths:
+  /v1/logs:
+    get:
+      description: get log list
+      operationId: listLogs
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Query start date
+        example: 2025-02-20T06:00:00Z
+        explode: true
+        in: query
+        name: start_at
+        required: true
+        schema:
+          description: Query start date
+          example: 2025-02-20T06:00:00Z
+          title: Start At
+          type: string
+        style: form
+      - description: Query finish date
+        example: 2025-05-21T06:00:00Z
+        explode: true
+        in: query
+        name: end_at
+        required: true
+        schema:
+          description: Query finish date
+          example: 2025-05-21T06:00:00Z
+          title: End At
+          type: string
+        style: form
+      - description: Resource ID
+        explode: true
+        in: query
+        name: resource_id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Resource name
+        explode: true
+        in: query
+        name: resource_name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Resource type
+        explode: true
+        in: query
+        name: resource_type
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Product name
+        explode: true
+        in: query
+        name: product_name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Product type
+        explode: true
+        in: query
+        name: product_type
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Task result
+        explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Event type
+        explode: true
+        in: query
+        name: event_type
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: User ID
+        explode: true
+        in: query
+        name: user_id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Username
+        explode: true
+        in: query
+        name: user_name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Region name
+        explode: true
+        in: query
+        name: region
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Root resource ID
+        explode: true
+        in: query
+        name: root_resource_id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Service type
+        explode: true
+        in: query
+        name: service_type
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ListLogs
+      tags:
+      - loggingaudit.v1.LogsApi
+      x-action-id: loggingaudit:ListLogs
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: log_list
+      x-not-before: 2026-02-23
+      x-operation-id: listLogs
+      x-resource: Log
+  /v1/logs/download:
+    post:
+      description: download log file
+      operationId: downloadLogs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogDownloadRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogDownloadResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: DownloadLogs
+      tags:
+      - loggingaudit.v1.LogsApi
+      x-action-id: loggingaudit:DownloadLogs
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: log_file_download
+      x-not-before: 2026-02-23
+      x-operation-id: downloadLogs
+      x-resource: Log
+  /v1/logs/{logging_id}:
+    get:
+      description: show a specific log
+      operationId: showLog
+      parameters:
+      - description: Log ID
+        explode: false
+        in: path
+        name: logging_id
+        required: true
+        schema:
+          description: Log ID
+          title: Logging Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ShowLog
+      tags:
+      - loggingaudit.v1.LogsApi
+      x-action-id: loggingaudit:ShowLog
+      x-api-access-level: READ
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: log_show
+      x-not-before: 2026-02-23
+      x-operation-id: showLog
+      x-resource: Log
+  /v1/trails:
+    get:
+      description: get trails list
+      operationId: listTrails
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Trail name
+        explode: true
+        in: query
+        name: trail_name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Bucket name
+        explode: true
+        in: query
+        name: bucket_name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Trail state
+        explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Resource type
+        explode: true
+        in: query
+        name: resource_type
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrailListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: listTrails
+      tags:
+      - loggingaudit.v1.TrailsApi
+      x-action-id: loggingaudit:ListTrails
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: trail_list
+      x-not-before: 2026-02-23
+      x-operation-id: listTrails
+      x-resource: Trail
+    post:
+      description: create a trail
+      operationId: createTrail
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrailCreateRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrailShowResponse'
+          description: Created
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "409":
+          description: Conflict
+      security:
+      - X-Auth-Token: []
+      summary: CreateTrail
+      tags:
+      - loggingaudit.v1.TrailsApi
+      x-action-id: loggingaudit:CreateTrail
+      x-api-access-level: CREATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: trail_create
+      x-not-before: 2026-02-23
+      x-operation-id: createTrail
+      x-resource: Trail
+  /v1/trails/{trail_id}:
+    delete:
+      description: delete a specific trail
+      operationId: deleteTrail
+      parameters:
+      - description: Trail ID
+        explode: false
+        in: path
+        name: trail_id
+        required: true
+        schema:
+          nullable: true
+          type: string
+        style: simple
+      responses:
+        "202":
+          description: Accepted
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: DeleteTrail
+      tags:
+      - loggingaudit.v1.TrailsApi
+      x-action-id: loggingaudit:DeleteTrail
+      x-api-access-level: DELETE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: trail_delete
+      x-not-before: 2026-02-23
+      x-operation-id: deleteTrail
+      x-resource: Trail
+    get:
+      description: show a specific trail
+      operationId: showTrail
+      parameters:
+      - description: Trail ID
+        explode: false
+        in: path
+        name: trail_id
+        required: true
+        schema:
+          nullable: true
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrailShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ShowTrail
+      tags:
+      - loggingaudit.v1.TrailsApi
+      x-action-id: loggingaudit:ShowTrail
+      x-api-access-level: READ
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: trail_show
+      x-not-before: 2026-02-23
+      x-operation-id: showTrail
+      x-resource: Trail
+    put:
+      description: set a specific trail
+      operationId: setTrail
+      parameters:
+      - description: Trail ID
+        explode: false
+        in: path
+        name: trail_id
+        required: true
+        schema:
+          nullable: true
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrailSetRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrailShowResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: SetTrail
+      tags:
+      - loggingaudit.v1.TrailsApi
+      x-action-id: loggingaudit:SetTrail
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: trail_set
+      x-not-before: 2026-02-23
+      x-operation-id: setTrail
+      x-resource: Trail
+  /v1/trails/{trail_id}/start:
+    post:
+      description: start a specific trail
+      operationId: startTrail
+      parameters:
+      - description: Trail ID
+        explode: false
+        in: path
+        name: trail_id
+        required: true
+        schema:
+          nullable: true
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrailShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: StartTrail
+      tags:
+      - loggingaudit.v1.TrailsApi
+      x-action-id: loggingaudit:StartTrail
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: trail_start
+      x-not-before: 2026-02-23
+      x-operation-id: startTrail
+      x-resource: Trail
+  /v1/trails/{trail_id}/stop:
+    post:
+      description: stop a specific trail
+      operationId: stopTrail
+      parameters:
+      - description: Trail ID
+        explode: false
+        in: path
+        name: trail_id
+        required: true
+        schema:
+          nullable: true
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrailShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: StopTrail
+      tags:
+      - loggingaudit.v1.TrailsApi
+      x-action-id: loggingaudit:StopTrail
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: trail_stop
+      x-not-before: 2026-02-23
+      x-operation-id: stopTrail
+      x-resource: Trail
+components:
+  schemas:
+    Log:
+      example:
+        resource_type: resource_type
+        product_name: product_name
+        account_id: account_id
+        event_type: event_type
+        product_type: product_type
+        user_id: user_id
+        event_name: event_name
+        resource_id: resource_id
+        id: id
+        region: region
+        resource_name: resource_name
+        status: status
+        timestamp: timestamp
+      properties:
+        account_id:
+          nullable: true
+          type: string
+        event_name:
+          nullable: true
+          type: string
+        event_type:
+          nullable: true
+          type: string
+        id:
+          nullable: true
+          type: string
+        product_name:
+          nullable: true
+          type: string
+        product_type:
+          nullable: true
+          type: string
+        region:
+          nullable: true
+          type: string
+        resource_id:
+          nullable: true
+          type: string
+        resource_name:
+          nullable: true
+          type: string
+        resource_type:
+          nullable: true
+          type: string
+        status:
+          nullable: true
+          type: string
+        timestamp:
+          nullable: true
+          type: string
+        user_id:
+          nullable: true
+          type: string
+      title: Log
+    LogDetails:
+      example:
+        resource_type: resource_type
+        product_name: product_name
+        account_id: account_id
+        event_type: event_type
+        product_type: product_type
+        user_id: user_id
+        event_name: event_name
+        resource_id: resource_id
+        details: "{}"
+        id: id
+        region: region
+        resource_name: resource_name
+        status: status
+        timestamp: timestamp
+      properties:
+        account_id:
+          nullable: true
+          type: string
+        details:
+          nullable: true
+          type: object
+        event_name:
+          nullable: true
+          type: string
+        event_type:
+          nullable: true
+          type: string
+        id:
+          nullable: true
+          type: string
+        product_name:
+          nullable: true
+          type: string
+        product_type:
+          nullable: true
+          type: string
+        region:
+          nullable: true
+          type: string
+        resource_id:
+          nullable: true
+          type: string
+        resource_name:
+          nullable: true
+          type: string
+        resource_type:
+          nullable: true
+          type: string
+        status:
+          nullable: true
+          type: string
+        timestamp:
+          nullable: true
+          type: string
+        user_id:
+          nullable: true
+          type: string
+      title: LogDetails
+    LogDownloadDetailResponse:
+      example:
+        WorkTime: WorkTime
+        EventTopic: EventTopic
+        RegionName: RegionName
+        ResourceId: ResourceId
+        ResourceName: ResourceName
+        WorkInfo: WorkInfo
+        ResourceType: ResourceType
+        WorkResult: WorkResult
+        WorkerEmail: WorkerEmail
+        WorkerID: WorkerID
+        WorkerName: WorkerName
+      properties:
+        EventTopic:
+          nullable: true
+          type: string
+        RegionName:
+          nullable: true
+          type: string
+        ResourceId:
+          nullable: true
+          type: string
+        ResourceName:
+          nullable: true
+          type: string
+        ResourceType:
+          nullable: true
+          type: string
+        WorkInfo:
+          nullable: true
+          type: string
+        WorkResult:
+          nullable: true
+          type: string
+        WorkTime:
+          nullable: true
+          type: string
+        WorkerEmail:
+          nullable: true
+          type: string
+        WorkerID:
+          nullable: true
+          type: string
+        WorkerName:
+          nullable: true
+          type: string
+      title: LogDownloadDetailResponse
+    LogDownloadRequest:
+      example:
+        end_at: 2025-05-21T06:00:00Z
+        time_zone_info: Asia/Seoul
+        file_type: JSON
+        user_name: user_name
+        resource_type: resource_type
+        region: region
+        resource_name: resource_name
+        root_resource_id: root_resource_id
+        start_at: 2025-02-20T06:00:00Z
+        product_name: product_name
+        status: status
+      properties:
+        end_at:
+          description: Query finish date
+          example: 2025-05-21T06:00:00Z
+          title: End At
+          type: string
+        file_type:
+          description: Download file type
+          example: JSON
+          title: File Type
+          type: string
+        product_name:
+          nullable: true
+          type: string
+        region:
+          nullable: true
+          type: string
+        resource_name:
+          nullable: true
+          type: string
+        resource_type:
+          nullable: true
+          type: string
+        root_resource_id:
+          nullable: true
+          type: string
+        start_at:
+          description: Query start date
+          example: 2025-02-20T06:00:00Z
+          title: Start At
+          type: string
+        status:
+          nullable: true
+          type: string
+        time_zone_info:
+          description: Timezone info
+          example: Asia/Seoul
+          title: Time Zone Info
+          type: string
+        user_name:
+          nullable: true
+          type: string
+      required:
+      - end_at
+      - file_type
+      - start_at
+      - time_zone_info
+      title: LogDownloadRequest
+    LogDownloadResponse:
+      example:
+        file:
+        - WorkTime: WorkTime
+          EventTopic: EventTopic
+          RegionName: RegionName
+          ResourceId: ResourceId
+          ResourceName: ResourceName
+          WorkInfo: WorkInfo
+          ResourceType: ResourceType
+          WorkResult: WorkResult
+          WorkerEmail: WorkerEmail
+          WorkerID: WorkerID
+          WorkerName: WorkerName
+        - WorkTime: WorkTime
+          EventTopic: EventTopic
+          RegionName: RegionName
+          ResourceId: ResourceId
+          ResourceName: ResourceName
+          WorkInfo: WorkInfo
+          ResourceType: ResourceType
+          WorkResult: WorkResult
+          WorkerEmail: WorkerEmail
+          WorkerID: WorkerID
+          WorkerName: WorkerName
+      properties:
+        file:
+          items:
+            $ref: '#/components/schemas/LogDownloadDetailResponse'
+          type: array
+      required:
+      - file
+      title: LogDownloadResponse
+    LogListResponse:
+      example:
+        size: 20
+        count: 20
+        page: 0
+        sort:
+        - sort
+        - sort
+        logs:
+        - resource_type: resource_type
+          product_name: product_name
+          account_id: account_id
+          event_type: event_type
+          product_type: product_type
+          user_id: user_id
+          event_name: event_name
+          resource_id: resource_id
+          id: id
+          region: region
+          resource_name: resource_name
+          status: status
+          timestamp: timestamp
+        - resource_type: resource_type
+          product_name: product_name
+          account_id: account_id
+          event_type: event_type
+          product_type: product_type
+          user_id: user_id
+          event_name: event_name
+          resource_id: resource_id
+          id: id
+          region: region
+          resource_name: resource_name
+          status: status
+          timestamp: timestamp
+      properties:
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        logs:
+          items:
+            $ref: '#/components/schemas/Log'
+          type: array
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - count
+      - logs
+      - page
+      - size
+      title: LogListResponse
+    LogShowResponse:
+      example:
+        log:
+          resource_type: resource_type
+          product_name: product_name
+          account_id: account_id
+          event_type: event_type
+          product_type: product_type
+          user_id: user_id
+          event_name: event_name
+          resource_id: resource_id
+          details: "{}"
+          id: id
+          region: region
+          resource_name: resource_name
+          status: status
+          timestamp: timestamp
+      properties:
+        log:
+          $ref: '#/components/schemas/LogDetails'
+      required:
+      - log
+      title: LogShowResponse
+    Trail:
+      example:
+        log_type_total_yn: log_type_total_yn
+        created_user_id: created_user_id
+        created_at: 2024-05-17T00:23:17Z
+        resource_type_total_yn: resource_type_total_yn
+        target_users: []
+        trail_batch_end_at: 2000-01-23T04:56:07.000+00:00
+        bucket_region: RegionOne
+        account_name: account_name
+        target_log_types: []
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        state: state
+        modified_at: 2024-05-17T00:23:17Z
+        trail_batch_last_state: trail_batch_last_state
+        trail_batch_success_at: 2000-01-23T04:56:07.000+00:00
+        trail_name: Trail-0001
+        region_names: []
+        target_resource_types: []
+        region_total_yn: region_total_yn
+        bucket_name: Bucket001
+        trail_save_type: JSON
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        del_yn: del_yn
+        trail_batch_first_start_at: 2000-01-23T04:56:07.000+00:00
+        log_verification_yn: log_verification_yn
+        account_id: account_id
+        trail_description: trail_description
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        trail_batch_start_at: 2000-01-23T04:56:07.000+00:00
+        user_total_yn: user_total_yn
+      properties:
+        account_id:
+          nullable: true
+          type: string
+        account_name:
+          nullable: true
+          type: string
+        bucket_name:
+          description: Bucket name
+          example: Bucket001
+          title: Bucket Name
+          type: string
+        bucket_region:
+          description: Bucket region
+          example: RegionOne
+          title: Bucket Region
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        created_user_id:
+          nullable: true
+          type: string
+        del_yn:
+          nullable: true
+          type: string
+        id:
+          description: ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        log_type_total_yn:
+          nullable: true
+          type: string
+        log_verification_yn:
+          nullable: true
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        region_names:
+          default: []
+          description: Region name list
+          example: []
+          items: {}
+          type: array
+        region_total_yn:
+          nullable: true
+          type: string
+        resource_type_total_yn:
+          nullable: true
+          type: string
+        state:
+          nullable: true
+          type: string
+        target_log_types:
+          default: []
+          description: Target log type list
+          example: []
+          items: {}
+          type: array
+        target_resource_types:
+          default: []
+          description: Target resource type list
+          example: []
+          items: {}
+          type: array
+        target_users:
+          default: []
+          description: Target user list
+          example: []
+          items: {}
+          type: array
+        trail_batch_end_at:
+          format: date-time
+          nullable: true
+          type: string
+        trail_batch_first_start_at:
+          format: date-time
+          nullable: true
+          type: string
+        trail_batch_last_state:
+          nullable: true
+          type: string
+        trail_batch_start_at:
+          format: date-time
+          nullable: true
+          type: string
+        trail_batch_success_at:
+          format: date-time
+          nullable: true
+          type: string
+        trail_description:
+          nullable: true
+          type: string
+        trail_name:
+          description: Trail name
+          example: Trail-0001
+          title: Trail Name
+          type: string
+        trail_save_type:
+          description: Trail save type
+          example: JSON
+          title: Trail Save Type
+          type: string
+        user_total_yn:
+          nullable: true
+          type: string
+      required:
+      - bucket_name
+      - bucket_region
+      - created_at
+      - created_by
+      - id
+      - modified_at
+      - modified_by
+      - trail_name
+      - trail_save_type
+      title: Trail
+    TrailCreateRequest:
+      example:
+        tag_create_requests:
+        - key: tag_create_requests
+        - key: tag_create_requests
+        region_names: []
+        target_resource_types: []
+        log_type_total_yn: log_type_total_yn
+        region_total_yn: region_total_yn
+        bucket_name: TestBucket00
+        resource_type_total_yn: resource_type_total_yn
+        target_users: []
+        trail_save_type: JSON
+        log_verification_yn: log_verification_yn
+        account_id: account_id
+        trail_description: trail_description
+        bucket_region: RegionOne
+        target_log_types: []
+        trail_name: TestTrail01
+        user_total_yn: user_total_yn
+      properties:
+        account_id:
+          nullable: true
+          type: string
+        bucket_name:
+          description: Bucket name
+          example: TestBucket00
+          minLength: 1
+          title: Bucket Name
+          type: string
+        bucket_region:
+          description: Bucket region
+          example: RegionOne
+          minLength: 1
+          title: Bucket Region
+          type: string
+        log_type_total_yn:
+          nullable: true
+          type: string
+        log_verification_yn:
+          nullable: true
+          type: string
+        region_names:
+          default: []
+          description: Region name list
+          example: []
+          items: {}
+          type: array
+        region_total_yn:
+          nullable: true
+          type: string
+        resource_type_total_yn:
+          nullable: true
+          type: string
+        tag_create_requests:
+          items:
+            additionalProperties:
+              type: string
+          nullable: true
+          type: array
+        target_log_types:
+          default: []
+          description: Target log type list
+          example: []
+          items: {}
+          type: array
+        target_resource_types:
+          default: []
+          description: Target resource type list
+          example: []
+          items: {}
+          type: array
+        target_users:
+          default: []
+          description: Target user list
+          example: []
+          items: {}
+          type: array
+        trail_description:
+          nullable: true
+          type: string
+        trail_name:
+          description: Trail name
+          example: TestTrail01
+          maxLength: 20
+          minLength: 5
+          pattern: "^[a-zA-Z0-9\\-ㄱ-ㅎㅏ-ㅣ가-힣\\s]*$"
+          title: Trail Name
+          type: string
+        trail_save_type:
+          description: Trail save type
+          example: JSON
+          minLength: 1
+          pattern: ^(CSV|JSON)$
+          title: Trail Save Type
+          type: string
+        user_total_yn:
+          nullable: true
+          type: string
+      required:
+      - bucket_name
+      - bucket_region
+      - trail_name
+      - trail_save_type
+      title: TrailCreateRequest
+    TrailListResponse:
+      example:
+        size: 20
+        count: 20
+        page: 0
+        sort:
+        - sort
+        - sort
+        trails:
+        - log_type_total_yn: log_type_total_yn
+          created_user_id: created_user_id
+          created_at: 2024-05-17T00:23:17Z
+          resource_type_total_yn: resource_type_total_yn
+          target_users: []
+          trail_batch_end_at: 2000-01-23T04:56:07.000+00:00
+          bucket_region: RegionOne
+          account_name: account_name
+          target_log_types: []
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          state: state
+          modified_at: 2024-05-17T00:23:17Z
+          trail_batch_last_state: trail_batch_last_state
+          trail_batch_success_at: 2000-01-23T04:56:07.000+00:00
+          trail_name: Trail-0001
+          region_names: []
+          target_resource_types: []
+          region_total_yn: region_total_yn
+          bucket_name: Bucket001
+          trail_save_type: JSON
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          del_yn: del_yn
+          trail_batch_first_start_at: 2000-01-23T04:56:07.000+00:00
+          log_verification_yn: log_verification_yn
+          account_id: account_id
+          trail_description: trail_description
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          trail_batch_start_at: 2000-01-23T04:56:07.000+00:00
+          user_total_yn: user_total_yn
+        - log_type_total_yn: log_type_total_yn
+          created_user_id: created_user_id
+          created_at: 2024-05-17T00:23:17Z
+          resource_type_total_yn: resource_type_total_yn
+          target_users: []
+          trail_batch_end_at: 2000-01-23T04:56:07.000+00:00
+          bucket_region: RegionOne
+          account_name: account_name
+          target_log_types: []
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          state: state
+          modified_at: 2024-05-17T00:23:17Z
+          trail_batch_last_state: trail_batch_last_state
+          trail_batch_success_at: 2000-01-23T04:56:07.000+00:00
+          trail_name: Trail-0001
+          region_names: []
+          target_resource_types: []
+          region_total_yn: region_total_yn
+          bucket_name: Bucket001
+          trail_save_type: JSON
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          del_yn: del_yn
+          trail_batch_first_start_at: 2000-01-23T04:56:07.000+00:00
+          log_verification_yn: log_verification_yn
+          account_id: account_id
+          trail_description: trail_description
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          trail_batch_start_at: 2000-01-23T04:56:07.000+00:00
+          user_total_yn: user_total_yn
+      properties:
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+        trails:
+          items:
+            $ref: '#/components/schemas/Trail'
+          type: array
+      required:
+      - count
+      - page
+      - size
+      - trails
+      title: TrailListResponse
+    TrailSetRequest:
+      example:
+        region_names:
+        - ""
+        - ""
+        log_verification_yn: log_verification_yn
+        target_resource_types:
+        - ""
+        - ""
+        log_type_total_yn: log_type_total_yn
+        trail_description: trail_description
+        region_total_yn: region_total_yn
+        resource_type_total_yn: resource_type_total_yn
+        target_log_types:
+        - ""
+        - ""
+        target_users:
+        - ""
+        - ""
+        trail_save_type: trail_save_type
+        user_total_yn: user_total_yn
+      properties:
+        log_type_total_yn:
+          nullable: true
+          type: string
+        log_verification_yn:
+          nullable: true
+          type: string
+        region_names:
+          items: {}
+          nullable: true
+          type: array
+        region_total_yn:
+          nullable: true
+          type: string
+        resource_type_total_yn:
+          nullable: true
+          type: string
+        target_log_types:
+          items: {}
+          nullable: true
+          type: array
+        target_resource_types:
+          items: {}
+          nullable: true
+          type: array
+        target_users:
+          items: {}
+          nullable: true
+          type: array
+        trail_description:
+          nullable: true
+          type: string
+        trail_save_type:
+          nullable: true
+          pattern: ^(CSV|JSON)$
+          type: string
+        user_total_yn:
+          nullable: true
+          type: string
+      title: TrailSetRequest
+    TrailShowResponse:
+      example:
+        trail:
+          log_type_total_yn: log_type_total_yn
+          created_user_id: created_user_id
+          created_at: 2024-05-17T00:23:17Z
+          resource_type_total_yn: resource_type_total_yn
+          target_users: []
+          trail_batch_end_at: 2000-01-23T04:56:07.000+00:00
+          bucket_region: RegionOne
+          account_name: account_name
+          target_log_types: []
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          state: state
+          modified_at: 2024-05-17T00:23:17Z
+          trail_batch_last_state: trail_batch_last_state
+          trail_batch_success_at: 2000-01-23T04:56:07.000+00:00
+          trail_name: Trail-0001
+          region_names: []
+          target_resource_types: []
+          region_total_yn: region_total_yn
+          bucket_name: Bucket001
+          trail_save_type: JSON
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          del_yn: del_yn
+          trail_batch_first_start_at: 2000-01-23T04:56:07.000+00:00
+          log_verification_yn: log_verification_yn
+          account_id: account_id
+          trail_description: trail_description
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          trail_batch_start_at: 2000-01-23T04:56:07.000+00:00
+          user_total_yn: user_total_yn
+      properties:
+        trail:
+          $ref: '#/components/schemas/Trail'
+      required:
+      - trail
+      title: TrailShowResponse
+    ValidationErrorModel:
+      example:
+        msg: msg
+        loc:
+        - loc
+        - loc
+        ctx: "{}"
+        type_: type_
+      properties:
+        ctx:
+          nullable: true
+          type: object
+        loc:
+          items:
+            type: string
+          nullable: true
+          type: array
+        msg:
+          nullable: true
+          type: string
+        type_:
+          nullable: true
+          type: string
+      title: ValidationErrorModel
+  securitySchemes:
+    X-Auth-Token:
+      in: header
+      name: X-Auth-Token
+      type: apiKey
+x-app-name: scp-loggingaudit
+x-package-name: scp_loggingaudit
+x-service-type: scp-loggingaudit
+x-service-versions:
+  loggingaudit_service:
+  - id: "1.0"
+    links:
+    - rel: self
+    not_before: 2026-02-23
+    status: CURRENT
+x-url-prefix: ""

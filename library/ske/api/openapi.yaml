@@ -1,0 +1,2249 @@
+openapi: 3.1.0
+info:
+  description: SCP Kubernetes Service
+  title: SCP Kubernetes Service
+  version: 0.0.1.dev2273
+servers:
+- url: https://scp-kubernetes-a.kr-west1.dev2.samsungsdscloud.com
+tags:
+- description: Clusters API
+  name: ske.v1.ClustersApi
+- description: Namespaces API
+  name: ske.v1.NamespacesApi
+- description: Nodes API
+  name: ske.v1.NodesApi
+- description: Objects API
+  name: ske.v1.ObjectsApi
+- description: Deployments API
+  name: ske.v1.DeploymentsApi
+- description: Services API
+  name: ske.v1.ServicesApi
+- description: Endpoints API
+  name: ske.v1.EndpointsApi
+- description: Ingresses API
+  name: ske.v1.IngressesApi
+- description: Ingress Classes API
+  name: ske.v1.IngressClassesApi
+- description: Jobs API
+  name: ske.v1.JobsApi
+- description: StatefulSets API
+  name: ske.v1.StatefulSetsApi
+- description: DaemonSets API
+  name: ske.v1.DaemonSetsApi
+- description: Pods API
+  name: ske.v1.PodsApi
+- description: CronJobs API
+  name: ske.v1.CronJobsApi
+- description: ConfigMaps API
+  name: ske.v1.ConfigMapsApi
+- description: Persistent volume claims API
+  name: ske.v1.PvcsApi
+- description: Persistent volume API
+  name: ske.v1.PvsApi
+- description: Storage Class API
+  name: ske.v1.StorageClassesApi
+- description: Cluster Role API
+  name: ske.v1.ClusterRolesApi
+- description: Cluster Role Binding API
+  name: ske.v1.ClusterRoleBindingsApi
+- description: Events API
+  name: ske.v1.EventsApi
+- description: Secrets API
+  name: ske.v1.SecretsApi
+- description: Roles API
+  name: ske.v1.RolesApi
+- description: RoleBindings API
+  name: ske.v1.RoleBindingsApi
+- description: Nodepools API
+  name: ske.v1.NodepoolsApi
+- description: KubernetesVersions API
+  name: ske.v1.KubernetesVersionsApi
+- description: Internal Clusters API
+  name: ske.v1.internalClustersApi
+- description: Internal Helm API
+  name: ske.v1.InternalHelmApi
+- description: Internal Storage class API
+  name: ske.v1.InternalStorageClassesApi
+- description: Internal Namespaces API
+  name: ske.v1.InternalNamespacesApi
+- description: Internal Services API
+  name: ske.v1.InternalServicesApi
+- description: Internal Pods API
+  name: ske.v1.InternalPodsApi
+paths:
+  /v1/clusters:
+    get:
+      description: get clusters list
+      operationId: listClusters
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Cluster Name
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          nullable: true
+          pattern: "^[a-z0-9\\-]*$"
+          type: string
+        style: form
+      - description: Cluster Status
+        explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          $ref: '#/components/schemas/Status'
+        style: form
+      - description: Cluster Version
+        explode: true
+        in: query
+        name: kubernetes_version
+        required: false
+        schema:
+          $ref: '#/components/schemas/Kubernetes_Version'
+        style: form
+      - description: Cluster Subnet ID
+        explode: true
+        in: query
+        name: subnet_id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: List Clusters
+      tags:
+      - ske.v1.ClustersApi
+      x-action-id: ske:ListClusters
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: cluster_list
+      x-resource: cluster
+    post:
+      description: create a cluster
+      operationId: createCluster
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClusterCreateRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Create Cluster
+      tags:
+      - ske.v1.ClustersApi
+      x-action-id: ske:CreateCluster
+      x-api-access-level: CREATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: cluster_create
+      x-resource: cluster
+  /v1/clusters/console/clusters/{server_id}: {}
+  /v1/clusters/{cluster_id}:
+    delete:
+      description: delete a specific cluster
+      operationId: deleteCluster
+      parameters:
+      - description: Cluster ID
+        example: 10a599e031e749b7b260868f441e862b
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          example: 10a599e031e749b7b260868f441e862b
+          pattern: "^[0-9a-f]{32}$"
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Delete Cluster
+      tags:
+      - ske.v1.ClustersApi
+      x-action-id: ske:DeleteCluster
+      x-api-access-level: DELETE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: cluster_delete
+      x-resource: cluster
+    get:
+      description: show a cluster
+      operationId: showCluster
+      parameters:
+      - description: Cluster ID
+        example: 10a599e031e749b7b260868f441e862b
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          example: 10a599e031e749b7b260868f441e862b
+          pattern: "^[0-9a-f]{32}$"
+          title: Cluster Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Show Cluster
+      tags:
+      - ske.v1.ClustersApi
+      x-action-id: ske:ShowCluster
+      x-api-access-level: READ
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: cluster_show
+      x-resource: cluster
+  /v1/clusters/{cluster_id}/clusterrolebindings: {}
+  /v1/clusters/{cluster_id}/clusterrolebindings/{cluster_role_binding_name}: {}
+  /v1/clusters/{cluster_id}/clusterroles: {}
+  /v1/clusters/{cluster_id}/clusterroles/{cluster_role_name}: {}
+  /v1/clusters/{cluster_id}/events: {}
+  /v1/clusters/{cluster_id}/ingressclasses: {}
+  /v1/clusters/{cluster_id}/ingressclasses/{ingress_class_name}: {}
+  /v1/clusters/{cluster_id}/kubeconfig:
+    get:
+      description: Download kubeconfig file for the cluster
+      operationId: showClusterKubeconfig
+      parameters:
+      - description: Cluster ID
+        example: 10a599e031e749b7b260868f441e862b
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          example: 10a599e031e749b7b260868f441e862b
+          pattern: "^[0-9a-f]{32}$"
+          title: Cluster Id
+          type: string
+        style: simple
+      - description: Kubeconfig Type
+        example: private
+        explode: true
+        in: query
+        name: kubeconfig_type
+        required: true
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/ClusterKubeconfigType'
+          description: Kubeconfig Type
+          example: private
+        style: form
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Show Cluster Kubeconfig
+      tags:
+      - ske.v1.ClustersApi
+      x-action-id: ske:ShowClusterKubeconfig
+      x-api-access-level: READ
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: cluster_kubeconfig_show
+      x-resource: cluster
+  /v1/clusters/{cluster_id}/logging:
+    put:
+      description: Set logging on the cluster
+      operationId: setClusterLogging
+      parameters:
+      - description: Cluster ID
+        example: 10a599e031e749b7b260868f441e862b
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          example: 10a599e031e749b7b260868f441e862b
+          pattern: "^[0-9a-f]{32}$"
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClusterLoggingSetRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterSetResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Set Cluster Logging
+      tags:
+      - ske.v1.ClustersApi
+      x-action-id: ske:SetClusterLogging
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: cluster_logging_set
+      x-resource: cluster
+  /v1/clusters/{cluster_id}/namespaces: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/configmaps: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/configmaps/{config_map_name}: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/cronjobs: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/cronjobs/{cron_job_name}: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/daemonsets: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/daemonsets/{daemon_set_name}: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/deployments: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/deployments/{deployment_name}: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/endpoints: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/endpoints/{endpoint_name}: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/events: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/ingresses: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/ingresses/{ingress_name}: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/jobs: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/jobs/{job_name}: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/persistentvolumeclaims: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/persistentvolumeclaims/{pvc_name}: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/pods: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/pods/{pod_name}: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/pods/{pod_name}/logs: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/rolebindings: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/rolebindings/{role_binding_name}: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/roles: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/roles/{role_name}: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/secrets: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/secrets/{secret_name}: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/services: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/services/{service_name}: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/statefulsets: {}
+  /v1/clusters/{cluster_id}/namespaces/{namespace_name}/statefulsets/{stateful_set_name}: {}
+  /v1/clusters/{cluster_id}/nodepools:
+    get:
+      description: get nodepools list
+      operationId: listNodepools
+      parameters:
+      - description: Cluster ID
+        example: 10a599e031e749b7b260868f441e862b
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          example: 10a599e031e749b7b260868f441e862b
+          pattern: "^[0-9a-f]{32}$"
+          title: Cluster Id
+          type: string
+        style: simple
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Nodepool Name
+        explode: true
+        in: query
+        name: nodepool_name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodepoolListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: List Nodepools
+      tags:
+      - ske.v1.NodepoolsApi
+      x-action-id: ske:ListNodepools
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: nodepool_list
+      x-resource: nodepool
+  /v1/clusters/{cluster_id}/nodes: {}
+  /v1/clusters/{cluster_id}/nodes/{node_name}: {}
+  /v1/clusters/{cluster_id}/nodes/{node_name}/pods: {}
+  /v1/clusters/{cluster_id}/objects: {}
+  /v1/clusters/{cluster_id}/persistentvolumes: {}
+  /v1/clusters/{cluster_id}/persistentvolumes/{pv_name}: {}
+  /v1/clusters/{cluster_id}/private-access-control:
+    put:
+      description: set a private access control specific cluster
+      operationId: setClusterPrivateAccessControl
+      parameters:
+      - description: Cluster ID
+        example: 10a599e031e749b7b260868f441e862b
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          example: 10a599e031e749b7b260868f441e862b
+          pattern: "^[0-9a-f]{32}$"
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClusterPrivateAccessControlSetRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterSetResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Set Cluster Private Access Control
+      tags:
+      - ske.v1.ClustersApi
+      x-action-id: ske:SetClusterPrivateAccessControl
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250424"
+      x-api-modified-date: "20250424"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: set_cluster_private_access_control
+      x-resource: cluster
+  /v1/clusters/{cluster_id}/public-access-control:
+    put:
+      description: set a public access control specific cluster
+      operationId: setClusterPublicAccessControl
+      parameters:
+      - description: Cluster ID
+        example: 10a599e031e749b7b260868f441e862b
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          example: 10a599e031e749b7b260868f441e862b
+          pattern: "^[0-9a-f]{32}$"
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClusterPublicAccessControlSetRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterSetResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Set Cluster Public Access Control
+      tags:
+      - ske.v1.ClustersApi
+      x-action-id: ske:SetClusterPublicAccessControl
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: set_cluster_public_access_control
+      x-resource: cluster
+  /v1/clusters/{cluster_id}/security-groups:
+    put:
+      description: Set Cluster Security Groups
+      operationId: setClusterSecurityGroups
+      parameters:
+      - description: Cluster ID
+        example: 10a599e031e749b7b260868f441e862b
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          example: 10a599e031e749b7b260868f441e862b
+          pattern: "^[0-9a-f]{32}$"
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClusterSecurityGroupsSetRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterShowResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Set Cluster Security Groups
+      tags:
+      - ske.v1.ClustersApi
+      x-action-id: ske:SetClusterSecurityGroups
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: cluster_security_group_set
+      x-resource: cluster
+  /v1/clusters/{cluster_id}/storageclasses: {}
+  /v1/clusters/{cluster_id}/storageclasses/{storage_class_name}: {}
+  /v1/clusters/{cluster_id}/upgrade:
+    put:
+      description: upgrade a specific cluster
+      operationId: setClusterUpgrade
+      parameters:
+      - description: Cluster ID
+        example: 10a599e031e749b7b260868f441e862b
+        explode: false
+        in: path
+        name: cluster_id
+        required: true
+        schema:
+          description: Cluster ID
+          example: 10a599e031e749b7b260868f441e862b
+          pattern: "^[0-9a-f]{32}$"
+          title: Cluster Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClusterUpgradeSetRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterSetResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Set Cluster Upgrade
+      tags:
+      - ske.v1.ClustersApi
+      x-action-id: ske:SetClusterUpgrade
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: cluster_upgrade_set
+      x-resource: cluster
+  /v1/internal/clusters/prometheus: {}
+  /v1/internal/clusters/{cluster_id}/kubeconfig: {}
+  /v1/internal/clusters/{cluster_id}/namespaces: {}
+  /v1/internal/clusters/{cluster_id}/namespaces/{namespace_name}/helm-releases/{release_name}: {}
+  /v1/internal/clusters/{cluster_id}/namespaces/{namespace_name}/helm-releases/{release_name}/detail: {}
+  /v1/internal/clusters/{cluster_id}/namespaces/{namespace_name}/helm-releases/{release_name}/status: {}
+  /v1/internal/clusters/{cluster_id}/namespaces/{namespace_name}/helm-releases/{release_name}/value: {}
+  /v1/internal/clusters/{cluster_id}/namespaces/{namespace_name}/pods: {}
+  /v1/internal/clusters/{cluster_id}/namespaces/{namespace_name}/services: {}
+  /v1/internal/clusters/{cluster_id}/nodes: {}
+  /v1/internal/clusters/{cluster_id}/storageclasses: {}
+  /v1/kubernetes-versions:
+    get:
+      description: get kubernetes versions list
+      operationId: listKubernetesVersions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KubernetesVersionListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: List Kubernetes Versions
+      tags:
+      - ske.v1.KubernetesVersionsApi
+      x-action-id: ske:ListKubernetesVersions
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CONSOLE
+  /v1/nodepools:
+    post:
+      description: create a nodepool
+      operationId: createNodepool
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NodepoolCreateRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodepoolShowResponse'
+          description: Created
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Create Nodepool
+      tags:
+      - ske.v1.NodepoolsApi
+      x-action-id: ske:CreateNodepool
+      x-api-access-level: CREATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: nodepool_create
+      x-resource: nodepool
+  /v1/nodepools/{nodepool_id}:
+    delete:
+      description: delete a nodepool
+      operationId: deleteNodepool
+      parameters:
+      - description: Nodepool ID
+        explode: false
+        in: path
+        name: nodepool_id
+        required: true
+        schema:
+          description: Nodepool ID
+          title: Nodepool Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Delete Nodepool
+      tags:
+      - ske.v1.NodepoolsApi
+      x-action-id: ske:DeleteNodepool
+      x-api-access-level: DELETE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: nodepool_delete
+      x-resource: nodepool
+    get:
+      description: show a nodepool
+      operationId: showNodepool
+      parameters:
+      - description: Nodepool ID
+        explode: false
+        in: path
+        name: nodepool_id
+        required: true
+        schema:
+          description: Nodepool ID
+          title: Nodepool Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodepoolShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Show Nodepool
+      tags:
+      - ske.v1.NodepoolsApi
+      x-action-id: ske:ShowNodepool
+      x-api-access-level: READ
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: nodepool_show
+      x-resource: nodepool
+    put:
+      description: set a nodepool
+      operationId: setNodepool
+      parameters:
+      - description: Nodepool ID
+        explode: false
+        in: path
+        name: nodepool_id
+        required: true
+        schema:
+          description: Nodepool ID
+          title: Nodepool Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NodepoolUpdateRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Set Nodepool
+      tags:
+      - ske.v1.NodepoolsApi
+      x-action-id: ske:SetNodepool
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: nodepool_set
+      x-resource: nodepool
+  /v1/nodepools/{nodepool_id}/nodes:
+    get:
+      description: Get nodepool node list
+      operationId: listNodepoolNodes
+      parameters:
+      - description: Nodepool ID
+        explode: false
+        in: path
+        name: nodepool_id
+        required: true
+        schema:
+          description: Nodepool ID
+          title: Nodepool Id
+          type: string
+        style: simple
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Node Name
+        explode: true
+        in: query
+        name: node_name
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeListInNodepoolResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: List Nodepool Nodes
+      tags:
+      - ske.v1.NodepoolsApi
+      x-action-id: ske:ListNodepoolNodes
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: nodepool_node_list
+      x-resource: nodepool
+  /v1/nodepools/{nodepool_id}/upgrade:
+    put:
+      description: 'upgrade a nodepool '
+      operationId: setNodepoolUpgrade
+      parameters:
+      - description: Nodepool ID
+        explode: false
+        in: path
+        name: nodepool_id
+        required: true
+        schema:
+          description: Nodepool ID
+          title: Nodepool Id
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Set Nodepool Upgrade
+      tags:
+      - ske.v1.NodepoolsApi
+      x-action-id: ske:SetNodepoolUpgrade
+      x-api-access-level: UPDATE
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      - CONSOLE
+      x-cli: nodepool_upgrade_set
+      x-resource: nodepool
+components:
+  schemas:
+    AsyncResponse:
+      example:
+        account_id: account_id
+        resource_id: resource_id
+        request_id: request_id
+      properties:
+        account_id:
+          description: Account ID
+          title: Account Id
+          type: string
+        request_id:
+          description: Request ID
+          title: Request Id
+          type: string
+        resource_id:
+          description: Resource ID
+          title: Resource Id
+          type: string
+      required:
+      - account_id
+      - request_id
+      - resource_id
+      title: AsyncResponse
+    Cluster:
+      example:
+        public_endpoint_url: public_endpoint_url
+        subnet:
+          name: sample-name
+          id: 70a599e031e749b7b260868f441e862b
+        cluster_namespace: sample-cluster-16445
+        managed_security_group:
+          name: sample-name
+          id: 70a599e031e749b7b260868f441e862b
+        vpc:
+          name: sample-name
+          id: 70a599e031e749b7b260868f441e862b
+        created_at: 2024-05-17T00:23:17Z
+        max_node_count: 0
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        private_endpoint_url: https://test-1234.osscp.io:6443
+        volume:
+          name: sample-name
+          id: 70a599e031e749b7b260868f441e862b
+        cloud_logging_enabled: true
+        public_endpoint_access_control_ip: public_endpoint_access_control_ip
+        account_id: account_id
+        kubernetes_version: v1.28.1
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: sample-cluster
+        private_endpoint_access_control_resources:
+        - name: name
+          id: id
+          type: type
+        - name: name
+          id: id
+          type: type
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        node_count: 6
+        modified_at: 2024-05-17T00:23:17Z
+        security_group_list:
+        - name: sample-name
+          id: 70a599e031e749b7b260868f441e862b
+        - name: sample-name
+          id: 70a599e031e749b7b260868f441e862b
+        status: RUNNING
+      properties:
+        account_id:
+          description: Account ID
+          title: Account Id
+          type: string
+        cloud_logging_enabled:
+          description: Cloud Logging Enabled
+          title: Cloud Logging Enabled
+          type: boolean
+        cluster_namespace:
+          description: Cluster Namespace
+          example: sample-cluster-16445
+          title: Cluster Namespace
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        id:
+          description: ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        kubernetes_version:
+          description: Cluster Version
+          example: v1.28.1
+          title: Kubernetes Version
+          type: string
+        managed_security_group:
+          $ref: '#/components/schemas/ExternalResource'
+        max_node_count:
+          nullable: true
+          type: integer
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: Cluster Name
+          example: sample-cluster
+          title: Name
+          type: string
+        node_count:
+          nullable: true
+          type: integer
+        private_endpoint_access_control_resources:
+          items:
+            $ref: '#/components/schemas/PrivateEndpointAccessControlResource'
+          nullable: true
+          type: array
+        private_endpoint_url:
+          description: Private Endpoint URL
+          example: https://test-1234.osscp.io:6443
+          title: Private Endpoint Url
+          type: string
+        public_endpoint_access_control_ip:
+          nullable: true
+          type: string
+        public_endpoint_url:
+          nullable: true
+          type: string
+        security_group_list:
+          description: Connected Security Group List
+          items:
+            $ref: '#/components/schemas/ExternalResource'
+          type: array
+        status:
+          description: Cluster Status
+          example: RUNNING
+          title: Status
+          type: string
+        subnet:
+          $ref: '#/components/schemas/ExternalResource'
+        volume:
+          $ref: '#/components/schemas/ExternalResource'
+        vpc:
+          $ref: '#/components/schemas/ExternalResource'
+      required:
+      - account_id
+      - cloud_logging_enabled
+      - cluster_namespace
+      - created_at
+      - created_by
+      - id
+      - kubernetes_version
+      - managed_security_group
+      - max_node_count
+      - modified_at
+      - modified_by
+      - name
+      - node_count
+      - private_endpoint_access_control_resources
+      - private_endpoint_url
+      - public_endpoint_access_control_ip
+      - public_endpoint_url
+      - security_group_list
+      - status
+      - subnet
+      - volume
+      - vpc
+      title: Cluster
+    ClusterCreateRequest:
+      example:
+        cloud_logging_enabled: true
+        public_endpoint_access_control_ip: public_endpoint_access_control_ip
+        volume_id: volume_id
+        vpc_id: vpc_id
+        kubernetes_version: kubernetes_version
+        name: name
+        private_endpoint_access_control_resources:
+        - name: name
+          id: id
+          type: type
+        - name: name
+          id: id
+          type: type
+        subnet_id: subnet_id
+        security_group_id_list:
+        - security_group_id_list
+        - security_group_id_list
+        tags:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      properties:
+        cloud_logging_enabled:
+          description: Cloud Logging Enabled
+          title: Cloud Logging Enabled
+          type: boolean
+        kubernetes_version:
+          description: Cluster Version
+          pattern: "^v[0-9]{1}\\.[0-9]{1,2}\\.[0-9]{1,2}$"
+          title: Kubernetes Version
+          type: string
+        name:
+          description: Cluster Name
+          maxLength: 30
+          minLength: 3
+          pattern: "^[a-z][a-z0-9\\-]*[a-z0-9]$"
+          title: Name
+          type: string
+        private_endpoint_access_control_resources:
+          items:
+            $ref: '#/components/schemas/PrivateEndpointAccessControlResource'
+          nullable: true
+          type: array
+        public_endpoint_access_control_ip:
+          nullable: true
+          type: string
+        security_group_id_list:
+          description: Security group ID list
+          items:
+            type: string
+          type: array
+        subnet_id:
+          description: Subnet ID
+          title: Subnet Id
+          type: string
+        tags:
+          items:
+            $ref: '#/components/schemas/Tag'
+          nullable: true
+          type: array
+        volume_id:
+          description: Volume ID
+          title: Volume Id
+          type: string
+        vpc_id:
+          description: VPC ID
+          title: Vpc Id
+          type: string
+      required:
+      - cloud_logging_enabled
+      - kubernetes_version
+      - name
+      - security_group_id_list
+      - subnet_id
+      - volume_id
+      - vpc_id
+      title: ClusterCreateRequest
+    ClusterKubeconfigType:
+      enum:
+      - private
+      - public
+      title: ClusterKubeconfigType
+      type: string
+    ClusterListResponse:
+      example:
+        count: 6
+        links:
+        - ""
+        - ""
+        clusters:
+        - account_id: account_id
+          kubernetes_version: kubernetes_version
+          name: name
+          created_at: 2024-05-17T00:23:17Z
+          subnet_id: subnet_id
+          id: id
+          node_count: 0
+          modified_at: 2024-05-17T00:23:17Z
+          status: status
+        - account_id: account_id
+          kubernetes_version: kubernetes_version
+          name: name
+          created_at: 2024-05-17T00:23:17Z
+          subnet_id: subnet_id
+          id: id
+          node_count: 0
+          modified_at: 2024-05-17T00:23:17Z
+          status: status
+      properties:
+        clusters:
+          items:
+            $ref: '#/components/schemas/ClusterSummary'
+          type: array
+        count:
+          nullable: true
+          type: integer
+        links:
+          items: {}
+          nullable: true
+          type: array
+      required:
+      - clusters
+      title: ClusterListResponse
+    ClusterLoggingSetRequest:
+      example:
+        cloud_logging_enabled: true
+      properties:
+        cloud_logging_enabled:
+          description: Cloud Logging Enabled
+          title: Cloud Logging Enabled
+          type: boolean
+      required:
+      - cloud_logging_enabled
+      title: ClusterLoggingSetRequest
+    ClusterOfNodepool:
+      properties:
+        id:
+          description: Cluster ID
+          title: Id
+          type: string
+      required:
+      - id
+      title: ClusterOfNodepool
+    ClusterPrivateAccessControlSetRequest:
+      example:
+        private_endpoint_access_control_resources:
+        - name: name
+          id: id
+          type: type
+        - name: name
+          id: id
+          type: type
+      properties:
+        private_endpoint_access_control_resources:
+          items:
+            $ref: '#/components/schemas/PrivateEndpointAccessControlResource'
+          type: array
+      required:
+      - private_endpoint_access_control_resources
+      title: ClusterPrivateAccessControlSetRequest
+    ClusterPublicAccessControlSetRequest:
+      example:
+        public_endpoint_access_control_ip: public_endpoint_access_control_ip
+      properties:
+        public_endpoint_access_control_ip:
+          description: Public Endpoint Access Control IP
+          title: Public Endpoint Access Control Ip
+          type: string
+      required:
+      - public_endpoint_access_control_ip
+      title: ClusterPublicAccessControlSetRequest
+    ClusterSecurityGroupsSetRequest:
+      example:
+        security_group_id_list:
+        - security_group_id_list
+        - security_group_id_list
+      properties:
+        security_group_id_list:
+          description: Security group ID list
+          items:
+            type: string
+          type: array
+      required:
+      - security_group_id_list
+      title: ClusterSecurityGroupsSetRequest
+    ClusterSetResponse:
+      example:
+        account_id: account_id
+        resource_id: resource_id
+        request_id: request_id
+      properties:
+        account_id:
+          description: Account ID
+          title: Account Id
+          type: string
+        request_id:
+          description: Request ID
+          title: Request Id
+          type: string
+        resource_id:
+          description: Resource ID
+          title: Resource Id
+          type: string
+      required:
+      - account_id
+      - request_id
+      - resource_id
+      title: ClusterSetResponse
+    ClusterShowResponse:
+      example:
+        cluster:
+          public_endpoint_url: public_endpoint_url
+          subnet:
+            name: sample-name
+            id: 70a599e031e749b7b260868f441e862b
+          cluster_namespace: sample-cluster-16445
+          managed_security_group:
+            name: sample-name
+            id: 70a599e031e749b7b260868f441e862b
+          vpc:
+            name: sample-name
+            id: 70a599e031e749b7b260868f441e862b
+          created_at: 2024-05-17T00:23:17Z
+          max_node_count: 0
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          private_endpoint_url: https://test-1234.osscp.io:6443
+          volume:
+            name: sample-name
+            id: 70a599e031e749b7b260868f441e862b
+          cloud_logging_enabled: true
+          public_endpoint_access_control_ip: public_endpoint_access_control_ip
+          account_id: account_id
+          kubernetes_version: v1.28.1
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: sample-cluster
+          private_endpoint_access_control_resources:
+          - name: name
+            id: id
+            type: type
+          - name: name
+            id: id
+            type: type
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          node_count: 6
+          modified_at: 2024-05-17T00:23:17Z
+          security_group_list:
+          - name: sample-name
+            id: 70a599e031e749b7b260868f441e862b
+          - name: sample-name
+            id: 70a599e031e749b7b260868f441e862b
+          status: RUNNING
+      properties:
+        cluster:
+          $ref: '#/components/schemas/Cluster'
+      required:
+      - cluster
+      title: ClusterShowResponse
+    ClusterSummary:
+      example:
+        account_id: account_id
+        kubernetes_version: kubernetes_version
+        name: name
+        created_at: 2024-05-17T00:23:17Z
+        subnet_id: subnet_id
+        id: id
+        node_count: 0
+        modified_at: 2024-05-17T00:23:17Z
+        status: status
+      properties:
+        account_id:
+          description: Account ID
+          title: Account Id
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        id:
+          description: Cluster ID
+          title: Id
+          type: string
+        kubernetes_version:
+          description: Cluster Version
+          title: Kubernetes Version
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        name:
+          description: Cluster Name
+          title: Name
+          type: string
+        node_count:
+          nullable: true
+          type: integer
+        status:
+          description: Cluster Status
+          title: Status
+          type: string
+        subnet_id:
+          nullable: true
+          type: string
+      required:
+      - account_id
+      - created_at
+      - id
+      - kubernetes_version
+      - modified_at
+      - name
+      - node_count
+      - status
+      - subnet_id
+      title: ClusterSummary
+    ClusterUpgradeSetRequest:
+      example:
+        kubernetes_version: kubernetes_version
+      properties:
+        kubernetes_version:
+          description: Kubernetes Version
+          title: Kubernetes Version
+          type: string
+      required:
+      - kubernetes_version
+      title: ClusterUpgradeSetRequest
+    ExternalResource:
+      example:
+        name: sample-name
+        id: 70a599e031e749b7b260868f441e862b
+      properties:
+        id:
+          description: ID
+          example: 70a599e031e749b7b260868f441e862b
+          title: Id
+          type: string
+        name:
+          description: Name
+          example: sample-name
+          title: Name
+          type: string
+      required:
+      - id
+      - name
+      title: ExternalResource
+    Image:
+      properties:
+        custom_image_name:
+          nullable: true
+          type: string
+        os:
+          description: Image OS
+          title: Os
+          type: string
+        os_version:
+          description: Image OS Version
+          title: Os Version
+          type: string
+      required:
+      - os
+      - os_version
+      title: Image
+    Keypair:
+      properties:
+        name:
+          description: VM Keypair Name
+          title: Name
+          type: string
+      required:
+      - name
+      title: Keypair
+    KubernetesVersion:
+      example:
+        kubernetes_version: v1.28.7
+        description: description
+      properties:
+        description:
+          nullable: true
+          type: string
+        kubernetes_version:
+          description: Kubernetes version
+          example: v1.28.7
+          title: Kubernetes Version
+          type: string
+      required:
+      - kubernetes_version
+      title: KubernetesVersion
+    KubernetesVersionListResponse:
+      example:
+        kubernetes_versions:
+        - kubernetes_version: v1.28.7
+          description: description
+        - kubernetes_version: v1.28.7
+          description: description
+      properties:
+        kubernetes_versions:
+          items:
+            $ref: '#/components/schemas/KubernetesVersion'
+          type: array
+      required:
+      - kubernetes_versions
+      title: KubernetesVersionListResponse
+    NodeInNodepool:
+      example:
+        account_id: account_id
+        kubernetes_version: kubernetes_version
+        name: name
+        status: status
+      properties:
+        account_id:
+          description: Account ID
+          title: Account Id
+          type: string
+        kubernetes_version:
+          description: Kubernetes Version
+          title: Kubernetes Version
+          type: string
+        name:
+          description: Node Name
+          title: Name
+          type: string
+        status:
+          description: Node Status
+          title: Status
+          type: string
+      required:
+      - account_id
+      - kubernetes_version
+      - name
+      - status
+      title: NodeInNodepool
+    NodeListInNodepoolResponse:
+      example:
+        nodes:
+        - account_id: account_id
+          kubernetes_version: kubernetes_version
+          name: name
+          status: status
+        - account_id: account_id
+          kubernetes_version: kubernetes_version
+          name: name
+          status: status
+        count: 0
+        links:
+        - ""
+        - ""
+      properties:
+        count:
+          nullable: true
+          type: integer
+        links:
+          items: {}
+          nullable: true
+          type: array
+        nodes:
+          items:
+            $ref: '#/components/schemas/NodeInNodepool'
+          nullable: true
+          type: array
+      title: NodeListInNodepoolResponse
+    Nodepool:
+      example:
+        cluster: ""
+        image: ""
+        volume_type: ""
+        keypair: ""
+        auto_recovery_enabled: true
+        created_at: 2024-05-17T00:23:17Z
+        max_node_count: 1
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        desired_node_count: 6
+        current_node_count: 0
+        account_id: account_id
+        min_node_count: 5
+        kubernetes_version: kubernetes_version
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: name
+        volume_size: 5
+        id: id
+        modified_at: 2024-05-17T00:23:17Z
+        auto_scale_enabled: true
+        server_type: ""
+        status: status
+      properties:
+        account_id:
+          description: Account ID
+          title: Account Id
+          type: string
+        auto_recovery_enabled:
+          description: Is Auto Recovery
+          title: Auto Recovery Enabled
+          type: boolean
+        auto_scale_enabled:
+          description: Is Auto Scale
+          title: Auto Scale Enabled
+          type: boolean
+        cluster:
+          allOf:
+          - $ref: '#/components/schemas/ClusterOfNodepool'
+          description: Cluster
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        current_node_count:
+          description: Current Node Count
+          title: Current Node Count
+          type: integer
+        desired_node_count:
+          description: Desired Node Count
+          title: Desired Node Count
+          type: integer
+        id:
+          description: Nodepool ID
+          title: Id
+          type: string
+        image:
+          allOf:
+          - $ref: '#/components/schemas/Image'
+          description: Image
+        keypair:
+          allOf:
+          - $ref: '#/components/schemas/Keypair'
+          description: Keypair
+        kubernetes_version:
+          description: Kubernetes Version
+          title: Kubernetes Version
+          type: string
+        max_node_count:
+          description: Max Node Count
+          title: Max Node Count
+          type: integer
+        min_node_count:
+          description: Min Node Count
+          title: Min Node Count
+          type: integer
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: Nodepool Name
+          title: Name
+          type: string
+        server_type:
+          allOf:
+          - $ref: '#/components/schemas/ServerType'
+          description: Server Type
+        status:
+          description: Nodepool Status
+          title: Status
+          type: string
+        volume_size:
+          description: Volume Size
+          title: Volume Size
+          type: integer
+        volume_type:
+          allOf:
+          - $ref: '#/components/schemas/VolumeType'
+          description: Volume Type
+      required:
+      - account_id
+      - auto_recovery_enabled
+      - auto_scale_enabled
+      - cluster
+      - created_at
+      - created_by
+      - current_node_count
+      - desired_node_count
+      - id
+      - image
+      - keypair
+      - kubernetes_version
+      - max_node_count
+      - min_node_count
+      - modified_at
+      - modified_by
+      - name
+      - server_type
+      - status
+      - volume_size
+      - volume_type
+      title: Nodepool
+    NodepoolCreateRequest:
+      example:
+        custom_image_id: custom_image_id
+        server_type_id: server_type_id
+        volume_type_name: volume_type_name
+        keypair_name: keypair_name
+        image_os: image_os
+        max_node_count: 6
+        desired_node_count: 0
+        is_auto_scale: true
+        image_os_version: image_os_version
+        cluster_id: cluster_id
+        is_auto_recovery: true
+        min_node_count: 1
+        kubernetes_version: kubernetes_version
+        name: name
+        volume_size: 5
+      properties:
+        cluster_id:
+          description: Cluster ID
+          title: Cluster Id
+          type: string
+        custom_image_id:
+          nullable: true
+          type: string
+        desired_node_count:
+          nullable: true
+          type: integer
+        image_os:
+          description: Image OS
+          title: Image Os
+          type: string
+        image_os_version:
+          description: Image OS Version
+          title: Image Os Version
+          type: string
+        is_auto_recovery:
+          description: Is Auto Recovery
+          title: Is Auto Recovery
+          type: boolean
+        is_auto_scale:
+          description: Is Auto Scale
+          title: Is Auto Scale
+          type: boolean
+        keypair_name:
+          description: Keypair Name
+          title: Keypair Name
+          type: string
+        kubernetes_version:
+          description: Kubernetes Version
+          title: Kubernetes Version
+          type: string
+        max_node_count:
+          nullable: true
+          type: integer
+        min_node_count:
+          nullable: true
+          type: integer
+        name:
+          description: Nodepool Name
+          title: Name
+          type: string
+        server_type_id:
+          description: Server Type ID
+          title: Server Type Id
+          type: string
+        volume_size:
+          description: Volume Size
+          title: Volume Size
+          type: integer
+        volume_type_name:
+          description: Volume Type Name
+          title: Volume Type Name
+          type: string
+      required:
+      - cluster_id
+      - image_os
+      - image_os_version
+      - is_auto_recovery
+      - is_auto_scale
+      - keypair_name
+      - kubernetes_version
+      - name
+      - server_type_id
+      - volume_size
+      - volume_type_name
+      title: NodepoolCreateRequest
+    NodepoolListResponse:
+      example:
+        nodepools:
+        - desired_node_count: 1
+          image: ""
+          current_node_count: 6
+          account_id: account_id
+          volume_type: ""
+          kubernetes_version: kubernetes_version
+          name: name
+          auto_recovery_enabled: true
+          id: id
+          auto_scale_enabled: true
+          server_type: ""
+          status: status
+        - desired_node_count: 1
+          image: ""
+          current_node_count: 6
+          account_id: account_id
+          volume_type: ""
+          kubernetes_version: kubernetes_version
+          name: name
+          auto_recovery_enabled: true
+          id: id
+          auto_scale_enabled: true
+          server_type: ""
+          status: status
+        count: 0
+        links:
+        - ""
+        - ""
+      properties:
+        count:
+          nullable: true
+          type: integer
+        links:
+          items: {}
+          nullable: true
+          type: array
+        nodepools:
+          description: Nodepools List
+          items:
+            $ref: '#/components/schemas/NodepoolSummary'
+          type: array
+      title: NodepoolListResponse
+    NodepoolShowResponse:
+      example:
+        nodepool:
+          cluster: ""
+          image: ""
+          volume_type: ""
+          keypair: ""
+          auto_recovery_enabled: true
+          created_at: 2024-05-17T00:23:17Z
+          max_node_count: 1
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          desired_node_count: 6
+          current_node_count: 0
+          account_id: account_id
+          min_node_count: 5
+          kubernetes_version: kubernetes_version
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          volume_size: 5
+          id: id
+          modified_at: 2024-05-17T00:23:17Z
+          auto_scale_enabled: true
+          server_type: ""
+          status: status
+      properties:
+        nodepool:
+          $ref: '#/components/schemas/Nodepool'
+      required:
+      - nodepool
+      title: NodepoolShowResponse
+    NodepoolSummary:
+      example:
+        desired_node_count: 1
+        image: ""
+        current_node_count: 6
+        account_id: account_id
+        volume_type: ""
+        kubernetes_version: kubernetes_version
+        name: name
+        auto_recovery_enabled: true
+        id: id
+        auto_scale_enabled: true
+        server_type: ""
+        status: status
+      properties:
+        account_id:
+          description: Account ID
+          title: Account Id
+          type: string
+        auto_recovery_enabled:
+          description: Is Auto Recovery
+          title: Auto Recovery Enabled
+          type: boolean
+        auto_scale_enabled:
+          description: Is Auto Scale
+          title: Auto Scale Enabled
+          type: boolean
+        current_node_count:
+          description: Current Node Count
+          title: Current Node Count
+          type: integer
+        desired_node_count:
+          description: Desired Node Count
+          title: Desired Node Count
+          type: integer
+        id:
+          description: Nodepool ID
+          title: Id
+          type: string
+        image:
+          allOf:
+          - $ref: '#/components/schemas/Image'
+          description: Image
+        kubernetes_version:
+          description: Kubernetes Version
+          title: Kubernetes Version
+          type: string
+        name:
+          description: Nodepool Name
+          title: Name
+          type: string
+        server_type:
+          allOf:
+          - $ref: '#/components/schemas/ServerType'
+          description: Server Type
+        status:
+          description: Nodepool Status
+          title: Status
+          type: string
+        volume_type:
+          allOf:
+          - $ref: '#/components/schemas/VolumeTypeSummary'
+          description: Volume Type
+      required:
+      - account_id
+      - auto_recovery_enabled
+      - auto_scale_enabled
+      - current_node_count
+      - desired_node_count
+      - id
+      - image
+      - kubernetes_version
+      - name
+      - server_type
+      - status
+      - volume_type
+      title: NodepoolSummary
+    NodepoolUpdateRequest:
+      example:
+        desired_node_count: 0
+        is_auto_scale: true
+        is_auto_recovery: true
+        min_node_count: 1
+        max_node_count: 6
+      properties:
+        desired_node_count:
+          nullable: true
+          type: integer
+        is_auto_recovery:
+          nullable: true
+          type: boolean
+        is_auto_scale:
+          nullable: true
+          type: boolean
+        max_node_count:
+          nullable: true
+          type: integer
+        min_node_count:
+          nullable: true
+          type: integer
+      title: NodepoolUpdateRequest
+    PrivateEndpointAccessControlResource:
+      example:
+        name: name
+        id: id
+        type: type
+      properties:
+        id:
+          description: Private Endpoint Access Control Resource ID
+          title: Id
+          type: string
+        name:
+          description: Private Endpoint Access Control Resource Name
+          title: Name
+          type: string
+        type:
+          description: Private Endpoint Access Control Resource Type
+          title: Type
+          type: string
+      title: PrivateEndpointAccessControlResource
+    ServerType:
+      properties:
+        description:
+          description: Server Type Description
+          title: Description
+          type: string
+        id:
+          description: Server Type ID
+          title: Id
+          type: string
+      required:
+      - description
+      - id
+      title: ServerType
+    Tag:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          description: tag key
+          title: Key
+          type: string
+        value:
+          description: tag value
+          title: Value
+          type: string
+      required:
+      - key
+      - value
+      title: Tag
+    VolumeType:
+      properties:
+        encrypt:
+          description: Volume Type Encrypt
+          title: Encrypt
+          type: boolean
+        id:
+          description: Volume Type ID
+          title: Id
+          type: string
+        name:
+          description: Volume Type Name
+          title: Name
+          type: string
+      required:
+      - encrypt
+      - id
+      - name
+      title: VolumeType
+    VolumeTypeSummary:
+      properties:
+        id:
+          description: Volume Type ID
+          title: Id
+          type: string
+        name:
+          description: Volume Type Name
+          title: Name
+          type: string
+      required:
+      - id
+      - name
+      title: VolumeTypeSummary
+    Status:
+      anyOf:
+      - items:
+          nullable: true
+          type: string
+        type: array
+      - nullable: true
+        type: string
+      description: Cluster Status
+      nullable: true
+      title: Status
+    Kubernetes_Version:
+      anyOf:
+      - items:
+          type: string
+        type: array
+      - nullable: true
+        type: string
+      description: Cluster Version
+      nullable: true
+      title: Kubernetes Version
+  securitySchemes:
+    X-Auth-Token:
+      in: header
+      name: X-Auth-Token
+      type: apiKey
+x-app-name: scp-kubernetes
+x-package-name: scp_kubernetes
+x-service-type: scp-kubernetes
+x-url-prefix: ""

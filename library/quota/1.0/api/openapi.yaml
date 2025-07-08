@@ -1,0 +1,1024 @@
+openapi: 3.1.0
+info:
+  description: OSSCP Quota Project
+  title: OSSCP Quota Project
+  version: 0.0.1.dev92
+servers:
+- url: http://localhost:8080
+tags:
+- description: Quota Items API
+  name: quota.v1.QuotaItemsAPIs
+- description: Account Quotas API
+  name: quota.v1.AccountQuotasAPIs
+- description: Quota Requests API
+  name: quota.v1.QuotaRequestsAPIs
+- description: Quota Approvals API
+  name: quota.v1.QuotaApprovalsAPIs
+paths:
+  /v1/account-quotas:
+    get:
+      description: get account quota list
+      operationId: listAccountQuota
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: "Classification of the quota request (e.g., Account, Region)"
+        example: Account
+        explode: true
+        in: query
+        name: request_class
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Service Name
+        example: IAM
+        explode: true
+        in: query
+        name: service
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Quota Item Name
+        example: POLICY.MAX.COUNT
+        explode: true
+        in: query
+        name: quota_item
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Description
+        example: Virtual Server disk max size
+        explode: true
+        in: query
+        name: description
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountQuotaListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ListAccountQuota
+      tags:
+      - quota.v1.AccountQuotasAPIs
+      x-action-id: quota:ListAccountQuota
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: account-quota_list
+      x-not-before: 2026-02-23
+      x-operation-id: listAccountQuota
+      x-resource: AccountQuota
+  /v1/account-quotas/{account_quota_id}:
+    get:
+      description: show a specific account quota
+      operationId: showAccountQuota
+      parameters:
+      - description: Account Quota ID
+        example: 138c2fc8c29a449dbfa8681f8f1d78e2
+        explode: false
+        in: path
+        name: account_quota_id
+        required: true
+        schema:
+          description: Account Quota ID
+          example: 138c2fc8c29a449dbfa8681f8f1d78e2
+          title: Account Quota Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountQuotaShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ShowAccountQuota
+      tags:
+      - quota.v1.AccountQuotasAPIs
+      x-action-id: quota:ShowAccountQuota
+      x-api-access-level: READ
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: account-quota_show
+      x-not-before: 2026-02-23
+      x-operation-id: showAccountQuota
+      x-resource: AccountQuota
+  /v1/quota-requests:
+    get:
+      description: get quota requests list
+      operationId: listQuotaRequests
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Service Name
+        example: Virtual Server
+        explode: true
+        in: query
+        name: service
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Quota Item Name
+        example: VIRTUAL_SERVER_DISK.MAX.SIZE
+        explode: true
+        in: query
+        name: quota_item
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Request Class
+        example: Account
+        explode: true
+        in: query
+        name: request_class
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Start date of the request
+        example: 2024-05-01
+        explode: true
+        in: query
+        name: requested_start_at
+        required: false
+        schema:
+          format: date-time
+          nullable: true
+          type: string
+        style: form
+      - description: End date of the request
+        example: 2024-05-31
+        explode: true
+        in: query
+        name: requested_end_at
+        required: false
+        schema:
+          format: date-time
+          nullable: true
+          type: string
+        style: form
+      - description: Start date of the application
+        example: 2024-05-01
+        explode: true
+        in: query
+        name: applied_start_at
+        required: false
+        schema:
+          format: date-time
+          nullable: true
+          type: string
+        style: form
+      - description: End date of the application
+        example: 2024-05-31
+        explode: true
+        in: query
+        name: applied_end_at
+        required: false
+        schema:
+          format: date-time
+          nullable: true
+          type: string
+        style: form
+      - description: Request State
+        example: BEFORE_APPROVE
+        explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuotaRequestListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ListQuotaRequests
+      tags:
+      - quota.v1.QuotaRequestsAPIs
+      x-action-id: quota:ListQuotaRequest
+      x-api-access-level: LIST
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: quota-request_list
+      x-not-before: 2026-02-23
+      x-operation-id: listQuotaRequests
+      x-resource: QuotaRequest
+  /v1/quota-requests/{request_id}:
+    get:
+      description: show a specific quota request
+      operationId: showQuotaRequest
+      parameters:
+      - description: Request ID
+        example: 0c2a06f2f06d42248a6bb88b1a78d4cc
+        explode: false
+        in: path
+        name: request_id
+        required: true
+        schema:
+          description: Request ID
+          example: 0c2a06f2f06d42248a6bb88b1a78d4cc
+          title: Request Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuotaRequestShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: ShowQuotaRequest
+      tags:
+      - quota.v1.QuotaRequestsAPIs
+      x-action-id: quota:ShowQuotaRequest
+      x-api-access-level: READ
+      x-api-created-date: "20250227"
+      x-api-modified-date: "20250227"
+      x-api-scope:
+      - OPENAPI
+      - CLI
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: quota-request_show
+      x-not-before: 2026-02-23
+      x-operation-id: showQuotaRequest
+      x-resource: QuotaRequest
+components:
+  schemas:
+    AccountQuota:
+      example:
+        request: false
+        initial_value: 100
+        quota_item: VIRTUAL_SERVER_DISK.MAX.SIZE
+        approval: false
+        request_class: Account
+        applied_value: 0
+        resource_type: Virtual Server Disk
+        created_at: 2024-05-17T00:23:17Z
+        description: Maximum disk size for virtual servers in the account
+        srn: srn:s::kr-west1:quota:account-quota/123456789
+        unit: GB
+        account_id: 2b7ed60576ce404bbc734266ff1839a5
+        service: Virtual Server
+        account_name: Example Account Inc.
+        free_rate: 10
+        adjustable: true
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        modified_at: 2024-05-17T00:23:17Z
+        reduction: false
+        class_value: global
+      properties:
+        account_id:
+          description: Unique identifier for the account
+          example: 2b7ed60576ce404bbc734266ff1839a5
+          title: Account Id
+          type: string
+        account_name:
+          description: Name of the account
+          example: Example Account Inc.
+          title: Account Name
+          type: string
+        adjustable:
+          description: Flag indicating if additional quota is being requested
+          example: true
+          title: Adjustable
+          type: boolean
+        applied_value:
+          nullable: true
+          type: integer
+        approval:
+          description: Approval
+          example: false
+          title: Approval
+          type: boolean
+        class_value:
+          description: Value associated with the request class
+          example: global
+          title: Class Value
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        description:
+          description: Detailed description of the quota item
+          example: Maximum disk size for virtual servers in the account
+          title: Description
+          type: string
+        free_rate:
+          description: Free Rate
+          example: 10
+          title: Free Rate
+          type: integer
+        id:
+          description: Account Quota ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        initial_value:
+          description: Initial quota value allocated
+          example: 100
+          title: Initial Value
+          type: integer
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        quota_item:
+          description: Specific quota item within the resource
+          example: VIRTUAL_SERVER_DISK.MAX.SIZE
+          title: Quota Item
+          type: string
+        reduction:
+          default: false
+          description: Reduction
+          example: false
+          title: Reduction
+          type: boolean
+        request:
+          default: false
+          description: 'Reqeust '
+          example: false
+          title: Request
+          type: boolean
+        request_class:
+          description: "Classification of the quota request (e.g., Account, Region)"
+          example: Account
+          title: Request Class
+          type: string
+        resource_type:
+          description: "Type of the resource (e.g., Virtual Server, Storage)"
+          example: Virtual Server Disk
+          title: Resource Type
+          type: string
+        service:
+          description: Name of the service to which quota applies
+          example: Virtual Server
+          title: Service
+          type: string
+        srn:
+          description: Service Resource Name for the quota item
+          example: srn:s::kr-west1:quota:account-quota/123456789
+          title: Srn
+          type: string
+        unit:
+          description: "Unit in which the quota value is measured (e.g., EA, GB)"
+          example: GB
+          title: Unit
+          type: string
+      required:
+      - account_id
+      - account_name
+      - adjustable
+      - approval
+      - class_value
+      - created_at
+      - description
+      - free_rate
+      - id
+      - initial_value
+      - modified_at
+      - quota_item
+      - request_class
+      - resource_type
+      - service
+      - srn
+      - unit
+      title: AccountQuota
+    AccountQuotaListResponse:
+      example:
+        size: 20
+        account_quotas:
+        - request: false
+          initial_value: 100
+          quota_item: VIRTUAL_SERVER_DISK.MAX.SIZE
+          approval: false
+          request_class: Account
+          applied_value: 0
+          resource_type: Virtual Server Disk
+          created_at: 2024-05-17T00:23:17Z
+          description: Maximum disk size for virtual servers in the account
+          srn: srn:s::kr-west1:quota:account-quota/123456789
+          unit: GB
+          account_id: 2b7ed60576ce404bbc734266ff1839a5
+          service: Virtual Server
+          account_name: Example Account Inc.
+          free_rate: 10
+          adjustable: true
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          modified_at: 2024-05-17T00:23:17Z
+          reduction: false
+          class_value: global
+        - request: false
+          initial_value: 100
+          quota_item: VIRTUAL_SERVER_DISK.MAX.SIZE
+          approval: false
+          request_class: Account
+          applied_value: 0
+          resource_type: Virtual Server Disk
+          created_at: 2024-05-17T00:23:17Z
+          description: Maximum disk size for virtual servers in the account
+          srn: srn:s::kr-west1:quota:account-quota/123456789
+          unit: GB
+          account_id: 2b7ed60576ce404bbc734266ff1839a5
+          service: Virtual Server
+          account_name: Example Account Inc.
+          free_rate: 10
+          adjustable: true
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          modified_at: 2024-05-17T00:23:17Z
+          reduction: false
+          class_value: global
+        count: 20
+        page: 0
+        sort:
+        - sort
+        - sort
+      properties:
+        account_quotas:
+          items:
+            $ref: '#/components/schemas/AccountQuota'
+          type: array
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - account_quotas
+      - count
+      - page
+      - size
+      title: AccountQuotaListResponse
+    AccountQuotaShowResponse:
+      example:
+        account_quota:
+          request: false
+          initial_value: 100
+          quota_item: VIRTUAL_SERVER_DISK.MAX.SIZE
+          approval: false
+          request_class: Account
+          applied_value: 0
+          resource_type: Virtual Server Disk
+          created_at: 2024-05-17T00:23:17Z
+          description: Maximum disk size for virtual servers in the account
+          srn: srn:s::kr-west1:quota:account-quota/123456789
+          unit: GB
+          account_id: 2b7ed60576ce404bbc734266ff1839a5
+          service: Virtual Server
+          account_name: Example Account Inc.
+          free_rate: 10
+          adjustable: true
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          modified_at: 2024-05-17T00:23:17Z
+          reduction: false
+          class_value: global
+      properties:
+        account_quota:
+          $ref: '#/components/schemas/AccountQuota'
+      required:
+      - account_quota
+      title: AccountQuotaShowResponse
+    QuotaRequest:
+      example:
+        requester: cloudkim
+        applied_at: 2000-01-23T04:56:07.000+00:00
+        initial_value: 100
+        quota_item: VIRTUAL_SERVER_DISK.MAX.SIZE
+        request_class: Account
+        request_message: Quota increase request message.
+        applied_value: 0
+        approval_message: approval_message
+        created_at: 2024-05-17T00:23:17Z
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        unit: GB
+        request_value: 300
+        service: Virtual Server
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        free_rate: 6
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        state: BEFORE_APPROVE
+        modified_at: 2024-05-17T00:23:17Z
+      properties:
+        applied_at:
+          format: date-time
+          nullable: true
+          type: string
+        applied_value:
+          nullable: true
+          type: integer
+        approval_message:
+          nullable: true
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        free_rate:
+          nullable: true
+          type: integer
+        id:
+          description: ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        initial_value:
+          description: Initial value
+          example: 100
+          title: Initial Value
+          type: integer
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        quota_item:
+          description: Quota Item Name
+          example: VIRTUAL_SERVER_DISK.MAX.SIZE
+          title: Quota Item
+          type: string
+        request_class:
+          description: Request Class
+          example: Account
+          title: Request Class
+          type: string
+        request_message:
+          description: Request message
+          example: Quota increase request message.
+          title: Request Message
+          type: string
+        request_value:
+          description: User Request Value
+          example: 300
+          title: Request Value
+          type: integer
+        requester:
+          description: Requester
+          example: cloudkim
+          title: Requester
+          type: string
+        service:
+          description: Service Name
+          example: Virtual Server
+          title: Service
+          type: string
+        state:
+          allOf:
+          - $ref: '#/components/schemas/RequestStateEnum'
+          description: Request State
+          example: BEFORE_APPROVE
+        unit:
+          description: "Unit in which the quota value is measured (e.g., EA, GB)"
+          example: GB
+          title: Unit
+          type: string
+      required:
+      - applied_value
+      - created_at
+      - created_by
+      - id
+      - initial_value
+      - modified_at
+      - modified_by
+      - quota_item
+      - request_class
+      - request_message
+      - request_value
+      - requester
+      - service
+      - state
+      - unit
+      title: QuotaRequest
+    QuotaRequestDetail:
+      example:
+        requester: cloudkim
+        applied_at: 2000-01-23T04:56:07.000+00:00
+        initial_value: 100
+        quota_item: VIRTUAL_SERVER_DISK.MAX.SIZE
+        request_message: Quota increase request message.
+        applied_value: 0
+        approval_message: approval_message
+        created_at: 2024-05-17T00:23:17Z
+        description: Maximum disk size for virtual servers in the account
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        unit: GB
+        request_value: 300
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        account_quota_id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        free_rate: 6
+        id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+        state: BEFORE_APPROVE
+        modified_at: 2024-05-17T00:23:17Z
+        reduction: false
+        class_value: global
+      properties:
+        account_quota_id:
+          description: Account Quota ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Account Quota Id
+          type: string
+        applied_at:
+          format: date-time
+          nullable: true
+          type: string
+        applied_value:
+          nullable: true
+          type: integer
+        approval_message:
+          nullable: true
+          type: string
+        class_value:
+          description: Value associated with the request class
+          example: global
+          title: Class Value
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        description:
+          description: Detailed description of the quota item
+          example: Maximum disk size for virtual servers in the account
+          title: Description
+          type: string
+        free_rate:
+          nullable: true
+          type: integer
+        id:
+          description: ID
+          example: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          title: Id
+          type: string
+        initial_value:
+          description: Initial value
+          example: 100
+          title: Initial Value
+          type: integer
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        quota_item:
+          description: Quota Item Name
+          example: VIRTUAL_SERVER_DISK.MAX.SIZE
+          title: Quota Item
+          type: string
+        reduction:
+          description: Reduction
+          example: false
+          title: Reduction
+          type: boolean
+        request_message:
+          description: Request message
+          example: Quota increase request message.
+          title: Request Message
+          type: string
+        request_value:
+          description: User Request Value
+          example: 300
+          title: Request Value
+          type: integer
+        requester:
+          description: Requester
+          example: cloudkim
+          title: Requester
+          type: string
+        state:
+          allOf:
+          - $ref: '#/components/schemas/RequestStateEnum'
+          description: Request State
+          example: BEFORE_APPROVE
+        unit:
+          description: "Unit in which the quota value is measured (e.g., EA, GB)"
+          example: GB
+          title: Unit
+          type: string
+      required:
+      - account_quota_id
+      - applied_value
+      - class_value
+      - created_at
+      - created_by
+      - description
+      - id
+      - initial_value
+      - modified_at
+      - modified_by
+      - quota_item
+      - reduction
+      - request_message
+      - request_value
+      - requester
+      - state
+      - unit
+      title: QuotaRequestDetail
+    QuotaRequestListResponse:
+      example:
+        quota_requests:
+        - requester: cloudkim
+          applied_at: 2000-01-23T04:56:07.000+00:00
+          initial_value: 100
+          quota_item: VIRTUAL_SERVER_DISK.MAX.SIZE
+          request_class: Account
+          request_message: Quota increase request message.
+          applied_value: 0
+          approval_message: approval_message
+          created_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          unit: GB
+          request_value: 300
+          service: Virtual Server
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          free_rate: 6
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          state: BEFORE_APPROVE
+          modified_at: 2024-05-17T00:23:17Z
+        - requester: cloudkim
+          applied_at: 2000-01-23T04:56:07.000+00:00
+          initial_value: 100
+          quota_item: VIRTUAL_SERVER_DISK.MAX.SIZE
+          request_class: Account
+          request_message: Quota increase request message.
+          applied_value: 0
+          approval_message: approval_message
+          created_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          unit: GB
+          request_value: 300
+          service: Virtual Server
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          free_rate: 6
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          state: BEFORE_APPROVE
+          modified_at: 2024-05-17T00:23:17Z
+        size: 20
+        count: 20
+        page: 0
+        sort:
+        - sort
+        - sort
+      properties:
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        quota_requests:
+          items:
+            $ref: '#/components/schemas/QuotaRequest'
+          type: array
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - count
+      - page
+      - quota_requests
+      - size
+      title: QuotaRequestListResponse
+    QuotaRequestShowResponse:
+      example:
+        quota_request:
+          requester: cloudkim
+          applied_at: 2000-01-23T04:56:07.000+00:00
+          initial_value: 100
+          quota_item: VIRTUAL_SERVER_DISK.MAX.SIZE
+          request_message: Quota increase request message.
+          applied_value: 0
+          approval_message: approval_message
+          created_at: 2024-05-17T00:23:17Z
+          description: Maximum disk size for virtual servers in the account
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          unit: GB
+          request_value: 300
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          account_quota_id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          free_rate: 6
+          id: 0fdd87aab8cb46f59b7c1f81ed03fb3e
+          state: BEFORE_APPROVE
+          modified_at: 2024-05-17T00:23:17Z
+          reduction: false
+          class_value: global
+      properties:
+        quota_request:
+          $ref: '#/components/schemas/QuotaRequestDetail'
+      required:
+      - quota_request
+      title: QuotaRequestShowResponse
+    RequestStateEnum:
+      enum:
+      - BEFORE_APPROVE
+      - PARTIAL_APPROVED
+      - REFUSED
+      - HOLDING
+      - APPROVED
+      - AUTO_REDUCED
+      title: RequestStateEnum
+      type: string
+  securitySchemes:
+    X-Auth-Token:
+      in: header
+      name: X-Auth-Token
+      type: apiKey
+x-app-name: scp-quota
+x-package-name: scp_quota
+x-service-type: scp-quota
+x-service-versions:
+  quota:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-02-23
+    status: CURRENT
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-02-23
+    status: CURRENT
+x-url-prefix: ""

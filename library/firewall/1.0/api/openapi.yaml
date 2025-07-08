@@ -1,0 +1,1849 @@
+openapi: 3.1.0
+info:
+  description: SCP Network Service
+  title: SCP Network Service
+  version: 0.0.1.dev6882
+servers:
+- url: ""
+tags:
+- description: Internal IP Pool API
+  name: vpc.v1.InternalIpPoolsApi
+- description: Internal Subnets API
+  name: vpc.v1.InternalSubnetsApi
+- description: Internal Vpc Endpoints API
+  name: vpc.v1.InternalVpcEndpointApi
+- description: Internal VPC Static Nat API
+  name: vpc.v1.InternalVpcStaticNatsApi
+- description: Internet Gateways API
+  name: vpc.v1.InternetGatewaysApi
+- description: Internal Private NAT API
+  name: vpc.v1.InternalPrivateNatsApi
+- description: Nat Gateways API
+  name: vpc.v1.NatGatewayApi
+- description: Ports API
+  name: vpc.v1.PortsApi
+- description: publicIps API
+  name: vpc.v1.PublicIpApi
+- description: Subnets API
+  name: vpc.v1.SubnetsApi
+- description: Vpc Endpoints API
+  name: vpc.v1.VpcEndpointApi
+- description: Vpcs API
+  name: vpc.v1.VpcsApi
+- description: Private NAT API
+  name: vpc.v1.PrivateNatApi
+- description: Private NAT IP API
+  name: vpc.v1.PrivateNatIpApi
+- description: VPC Peerings API
+  name: vpc.v1.VpcPeeringApi
+- description: VPC Peering Rules API
+  name: vpc.v1.VpcPeeringRuleApi
+- description: Transit Gateways API
+  name: vpc.v1.TransitGatewayApi
+- description: Transit Gateway VPC Connections API
+  name: vpc.v1.TransitGatewayVpcConnectionApi
+- description: Transit Gateway Rules API
+  name: vpc.v1.TransitGatewayRulesApi
+- description: Direct Connects API
+  name: direct-connect.v1.DirectConnectsApi
+- description: Direct Connects Rules API
+  name: direct-connect.v1.DirectConnectsRulesApi
+- description: Internal Security Groups API
+  name: security-group.v1.InternalSecurityGroupApi
+- description: Security Group Rules API
+  name: security-group.v1.SecurityGroupRuleApi
+- description: Security Groups API
+  name: security-group.v1.SecurityGroupApi
+- description: Firewall Rules API
+  name: firewall.v1.FirewallRulesApi
+- description: Firewalls API
+  name: firewall.v1.FirewallApi
+- description: VPN Gateways API
+  name: vpn.v1.VpnGatewaysApi
+- description: VPN Tunnels API
+  name: vpn.v1.VpnTunnelsApi
+- description: NetworkLoggingConfiguration API
+  name: network-logging.v1.NetworkLoggingConfigurationApi
+- description: NetworkLoggingStorage API
+  name: network-logging.v1.NetworkLoggingStorageApi
+- description: Internal Firewall Engine API
+  name: network-common.v1.InternalFirewallEngineApi
+- description: Network Natives API
+  name: network-common.v1.NetworkNativesApi
+- description: Sample Vpc API
+  name: network-common.v1.SampleVpcsApi
+- description: Cdn API
+  name: cdn.v1.CdnApi
+- description: Gslbs API
+  name: gslb.v1.GslbsApi
+- description: GslbResources API
+  name: gslb.v1.GslbResourcesApi
+- description: Public Domain Name API
+  name: dns.v1.PublicDomainNameApi
+- description: Hosted Zones API
+  name: dns.v1.HostedZonesApi
+- description: Private DNS API
+  name: dns.v1.PrivateDnsApi
+- description: Records API
+  name: dns.v1.RecordsApi
+paths:
+  /v1/firewalls:
+    get:
+      description: Get firewall list.
+      operationId: listFirewalls
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Firewall Name
+        example: FW_IGW_secuVPC
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          description: Firewall Name
+          example: FW_IGW_secuVPC
+          title: Name
+          type: string
+        style: form
+      - description: VPC Name
+        example: secuVPC
+        explode: true
+        in: query
+        name: vpc_name
+        required: false
+        schema:
+          description: VPC Name
+          example: secuVPC
+          title: Vpc Name
+          type: string
+        style: form
+      - description: Firewall Product Type
+        explode: true
+        in: query
+        name: product_type
+        required: false
+        schema:
+          default: []
+          description: Firewall Product Type
+          items:
+            $ref: '#/components/schemas/FirewallProductType'
+          type: array
+        style: form
+      - description: Firewall State
+        explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          default: []
+          description: Firewall State
+          items:
+            $ref: '#/components/schemas/FirewallState'
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FirewallListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Firewalls
+      tags:
+      - firewall.v1.FirewallApi
+      x-action-id: firewall:ListFirewalls
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: firewall_list
+      x-not-before: 2026-07-01
+      x-operation-id: listFirewalls
+      x-resource: firewall
+  /v1/firewalls/rules:
+    get:
+      description: Get firewall rule list.
+      operationId: listFirewallRules
+      parameters:
+      - description: size
+        example: 20
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: page
+        example: 0
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          minimum: 0
+          nullable: true
+          type: integer
+        style: form
+      - description: sort
+        example: created_at:desc
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Firewall ID
+        example: b156740b6335468d8354eb9ef8eddf5a
+        explode: true
+        in: query
+        name: firewall_id
+        required: true
+        schema:
+          description: Firewall ID
+          example: b156740b6335468d8354eb9ef8eddf5a
+          title: Firewall Id
+          type: string
+        style: form
+      - description: Source IP
+        example: 192.168.1.1
+        explode: true
+        in: query
+        name: src_ip
+        required: false
+        schema:
+          description: Source IP
+          example: 192.168.1.1
+          title: Src Ip
+          type: string
+        style: form
+      - description: Destination IP
+        example: 192.168.1.1
+        explode: true
+        in: query
+        name: dst_ip
+        required: false
+        schema:
+          description: Destination IP
+          example: 192.168.1.1
+          title: Dst Ip
+          type: string
+        style: form
+      - description: Firewall Rule Description
+        example: Firewall rule description example
+        explode: true
+        in: query
+        name: description
+        required: false
+        schema:
+          description: Firewall Rule Description
+          example: Firewall rule description example
+          title: Description
+          type: string
+        style: form
+      - description: Firewall Rule State
+        explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          default: []
+          description: Firewall Rule State
+          items:
+            $ref: '#/components/schemas/FirewallRuleState'
+          type: array
+        style: form
+      - description: Firewall Rule Status
+        explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/FirewallStatusType'
+          description: Firewall Rule Status
+        style: form
+      - description: Firewall Rule Fetch ALL
+        explode: true
+        in: query
+        name: fetch_all
+        required: false
+        schema:
+          default: false
+          description: Firewall Rule Fetch ALL
+          title: Fetch All
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FirewallRuleListResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: List Firewall Rules
+      tags:
+      - firewall.v1.FirewallRulesApi
+      x-action-id: firewall:ListFirewallrules
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: firewall-rule_list
+      x-not-before: 2026-07-01
+      x-operation-id: listFirewallRules
+      x-resource: firewall
+    post:
+      description: Create firewall rule.
+      operationId: createFirewallRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FirewallRuleCreateSingleRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FirewallRuleShowResponse'
+          description: Created
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Create Firewall Rule
+      tags:
+      - firewall.v1.FirewallRulesApi
+      x-action-id: firewall:CreateFirewallrule
+      x-api-access-level: CREATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: firewall-rule_create
+      x-not-before: 2026-07-01
+      x-operation-id: createFirewallRule
+      x-resource: firewall
+  /v1/firewalls/rules/bulk:
+    delete:
+      description: Delete firewall rule bulk.
+      operationId: deleteFirewallRuleBulk
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FirewallRuleDeleteBulkRequest'
+        required: true
+      responses:
+        "202":
+          description: Accepted
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "403":
+          description: Forbidden
+      security:
+      - X-Auth-Token: []
+      summary: Delete Firewall Rule Bulk
+      tags:
+      - firewall.v1.FirewallRulesApi
+      x-action-id: firewall:DeleteBulkFirewallrules
+      x-api-access-level: DELETE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2026-07-01
+      x-operation-id: deleteFirewallRuleBulk
+    post:
+      description: Create firewall rule bulk.
+      operationId: createFirewallRuleBulk
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FirewallRuleCreateBulkRequest'
+        required: true
+      responses:
+        "202":
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Create Firewall Rule Bulk
+      tags:
+      - firewall.v1.FirewallRulesApi
+      x-action-id: firewall:CreateBulkFirewallrules
+      x-api-access-level: CREATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2026-07-01
+      x-operation-id: createFirewallRuleBulk
+    put:
+      description: Set firewall rule bulk.
+      operationId: setFirewallRuleBulk
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FirewallRuleUpdateBulkRequest'
+        required: true
+      responses:
+        "202":
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Set Firewall Rule Bulk
+      tags:
+      - firewall.v1.FirewallRulesApi
+      x-action-id: firewall:SetBulkFirewallrules
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2026-07-01
+      x-operation-id: setFirewallRuleBulk
+  /v1/firewalls/rules/downloads:
+    get:
+      description: Download firewall rule list.
+      operationId: downloadFirewallRules
+      parameters:
+      - description: Firewall ID
+        example: b156740b6335468d8354eb9ef8eddf5a
+        explode: true
+        in: query
+        name: firewall_id
+        required: true
+        schema:
+          description: Firewall ID
+          example: b156740b6335468d8354eb9ef8eddf5a
+          title: Firewall Id
+          type: string
+        style: form
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Download Firewall Rules
+      tags:
+      - firewall.v1.FirewallRulesApi
+      x-action-id: firewall:ListDownloadFirewallrules
+      x-api-access-level: LIST
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250701"
+      x-api-scope: CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2026-07-01
+      x-operation-id: downloadFirewallRules
+  /v1/firewalls/rules/{firewall_rule_id}:
+    delete:
+      description: Delete firewall rule.
+      operationId: deleteFirewallRule
+      parameters:
+      - description: Firewall Rule ID
+        example: b156740b6335468d8354eb9ef8eddf5a
+        explode: false
+        in: path
+        name: firewall_rule_id
+        required: true
+        schema:
+          description: Firewall Rule ID
+          example: b156740b6335468d8354eb9ef8eddf5a
+          title: Firewall Rule Id
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Delete Firewall Rule
+      tags:
+      - firewall.v1.FirewallRulesApi
+      x-action-id: firewall:DeleteFirewallrule
+      x-api-access-level: DELETE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: firewall-rule_delete
+      x-not-before: 2026-07-01
+      x-operation-id: deleteFirewallRule
+      x-resource: firewall
+    get:
+      description: Show firewall rule.
+      operationId: showFirewallRule
+      parameters:
+      - description: Firewall Rule ID
+        example: b156740b6335468d8354eb9ef8eddf5a
+        explode: false
+        in: path
+        name: firewall_rule_id
+        required: true
+        schema:
+          description: Firewall Rule ID
+          example: b156740b6335468d8354eb9ef8eddf5a
+          title: Firewall Rule Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FirewallRuleShowResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Show Firewall Rule
+      tags:
+      - firewall.v1.FirewallRulesApi
+      x-action-id: firewall:ShowFirewallrule
+      x-api-access-level: READ
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: firewall-rule_show
+      x-not-before: 2026-07-01
+      x-operation-id: showFirewallRule
+      x-resource: firewall
+    put:
+      description: Set firewall rule.
+      operationId: setFirewallRule
+      parameters:
+      - description: Firewall Rule ID
+        example: b156740b6335468d8354eb9ef8eddf5a
+        explode: false
+        in: path
+        name: firewall_rule_id
+        required: true
+        schema:
+          description: Firewall Rule ID
+          example: b156740b6335468d8354eb9ef8eddf5a
+          title: Firewall Rule Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FirewallRuleSetRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FirewallRuleShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Set Firewall Rule
+      tags:
+      - firewall.v1.FirewallRulesApi
+      x-action-id: firewall:SetFirewallrule
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: firewall-rule_set
+      x-not-before: 2026-07-01
+      x-operation-id: setFirewallRule
+      x-resource: firewall
+  /v1/firewalls/rules/{firewall_rule_id}/order:
+    put:
+      description: Set firewall rule order.
+      operationId: setFirewallRuleOrder
+      parameters:
+      - description: Firewall Rule ID
+        example: b156740b6335468d8354eb9ef8eddf5a
+        explode: false
+        in: path
+        name: firewall_rule_id
+        required: true
+        schema:
+          description: Firewall Rule ID
+          example: b156740b6335468d8354eb9ef8eddf5a
+          title: Firewall Rule Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FirewallRuleSetOrderRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FirewallRuleShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Set Firewall Rule Order
+      tags:
+      - firewall.v1.FirewallRulesApi
+      x-action-id: firewall:SetOrderFirewallrule
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2026-07-01
+      x-operation-id: setFirewallRuleOrder
+  /v1/firewalls/{firewall_id}:
+    get:
+      description: Show firewall.
+      operationId: showFirewall
+      parameters:
+      - description: Firewall ID
+        example: b156740b6335468d8354eb9ef8eddf5a
+        explode: false
+        in: path
+        name: firewall_id
+        required: true
+        schema:
+          description: Firewall ID
+          example: b156740b6335468d8354eb9ef8eddf5a
+          title: Firewall Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FirewallShowResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ValidationErrorModel'
+                type: array
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Show Firewall
+      tags:
+      - firewall.v1.FirewallApi
+      x-action-id: firewall:ShowFirewall
+      x-api-access-level: READ
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: firewall_show
+      x-not-before: 2026-07-01
+      x-operation-id: showFirewall
+      x-resource: firewall
+    put:
+      description: Set firewall.
+      operationId: setFirewall
+      parameters:
+      - description: Firewall ID
+        example: b156740b6335468d8354eb9ef8eddf5a
+        explode: false
+        in: path
+        name: firewall_id
+        required: true
+        schema:
+          description: Firewall ID
+          example: b156740b6335468d8354eb9ef8eddf5a
+          title: Firewall Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FirewallSetRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FirewallShowResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Set Firewall
+      tags:
+      - firewall.v1.FirewallApi
+      x-action-id: firewall:SetFirewall
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: "OPENAPI, CLI, CONSOLE"
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-cli: firewall_set
+      x-not-before: 2026-07-01
+      x-operation-id: setFirewall
+      x-resource: firewall
+  /v1/firewalls/{firewall_id}/status:
+    put:
+      description: Set firewall status.
+      operationId: setFirewallStatus
+      parameters:
+      - description: Firewall ID
+        example: b156740b6335468d8354eb9ef8eddf5a
+        explode: false
+        in: path
+        name: firewall_id
+        required: true
+        schema:
+          description: Firewall ID
+          example: b156740b6335468d8354eb9ef8eddf5a
+          title: Firewall Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FirewallSetStatusRequest'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FirewallShowResponse'
+          description: Accepted
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+      - X-Auth-Token: []
+      summary: Set Firewall Status.
+      tags:
+      - firewall.v1.FirewallApi
+      x-action-id: firewall:SetStatusFirewall
+      x-api-access-level: UPDATE
+      x-api-created-date: "20241001"
+      x-api-modified-date: "20250227"
+      x-api-scope: CONSOLE
+      x-api-status: CURRENT
+      x-api-version: "1.0"
+      x-not-before: 2026-07-01
+      x-operation-id: setFirewallStatus
+components:
+  schemas:
+    Firewall:
+      example:
+        vpc_name: vpc_name
+        total_rule_count: 8
+        vpc_id: vpc_id
+        created_at: 2024-05-17T00:23:17Z
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        flavor_rule_quota: 100
+        flavor_name: SMALL
+        account_id: 0e3dffc50eb247a1adf4f2e5c82c4f99
+        loggable: false
+        product_type: ""
+        pre_product_id: 76479b7ffee1431198d9beb4502cda08
+        fw_resource_id: 005fd1d30dea11f08a2c56773bef875b
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: FW_IGW_secuVPC
+        id: b156740b6335468d8354eb9ef8eddf5a
+        state: ""
+        modified_at: 2024-05-17T00:23:17Z
+        status: ""
+      properties:
+        account_id:
+          description: Account ID
+          example: 0e3dffc50eb247a1adf4f2e5c82c4f99
+          title: Account Id
+          type: string
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        flavor_name:
+          description: Firewall Size Name
+          example: SMALL
+          title: Flavor Name
+          type: string
+        flavor_rule_quota:
+          default: 0
+          description: Firewall Rule Quota
+          example: 100
+          title: Flavor Rule Quota
+          type: integer
+        fw_resource_id:
+          description: Fw Resource ID
+          example: 005fd1d30dea11f08a2c56773bef875b
+          title: Fw Resource Id
+          type: string
+        id:
+          description: Firewall ID
+          example: b156740b6335468d8354eb9ef8eddf5a
+          title: Id
+          type: string
+        loggable:
+          description: Logging Use
+          example: false
+          title: Loggable
+          type: boolean
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          description: Firewall Name
+          example: FW_IGW_secuVPC
+          title: Name
+          type: string
+        pre_product_id:
+          description: Pre Product ID
+          example: 76479b7ffee1431198d9beb4502cda08
+          title: Pre Product Id
+          type: string
+        product_type:
+          allOf:
+          - $ref: '#/components/schemas/FirewallProductType'
+          description: Firewall Product Type
+        state:
+          allOf:
+          - $ref: '#/components/schemas/FirewallState'
+          description: Firewall State
+        status:
+          allOf:
+          - $ref: '#/components/schemas/FirewallStatusType'
+          description: Firewall Status
+        total_rule_count:
+          default: 0
+          description: Total Rule Count
+          example: 8
+          title: Total Rule Count
+          type: integer
+        vpc_id:
+          nullable: true
+          type: string
+        vpc_name:
+          nullable: true
+          type: string
+      required:
+      - account_id
+      - created_at
+      - created_by
+      - fw_resource_id
+      - id
+      - loggable
+      - modified_at
+      - modified_by
+      - name
+      - product_type
+      - state
+      - status
+      - vpc_id
+      - vpc_name
+      title: Firewall
+    FirewallFlavorType:
+      enum:
+      - EXSMALL
+      - SMALL
+      - MEDIUM
+      - LARGE
+      - EXLARGE
+      title: FirewallFlavorType
+      type: string
+    FirewallListResponse:
+      example:
+        size: 20
+        count: 20
+        firewalls:
+        - vpc_name: vpc_name
+          total_rule_count: 8
+          vpc_id: vpc_id
+          created_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          flavor_rule_quota: 100
+          flavor_name: SMALL
+          account_id: 0e3dffc50eb247a1adf4f2e5c82c4f99
+          loggable: false
+          product_type: ""
+          pre_product_id: 76479b7ffee1431198d9beb4502cda08
+          fw_resource_id: 005fd1d30dea11f08a2c56773bef875b
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: FW_IGW_secuVPC
+          id: b156740b6335468d8354eb9ef8eddf5a
+          state: ""
+          modified_at: 2024-05-17T00:23:17Z
+          status: ""
+        - vpc_name: vpc_name
+          total_rule_count: 8
+          vpc_id: vpc_id
+          created_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          flavor_rule_quota: 100
+          flavor_name: SMALL
+          account_id: 0e3dffc50eb247a1adf4f2e5c82c4f99
+          loggable: false
+          product_type: ""
+          pre_product_id: 76479b7ffee1431198d9beb4502cda08
+          fw_resource_id: 005fd1d30dea11f08a2c56773bef875b
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: FW_IGW_secuVPC
+          id: b156740b6335468d8354eb9ef8eddf5a
+          state: ""
+          modified_at: 2024-05-17T00:23:17Z
+          status: ""
+        page: 0
+        sort:
+        - sort
+        - sort
+      properties:
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        firewalls:
+          items:
+            $ref: '#/components/schemas/Firewall'
+          type: array
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - count
+      - firewalls
+      - page
+      - size
+      title: FirewallListResponse
+    FirewallPort:
+      example:
+        service_type: ""
+        service_value: "443"
+      properties:
+        service_type:
+          allOf:
+          - $ref: '#/components/schemas/FirewallServiceType'
+          description: Service Protocol Type
+        service_value:
+          description: Service Port Value
+          example: "443"
+          title: Service Value
+          type: string
+      required:
+      - service_type
+      title: FirewallPort
+    FirewallProductType:
+      enum:
+      - IGW
+      - GGW
+      - DGW
+      - LB
+      - SIGW
+      - TGW_IGW
+      - TGW_GGW
+      - TGW_DGW
+      - TGW_SIGW
+      - TGW_BM
+      title: FirewallProductType
+      type: string
+    FirewallRule:
+      example:
+        vendor_rule_id: "72"
+        destination_address:
+        - 10.0.0.1
+        - 10.0.0.2
+        firewall_id: b156740b6335468d8354eb9ef8eddf5a
+        created_at: 2024-05-17T00:23:17Z
+        description: description
+        created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        destination_interface: IFW1-v1001dn
+        sequence: 100
+        service:
+        - service_type: ""
+          service_value: "443"
+        - service_type: ""
+          service_value: "443"
+        source_interface: IFW1-v2501up
+        source_address:
+        - 192.168.1.1
+        - 192.168.1.2
+        modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+        name: name
+        action: ""
+        id: b156740b6335468d8354eb9ef8eddf5a
+        state: ""
+        modified_at: 2024-05-17T00:23:17Z
+        direction: ""
+        status: ""
+      properties:
+        action:
+          allOf:
+          - $ref: '#/components/schemas/FirewallRuleAction'
+          description: Firewall Rule Action
+        created_at:
+          description: Created At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Created At
+          type: string
+        created_by:
+          description: Created By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Created By
+          type: string
+        description:
+          nullable: true
+          type: string
+        destination_address:
+          description: Destination Address
+          example:
+          - 10.0.0.1
+          - 10.0.0.2
+          items:
+            type: string
+          type: array
+        destination_interface:
+          description: Destination Interface Name
+          example: IFW1-v1001dn
+          title: Destination Interface
+          type: string
+        direction:
+          allOf:
+          - $ref: '#/components/schemas/FirewallRuleDirection'
+          description: Firewall Rule Direction
+        firewall_id:
+          description: Firewall ID
+          example: b156740b6335468d8354eb9ef8eddf5a
+          title: Firewall Id
+          type: string
+        id:
+          description: Firewall Rule ID
+          example: b156740b6335468d8354eb9ef8eddf5a
+          title: Id
+          type: string
+        modified_at:
+          description: Modified At
+          example: 2024-05-17T00:23:17Z
+          format: date-time
+          title: Modified At
+          type: string
+        modified_by:
+          description: Modified By
+          example: 90dddfc2b1e04edba54ba2b41539a9ac
+          title: Modified By
+          type: string
+        name:
+          nullable: true
+          type: string
+        sequence:
+          description: Firewall Rule Sequence
+          example: 100
+          title: Sequence
+          type: integer
+        service:
+          description: Service Port
+          items:
+            $ref: '#/components/schemas/FirewallPort'
+          type: array
+        source_address:
+          description: Source Address
+          example:
+          - 192.168.1.1
+          - 192.168.1.2
+          items:
+            type: string
+          type: array
+        source_interface:
+          description: Source Interface Name
+          example: IFW1-v2501up
+          title: Source Interface
+          type: string
+        state:
+          allOf:
+          - $ref: '#/components/schemas/FirewallRuleState'
+          description: Firewall Rule State
+        status:
+          allOf:
+          - $ref: '#/components/schemas/FirewallStatusType'
+          description: Firewall Rule Status
+        vendor_rule_id:
+          description: Vendor Rule ID
+          example: "72"
+          title: Vendor Rule Id
+          type: string
+      required:
+      - action
+      - created_at
+      - created_by
+      - destination_address
+      - destination_interface
+      - direction
+      - firewall_id
+      - id
+      - modified_at
+      - modified_by
+      - sequence
+      - service
+      - source_address
+      - source_interface
+      - state
+      - status
+      - vendor_rule_id
+      title: FirewallRule
+    FirewallRuleAction:
+      enum:
+      - ALLOW
+      - DENY
+      title: FirewallRuleAction
+      type: string
+    FirewallRuleCreateBulkRequest:
+      example:
+        firewall_id: b156740b6335468d8354eb9ef8eddf5a
+        firewall_rule_list:
+        - destination_address:
+          - 10.0.0.1
+          - 10.0.0.2
+          service:
+          - service_type: ""
+            service_value: "443"
+          - service_type: ""
+            service_value: "443"
+          source_address:
+          - 192.168.1.1
+          - 192.168.1.2
+          action: ""
+          description: description
+          order_direction: ""
+          direction: ""
+          order_rule_id: 043aa63459da466faad71fe4fe587031
+          status: ""
+        - destination_address:
+          - 10.0.0.1
+          - 10.0.0.2
+          service:
+          - service_type: ""
+            service_value: "443"
+          - service_type: ""
+            service_value: "443"
+          source_address:
+          - 192.168.1.1
+          - 192.168.1.2
+          action: ""
+          description: description
+          order_direction: ""
+          direction: ""
+          order_rule_id: 043aa63459da466faad71fe4fe587031
+          status: ""
+      properties:
+        firewall_id:
+          description: Firewall ID
+          example: b156740b6335468d8354eb9ef8eddf5a
+          title: Firewall Id
+          type: string
+        firewall_rule_list:
+          description: Firewall Rule List
+          items:
+            $ref: '#/components/schemas/FirewallRuleCreateRequest'
+          type: array
+      required:
+      - firewall_id
+      - firewall_rule_list
+      title: FirewallRuleCreateBulkRequest
+    FirewallRuleCreateRequest:
+      example:
+        destination_address:
+        - 10.0.0.1
+        - 10.0.0.2
+        service:
+        - service_type: ""
+          service_value: "443"
+        - service_type: ""
+          service_value: "443"
+        source_address:
+        - 192.168.1.1
+        - 192.168.1.2
+        action: ""
+        description: description
+        order_direction: ""
+        direction: ""
+        order_rule_id: 043aa63459da466faad71fe4fe587031
+        status: ""
+      properties:
+        action:
+          allOf:
+          - $ref: '#/components/schemas/FirewallRuleAction'
+          description: Firewall Rule Action
+        description:
+          maxLength: 100
+          nullable: true
+          type: string
+        destination_address:
+          description: Destination Address
+          example:
+          - 10.0.0.1
+          - 10.0.0.2
+          items:
+            type: string
+          type: array
+        direction:
+          allOf:
+          - $ref: '#/components/schemas/FirewallRuleDirection'
+          description: Firewall Rule Direction
+        order_direction:
+          allOf:
+          - $ref: '#/components/schemas/FirewallRuleOrderDirection'
+          description: Order Direction
+        order_rule_id:
+          description: Order Rule ID
+          example: 043aa63459da466faad71fe4fe587031
+          title: Order Rule Id
+          type: string
+        service:
+          description: Service Port
+          items:
+            $ref: '#/components/schemas/FirewallPort'
+          type: array
+        source_address:
+          description: Source Address
+          example:
+          - 192.168.1.1
+          - 192.168.1.2
+          items:
+            type: string
+          type: array
+        status:
+          allOf:
+          - $ref: '#/components/schemas/FirewallStatusType'
+          description: Firewall Rule Status
+      required:
+      - action
+      - destination_address
+      - direction
+      - service
+      - source_address
+      - status
+      title: FirewallRuleCreateRequest
+    FirewallRuleCreateSingleRequest:
+      example:
+        firewall_id: b156740b6335468d8354eb9ef8eddf5a
+        firewall_rule: ""
+      properties:
+        firewall_id:
+          description: Firewall ID
+          example: b156740b6335468d8354eb9ef8eddf5a
+          title: Firewall Id
+          type: string
+        firewall_rule:
+          allOf:
+          - $ref: '#/components/schemas/FirewallRuleCreateRequest'
+          description: Firewall Rule List
+      required:
+      - firewall_id
+      - firewall_rule
+      title: FirewallRuleCreateSingleRequest
+    FirewallRuleDeleteBulkRequest:
+      example:
+        firewall_rule_id:
+        - b156740b6335468d8354eb9ef8eddf5a
+      properties:
+        firewall_rule_id:
+          description: Firewall Rule ID
+          example:
+          - b156740b6335468d8354eb9ef8eddf5a
+          items:
+            type: string
+          type: array
+      required:
+      - firewall_rule_id
+      title: FirewallRuleDeleteBulkRequest
+    FirewallRuleDirection:
+      enum:
+      - INBOUND
+      - OUTBOUND
+      title: FirewallRuleDirection
+      type: string
+    FirewallRuleListResponse:
+      example:
+        size: 20
+        firewall_rules:
+        - vendor_rule_id: "72"
+          destination_address:
+          - 10.0.0.1
+          - 10.0.0.2
+          firewall_id: b156740b6335468d8354eb9ef8eddf5a
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          destination_interface: IFW1-v1001dn
+          sequence: 100
+          service:
+          - service_type: ""
+            service_value: "443"
+          - service_type: ""
+            service_value: "443"
+          source_interface: IFW1-v2501up
+          source_address:
+          - 192.168.1.1
+          - 192.168.1.2
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          action: ""
+          id: b156740b6335468d8354eb9ef8eddf5a
+          state: ""
+          modified_at: 2024-05-17T00:23:17Z
+          direction: ""
+          status: ""
+        - vendor_rule_id: "72"
+          destination_address:
+          - 10.0.0.1
+          - 10.0.0.2
+          firewall_id: b156740b6335468d8354eb9ef8eddf5a
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          destination_interface: IFW1-v1001dn
+          sequence: 100
+          service:
+          - service_type: ""
+            service_value: "443"
+          - service_type: ""
+            service_value: "443"
+          source_interface: IFW1-v2501up
+          source_address:
+          - 192.168.1.1
+          - 192.168.1.2
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          action: ""
+          id: b156740b6335468d8354eb9ef8eddf5a
+          state: ""
+          modified_at: 2024-05-17T00:23:17Z
+          direction: ""
+          status: ""
+        count: 20
+        page: 0
+        sort:
+        - sort
+        - sort
+      properties:
+        count:
+          description: count
+          example: 20
+          title: Count
+          type: integer
+        firewall_rules:
+          items:
+            $ref: '#/components/schemas/FirewallRule'
+          type: array
+        page:
+          description: page
+          example: 0
+          title: Page
+          type: integer
+        size:
+          description: size
+          example: 20
+          title: Size
+          type: integer
+        sort:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - count
+      - firewall_rules
+      - page
+      - size
+      title: FirewallRuleListResponse
+    FirewallRuleOrderDirection:
+      enum:
+      - BEFORE
+      - AFTER
+      - BOTTOM
+      title: FirewallRuleOrderDirection
+      type: string
+    FirewallRuleSetOrderRequest:
+      example:
+        order_direction: ""
+        order_rule_id: order_rule_id
+      properties:
+        order_direction:
+          allOf:
+          - $ref: '#/components/schemas/FirewallRuleOrderDirection'
+          description: Order Direction
+        order_rule_id:
+          description: Order Rule ID
+          title: Order Rule Id
+          type: string
+      required:
+      - order_direction
+      title: FirewallRuleSetOrderRequest
+    FirewallRuleSetRequest:
+      example:
+        destination_address:
+        - 10.0.0.1
+        - 10.0.0.2
+        service:
+        - service_type: ""
+          service_value: "443"
+        - service_type: ""
+          service_value: "443"
+        source_address:
+        - 192.168.1.1
+        - 192.168.1.2
+        action: ""
+        description: description
+        direction: ""
+      properties:
+        action:
+          allOf:
+          - $ref: '#/components/schemas/FirewallRuleAction'
+          description: Firewall Rule Action
+        description:
+          maxLength: 100
+          nullable: true
+          type: string
+        destination_address:
+          description: Destination Address
+          example:
+          - 10.0.0.1
+          - 10.0.0.2
+          items:
+            type: string
+          type: array
+        direction:
+          allOf:
+          - $ref: '#/components/schemas/FirewallRuleDirection'
+          description: Firewall Rule Direction
+        service:
+          description: Service Port
+          items:
+            $ref: '#/components/schemas/FirewallPort'
+          type: array
+        source_address:
+          description: Source Address
+          example:
+          - 192.168.1.1
+          - 192.168.1.2
+          items:
+            type: string
+          type: array
+      required:
+      - action
+      - destination_address
+      - direction
+      - service
+      - source_address
+      title: FirewallRuleSetRequest
+    FirewallRuleShowResponse:
+      example:
+        firewall_rule:
+          vendor_rule_id: "72"
+          destination_address:
+          - 10.0.0.1
+          - 10.0.0.2
+          firewall_id: b156740b6335468d8354eb9ef8eddf5a
+          created_at: 2024-05-17T00:23:17Z
+          description: description
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          destination_interface: IFW1-v1001dn
+          sequence: 100
+          service:
+          - service_type: ""
+            service_value: "443"
+          - service_type: ""
+            service_value: "443"
+          source_interface: IFW1-v2501up
+          source_address:
+          - 192.168.1.1
+          - 192.168.1.2
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: name
+          action: ""
+          id: b156740b6335468d8354eb9ef8eddf5a
+          state: ""
+          modified_at: 2024-05-17T00:23:17Z
+          direction: ""
+          status: ""
+      properties:
+        firewall_rule:
+          $ref: '#/components/schemas/FirewallRule'
+      required:
+      - firewall_rule
+      title: FirewallRuleShowResponse
+    FirewallRuleState:
+      enum:
+      - CREATING
+      - ACTIVE
+      - DELETING
+      - DELETED
+      - EDITING
+      - ERROR
+      title: FirewallRuleState
+      type: string
+    FirewallRuleUpdateBulkRequest:
+      example:
+        firewall_rule_id:
+        - b156740b6335468d8354eb9ef8eddf5a
+        status: ""
+      properties:
+        firewall_rule_id:
+          description: Firewall Rule ID
+          example:
+          - b156740b6335468d8354eb9ef8eddf5a
+          items:
+            type: string
+          type: array
+        status:
+          allOf:
+          - $ref: '#/components/schemas/FirewallStatusType'
+          description: Firewall Rule Status
+      required:
+      - firewall_rule_id
+      - status
+      title: FirewallRuleUpdateBulkRequest
+    FirewallServiceType:
+      enum:
+      - TCP
+      - UDP
+      - ICMP
+      - IP
+      - TCP_ALL
+      - UDP_ALL
+      - ICMP_ALL
+      - ALL
+      title: FirewallServiceType
+      type: string
+    FirewallSetRequest:
+      example:
+        flavor_name: ""
+        loggable: false
+      properties:
+        flavor_name:
+          allOf:
+          - $ref: '#/components/schemas/FirewallFlavorType'
+          description: Firewall Size Name
+        loggable:
+          description: Logging Use
+          example: false
+          title: Loggable
+          type: boolean
+      title: FirewallSetRequest
+    FirewallSetStatusRequest:
+      example:
+        status: ""
+      properties:
+        status:
+          allOf:
+          - $ref: '#/components/schemas/FirewallStatusType'
+          description: Firewall Status
+      required:
+      - status
+      title: FirewallSetStatusRequest
+    FirewallShowResponse:
+      example:
+        firewall:
+          vpc_name: vpc_name
+          total_rule_count: 8
+          vpc_id: vpc_id
+          created_at: 2024-05-17T00:23:17Z
+          created_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          flavor_rule_quota: 100
+          flavor_name: SMALL
+          account_id: 0e3dffc50eb247a1adf4f2e5c82c4f99
+          loggable: false
+          product_type: ""
+          pre_product_id: 76479b7ffee1431198d9beb4502cda08
+          fw_resource_id: 005fd1d30dea11f08a2c56773bef875b
+          modified_by: 90dddfc2b1e04edba54ba2b41539a9ac
+          name: FW_IGW_secuVPC
+          id: b156740b6335468d8354eb9ef8eddf5a
+          state: ""
+          modified_at: 2024-05-17T00:23:17Z
+          status: ""
+      properties:
+        firewall:
+          $ref: '#/components/schemas/Firewall'
+      required:
+      - firewall
+      title: FirewallShowResponse
+    FirewallState:
+      enum:
+      - CREATING
+      - ACTIVE
+      - DELETING
+      - DELETED
+      - EDITING
+      - ERROR
+      - DEPLOYING
+      title: FirewallState
+      type: string
+    FirewallStatusType:
+      enum:
+      - ENABLE
+      - DISABLE
+      title: FirewallStatusType
+      type: string
+    ValidationErrorModel:
+      example:
+        msg: msg
+        loc:
+        - loc
+        - loc
+        ctx: "{}"
+        type_: type_
+      properties:
+        ctx:
+          nullable: true
+          type: object
+        loc:
+          items:
+            type: string
+          nullable: true
+          type: array
+        msg:
+          nullable: true
+          type: string
+        type_:
+          nullable: true
+          type: string
+      title: ValidationErrorModel
+  securitySchemes:
+    X-Auth-Token:
+      in: header
+      name: X-Auth-Token
+      type: apiKey
+x-app-name: scp-network
+x-package-name: scp_network
+x-service-type: scp-network
+x-service-versions:
+  cdn:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  direct-connect:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  dns:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  firewall:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  gslb:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  network-common:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  network-logging:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  security-group:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  vpc:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+  vpn:
+  - id: v1.0
+    links:
+    - rel: self
+    not_before: 2026-07-01
+    status: CURRENT
+x-url-prefix: ""

@@ -1,0 +1,5 @@
+packageName: vpn
+generatorName: go
+withGoMod: false
+structPrefix: true
+enumClassPrefix: true
