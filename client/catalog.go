@@ -2,11 +2,14 @@ package scpsdk
 
 import (
 	"crypto/tls"
+	"crypto/x509"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"net/http"
+	"os"
 	"sort"
 	"strconv"
 	"time"
@@ -55,22 +58,37 @@ func (c *Catalog) GetEndpoint(serviceType, region, accountID string) (string, er
 		req.Header.Set(HeaderTimestamp, timestamp)
 		req.Header.Set(HeaderSignature, signature)
 
+		certPath := os.Getenv("SSL_CERT_FILE")
+		var certPool *x509.CertPool
+
+		if certPath == "" {
+			certPool, err = x509.SystemCertPool()
+			if err != nil {
+				return "", err
+			}
+		} else {
+			crt, err := ioutil.ReadFile(certPath)
+			if err != nil {
+				return "", err
+			}
+			certPool = x509.NewCertPool()
+			certPool.AppendCertsFromPEM(crt)
+		}
+
 		httpClient := &http.Client{
 			Transport: &http.Transport{
-				// Disable SSL verification (insecure)
-				TLSClientConfig: &tls.Config{
-					InsecureSkipVerify: true,
-				},
+				TLSClientConfig: &tls.Config{RootCAs: certPool},
+				Proxy:           http.ProxyFromEnvironment,
 			},
 		}
 
 		resp, err := httpClient.Do(req)
-		if err != nil {
-			fmt.Println("Error sending request:", err)
-			return "", err
-		}
 
 		body, err := io.ReadAll(resp.Body)
+		if resp.StatusCode != http.StatusOK {
+			fmt.Println("Error get endpoints response:", string(body))
+			return "", errors.New(string(body))
+		}
 
 		var response struct {
 			Endpoints []Endpoint `json:"endpoints"`
