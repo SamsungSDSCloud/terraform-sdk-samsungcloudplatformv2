@@ -83,8 +83,16 @@ func (c *Catalog) GetEndpoint(serviceType, region, accountID string) (string, er
 		}
 
 		resp, err := httpClient.Do(req)
+		if err != nil {
+			fmt.Println("Error sending request:", err)
+			return "", err
+		}
 
 		body, err := io.ReadAll(resp.Body)
+		if err != nil {
+			fmt.Println("Error get endpoints response parsing:", err)
+			return "", err
+		}
 		if resp.StatusCode != http.StatusOK {
 			fmt.Println("Error get endpoints response:", string(body))
 			return "", errors.New(string(body))
